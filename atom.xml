@@ -493,9 +493,9 @@
       <category term="科技" scheme="http://kotori.love/categories/%E7%A7%91%E6%8A%80/"/>
     
     
-      <category term="wechat" scheme="http://kotori.love/tags/wechat/"/>
-    
       <category term="javascript" scheme="http://kotori.love/tags/javascript/"/>
+    
+      <category term="wechat" scheme="http://kotori.love/tags/wechat/"/>
     
   </entry>
   
