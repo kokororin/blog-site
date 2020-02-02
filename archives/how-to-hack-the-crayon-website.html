@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="han-la">
+  <head>
+    <meta charset="utf-8">
+    <!-- Meta & Title & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="theme-color" content="#16a085">
+<!-- Blue #448AFF -->
+<!-- Title -->
+
+<title>如何黑掉彩笔的网站(¬_¬) | ことりのおやつにしてやるぞー！</title>
+
+<!-- Favicons -->
+<link rel="icon shortcut" type="image/ico" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico">
+
+
+    <!-- Import CSS -->
+    
+<link rel="stylesheet" href="/css/mori.css">
+
+    
+<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+
+    
+<link rel="stylesheet" href="/css/flat-ui.min.css">
+
+    
+<link rel="stylesheet" href="/css/prism.css">
+
+    
+<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+
+    
+<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+
+
+    <!-- RSS -->
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head>
+
+<body>
+  
+
+  <div id="main" class="container">
+  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
+    <article class="post" style="padding-top: 20px;">
+      <h2 itemprop="name headline" style="font-weight: normal;">如何黑掉彩笔的网站(¬_¬)</h2>
+      <div class="text-right">
+        <div class="text-bar">
+          <a href="http://localhost:4000" class="fui-home"></a>
+          <!-- <a id="tor_show" href="javascript:void(0)" class="fui-list-bulleted"></a> -->
+          <a id="comment_go" href="#comments" class="fui-bubble"></a>
+          <a style="font-size: 30px;margin-left: 1px;">·</a>
+          <a href="https://twitter.com/intent/tweet?url=http://localhost:4000/archives/how-to-hack-the-crayon-website.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/archives/how-to-hack-the-crayon-website.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
+          <a href="https://plus.google.com/share?url=http://localhost:4000/archives/how-to-hack-the-crayon-website.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
+          <a href="http://service.weibo.com/share/share.php?url=http://localhost:4000/archives/how-to-hack-the-crayon-website.html&title=如何黑掉彩笔的网站(¬_¬)"
+            target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
+            class="fui-bookmark"></a>
+        </div>
+        <div class="post-info">
+          <span class="post-info-n">
+            
+            <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
+            
+          </span>
+          
+          <a href="/tags/xss/">xss</a>
+          
+          <a><time datetime="2015-02-05T15:07:00.000Z">2015-02-05</time></a>
+        </div>
+      </div>
+      <!-- 头图 -->
+      <!-- end -->
+      <div class="post-content" itemprop="articleBody">
+        <blockquote>
+<p>转自java吧</p>
+<p><a href="http://tieba.baidu.com/p/3567794788" target="_blank" rel="noopener">http://tieba.baidu.com/p/3567794788</a></p>
+<p>刚才看到吧里有只大彩笔在秀自己的网站：</p>
+<p>原帖地址：<a href="http://jump.bdimg.com/safecheck/index?url=x+Z5mMbGPAs95UolpNuq+CwM2BpViN6QF0BYrUCVRu+Ih3iPb8xNxwdoUcOC1TUKLQ1TKOpWHKLzQbcGOL5wzlvJyuAzzWKJT84Xyxbjh0YT+jGWSf0ix6r+9G21ACi5FCwD+tHScJ0N0JW7pjPTVTA8Zu4mdgY0" target="_blank" rel="noopener">http://tieba.baidu.com/p/3567694132</a></p>
+<p>对于这样热情高涨的新手，我们一定要予以关（nue）照（dai），于是心血来潮，</p>
+<p>科普一下XSS（Cross Site Scripting）黑站。</p>
+<p>中文叫跨站脚本攻击。</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/2015-02-5.jpg" alt=""></p>
+</blockquote>
+<p>首先，打开彩笔的目标网站（废话），并注册用户</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/32_2015-02-5.jpg" alt=""></p>
+<p>寻找一个可以提交字符串到服务器的页面</p>
+<p>并且保证这个字符串会在前台页面显示，比如贴吧的发帖之类的功能</p>
+<p>&nbsp;</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/41_2015-02-5.jpg" alt=""></p>
+<p>找到html标签，我们看到有maxlength属性，这里先干掉再说，因为一会我们要提交js代码</p>
+<p>这里就可见，web的前台验证什么的，都是假的，客户端提交的数据，必须要做后台验证。</p>
+<p>&nbsp;</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/56_2015-02-5.jpg" alt=""></p>
+<p>准备一段js，代表，这里以简单为主，仅仅测试</p>
+<p>&nbsp;</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/62_2015-02-5.jpg" alt=""></p>
+<p>粘到文本框里去</p>
+<p>&nbsp;</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/92_2015-02-5.jpg" alt=""></p>
+<p>提交成功</p>
+<p>看到没？彩笔做的网站，前台框架用得爽，后台验证完全没有，顺利过了</p>
+<p>&nbsp;</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/87_2015-02-5.jpg" alt=""></p>
+<p>打开相应的显示画面，看到了我们的js已经成功被执行</p>
+<p>&nbsp;</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/18_2015-02-5.jpg" alt=""></p>
+<p>查看一下源代码，我们的js已经被嵌入了html</p>
+<p>&nbsp;</p>
+<p>总结：</p>
+<p>真正的坏人，不会上传一段alert那么简单。</p>
+<p>正如名字一样，跨站的意思是，大的脚本不会直接上传，一定是再远程。</p>
+<p>如果，他上传的是如下的代码，你觉得后果会如何？</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/97_2015-02-5.jpg" alt=""></p>
+<p>防范xss的方法，前面已经提到了，用户提交数据的时候，做后台验证是其一。</p>
+<p>其二就是前台展示数据的时候，一定要做代码转义。</p>
+<p>这里隆重推荐，我大微软的 asp.net MVC + razor 真心很强大。</p>
+<p><strong>前台后台验证一条龙，显示转意一句话。</strong></p>
+
+      </div>
+    </article>
+  </div>
+
+  <center>
+    <div id="postnav" style="display: none;">
+      <ul class="pager">
+        <li class="previous">
+          <a href="http://localhost:4000">
+            <span class="fui-home"></span>
+          </a>
+        </li>
+        <li class="next" id="outcomment">
+          <a href="javascript:void(0)">
+            <span class="fui-chat"></span>
+          </a>
+        </li>
+
+        <li class="previous">
+          
+          <a href="http://localhost:4000/archives/homemade-chrome-theme-love-live.html" title="自制chrome LOVE LIVE!主题">自制chrome LOVE LIVE!主题</a>
+          
+        </li>
+
+        <li class="next">
+          
+          <a href="http://localhost:4000/archives/solve-toilet-queues-taiwan-two-college-students-were-germany-design-award.html" title="解决女厕排队问题 台湾两名大学生获德国设计大奖">解决女厕排队问题 台湾两名大学生获德国设计大奖</a>
+          
+        </li>
+      </ul>
+    </div>
+  </center>
+
+  <div id="comments"></div>
+  <div id="disqus_thread"></div>
+
+  <!-- <div class="post-tor-content">
+    <div class="post-tor" id="postTor" style="display: none;">
+      <div class="torarc-t">
+        <div class="torarc-tile">
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+
+<!-- Disqus 用于评论系统 -->
+
+<script type="text/javascript">
+  var disqus_config = function () {
+    this.page.url = 'http://localhost:4000/archives/how-to-hack-the-crayon-website.html';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = 'http://localhost:4000/archives/how-to-hack-the-crayon-website.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//sora-diary.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+</script>
+
+
+  <footer id="footer" class="container" style="background:rgba(255, 255, 255, 0);display:none;">
+  <hr>
+  <div style="text-align:center;padding-bottom:9px;">
+    <p>&copy; 2020 <a href="http://localhost:4000">ことりのおやつにしてやるぞー！</a>.
+      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank"
+        href="https://yumoe.com">Moricolor</a>
+      / <a href="/atom.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+
+<script src="/js/vendor/jquery.min.js"></script>
+
+
+<script src="/js/zoom-js/js/zoom.js"></script>
+
+
+<script src="/js/vendor/bootstrap.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- 
+<script src="/js/vendor/video.js"></script>
+ -->
+
+<script src="/js/flat-ui.min.js"></script>
+
+
+<script src="/js/prism.js"></script>
+
+
+<script type="text/javascript">
+  function getHitokoto() {
+    $.ajax({ url: "https://api.imjad.cn/hitokoto/" }).then(function (response) {
+      $("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;" + response);
+    });
+  }
+
+  $(document).ready(function () {
+    $("#main-index").fadeIn(800);
+    $("#main-archive").fadeIn(800);
+    $("#main-post").fadeIn(500);
+    $("#postnav").fadeIn(800);
+    $("#main-page").fadeIn(500);
+    $("#pagenav").fadeIn(800);
+    $("#bottomtools").fadeIn(1200);
+    if (window.location.hash != '') {
+      var i = window.location.hash.indexOf('#comment');
+      var ii = window.location.hash.indexOf('#respond-post');
+      if (i != '-1' || ii != '-1') {
+        $("#comments").fadeIn(1000);
+      }
+    }
+    $("#thatsi").fadeIn(1300);
+    $("#footer").css('display', 'block');
+    
+      // 锚点平滑滚动
+      $('a[href*=#],area[href*=#]').click(function () {
+        $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body'); //Opera BUG fixed
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && location.search == this.search) {
+          var $target = $(this.hash);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate({
+              scrollTop: targetOffset
+            },
+              1000);
+            return false;
+          }
+        }
+      });
+    // end
+    
+  });
+
+  $("#outcomment").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#comment_go").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#tor_show").click(function () {
+    if ($("#postTor").css('display') == 'none;') {
+      $("#postTor").fadeIn(400);
+      $("#postTor").css('display', 'inline-block');
+    } else {
+      $("#postTor").fadeOut(400);
+    }
+  });
+</script>
+<script>
+  $(function () {
+    $('[data-toggle=tooltip]').tooltip();
+  });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70944432-1');
+</script>
+
+</body>
+</html>

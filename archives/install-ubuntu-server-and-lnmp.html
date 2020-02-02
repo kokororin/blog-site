@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="han-la">
+  <head>
+    <meta charset="utf-8">
+    <!-- Meta & Title & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="theme-color" content="#16a085">
+<!-- Blue #448AFF -->
+<!-- Title -->
+
+<title>安装Ubuntu Server并配置LNMP环境 | ことりのおやつにしてやるぞー！</title>
+
+<!-- Favicons -->
+<link rel="icon shortcut" type="image/ico" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico">
+
+
+    <!-- Import CSS -->
+    
+<link rel="stylesheet" href="/css/mori.css">
+
+    
+<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+
+    
+<link rel="stylesheet" href="/css/flat-ui.min.css">
+
+    
+<link rel="stylesheet" href="/css/prism.css">
+
+    
+<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+
+    
+<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+
+
+    <!-- RSS -->
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head>
+
+<body>
+  
+
+  <div id="main" class="container">
+  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
+    <article class="post" style="padding-top: 20px;">
+      <h2 itemprop="name headline" style="font-weight: normal;">安装Ubuntu Server并配置LNMP环境</h2>
+      <div class="text-right">
+        <div class="text-bar">
+          <a href="http://localhost:4000" class="fui-home"></a>
+          <!-- <a id="tor_show" href="javascript:void(0)" class="fui-list-bulleted"></a> -->
+          <a id="comment_go" href="#comments" class="fui-bubble"></a>
+          <a style="font-size: 30px;margin-left: 1px;">·</a>
+          <a href="https://twitter.com/intent/tweet?url=http://localhost:4000/archives/install-ubuntu-server-and-lnmp.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/archives/install-ubuntu-server-and-lnmp.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
+          <a href="https://plus.google.com/share?url=http://localhost:4000/archives/install-ubuntu-server-and-lnmp.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
+          <a href="http://service.weibo.com/share/share.php?url=http://localhost:4000/archives/install-ubuntu-server-and-lnmp.html&title=安装Ubuntu Server并配置LNMP环境"
+            target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
+            class="fui-bookmark"></a>
+        </div>
+        <div class="post-info">
+          <span class="post-info-n">
+            
+            <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
+            
+          </span>
+          
+          <a href="/tags/linux/">linux</a>
+          
+          <a href="/tags/php/">php</a>
+          
+          <a href="/tags/nginx/">nginx</a>
+          
+          <a href="/tags/virtualbox/">virtualbox</a>
+          
+          <a href="/tags/ubuntu/">ubuntu</a>
+          
+          <a><time datetime="2015-08-18T11:05:00.000Z">2015-08-18</time></a>
+        </div>
+      </div>
+      <!-- 头图 -->
+      <!-- end -->
+      <div class="post-content" itemprop="articleBody">
+        <blockquote>
+<p>这篇文章给大家介绍一下如何在Windows系统下的Virtual Box虚拟机软件中安装Ubuntu Server系统，并配置一个Linux+Nginx+Mysql+PHP，本文仅适合新手。</p>
+</blockquote>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>下载<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">Virtualbox</a>并安装</li>
+<li>在网易开源镜像站下载<a href="http://mirrors.163.com/ubuntu-releases/14.04.3/ubuntu-14.04.3-server-i386.iso" target="_blank" rel="noopener">Ubuntu Server 14.04</a></li>
+</ul>
+<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h3><ul>
+<li>由于VBox默认的虚拟电脑位置位于系统分区，建议移到其他分区。</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/3431870263.png" alt="vbox1.png"></p>
+<ul>
+<li>新建一个虚拟电脑内存选择512M，磁盘大小选择20GB，其他配置保持默认即可。</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/3372103201.png" alt="vbox2.png"></p>
+<ul>
+<li>启动刚刚创建的虚拟电脑，选择下载的iso文件。</li>
+<li>选择语言English</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/992146488.png" alt="vox4.png"></p>
+<ul>
+<li>回车选择Install </li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/532683159.png" alt="vbox5.png"></p>
+<ul>
+<li>下一步照样选择English</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/1192955220.png" alt="vnox6.png"></p>
+<ul>
+<li>地区推荐选择HongKong</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/1582173464.png" alt="vbox7.png"></p>
+<ul>
+<li>下一步将会检测键盘布局，选择No</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/4099860439.png" alt="vbox8.png"></p>
+<ul>
+<li>下一步回车</li>
+<li>再次回车，之后等待安装程序配置，可能需要一段时间</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/2565025364.png" alt="vbox9.png"></p>
+<ul>
+<li>配置Hostname，默认Ubuntu就可以</li>
+<li>配置用户名，我这里使用kotori，下一步回车</li>
+<li>配置密码，输入kotori，询问密码弱的话不用理会，选择Yes</li>
+<li>是否加密home，选择No</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/2567764901.png" alt="vbox10.png"></p>
+<ul>
+<li>询问时区是否正确，选择Yes</li>
+<li>下面将开始分区，选择Manual，之后选择刚刚创建的虚拟磁盘</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/2485276699.png" alt="11.png"><br><img src="https://static-files.kotori.love/blog/2015/08/3987628378.png" alt="12.png"></p>
+<ul>
+<li>是否创建分区表，选择Yes</li>
+<li>选择Create a new partition，输入21.0GB，分区类型选择Primary，位置选择Begining，然后选择Done setting up the partition</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/1894108421.png" alt="13.png"></p>
+<ul>
+<li>接下来还剩余一个475MB的空间，把该空间创建为swap，与上一步大致一样，类型选择Logical，位置选择End，Use as 选择swap area</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/573460900.png" alt="14.png"></p>
+<ul>
+<li>是否写入选择Yes，接下来等待系统安装，可能会比较慢，请耐心等待</li>
+<li>安装完后，询问是否使用HTTP代理，直接回车</li>
+<li>询问是否自动更新，选择No automatic updates</li>
+<li>使用空格键选择OpenSSH Server，回车</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/761018150.png" alt="15.png"></p>
+<ul>
+<li>最后一步啦，选择Yes，稍等一会会自动重启，到这里Ubuntu Server正式安装完成</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/1684320810.png" alt="16.png"></p>
+<h3 id="配置LNMP"><a href="#配置LNMP" class="headerlink" title="配置LNMP"></a>配置LNMP</h3><ul>
+<li>登陆进入系统后，依次输入以下命令</li>
+</ul>
+<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">wget</span> http://mirrors.linuxeye.com/lnmp-full.tar.gz</span>
+<span class="line"><span class="token function">tar</span> xzf lnmp-full.tar.gz</span>
+<span class="line"><span class="token function">cd</span> lnmp</span>
+<span class="line"><span class="token function">sudo</span> ./install.sh</span></pre><div class="tools"></div></figure>
+<ul>
+<li>安装选项如下选择</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/3813440651.png" alt="18.png"><br><img src="https://static-files.kotori.love/blog/2015/08/2043331199.png" alt="19.png"></p>
+<ul>
+<li>安装时间较长，完成后，需进行网络配置，先将虚拟机关机 sudo poweroff，然后设置，添加一块网卡</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/3890212017.png" alt="3.PNG"></p>
+<ul>
+<li>启动虚拟机后，输入ip address命令，可以看到多出了一个块eth1网卡，但是没有ip地址</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/262474910.png" alt="1.PNG"></p>
+<ul>
+<li>输入 <code>sudo vim /etc/network/interfaces</code>，如下编辑，不会用vim的话请使用nano</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/2390516650.png" alt="4.PNG"></p>
+<ul>
+<li>保存后重启，再起输入ip address可以看到eth1已经有了ip地址了</li>
+<li>在实体机的浏览器中输入刚刚的ip地址，成功打开则安装成功</li>
+</ul>
+<p><img src="https://static-files.kotori.love/blog/2015/08/3025620632.png" alt="2.PNG"></p>
+<p>未完待续。</p>
+
+      </div>
+    </article>
+  </div>
+
+  <center>
+    <div id="postnav" style="display: none;">
+      <ul class="pager">
+        <li class="previous">
+          <a href="http://localhost:4000">
+            <span class="fui-home"></span>
+          </a>
+        </li>
+        <li class="next" id="outcomment">
+          <a href="javascript:void(0)">
+            <span class="fui-chat"></span>
+          </a>
+        </li>
+
+        <li class="previous">
+          
+          <a href="http://localhost:4000/archives/nginx-custom-header.html" title="nginx自定义header">nginx自定义header</a>
+          
+        </li>
+
+        <li class="next">
+          
+          <a href="http://localhost:4000/archives/kotori-php-framework.html" title="写了个php框架(?)">写了个php框架(?)</a>
+          
+        </li>
+      </ul>
+    </div>
+  </center>
+
+  <div id="comments"></div>
+  <div id="disqus_thread"></div>
+
+  <!-- <div class="post-tor-content">
+    <div class="post-tor" id="postTor" style="display: none;">
+      <div class="torarc-t">
+        <div class="torarc-tile">
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+
+<!-- Disqus 用于评论系统 -->
+
+<script type="text/javascript">
+  var disqus_config = function () {
+    this.page.url = 'http://localhost:4000/archives/install-ubuntu-server-and-lnmp.html';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = 'http://localhost:4000/archives/install-ubuntu-server-and-lnmp.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//sora-diary.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+</script>
+
+
+  <footer id="footer" class="container" style="background:rgba(255, 255, 255, 0);display:none;">
+  <hr>
+  <div style="text-align:center;padding-bottom:9px;">
+    <p>&copy; 2020 <a href="http://localhost:4000">ことりのおやつにしてやるぞー！</a>.
+      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank"
+        href="https://yumoe.com">Moricolor</a>
+      / <a href="/atom.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+
+<script src="/js/vendor/jquery.min.js"></script>
+
+
+<script src="/js/zoom-js/js/zoom.js"></script>
+
+
+<script src="/js/vendor/bootstrap.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- 
+<script src="/js/vendor/video.js"></script>
+ -->
+
+<script src="/js/flat-ui.min.js"></script>
+
+
+<script src="/js/prism.js"></script>
+
+
+<script type="text/javascript">
+  function getHitokoto() {
+    $.ajax({ url: "https://api.imjad.cn/hitokoto/" }).then(function (response) {
+      $("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;" + response);
+    });
+  }
+
+  $(document).ready(function () {
+    $("#main-index").fadeIn(800);
+    $("#main-archive").fadeIn(800);
+    $("#main-post").fadeIn(500);
+    $("#postnav").fadeIn(800);
+    $("#main-page").fadeIn(500);
+    $("#pagenav").fadeIn(800);
+    $("#bottomtools").fadeIn(1200);
+    if (window.location.hash != '') {
+      var i = window.location.hash.indexOf('#comment');
+      var ii = window.location.hash.indexOf('#respond-post');
+      if (i != '-1' || ii != '-1') {
+        $("#comments").fadeIn(1000);
+      }
+    }
+    $("#thatsi").fadeIn(1300);
+    $("#footer").css('display', 'block');
+    
+      // 锚点平滑滚动
+      $('a[href*=#],area[href*=#]').click(function () {
+        $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body'); //Opera BUG fixed
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && location.search == this.search) {
+          var $target = $(this.hash);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate({
+              scrollTop: targetOffset
+            },
+              1000);
+            return false;
+          }
+        }
+      });
+    // end
+    
+  });
+
+  $("#outcomment").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#comment_go").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#tor_show").click(function () {
+    if ($("#postTor").css('display') == 'none;') {
+      $("#postTor").fadeIn(400);
+      $("#postTor").css('display', 'inline-block');
+    } else {
+      $("#postTor").fadeOut(400);
+    }
+  });
+</script>
+<script>
+  $(function () {
+    $('[data-toggle=tooltip]').tooltip();
+  });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70944432-1');
+</script>
+
+</body>
+</html>

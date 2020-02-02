@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="han-la">
+  <head>
+    <meta charset="utf-8">
+    <!-- Meta & Title & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="theme-color" content="#16a085">
+<!-- Blue #448AFF -->
+<!-- Title -->
+
+<title>备份一下KDE配置 | ことりのおやつにしてやるぞー！</title>
+
+<!-- Favicons -->
+<link rel="icon shortcut" type="image/ico" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico">
+
+
+    <!-- Import CSS -->
+    
+<link rel="stylesheet" href="/css/mori.css">
+
+    
+<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+
+    
+<link rel="stylesheet" href="/css/flat-ui.min.css">
+
+    
+<link rel="stylesheet" href="/css/prism.css">
+
+    
+<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+
+    
+<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+
+
+    <!-- RSS -->
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head>
+
+<body>
+  
+
+  <div id="main" class="container">
+  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
+    <article class="post" style="padding-top: 20px;">
+      <h2 itemprop="name headline" style="font-weight: normal;">备份一下KDE配置</h2>
+      <div class="text-right">
+        <div class="text-bar">
+          <a href="http://localhost:4000" class="fui-home"></a>
+          <!-- <a id="tor_show" href="javascript:void(0)" class="fui-list-bulleted"></a> -->
+          <a id="comment_go" href="#comments" class="fui-bubble"></a>
+          <a style="font-size: 30px;margin-left: 1px;">·</a>
+          <a href="https://twitter.com/intent/tweet?url=http://localhost:4000/archives/backup-kde-configuration.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/archives/backup-kde-configuration.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
+          <a href="https://plus.google.com/share?url=http://localhost:4000/archives/backup-kde-configuration.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
+          <a href="http://service.weibo.com/share/share.php?url=http://localhost:4000/archives/backup-kde-configuration.html&title=备份一下KDE配置"
+            target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
+            class="fui-bookmark"></a>
+        </div>
+        <div class="post-info">
+          <span class="post-info-n">
+            
+            <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
+            
+          </span>
+          
+          <a href="/tags/linux/">linux</a>
+          
+          <a href="/tags/archlinux/">archlinux</a>
+          
+          <a href="/tags/kde/">kde</a>
+          
+          <a><time datetime="2015-01-24T19:17:00.000Z">2015-01-25</time></a>
+        </div>
+      </div>
+      <!-- 头图 -->
+      <!-- end -->
+      <div class="post-content" itemprop="articleBody">
+        <p>由于该博主的站经常挂，所以备份一下。</p>
+<blockquote>
+<p><a href="http://sforkw.jd-app.com/?p=114" target="_blank" rel="noopener">http://sforkw.jd-app.com/?p=114</a></p>
+</blockquote>
+<h3 id="KDE4的配置参考"><a href="#KDE4的配置参考" class="headerlink" title="KDE4的配置参考"></a>KDE4的配置参考</h3><p>西北工大回来后,时间又充裕了,所以又开始了折腾KDE。</p>
+<p>话说KDE的渲染阴影等效果非常接近MacBook。先放几张图：</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/2015-02-3.png" alt="抓图14"><br><img src="https://static-files.kotori.love/blog/2015/02/57_2015-02-3.png" alt="抓图15"><br><img src="https://static-files.kotori.love/blog/2015/02/82_2015-02-3.png" alt="抓图18"></p>
+<p>下面说一下，我的配置过程：</p>
+<ol>
+<li><p><strong>发行版：</strong></p>
+<p>我的发行版是Arch，没有Arch强大的AUR，很多桌面的配件很难装上。</p>
+</li>
+<li><p><strong>主题：</strong></p>
+<p>我的plasma主题是Helium与dynamo主题混合而成。标题栏主题是Qtcurve，图标主题是dynamo与flattr混合而成，鼠标主题是Breeze。应用程序主题是Qtcurve，配色是Breeze。这些都可以到<a href="http://pan.baidu.com/s/1jGLy3n4" target="_blank" rel="noopener">这里下载</a>。先安装qtcurve再将下载下来的文件解压并覆盖～/.kde4/share/即可。注意，Qtcurve的配置方案是Breeze，并且在窗口管理器中设置边框大小是无侧边框。</p>
+</li>
+<li><p><strong>全局菜单：</strong></p>
+<p>全局菜单可以先加archlinuxcn源，然后依次用yaourt安装appmenu-qt,appmenu-qt5,appmenu-gtk,kdeplasma-applets-menubar 。完成之后在面板上添加刚安装的部件再打开“系统设置&gt;应用程序外观&gt;风格”然后选择微调标签，修改“菜单栏风格”为“仅导出”就能有全局菜单了。</p>
+</li>
+<li><p><strong>最大化隐藏菜单栏：</strong></p>
+<p>最大化隐藏菜单栏可以直接在qtCurve中配置，依然在“窗口管理器”中，勾选“最大化窗口无边框”复选框即可。</p>
+</li>
+<li><p><strong>最大化上面板显示窗口控制按钮：</strong>（最后一张图鼠标所指的地方）</p>
+<p>在AUR中安装kdeplasma-applets-kwin-button-improved，然后在面板上重复三次添加这个部件，分别设置为最小化（iconify），最大化/回复（maximize/restore）和关闭（close）就行了。</p>
+</li>
+</ol>
+<h3 id="KDE的Mac向折腾指南"><a href="#KDE的Mac向折腾指南" class="headerlink" title="KDE的Mac向折腾指南"></a>KDE的Mac向折腾指南</h3><p>惯例，先上图：</p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/13_2015-02-3.png" alt="logo9"></p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/32_2015-02-3.png" alt="logo5"><br><img src="https://static-files.kotori.love/blog/2015/02/93_2015-02-3.png" alt="logo6"><br><img src="https://static-files.kotori.love/blog/2015/02/9_2015-02-3.png" alt="logo7"><br><img src="https://static-files.kotori.love/blog/2015/02/89_2015-02-3.png" alt="logo8"></p>
+<p>首先，KDE的全局菜单可以参考我以前的文章<a href="http://sforkw.jd-app.com/?p=114。" target="_blank" rel="noopener">http://sforkw.jd-app.com/?p=114。</a></p>
+<p>然后，Plasma的主题是AG-plasma，aurorae主题是Yoxydaze-light。这些可以去kde-look里找。</p>
+<p>底部的dock是plank，主题是ArHU，在deviantART中找到的。另外，plank上的图标是受gtk主题控制的，所以装numix-circle是最好不过的。</p>
+<p>我的apps文件可以在这里下载：<a href="http://pan.baidu.com/s/1hqGJDmk" target="_blank" rel="noopener">http://pan.baidu.com/s/1hqGJDmk</a></p>
+<p>~/.config/plank/dock1/settings文件：</p>
+<pre><code>#This file auto-generated by Plank.
+#2014-12-06T09:47:52+0000
+
+[PlankDockPreferences]
+#Whether to show only windows of the current workspace.
+CurrentWorkspaceOnly=false
+#The size of dock icons (in pixels).
+IconSize=42
+#If 0, the dock won’t hide. If 1, the dock intelligently hides. If 2, the dock auto-hides. If 3, the dock dodges active maximized windows.
+HideMode=0
+#Time (in ms) to wait before unhiding the dock.
+UnhideDelay=0
+#The monitor number for the dock. Use -1 to keep on the primary monitor.
+Monitor=-1
+#List of *.dockitem files on this dock. DO NOT MODIFY
+DockItems=plank.dockitem;;google-chrome.dockitem;;dolphin.dockitem;;juk.dockitem;;eclipse.dockitem;;chrome-pjkebmlmkppdjcdcilfcjdkifljollfd-Default.dockitem;;kate.dockitem;;gwenview.dockitem;;wps-office-wps.dockitem;;konsole.dockitem;;sublime_text_3.dockitem;;love-wallpaper.dockitem;;ksysguard.dockitem;;virtualbox.dockitem
+#The position for the dock on the monitor. If 0, left. If 1, right. If 2, top. If 3, bottom.
+Position=3
+#The dock’s position offset from center (in percent).
+Offset=0
+#The name of the dock’s theme to use.
+Theme=ArHU
+#The alignment for the dock on the monitor’s edge. If 0, panel-mode. If 1, left-aligned. If 2, right-aligned. If 3, centered.
+Alignment=3
+#The alignment of the items in this dock if panel-mode is used. If 1, left-aligned. If 2, right-aligned. If 3, centered.
+ItemsAlignment=3
+#Whether to prevent drag’n’drop actions and lock items on the dock.
+LockItems=false
+#Whether to use pressure-based revealing of the dock if the support is available.
+PressureReveal=false
+#Whether to show only pinned applications. Useful for running more then one dock.
+PinnedOnly=true
+#Whether to automatically pin an application if it seems useful to do.
+AutoPinning=true</code></pre><p>~/.local/share/plank/themes/ArHU/中的dock.theme和hover.theme文件分别是：</p>
+<pre><code>#This file auto-generated by Plank.
+#2014-12-06T06:22:37+0000
+
+[PlankDrawingTheme]
+#The roundness of the top corners.
+TopRoundness=6
+#The roundness of the bottom corners.
+BottomRoundness=0
+#The thickness (in pixels) of lines drawn.
+LineWidth=0
+#The color (RGBA) of the outer stroke.
+OuterStrokeColor=0;;0;;0;;0
+#The starting color (RGBA) of the fill gradient.
+FillStartColor=255;;255;;255;;150
+#The ending color (RGBA) of the fill gradient.
+FillEndColor=255;;255;;255;;150
+#The color (RGBA) of the inner stroke.
+InnerStrokeColor=255;;255;;255;;255
+
+[PlankDrawingDockTheme]
+#The padding on the left/right dock edges, in tenths of a percent of IconSize.
+HorizPadding=0
+#The padding on the top dock edge, in tenths of a percent of IconSize.
+TopPadding=1
+#The padding on the bottom dock edge, in tenths of a percent of IconSize.
+BottomPadding=1
+#The padding between items on the dock, in tenths of a percent of IconSize.
+ItemPadding=4
+#The size of item indicators, in tenths of a percent of IconSize.
+IndicatorSize=0
+#The size of the icon-shadow behind every item, in tenths of a percent of IconSize.
+IconShadowSize=0
+#The height (in percent of IconSize) to bounce an icon when the application sets urgent.
+UrgentBounceHeight=0.10000000000000001
+#The height (in percent of IconSize) to bounce an icon when launching an application.
+LaunchBounceHeight=0.10000000000000001
+#The opacity value (0 to 1) to fade the dock to when hiding it.
+FadeOpacity=0
+#The amount of time (in ms) for click animations.
+ClickTime=150
+#The amount of time (in ms) to bounce an urgent icon.
+UrgentBounceTime=300
+#The amount of time (in ms) to bounce an icon when launching an application.
+LaunchBounceTime=300
+#The amount of time (in ms) for active window indicator animations.
+ActiveTime=150
+#The amount of time (in ms) to slide icons into/out of the dock.
+SlideTime=150
+#The time (in ms) to fade the dock in/out on a hide (if FadeOpacity is &amp;amp;lt; 1).
+FadeTime=100
+#The time (in ms) to slide the dock in/out on a hide (if FadeOpacity is 1).
+HideTime=100
+#The size of the urgent glow (shown when dock is hidden), in tenths of a percent of IconSize.
+GlowSize=30
+#The total time (in ms) to show the hidden-dock urgent glow.
+GlowTime=10000
+#The time (in ms) of each pulse of the hidden-dock urgent glow.
+GlowPulseTime=2000
+#The hue-shift (-180 to 180) of the urgent indicator color.
+UrgentHueShift=150
+#The time (in ms) to move an item to its new position.
+ItemMoveTime=150
+
+#This theme written by Perian. thexperian.deviantart.com
+
+[PlankDrawingTheme]
+TopRoundness=3
+LineWidth=0
+OuterStrokeColor=0;;0;;0;;0
+FillStartColor=0;;0;;0;;150
+FillEndColor=0;;0;;0;;150
+InnerStrokeColor=0;;0;;0;;0</code></pre><p>以上是我折腾的结果，找主题也找了半天。大家如果有更好的主题与壁纸也拿来分享一下吧。</p>
+
+      </div>
+    </article>
+  </div>
+
+  <center>
+    <div id="postnav" style="display: none;">
+      <ul class="pager">
+        <li class="previous">
+          <a href="http://localhost:4000">
+            <span class="fui-home"></span>
+          </a>
+        </li>
+        <li class="next" id="outcomment">
+          <a href="javascript:void(0)">
+            <span class="fui-chat"></span>
+          </a>
+        </li>
+
+        <li class="previous">
+          
+          <a href="http://localhost:4000/archives/posutoba-imitation-baidu-project-completed.html" title="Posutoba（仿百度贴吧）项目大致完成">Posutoba（仿百度贴吧）项目大致完成</a>
+          
+        </li>
+
+        <li class="next">
+          
+          <a href="http://localhost:4000/archives/nginx-reverse-proxy-google-parameter-configuration.html" title="nginx反向代理Google的参数配置">nginx反向代理Google的参数配置</a>
+          
+        </li>
+      </ul>
+    </div>
+  </center>
+
+  <div id="comments"></div>
+  <div id="disqus_thread"></div>
+
+  <!-- <div class="post-tor-content">
+    <div class="post-tor" id="postTor" style="display: none;">
+      <div class="torarc-t">
+        <div class="torarc-tile">
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+
+<!-- Disqus 用于评论系统 -->
+
+<script type="text/javascript">
+  var disqus_config = function () {
+    this.page.url = 'http://localhost:4000/archives/backup-kde-configuration.html';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = 'http://localhost:4000/archives/backup-kde-configuration.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//sora-diary.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+</script>
+
+
+  <footer id="footer" class="container" style="background:rgba(255, 255, 255, 0);display:none;">
+  <hr>
+  <div style="text-align:center;padding-bottom:9px;">
+    <p>&copy; 2020 <a href="http://localhost:4000">ことりのおやつにしてやるぞー！</a>.
+      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank"
+        href="https://yumoe.com">Moricolor</a>
+      / <a href="/atom.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+
+<script src="/js/vendor/jquery.min.js"></script>
+
+
+<script src="/js/zoom-js/js/zoom.js"></script>
+
+
+<script src="/js/vendor/bootstrap.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- 
+<script src="/js/vendor/video.js"></script>
+ -->
+
+<script src="/js/flat-ui.min.js"></script>
+
+
+<script src="/js/prism.js"></script>
+
+
+<script type="text/javascript">
+  function getHitokoto() {
+    $.ajax({ url: "https://api.imjad.cn/hitokoto/" }).then(function (response) {
+      $("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;" + response);
+    });
+  }
+
+  $(document).ready(function () {
+    $("#main-index").fadeIn(800);
+    $("#main-archive").fadeIn(800);
+    $("#main-post").fadeIn(500);
+    $("#postnav").fadeIn(800);
+    $("#main-page").fadeIn(500);
+    $("#pagenav").fadeIn(800);
+    $("#bottomtools").fadeIn(1200);
+    if (window.location.hash != '') {
+      var i = window.location.hash.indexOf('#comment');
+      var ii = window.location.hash.indexOf('#respond-post');
+      if (i != '-1' || ii != '-1') {
+        $("#comments").fadeIn(1000);
+      }
+    }
+    $("#thatsi").fadeIn(1300);
+    $("#footer").css('display', 'block');
+    
+      // 锚点平滑滚动
+      $('a[href*=#],area[href*=#]').click(function () {
+        $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body'); //Opera BUG fixed
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && location.search == this.search) {
+          var $target = $(this.hash);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate({
+              scrollTop: targetOffset
+            },
+              1000);
+            return false;
+          }
+        }
+      });
+    // end
+    
+  });
+
+  $("#outcomment").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#comment_go").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#tor_show").click(function () {
+    if ($("#postTor").css('display') == 'none;') {
+      $("#postTor").fadeIn(400);
+      $("#postTor").css('display', 'inline-block');
+    } else {
+      $("#postTor").fadeOut(400);
+    }
+  });
+</script>
+<script>
+  $(function () {
+    $('[data-toggle=tooltip]').tooltip();
+  });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70944432-1');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="han-la">
+  <head>
+    <meta charset="utf-8">
+    <!-- Meta & Title & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="theme-color" content="#16a085">
+<!-- Blue #448AFF -->
+<!-- Title -->
+
+<title>LINE 社交登录简单记录 | ことりのおやつにしてやるぞー！</title>
+
+<!-- Favicons -->
+<link rel="icon shortcut" type="image/ico" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico">
+
+
+    <!-- Import CSS -->
+    
+<link rel="stylesheet" href="/css/mori.css">
+
+    
+<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+
+    
+<link rel="stylesheet" href="/css/flat-ui.min.css">
+
+    
+<link rel="stylesheet" href="/css/prism.css">
+
+    
+<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+
+    
+<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+
+
+    <!-- RSS -->
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head>
+
+<body>
+  
+
+  <div id="main" class="container">
+  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
+    <article class="post" style="padding-top: 20px;">
+      <h2 itemprop="name headline" style="font-weight: normal;">LINE 社交登录简单记录</h2>
+      <div class="text-right">
+        <div class="text-bar">
+          <a href="http://localhost:4000" class="fui-home"></a>
+          <!-- <a id="tor_show" href="javascript:void(0)" class="fui-list-bulleted"></a> -->
+          <a id="comment_go" href="#comments" class="fui-bubble"></a>
+          <a style="font-size: 30px;margin-left: 1px;">·</a>
+          <a href="https://twitter.com/intent/tweet?url=http://localhost:4000/archives/line-social-login.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/archives/line-social-login.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
+          <a href="https://plus.google.com/share?url=http://localhost:4000/archives/line-social-login.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
+          <a href="http://service.weibo.com/share/share.php?url=http://localhost:4000/archives/line-social-login.html&title=LINE 社交登录简单记录"
+            target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
+            class="fui-bookmark"></a>
+        </div>
+        <div class="post-info">
+          <span class="post-info-n">
+            
+            <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
+            
+          </span>
+          
+          <a href="/tags/LINE/">LINE</a>
+          
+          <a><time datetime="2017-09-26T03:36:00.000Z">2017-09-26</time></a>
+        </div>
+      </div>
+      <!-- 头图 -->
+      <!-- end -->
+      <div class="post-content" itemprop="articleBody">
+        <p>首先要去<a href="https://developers.line.me/" target="_blank" rel="noopener">LINE developers</a>注册一个账号～<br>创建好应用以后获取<code>client_id</code>和<code>client_secret</code></p>
+<p>大致流程和微信是一样的0w0</p>
+<hr>
+<h3 id="获取code"><a href="#获取code" class="headerlink" title="获取code"></a>获取code</h3><p>将用户重定向到<code>https://access.line.me/dialog/oauth/weblogin?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx</code>这个地址</p>
+<p>用户登录完了以后会跳转至上一步的<code>redirect_uri</code>，并带上code参数。</p>
+<p><img src="https://static-files.kotori.love/blog/2017/09/1363619783.png" alt="Screenshot from 2017-09-26 11:53:33.png"></p>
+<h3 id="获取access-token"><a href="#获取access-token" class="headerlink" title="获取access_token"></a>获取access_token</h3><p>我们的服务器获取到code以后，向LINE的服务器发送一个POST请求，注意这里的<code>Content-Type</code>是<code>application/x-www-form-urlencoded</code>。</p>
+<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">curl -X POST \</span>
+<span class="line">https://api.line.me/v2/oauth/accessToken \</span>
+<span class="line">-H <span class="token string">'content-type: application/x-www-form-urlencoded'</span> \</span>
+<span class="line">-d <span class="token string">'grant_type=authorization_code&amp;client_id=xxx&amp;client_secret=xxx&amp;code=xxx&amp;redirect_uri=xxx'</span></span></pre><div class="tools"></div></figure>
+<p>LINE服务器会返回如下结果：</p>
+<figure class="highlight code" data-language="Json"><pre class="language-json"><span class="line"><span class="token punctuation">{</span></span>
+<span class="line">       <span class="token property">"scope"</span><span class="token operator">:</span><span class="token string">"P"</span><span class="token punctuation">,</span></span>
+<span class="line">       <span class="token property">"access_token"</span><span class="token operator">:</span><span class="token string">"bNl4YEFPI/hjFWhTqexp4MuEw5YPs7qhr6dJDXKwNPuLka..."</span><span class="token punctuation">,</span></span>
+<span class="line">       <span class="token property">"token_type"</span><span class="token operator">:</span><span class="token string">"Bearer"</span><span class="token punctuation">,</span></span>
+<span class="line">       <span class="token property">"expires_in"</span><span class="token operator">:</span><span class="token number">2591977</span><span class="token punctuation">,</span></span>
+<span class="line">       <span class="token property">"refresh_token"</span><span class="token operator">:</span><span class="token string">"8iFFRdyxNVNLWYeteMMJ"</span></span>
+<span class="line">     <span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+<h3 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h3><p>最后使用获取到的<code>access_token</code>发送获取用户信息的请求：</p>
+<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">curl -X GET \</span>
+<span class="line">-H <span class="token string">'Authorization: Bearer bNl4YEFPI/hjFWhTqexp4MuEw5YPs7qhr6dJDXKwNPuLka...'</span> \</span>
+<span class="line">https://api.line.me/v2/profile</span></pre><div class="tools"></div></figure>
+<p>结果是酱紫的：</p>
+<figure class="highlight code" data-language="Json"><pre class="language-json"><span class="line"><span class="token punctuation">{</span></span>
+<span class="line">  <span class="token property">"userId"</span><span class="token operator">:</span><span class="token string">"Ufr47556f2e40dba2456887320ba7c76d"</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token property">"displayName"</span><span class="token operator">:</span><span class="token string">"Brown"</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token property">"pictureUrl"</span><span class="token operator">:</span><span class="token string">"https://example.com/abcdefghijklmn"</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token property">"statusMessage"</span><span class="token operator">:</span><span class="token string">"Hello, LINE!"</span></span>
+<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+<hr>
+<p>结束惹。很简单吧（x</p>
+<p>最后发现Web版Social Login能唤醒客户端。</p>
+
+      </div>
+    </article>
+  </div>
+
+  <center>
+    <div id="postnav" style="display: none;">
+      <ul class="pager">
+        <li class="previous">
+          <a href="http://localhost:4000">
+            <span class="fui-home"></span>
+          </a>
+        </li>
+        <li class="next" id="outcomment">
+          <a href="javascript:void(0)">
+            <span class="fui-chat"></span>
+          </a>
+        </li>
+
+        <li class="previous">
+          
+          <a href="http://localhost:4000/archives/webpack-dev-server-issue-in-safari.html" title="webpack-dev-server在Safari中的问题">webpack-dev-server在Safari中的问题</a>
+          
+        </li>
+
+        <li class="next">
+          
+          <a href="http://localhost:4000/archives/unicode-in-jsx.html" title="React JSX中unicode的处理">React JSX中unicode的处理</a>
+          
+        </li>
+      </ul>
+    </div>
+  </center>
+
+  <div id="comments"></div>
+  <div id="disqus_thread"></div>
+
+  <!-- <div class="post-tor-content">
+    <div class="post-tor" id="postTor" style="display: none;">
+      <div class="torarc-t">
+        <div class="torarc-tile">
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+
+<!-- Disqus 用于评论系统 -->
+
+<script type="text/javascript">
+  var disqus_config = function () {
+    this.page.url = 'http://localhost:4000/archives/line-social-login.html';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = 'http://localhost:4000/archives/line-social-login.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//sora-diary.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+</script>
+
+
+  <footer id="footer" class="container" style="background:rgba(255, 255, 255, 0);display:none;">
+  <hr>
+  <div style="text-align:center;padding-bottom:9px;">
+    <p>&copy; 2020 <a href="http://localhost:4000">ことりのおやつにしてやるぞー！</a>.
+      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank"
+        href="https://yumoe.com">Moricolor</a>
+      / <a href="/atom.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+
+<script src="/js/vendor/jquery.min.js"></script>
+
+
+<script src="/js/zoom-js/js/zoom.js"></script>
+
+
+<script src="/js/vendor/bootstrap.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- 
+<script src="/js/vendor/video.js"></script>
+ -->
+
+<script src="/js/flat-ui.min.js"></script>
+
+
+<script src="/js/prism.js"></script>
+
+
+<script type="text/javascript">
+  function getHitokoto() {
+    $.ajax({ url: "https://api.imjad.cn/hitokoto/" }).then(function (response) {
+      $("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;" + response);
+    });
+  }
+
+  $(document).ready(function () {
+    $("#main-index").fadeIn(800);
+    $("#main-archive").fadeIn(800);
+    $("#main-post").fadeIn(500);
+    $("#postnav").fadeIn(800);
+    $("#main-page").fadeIn(500);
+    $("#pagenav").fadeIn(800);
+    $("#bottomtools").fadeIn(1200);
+    if (window.location.hash != '') {
+      var i = window.location.hash.indexOf('#comment');
+      var ii = window.location.hash.indexOf('#respond-post');
+      if (i != '-1' || ii != '-1') {
+        $("#comments").fadeIn(1000);
+      }
+    }
+    $("#thatsi").fadeIn(1300);
+    $("#footer").css('display', 'block');
+    
+      // 锚点平滑滚动
+      $('a[href*=#],area[href*=#]').click(function () {
+        $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body'); //Opera BUG fixed
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && location.search == this.search) {
+          var $target = $(this.hash);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate({
+              scrollTop: targetOffset
+            },
+              1000);
+            return false;
+          }
+        }
+      });
+    // end
+    
+  });
+
+  $("#outcomment").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#comment_go").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#tor_show").click(function () {
+    if ($("#postTor").css('display') == 'none;') {
+      $("#postTor").fadeIn(400);
+      $("#postTor").css('display', 'inline-block');
+    } else {
+      $("#postTor").fadeOut(400);
+    }
+  });
+</script>
+<script>
+  $(function () {
+    $('[data-toggle=tooltip]').tooltip();
+  });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70944432-1');
+</script>
+
+</body>
+</html>

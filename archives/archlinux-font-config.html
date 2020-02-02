@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="han-la">
+  <head>
+    <meta charset="utf-8">
+    <!-- Meta & Title & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="theme-color" content="#16a085">
+<!-- Blue #448AFF -->
+<!-- Title -->
+
+<title>Archlinux字体配置 | ことりのおやつにしてやるぞー！</title>
+
+<!-- Favicons -->
+<link rel="icon shortcut" type="image/ico" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico">
+
+
+    <!-- Import CSS -->
+    
+<link rel="stylesheet" href="/css/mori.css">
+
+    
+<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+
+    
+<link rel="stylesheet" href="/css/flat-ui.min.css">
+
+    
+<link rel="stylesheet" href="/css/prism.css">
+
+    
+<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+
+    
+<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+
+
+    <!-- RSS -->
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head>
+
+<body>
+  
+
+  <div id="main" class="container">
+  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
+    <article class="post" style="padding-top: 20px;">
+      <h2 itemprop="name headline" style="font-weight: normal;">Archlinux字体配置</h2>
+      <div class="text-right">
+        <div class="text-bar">
+          <a href="http://localhost:4000" class="fui-home"></a>
+          <!-- <a id="tor_show" href="javascript:void(0)" class="fui-list-bulleted"></a> -->
+          <a id="comment_go" href="#comments" class="fui-bubble"></a>
+          <a style="font-size: 30px;margin-left: 1px;">·</a>
+          <a href="https://twitter.com/intent/tweet?url=http://localhost:4000/archives/archlinux-font-config.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/archives/archlinux-font-config.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
+          <a href="https://plus.google.com/share?url=http://localhost:4000/archives/archlinux-font-config.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
+          <a href="http://service.weibo.com/share/share.php?url=http://localhost:4000/archives/archlinux-font-config.html&title=Archlinux字体配置"
+            target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
+            class="fui-bookmark"></a>
+        </div>
+        <div class="post-info">
+          <span class="post-info-n">
+            
+            <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
+            
+          </span>
+          
+          <a href="/tags/linux/">linux</a>
+          
+          <a href="/tags/archlinux/">archlinux</a>
+          
+          <a href="/tags/%E5%AD%97%E4%BD%93/">字体</a>
+          
+          <a><time datetime="2014-10-20T12:37:00.000Z">2014-10-20</time></a>
+        </div>
+      </div>
+      <!-- 头图 -->
+      <!-- end -->
+      <div class="post-content" itemprop="articleBody">
+        <p>转载自：<a href="http://www.kankanews.com/ICkengine/archives/87503.shtml" target="_blank" rel="noopener">http://www.kankanews.com/ICkengine/archives/87503.shtml</a></p>
+<p>安装用 infinality 打包过的 freetype2 和 fontconfig。freetype 是字体渲染程序，fontconfig 是对字体的配置规则。</p>
+<p>默认情况下的绘字库的显示效果不是很好，所以我们要安装打过补丁的版本。</p>
+<p>两个打过补丁的包名字叫做 freetype2-infinality 和 fontconfig-infinality。不过只能用 yaourt 安装。安装 yaourt：</p>
+<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">pacman -S yaourt</span></pre><div class="tools"></div></figure>
+<p>然后运行：</p>
+<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">yaourt freetype2-infinality</span></pre><div class="tools"></div></figure>
+<p>之后可能会出现这样的一个列表：</p>
+<pre><code>    2 aur/fontconfig-infinality-git 101.91eb8e6-1 (57) Fontconfig files for use with freetype2-infinality. GIT version.
+    3 aur/freetype2-infinality 2.4.12-2 (551) TrueType font rendering library with infinality patch
+    4 aur/freetype2-infinality-git 2.4.99.git20130513-1 (85) TrueType font rendering library with Infinality patch
+    5 aur/lib32-freetype2-infinality 2.4.12-2 (166) TrueType font rendering library (32-bit) with infinality patch
+    6 aur/lib32-freetype2-infinality-git 2.4.99.git20130513-1 (28) TrueType font rendering library (32-bit) with Infinality patch
+    7 aur/libreoffice-uglyfix-freetype2-infinality 2.4.6-1 (43) Compiles freetype2 .so files and puts them in the libreoffice directory to fix font ugliness
+    8 aur/openoffice-uglyfix-freetype2-infinality 2.4.6-1 (10) Compiles freetype2 .so files and puts them in the openoffice directory to fix font ugliness==&amp;amp;gt;
+     Enter n° of packages to be installed (ex: 1 2 3 or 1-3)==</code></pre><p>这时输入 “1 3”（1空格3）就可以安装这两个包了。如果你不是 root 用户，可能会要你输入密码。 当出现 “Edit PKGBUILD ?[Y/n]”或者”Edit install.sh ?[Y/n]”字样的时候，输入”n”表示不编辑。 在”Continue building xxxx ?[Y/n]”出现之后输入”y”表示继续安装。</p>
+<p>由于 SourceForge 被墙，yaourt 无法下载 freetype 的源码包。这时候可以用代理手动安装。</p>
+<pre><code>source=(&quot;freetype/freetype-${pkgver}.tar.bz2&quot; &quot;http://www.infinality.net/fedora/linux/zips/freetype-infinality-${pkgver}-${_pkgdate}_${_pkgrel}-x86_64.tar.bz2&quot; &quot;freetype-2.2.1-enable-valid.patch::https://projects.archlinux.org/svntogit/packages.git/plain/trunk/freetype-2.2.1-enable-valid.patch?h=packages/freetype2&quot;)</code></pre><p>然后执行 makepkg -si 以安装，中间如果出现提示一直选择是。</p>
+<p>安装 fontconfig-infinality：</p>
+<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">yaourt fontconfig-infinality</span></pre><div class="tools"></div></figure>
+<p>完毕之后，执行 /etc/fonts/infinality/infctl.sh setstyle，然后选择一个渲染风格（我设置了5）。</p>
+
+      </div>
+    </article>
+  </div>
+
+  <center>
+    <div id="postnav" style="display: none;">
+      <ul class="pager">
+        <li class="previous">
+          <a href="http://localhost:4000">
+            <span class="fui-home"></span>
+          </a>
+        </li>
+        <li class="next" id="outcomment">
+          <a href="javascript:void(0)">
+            <span class="fui-chat"></span>
+          </a>
+        </li>
+
+        <li class="previous">
+          
+          <a href="http://localhost:4000/archives/how-to-install-archlinux-gnome-graphical-user-interface.html" title="Archlinux安装gnome图形界面的方法">Archlinux安装gnome图形界面的方法</a>
+          
+        </li>
+
+        <li class="next">
+          
+          <a href="http://localhost:4000/archives/gnome-shell-transparent-method.html" title="gnome-shell透明的方法">gnome-shell透明的方法</a>
+          
+        </li>
+      </ul>
+    </div>
+  </center>
+
+  <div id="comments"></div>
+  <div id="disqus_thread"></div>
+
+  <!-- <div class="post-tor-content">
+    <div class="post-tor" id="postTor" style="display: none;">
+      <div class="torarc-t">
+        <div class="torarc-tile">
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+
+<!-- Disqus 用于评论系统 -->
+
+<script type="text/javascript">
+  var disqus_config = function () {
+    this.page.url = 'http://localhost:4000/archives/archlinux-font-config.html';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = 'http://localhost:4000/archives/archlinux-font-config.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//sora-diary.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+</script>
+
+
+  <footer id="footer" class="container" style="background:rgba(255, 255, 255, 0);display:none;">
+  <hr>
+  <div style="text-align:center;padding-bottom:9px;">
+    <p>&copy; 2020 <a href="http://localhost:4000">ことりのおやつにしてやるぞー！</a>.
+      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank"
+        href="https://yumoe.com">Moricolor</a>
+      / <a href="/atom.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+
+<script src="/js/vendor/jquery.min.js"></script>
+
+
+<script src="/js/zoom-js/js/zoom.js"></script>
+
+
+<script src="/js/vendor/bootstrap.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- 
+<script src="/js/vendor/video.js"></script>
+ -->
+
+<script src="/js/flat-ui.min.js"></script>
+
+
+<script src="/js/prism.js"></script>
+
+
+<script type="text/javascript">
+  function getHitokoto() {
+    $.ajax({ url: "https://api.imjad.cn/hitokoto/" }).then(function (response) {
+      $("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;" + response);
+    });
+  }
+
+  $(document).ready(function () {
+    $("#main-index").fadeIn(800);
+    $("#main-archive").fadeIn(800);
+    $("#main-post").fadeIn(500);
+    $("#postnav").fadeIn(800);
+    $("#main-page").fadeIn(500);
+    $("#pagenav").fadeIn(800);
+    $("#bottomtools").fadeIn(1200);
+    if (window.location.hash != '') {
+      var i = window.location.hash.indexOf('#comment');
+      var ii = window.location.hash.indexOf('#respond-post');
+      if (i != '-1' || ii != '-1') {
+        $("#comments").fadeIn(1000);
+      }
+    }
+    $("#thatsi").fadeIn(1300);
+    $("#footer").css('display', 'block');
+    
+      // 锚点平滑滚动
+      $('a[href*=#],area[href*=#]').click(function () {
+        $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body'); //Opera BUG fixed
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && location.search == this.search) {
+          var $target = $(this.hash);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate({
+              scrollTop: targetOffset
+            },
+              1000);
+            return false;
+          }
+        }
+      });
+    // end
+    
+  });
+
+  $("#outcomment").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#comment_go").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#tor_show").click(function () {
+    if ($("#postTor").css('display') == 'none;') {
+      $("#postTor").fadeIn(400);
+      $("#postTor").css('display', 'inline-block');
+    } else {
+      $("#postTor").fadeOut(400);
+    }
+  });
+</script>
+<script>
+  $(function () {
+    $('[data-toggle=tooltip]').tooltip();
+  });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70944432-1');
+</script>
+
+</body>
+</html>

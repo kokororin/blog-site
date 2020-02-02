@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html class="han-la">
+  <head>
+    <meta charset="utf-8">
+    <!-- Meta & Title & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="theme-color" content="#16a085">
+<!-- Blue #448AFF -->
+<!-- Title -->
+
+<title>一些奇怪的nginx配置文件 | ことりのおやつにしてやるぞー！</title>
+
+<!-- Favicons -->
+<link rel="icon shortcut" type="image/ico" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico">
+
+
+    <!-- Import CSS -->
+    
+<link rel="stylesheet" href="/css/mori.css">
+
+    
+<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+
+    
+<link rel="stylesheet" href="/css/flat-ui.min.css">
+
+    
+<link rel="stylesheet" href="/css/prism.css">
+
+    
+<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+
+    
+<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+
+
+    <!-- RSS -->
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head>
+
+<body>
+  
+
+  <div id="main" class="container">
+  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
+    <article class="post" style="padding-top: 20px;">
+      <h2 itemprop="name headline" style="font-weight: normal;">一些奇怪的nginx配置文件</h2>
+      <div class="text-right">
+        <div class="text-bar">
+          <a href="http://localhost:4000" class="fui-home"></a>
+          <!-- <a id="tor_show" href="javascript:void(0)" class="fui-list-bulleted"></a> -->
+          <a id="comment_go" href="#comments" class="fui-bubble"></a>
+          <a style="font-size: 30px;margin-left: 1px;">·</a>
+          <a href="https://twitter.com/intent/tweet?url=http://localhost:4000/archives/nginx-config-file.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/archives/nginx-config-file.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
+          <a href="https://plus.google.com/share?url=http://localhost:4000/archives/nginx-config-file.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
+          <a href="http://service.weibo.com/share/share.php?url=http://localhost:4000/archives/nginx-config-file.html&title=一些奇怪的nginx配置文件"
+            target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
+            class="fui-bookmark"></a>
+        </div>
+        <div class="post-info">
+          <span class="post-info-n">
+            
+            <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
+            
+          </span>
+          
+          <a href="/tags/gravatar/">gravatar</a>
+          
+          <a href="/tags/nginx/">nginx</a>
+          
+          <a><time datetime="2015-11-29T12:05:00.000Z">2015-11-29</time></a>
+        </div>
+      </div>
+      <!-- 头图 -->
+      <!-- end -->
+      <div class="post-content" itemprop="articleBody">
+        <p>RT</p>
+<h3 id="Gravatar"><a href="#Gravatar" class="headerlink" title="Gravatar"></a>Gravatar</h3><pre><code>proxy_cache_path  /data/wwwroot/gravatar.kotori.love/cache  levels=1:2   keys_zone=gravatar:10m inactive=7d max_size=1g;
+
+server {
+    listen 80;
+    listen 443 ssl http2;
+    server_name gravatar.kotori.love;
+    access_log /data/wwwlogs/gravatar.kotori.love_nginx.log combined;
+    include none.conf;
+
+    ssl_certificate /path/to/file;
+    ssl_certificate_key /path/to/file;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_stapling on;
+    ssl_ciphers &quot;ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA&quot;;
+    ssl_session_cache shared:SSL:20m;
+    ssl_session_timeout 60m;
+    add_header Strict-Transport-Security &quot;max-age=63072000; includeSubdomains; preload&quot;;
+
+    if ( $query_string ~* &quot;.*[\;&#39;\&lt;\&gt;].*&quot; ){
+        return 404;
+    }
+
+    location ~ .*\.(wma|wmv|asf|mp3|mmf|zip|rar|jpg|gif|png|swf|flv)$ {
+        valid_referers none blocked *.kotori.love gravatar.kotori.love;
+        if ($invalid_referer) {
+            return 403;
+        }
+    }
+
+    location avatar/ {
+            valid_referers none blocked *.kotori.love gravatar.kotori.love;
+            if ($invalid_referer) {
+                    #return 403;
+            }
+    }
+
+    location / {
+        valid_referers none blocked *.kotori.love gravatar.kotori.love;
+            if ($invalid_referer) {
+                #return 403;
+            }
+        proxy_redirect                   off;
+        proxy_pass                       http://gravatar.com;
+        add_header                       Nginx-Cache            &quot;$upstream_cache_status&quot;;
+        proxy_connect_timeout            180;
+        proxy_send_timeout               180;
+        proxy_read_timeout               180;
+        proxy_buffer_size                128k;
+        proxy_buffers                    4                    128k;
+        proxy_busy_buffers_size          128k;
+        proxy_temp_file_write_size       128k;
+        proxy_cache                      gravatar;
+        proxy_cache_valid                200                    302        1h;
+        proxy_cache_valid                404                    1m;
+        proxy_cache_key                  $uri$is_args$args;
+        proxy_set_header                 Host                $host;
+        proxy_set_header                 Accept-Encoding        &quot;&quot;;
+        proxy_set_header                 X-Real-IP            $remote_addr;
+        proxy_set_header                 X-Forwarded-For        $proxy_add_x_forwarded_for;
+        subs_filter_types                text/css text/xml    application/xml    application/xml+rss;
+        subs_filter http://gravatar.com http://gravatar.kotori.love;
+    }
+}
+</code></pre><h3 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h3><pre><code>server {
+listen 443 ssl;
+server_name g.kotori.love;
+access_log /data/wwwlogs/g.kotori.love_nginx.log combined;
+index index.html index.htm index.jsp index.php;
+#include none.conf;
+#root /data/wwwroot/g.kotori.love;
+
+ssl_certificate /path/to/file;
+ssl_certificate_key /path/to/file;
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+#ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RS
+#ssl_prefer_server_ciphers on;
+ssl_session_cache shared:SSL:20m;
+ssl_session_timeout 60m;
+
+resolver 8.8.8.8;
+
+
+location / {
+    google on;
+    google_language zh-CN;
+   # subs_filter &#39;_\.ua\(&quot;rwt&quot;,function\(\)\{[^\}]*\}\);&#39; &#39;&#39; igr;
+   subs_filter &#39;&lt;/head&gt;&#39; &#39;&lt;style id=&quot;kotori-custom-css&quot;&gt;#gb_8,#gb_78,#gb_36,#gb_5,#gb_23,#gbztm,#gb_119,#gbi4s1{display:none}&lt;/style&gt;&lt;/head&gt;&#39; o;
+   subs_filter &#39;&lt;title&gt;Google&lt;/title&gt;&#39; &#39;&lt;title&gt;Kotori\&#39;s Google&lt;/title&gt;&#39; o;
+   subs_filter &#39;&lt;input value=&quot;Google 搜索&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#39; &#39;&lt;input value=&quot;Kotori 一下&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#39; o;
+   subs_filter &#39;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;简体中文&lt;/div&gt;&#39; &#39;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;喵星人&lt;/div&gt;&#39; o; 
+    }
+
+}
+
+upstream www.google.com {
+      server 74.125.224.80:443;
+      server 74.125.224.82:443;
+      server 74.125.224.81:443;
+      server 74.125.224.84:443;
+      server 74.125.224.83:443;
+}
+
+server {
+listen 80;
+server_name g.kotori.love;
+#return 301 https://$server_name$request_uri;
+return 403;
+}</code></pre><h3 id="Google-Ajax-lib"><a href="#Google-Ajax-lib" class="headerlink" title="Google Ajax lib"></a>Google Ajax lib</h3><pre><code>proxy_temp_file_write_size 128k;
+proxy_temp_path   /var/cache/nginx/temp;
+proxy_cache_path  /var/cache/nginx/cache levels=1:2 keys_zone=cache_one:50m inactive=7d max_size=5g;
+
+upstream googleajax {
+    server ajax.googleapis.com:443;
+}
+
+server {
+    listen 80;
+
+    server_name ajax.css.network;
+
+    resolver 8.8.8.8;
+
+    location / {
+        proxy_pass_header Server;
+        proxy_set_header Host ajax.googleapis.com;
+        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass https://googleajax;
+        proxy_cache cache_one;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+}
+
+server {
+    listen 443 ssl spdy;
+
+    ssl on;
+    ssl_certificate /root/ssl/css.crt;
+    ssl_certificate_key /root/ssl/css.key;
+
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers &quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;;
+    keepalive_timeout 70;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m; 
+
+    server_name ajax.css.network;
+
+    resolver 8.8.8.8;
+
+    location / {
+        proxy_pass_header Server;
+        proxy_set_header Host ajax.googleapis.com;
+        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass https://googleajax;
+        proxy_cache cache_one;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+}</code></pre><h3 id="Google-Fonts-lib"><a href="#Google-Fonts-lib" class="headerlink" title="Google Fonts lib"></a>Google Fonts lib</h3><pre><code>upstream google {
+    server fonts.googleapis.com:443;
+}
+
+upstream gstatic {
+    server fonts.gstatic.com:443;
+}
+
+server {
+    listen 80;
+
+    server_name fonts.css.network;
+
+    resolver 8.8.8.8;
+
+    location /css {
+        sub_filter &#39;fonts.gstatic.com&#39; &#39;fonts.css.network&#39;;
+        sub_filter_once off;
+        sub_filter_types text/css;
+        proxy_pass_header Server;
+        proxy_set_header Host fonts.googleapis.com;
+        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass https://google;
+        proxy_cache cache_one;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+
+    location /icon {
+        sub_filter &#39;fonts.gstatic.com&#39; &#39;fonts.css.network&#39;;
+        sub_filter_once off;
+        sub_filter_types text/css;
+        proxy_pass_header Server;
+        proxy_set_header Host fonts.googleapis.com;
+        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass https://google;
+        proxy_cache cache_one;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+
+    location / {
+        proxy_pass_header Server;
+        proxy_set_header Host fonts.gstatic.com;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass http://gstatic;
+        proxy_cache cache_one;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+}
+
+server {
+    listen 443 ssl spdy;
+
+    ssl on;
+    ssl_certificate /root/ssl/css.crt;
+    ssl_certificate_key /root/ssl/css.key;
+
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers &quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;;
+    keepalive_timeout 70;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m; 
+
+    server_name fonts.css.network;
+
+    resolver 8.8.8.8;
+
+    location /css {
+        sub_filter &#39;fonts.gstatic.com&#39; &#39;fonts.css.network&#39;; 
+        sub_filter_once off;
+        sub_filter_types text/css;
+        proxy_pass_header Server;
+        proxy_set_header Host fonts.googleapis.com;
+        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass https://google;
+        proxy_cache cache_one;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+
+    location /icon {
+        sub_filter &#39;fonts.gstatic.com&#39; &#39;fonts.css.network&#39;; 
+        sub_filter_once off;
+        sub_filter_types text/css;
+        proxy_pass_header Server;
+        proxy_set_header Host fonts.googleapis.com;
+        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass https://google;
+        proxy_cache cache_one;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+
+    location / {
+        proxy_pass_header Server;
+        proxy_set_header Host fonts.gstatic.com;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass https://gstatic;
+        proxy_cache cache_one;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+}</code></pre>
+      </div>
+    </article>
+  </div>
+
+  <center>
+    <div id="postnav" style="display: none;">
+      <ul class="pager">
+        <li class="previous">
+          <a href="http://localhost:4000">
+            <span class="fui-home"></span>
+          </a>
+        </li>
+        <li class="next" id="outcomment">
+          <a href="javascript:void(0)">
+            <span class="fui-chat"></span>
+          </a>
+        </li>
+
+        <li class="previous">
+          
+          <a href="http://localhost:4000/archives/typecho-plugin-access.html" title="Typecho仿(?)百度统计插件">Typecho仿(?)百度统计插件</a>
+          
+        </li>
+
+        <li class="next">
+          
+          <a href="http://localhost:4000/archives/install-nginx-php-mysql-on-osx.html" title="OS X下配置Nginx+PHP+MySQL">OS X下配置Nginx+PHP+MySQL</a>
+          
+        </li>
+      </ul>
+    </div>
+  </center>
+
+  <div id="comments"></div>
+  <div id="disqus_thread"></div>
+
+  <!-- <div class="post-tor-content">
+    <div class="post-tor" id="postTor" style="display: none;">
+      <div class="torarc-t">
+        <div class="torarc-tile">
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+
+<!-- Disqus 用于评论系统 -->
+
+<script type="text/javascript">
+  var disqus_config = function () {
+    this.page.url = 'http://localhost:4000/archives/nginx-config-file.html';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = 'http://localhost:4000/archives/nginx-config-file.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  }
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//sora-diary.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+</script>
+
+
+  <footer id="footer" class="container" style="background:rgba(255, 255, 255, 0);display:none;">
+  <hr>
+  <div style="text-align:center;padding-bottom:9px;">
+    <p>&copy; 2020 <a href="http://localhost:4000">ことりのおやつにしてやるぞー！</a>.
+      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank"
+        href="https://yumoe.com">Moricolor</a>
+      / <a href="/atom.xml">RSS</a>
+  </div>
+</footer>
+
+<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+
+<script src="/js/vendor/jquery.min.js"></script>
+
+
+<script src="/js/zoom-js/js/zoom.js"></script>
+
+
+<script src="/js/vendor/bootstrap.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- 
+<script src="/js/vendor/video.js"></script>
+ -->
+
+<script src="/js/flat-ui.min.js"></script>
+
+
+<script src="/js/prism.js"></script>
+
+
+<script type="text/javascript">
+  function getHitokoto() {
+    $.ajax({ url: "https://api.imjad.cn/hitokoto/" }).then(function (response) {
+      $("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;" + response);
+    });
+  }
+
+  $(document).ready(function () {
+    $("#main-index").fadeIn(800);
+    $("#main-archive").fadeIn(800);
+    $("#main-post").fadeIn(500);
+    $("#postnav").fadeIn(800);
+    $("#main-page").fadeIn(500);
+    $("#pagenav").fadeIn(800);
+    $("#bottomtools").fadeIn(1200);
+    if (window.location.hash != '') {
+      var i = window.location.hash.indexOf('#comment');
+      var ii = window.location.hash.indexOf('#respond-post');
+      if (i != '-1' || ii != '-1') {
+        $("#comments").fadeIn(1000);
+      }
+    }
+    $("#thatsi").fadeIn(1300);
+    $("#footer").css('display', 'block');
+    
+      // 锚点平滑滚动
+      $('a[href*=#],area[href*=#]').click(function () {
+        $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body'); //Opera BUG fixed
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname && location.search == this.search) {
+          var $target = $(this.hash);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate({
+              scrollTop: targetOffset
+            },
+              1000);
+            return false;
+          }
+        }
+      });
+    // end
+    
+  });
+
+  $("#outcomment").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#comment_go").click(function () {
+    $("#comments").fadeIn(1000);
+  });
+
+  $("#tor_show").click(function () {
+    if ($("#postTor").css('display') == 'none;') {
+      $("#postTor").fadeIn(400);
+      $("#postTor").css('display', 'inline-block');
+    } else {
+      $("#postTor").fadeOut(400);
+    }
+  });
+</script>
+<script>
+  $(function () {
+    $('[data-toggle=tooltip]').tooltip();
+  });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70944432-1');
+</script>
+
+</body>
+</html>
