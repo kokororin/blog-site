@@ -53,17 +53,17 @@
       <h2 itemprop="name headline" style="font-weight: normal;">模拟登录pixiv.net后续</h2>
       <div class="text-right">
         <div class="text-bar">
-          <a href="http://localhost:4000" class="fui-home"></a>
+          <a href="http://kotori.love" class="fui-home"></a>
           <!-- <a id="tor_show" href="javascript:void(0)" class="fui-list-bulleted"></a> -->
           <a id="comment_go" href="#comments" class="fui-bubble"></a>
           <a style="font-size: 30px;margin-left: 1px;">·</a>
-          <a href="https://twitter.com/intent/tweet?url=http://localhost:4000/archives/curl-login-pixiv-next.html" target="_blank" rel="nofollow"
+          <a href="https://twitter.com/intent/tweet?url=http://kotori.love/archives/curl-login-pixiv-next.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/archives/curl-login-pixiv-next.html" target="_blank" rel="nofollow"
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://kotori.love/archives/curl-login-pixiv-next.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
-          <a href="https://plus.google.com/share?url=http://localhost:4000/archives/curl-login-pixiv-next.html" target="_blank" rel="nofollow"
+          <a href="https://plus.google.com/share?url=http://kotori.love/archives/curl-login-pixiv-next.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=http://localhost:4000/archives/curl-login-pixiv-next.html&title=模拟登录pixiv.net后续"
+          <a href="http://service.weibo.com/share/share.php?url=http://kotori.love/archives/curl-login-pixiv-next.html&title=模拟登录pixiv.net后续"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -86,7 +86,7 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p>继上一篇文章<a href="https://kotori.love/archives/curl-login-pixiv.html" target="_blank" rel="noopener">《模拟登录pixiv.net后续》</a>，老接口已经在html上消失了，那么只能按新版接口来惹<br>直接上代码，添加了登录错误的异常=w= 同时不再需要<code>sunra/php-simple-html-dom-parse</code>。<br>可以看到p站添加了<code>Google reCAPTCHA</code>，但是目前没有碰到验证码。<br>PS: <code>is_cookie_ok</code>没有改动，依旧按原来的使用。<br>PSS: nodejs版 <a href="https://github.com/kokororin/pixiv-cookie" target="_blank" rel="noopener">pixiv-cookie</a></p>
+        <p>继上一篇文章<a href="https://kotori.love/archives/curl-login-pixiv.html">《模拟登录pixiv.net后续》</a>，老接口已经在html上消失了，那么只能按新版接口来惹<br>直接上代码，添加了登录错误的异常=w= 同时不再需要<code>sunra/php-simple-html-dom-parse</code>。<br>可以看到p站添加了<code>Google reCAPTCHA</code>，但是目前没有碰到验证码。<br>PS: <code>is_cookie_ok</code>没有改动，依旧按原来的使用。<br>PSS: nodejs版 <a href="https://github.com/kokororin/pixiv-cookie" target="_blank" rel="noopener">pixiv-cookie</a></p>
 <figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">'BEFORE_LOGIN_COOKIE'</span><span class="token punctuation">,</span> <span class="token constant">__DIR__</span> <span class="token punctuation">.</span> <span class="token string">'/BEFORE_LOGIN_COOKIE.txt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//登录页面的cookie</span></span>
 <span class="line"><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">'AFTER_LOGIN_COOKIE'</span><span class="token punctuation">,</span> <span class="token constant">__DIR__</span> <span class="token punctuation">.</span> <span class="token string">'/AFTER_LOGIN_COOKIE.txt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//登录成功后获取到的cookie</span></span>
 <span class="line"><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">'USER_AGENT'</span><span class="token punctuation">,</span> <span class="token string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.59 Safari/537.36'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
@@ -162,7 +162,7 @@
     <div id="postnav" style="display: none;">
       <ul class="pager">
         <li class="previous">
-          <a href="http://localhost:4000">
+          <a href="http://kotori.love">
             <span class="fui-home"></span>
           </a>
         </li>
@@ -174,13 +174,13 @@
 
         <li class="previous">
           
-          <a href="http://localhost:4000/archives/ubuntu-sublime-text-imfix.html" title="Ubuntu Sublime Text 3 中文输入法">Ubuntu Sublime Text 3 中文输入法</a>
+          <a href="http://kotori.love/archives/ubuntu-sublime-text-imfix.html" title="Ubuntu Sublime Text 3 中文输入法">Ubuntu Sublime Text 3 中文输入法</a>
           
         </li>
 
         <li class="next">
           
-          <a href="http://localhost:4000/archives/a-javascript-question-create-json-object-from-server.html" title="一道神奇的JavaScript面试题">一道神奇的JavaScript面试题</a>
+          <a href="http://kotori.love/archives/a-javascript-question-create-json-object-from-server.html" title="一道神奇的JavaScript面试题">一道神奇的JavaScript面试题</a>
           
         </li>
       </ul>
@@ -205,8 +205,8 @@
 
 <script type="text/javascript">
   var disqus_config = function () {
-    this.page.url = 'http://localhost:4000/archives/curl-login-pixiv-next.html';  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = 'http://localhost:4000/archives/curl-login-pixiv-next.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.url = 'http://kotori.love/archives/curl-login-pixiv-next.html';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = 'http://kotori.love/archives/curl-login-pixiv-next.html'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
   }
   var d = document;
   var s = d.createElement('script');
@@ -219,7 +219,7 @@
   <footer id="footer" class="container" style="background:rgba(255, 255, 255, 0);display:none;">
   <hr>
   <div style="text-align:center;padding-bottom:9px;">
-    <p>&copy; 2020 <a href="http://localhost:4000">ことりのおやつにしてやるぞー！</a>.
+    <p>&copy; 2020 <a href="http://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank"
         href="https://yumoe.com">Moricolor</a>
       / <a href="/atom.xml">RSS</a>
