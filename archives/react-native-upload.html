@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>React Native中的上传 | ことりのおやつにしてやるぞー！</title>
+  <title>React Native 中的上传 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">React Native中的上传</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">React Native 中的上传</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/react-native-upload.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/react-native-upload.html&title=React Native中的上传"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/react-native-upload.html&title=React Native 中的上传"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -80,11 +80,11 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p>最近做了上传图片到服务端，其实不用第三方模块。<br>窝建议直接和web端一样采用<code>multipart/form-data</code>来上传，这样APP端和web端用的接口可以通用，至于将图片编码成base64，再到服务端解码保存也是可以的，且效率差别也不是很大。但是由于要改服务端的逻辑，我就懒得用这个方法了。</p>
+        <p>最近做了上传图片到服务端，其实不用第三方模块。<br>窝建议直接和 web 端一样采用 <code>multipart/form-data</code> 来上传，这样 APP 端和 web 端用的接口可以通用，至于将图片编码成 base64，再到服务端解码保存也是可以的，且效率差别也不是很大。但是由于要改服务端的逻辑，我就懒得用这个方法了。</p>
 <blockquote>
-<p>如果仅从应用层观察，base64是会按4/3比例增加传输成本。<br>但实际操作上，物理层和MAC层协议本身是有做压缩和冗余，所以用base64，至少在这两层上讲，传输成本并不会按照4/3比例增多，传输效率可能和纯二进制序列传输没什么区别。</p>
+<p>如果仅从应用层观察，base64 是会按 4/3 比例增加传输成本。<br>但实际操作上，物理层和 MAC 层协议本身是有做压缩和冗余，所以用 base64，至少在这两层上讲，传输成本并不会按照 4/3 比例增多，传输效率可能和纯二进制序列传输没什么区别。</p>
 </blockquote>
-<h3 id="单文件"><a href="#单文件" class="headerlink" title="单文件"></a>单文件</h3><figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">let</span> formData <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FormData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<h3 id="单文件"><a href="#单文件" class="headerlink" title="单文件"></a>单文件</h3><figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">let</span> formData <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FormData</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">let</span> params <span class="token operator">=</span> <span class="token punctuation">{</span></span>
 <span class="line">  uploadImg<span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
@@ -95,55 +95,55 @@
 <span class="line"><span class="token punctuation">}</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> params<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">  formData<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> params<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">  formData<span class="token punctuation">.</span>append <span class="token punctuation">(</span>key<span class="token punctuation">,</span> params <span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token punctuation">}</span></span>
 <span class="line"></span>
-<span class="line"><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'https://api.domain.com/upload.json'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span></span>
+<span class="line">fetch <span class="token punctuation">(</span><span class="token string">'https://api.domain.com/upload.json'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span></span>
 <span class="line">  body<span class="token punctuation">:</span> formData<span class="token punctuation">,</span></span>
 <span class="line">  method<span class="token punctuation">:</span> <span class="token string">'post'</span><span class="token punctuation">,</span></span>
 <span class="line">  headers<span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token string">'Auth-Token'</span><span class="token punctuation">:</span> <span class="token string">'XXXXX'</span><span class="token comment" spellcheck="true">//php端直接用$_SERVER['HTTP_AUTH_TOKEN]接收</span></span>
+<span class="line">    <span class="token string">'Auth-Token'</span><span class="token punctuation">:</span> <span class="token string">'XXXXX'</span><span class="token comment" spellcheck="true">//php 端直接用 $_SERVER ['HTTP_AUTH_TOKEN] 接收</span></span>
 <span class="line">  <span class="token punctuation">}</span></span>
-<span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
-<span class="line">  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>then <span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
+<span class="line">  console<span class="token punctuation">.</span>log <span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<h3 id="文件数组"><a href="#文件数组" class="headerlink" title="文件数组"></a>文件数组</h3><p>PHP可以直接用文件数组批量上传文件</p>
-<figure class="highlight code" data-language="Html"><pre class="language-html"><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image[]<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image[]<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image[]<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image[]<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image[]<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span></pre><div class="tools"></div></figure>
-<p>然而我尝试在RN中也构造类似的结构却不行：</p>
+<h3 id="文件数组"><a href="#文件数组" class="headerlink" title="文件数组"></a>文件数组</h3><p>PHP 可以直接用文件数组批量上传文件</p>
+<figure class="highlight code" data-language="Html"><pre class="language-html"><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image []<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
+<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image []<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
+<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image []<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
+<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image []<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
+<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image []<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span></pre><div class="tools"></div></figure>
+<p>然而我尝试在 RN 中也构造类似的结构却不行：</p>
 <figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">let</span> params <span class="token operator">=</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token string">'uploadImg[]'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
+<span class="line">  <span class="token string">'uploadImg []'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
 <span class="line">    uri<span class="token punctuation">:</span> uri<span class="token punctuation">,</span></span>
 <span class="line">    type<span class="token punctuation">:</span> <span class="token string">'application/octet-stream'</span><span class="token punctuation">,</span></span>
 <span class="line">    name<span class="token punctuation">:</span> <span class="token string">'image.jpg'</span></span>
 <span class="line">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">  <span class="token string">'uploadImg[]'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
+<span class="line">  <span class="token string">'uploadImg []'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
 <span class="line">    uri<span class="token punctuation">:</span> uri<span class="token punctuation">,</span></span>
 <span class="line">    type<span class="token punctuation">:</span> <span class="token string">'application/octet-stream'</span><span class="token punctuation">,</span></span>
 <span class="line">    name<span class="token punctuation">:</span> <span class="token string">'image.jpg'</span></span>
 <span class="line">  <span class="token punctuation">}</span></span>
 <span class="line"><span class="token punctuation">}</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<p>于是按照java web里的类似方式构造是可以的：</p>
+<p>于是按照 java web 里的类似方式构造是可以的：</p>
 <figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">let</span> params <span class="token operator">=</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token string">'uploadImg[0]'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
+<span class="line">  <span class="token string">'uploadImg [0]'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
 <span class="line">    uri<span class="token punctuation">:</span> uri<span class="token punctuation">,</span></span>
 <span class="line">    type<span class="token punctuation">:</span> <span class="token string">'application/octet-stream'</span><span class="token punctuation">,</span></span>
 <span class="line">    name<span class="token punctuation">:</span> <span class="token string">'image.jpg'</span></span>
 <span class="line">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">  <span class="token string">'uploadImg[1]'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
+<span class="line">  <span class="token string">'uploadImg [1]'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
 <span class="line">    uri<span class="token punctuation">:</span> uri<span class="token punctuation">,</span></span>
 <span class="line">    type<span class="token punctuation">:</span> <span class="token string">'application/octet-stream'</span><span class="token punctuation">,</span></span>
 <span class="line">    name<span class="token punctuation">:</span> <span class="token string">'image.jpg'</span></span>
 <span class="line">  <span class="token punctuation">}</span></span>
 <span class="line"><span class="token punctuation">}</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<p>嫌麻烦的话使用for循环构造一下即可</p>
-<h2 id="最后总结一下RN中有关图片的第三方包-也是踩坑过程中碰到的-｡･ω･｡"><a href="#最后总结一下RN中有关图片的第三方包-也是踩坑过程中碰到的-｡･ω･｡" class="headerlink" title="最后总结一下RN中有关图片的第三方包(也是踩坑过程中碰到的(｡･ω･｡))"></a>最后总结一下RN中有关图片的第三方包(也是踩坑过程中碰到的(｡･ω･｡))</h2><ul>
-<li><a href="https://github.com/marcshilling/react-native-image-picker" target="_blank" rel="noopener">react-native-image-picker</a> 图片选取组件，但是不支持多选，裁剪功能不完善，窝现在只用到了它的照相功能，选取需要结合react-native-image-crop-picker</li>
+<p>嫌麻烦的话使用 for 循环构造一下即可</p>
+<h2 id="最后总结一下-RN-中有关图片的第三方包-也是踩坑过程中碰到的-｡･ω･｡"><a href="#最后总结一下-RN-中有关图片的第三方包-也是踩坑过程中碰到的-｡･ω･｡" class="headerlink" title="最后总结一下 RN 中有关图片的第三方包 (也是踩坑过程中碰到的 (｡･ω･｡))"></a>最后总结一下 RN 中有关图片的第三方包 (也是踩坑过程中碰到的 (｡･ω･｡))</h2><ul>
+<li><a href="https://github.com/marcshilling/react-native-image-picker" target="_blank" rel="noopener">react-native-image-picker</a> 图片选取组件，但是不支持多选，裁剪功能不完善，窝现在只用到了它的照相功能，选取需要结合 react-native-image-crop-picker</li>
 <li><a href="https://github.com/ivpusic/react-native-image-crop-picker" target="_blank" rel="noopener">react-native-image-crop-picker</a> 和上面的类似，但是它支持多选和裁剪，然而不支持照相，所以…</li>
-<li><a href="https://github.com/bamlab/react-native-image-resizer" target="_blank" rel="noopener">react-native-image-resizer</a> 这个主要用来压缩图片，一般iOS和Android拍摄出来的图片都有3~5MB左右，所以上传前压缩下当然是极好的</li>
+<li><a href="https://github.com/bamlab/react-native-image-resizer" target="_blank" rel="noopener">react-native-image-resizer</a> 这个主要用来压缩图片，一般 iOS 和 Android 拍摄出来的图片都有 3~5MB 左右，所以上传前压缩下当然是极好的</li>
 </ul>
 
       </div>
@@ -166,13 +166,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/vulnerable-react-native.html" title="React Native中的坑">React Native中的坑</a>
+            <a href="https://kotori.love/archives/vulnerable-react-native.html" title="React Native 中的坑">React Native 中的坑</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/react-native-es5-es6-difference.html" title="React/React Native 的ES5 ES6写法对照表">React/React Native 的ES5 ES6写法对照表</a>
+            <a href="https://kotori.love/archives/react-native-es5-es6-difference.html" title="React/React Native 的 ES5 ES6 写法对照表">React/React Native 的 ES5 ES6 写法对照表</a>
           
         </li>
       </ul>
@@ -223,10 +223,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -315,7 +315,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

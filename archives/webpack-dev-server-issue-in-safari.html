@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>webpack-dev-server在Safari中的问题 | ことりのおやつにしてやるぞー！</title>
+  <title>webpack-dev-server 在 Safari 中的问题 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">webpack-dev-server在Safari中的问题</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">webpack-dev-server 在 Safari 中的问题</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/webpack-dev-server-issue-in-safari.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/webpack-dev-server-issue-in-safari.html&title=webpack-dev-server在Safari中的问题"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/webpack-dev-server-issue-in-safari.html&title=webpack-dev-server 在 Safari 中的问题"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -82,13 +82,13 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p>webpack-dev-server &gt;= 2.8.0的版本在iOS Safari下无法打开网页，效果为白屏。<br>控制台报错：<code>Can&#39;t find variable: SockJS</code></p>
-<p>应该是Safari的<a href="https://stackoverflow.com/questions/46036960/evaluated-expression-const-variable-scope-in-safari" target="_blank" rel="noopener">BUG</a>，比如下面的代码就会抛出Error</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token function">eval</span><span class="token punctuation">(</span><span class="token string">"const a = function () {}; function b() {  a(); }; b();"</span><span class="token punctuation">)</span></span></pre><div class="tools"></div></figure>
+        <p>webpack-dev-server &gt;= 2.8.0 的版本在 iOS Safari 下无法打开网页，效果为白屏。<br>控制台报错：<code>Can&#39;t find variable: SockJS</code></p>
+<p>应该是 Safari 的 <a href="https://stackoverflow.com/questions/46036960/evaluated-expression-const-variable-scope-in-safari" target="_blank" rel="noopener">BUG</a>，比如下面的代码就会抛出 Error</p>
+<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line">eval <span class="token punctuation">(</span><span class="token string">"const a = function () {}; function b () {  a (); }; b ();"</span><span class="token punctuation">)</span></span></pre><div class="tools"></div></figure>
 <blockquote>
 <p>ReferenceError: Can’t find variable: a</p>
 </blockquote>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><h4 id="使用老版本（bu"><a href="#使用老版本（bu" class="headerlink" title="使用老版本（bu"></a><del>使用老版本（bu</del></h4><pre><code>yarn add webpack-dev-server@~2.7.0 -D</code></pre><h4 id="其它方法"><a href="#其它方法" class="headerlink" title="其它方法"></a>其它方法</h4><pre><code>yarn add babel-plugin-transform-es2015-block-scoping -D</code></pre><p>修改webpack相关配置</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><h4 id="使用老版本（bu"><a href="#使用老版本（bu" class="headerlink" title="~ 使用老版本（bu"></a><del>~ 使用老版本（bu</del></h4><pre><code>yarn add webpack-dev-server@~2.7.0 -D</code></pre><h4 id="其它方法"><a href="#其它方法" class="headerlink" title="其它方法"></a>其它方法</h4><pre><code>yarn add babel-plugin-transform-es2015-block-scoping -D</code></pre><p>修改 webpack 相关配置</p>
 <pre><code>{
   test: /\.js$/,
   loader: &#39;babel-loader&#39;,
@@ -117,7 +117,7 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/integrates-basket-into-webpack.html" title="webpack集成basket.js实现localStorage本地缓存">webpack集成basket.js实现localStorage本地缓存</a>
+            <a href="https://kotori.love/archives/integrates-basket-into-webpack.html" title="webpack 集成 basket.js 实现 localStorage 本地缓存">webpack 集成 basket.js 实现 localStorage 本地缓存</a>
           
         </li>
 
@@ -174,10 +174,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -266,7 +266,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

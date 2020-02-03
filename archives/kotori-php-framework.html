@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>写了个php框架(?) | ことりのおやつにしてやるぞー！</title>
+  <title>写了个 php 框架 (?) | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">写了个php框架(?)</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">写了个 php 框架 (?)</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/kotori-php-framework.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/kotori-php-framework.html&title=写了个php框架(?)"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/kotori-php-framework.html&title=写了个 php 框架 (?)"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -81,19 +81,19 @@
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
         <blockquote>
-<p>PHP框架是PHP程序员开发的有利武器，在你用了一些框架之后，我相信你有一天会突发奇想“我要自己写一个属于我自己的PHP框架”。</p>
+<p>PHP 框架是 PHP 程序员开发的有利武器，在你用了一些框架之后，我相信你有一天会突发奇想 “我要自己写一个属于我自己的 PHP 框架”。</p>
 </blockquote>
 <h3 id="为啥自己开发框架？"><a href="#为啥自己开发框架？" class="headerlink" title="为啥自己开发框架？"></a>为啥自己开发框架？</h3><p>框架和其他程序一样，是用来解决问题的。如果你没有遇到问题，为什么要重新制造轮子？可能只是为了开发方便？但是，通过写个框架更好的理解原理也是一件好事。</p>
-<h3 id="大部分PHP框架做的事情："><a href="#大部分PHP框架做的事情：" class="headerlink" title="大部分PHP框架做的事情："></a>大部分PHP框架做的事情：</h3><ul>
-<li>代码重用：定义包、类、函数的放置和加载规则，建议直接整合Composer及其AutoLoad特性。</li>
-<li>请求的分发管理：这个就是路由，Rest风的框架喜欢Rewrite，简单的一点的框架主要通过参数来定位模块和方法所在。</li>
+<h3 id="大部分-PHP-框架做的事情："><a href="#大部分-PHP-框架做的事情：" class="headerlink" title="大部分 PHP 框架做的事情："></a>大部分 PHP 框架做的事情：</h3><ul>
+<li>代码重用：定义包、类、函数的放置和加载规则，建议直接整合 Composer 及其 AutoLoad 特性。</li>
+<li>请求的分发管理：这个就是路由，Rest 风的框架喜欢 Rewrite，简单的一点的框架主要通过参数来定位模块和方法所在。</li>
 <li>配置文件管理：加载和动态加载配置数据</li>
 <li>错误和异常管理：异常捕捉、错误日志记录以及错误码规范。</li>
-<li>LayOut和模板引擎：如何规划页面布局、widget如何重用、ajax页面如何结合、过期session如何重定向；数据和模板怎么渲染成HTML，是否压缩和设置过期头。</li>
-<li>数据库：如何融入控制器；支持什么样的driver；考虑主从分离的扩展性；以及是否使用ORM。</li>
+<li>LayOut 和模板引擎：如何规划页面布局、widget 如何重用、ajax 页面如何结合、过期 session 如何重定向；数据和模板怎么渲染成 HTML，是否压缩和设置过期头。</li>
+<li>数据库：如何融入控制器；支持什么样的 driver；考虑主从分离的扩展性；以及是否使用 ORM。</li>
 </ul>
-<h3 id="关于本框架"><a href="#关于本框架" class="headerlink" title="关于本框架"></a>关于本框架</h3><p>还是进入正题吧，本框架的名字定为KotoriFramework，翻译成中文就叫“鸟框架”。初衷还是为了应付一些小项目，比如个人的小博客程序之类的。内部函数命名<strong>极大的</strong>参考了ThinkPHP（误<del>。不过路由的方法还是参照了TP的说。本框架应该暂时没有什么特点，不知道小算不算特点？框架没有繁琐的目录结构，系统核心文件也是单文件（我把所有类都放在了一个文件里，当然是单文件了！）既然是小（微）型框架，当然没有什么附加的功能了，基本功能都有，其他成熟框架附带的一些Helper都是没有哒</del>如果要拓展功能的话，比如想加入一个分页类、Markdown解析类之类的东西，这些都有目录可以拓展，简单快捷。</p>
-<p>目前唯一不足的地方可能是没有Model层，不过这应该也不算微型框架的缺点吧，暂时先写这些，个人感觉文档还是比较完善的，放上<a href="https://github.com/kokororin/KotoriFramework/" target="_blank" rel="noopener">Github地址</a>。</p>
+<h3 id="关于本框架"><a href="#关于本框架" class="headerlink" title="关于本框架"></a>关于本框架</h3><p>还是进入正题吧，本框架的名字定为 KotoriFramework，翻译成中文就叫 “鸟框架”。初衷还是为了应付一些小项目，比如个人的小博客程序之类的。内部函数命名 ** 极大的 ** 参考了 ThinkPHP（误～。不过路由的方法还是参照了 TP 的说。本框架应该暂时没有什么特点，不知道小算不算特点？框架没有繁琐的目录结构，系统核心文件也是单文件（我把所有类都放在了一个文件里，当然是单文件了！）既然是小（微）型框架，当然没有什么附加的功能了，基本功能都有，其他成熟框架附带的一些 Helper 都是没有哒～如果要拓展功能的话，比如想加入一个分页类、Markdown 解析类之类的东西，这些都有目录可以拓展，简单快捷。</p>
+<p>目前唯一不足的地方可能是没有 Model 层，不过这应该也不算微型框架的缺点吧，暂时先写这些，个人感觉文档还是比较完善的，放上 <a href="https://github.com/kokororin/KotoriFramework/" target="_blank" rel="noopener">Github 地址</a>。</p>
 
       </div>
     </article>
@@ -115,13 +115,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/install-ubuntu-server-and-lnmp.html" title="安装Ubuntu Server并配置LNMP环境">安装Ubuntu Server并配置LNMP环境</a>
+            <a href="https://kotori.love/archives/install-ubuntu-server-and-lnmp.html" title="安装 Ubuntu Server 并配置 LNMP 环境">安装 Ubuntu Server 并配置 LNMP 环境</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/decompile-apk.html" title="Android反编译">Android反编译</a>
+            <a href="https://kotori.love/archives/decompile-apk.html" title="Android 反编译">Android 反编译</a>
           
         </li>
       </ul>
@@ -172,10 +172,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -264,7 +264,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

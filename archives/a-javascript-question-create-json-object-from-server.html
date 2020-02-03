@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>一道神奇的JavaScript面试题 | ことりのおやつにしてやるぞー！</title>
+  <title>一道神奇的 JavaScript 面试题 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">一道神奇的JavaScript面试题</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">一道神奇的 JavaScript 面试题</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/a-javascript-question-create-json-object-from-server.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/a-javascript-question-create-json-object-from-server.html&title=一道神奇的JavaScript面试题"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/a-javascript-question-create-json-object-from-server.html&title=一道神奇的 JavaScript 面试题"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -84,14 +84,14 @@
 <figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token punctuation">{</span></span>
 <span class="line">  bar<span class="token punctuation">:</span> <span class="token operator">&lt;</span><span class="token operator">?</span>php echo $strFromServer<span class="token punctuation">;</span><span class="token operator">?</span><span class="token operator">></span></span>
 <span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<p>这段php代码，可能输出一个 JSON，也可能输出空。（不是<code>&#39;&#39;</code>）</p>
-<p>当输出 <strong>空</strong> 的时候</p>
+<p>这段 php 代码，可能输出一个 JSON，也可能输出空。（不是 <code>&#39;&#39;</code>）</p>
+<p>当输出 ** 空 ** 的时候</p>
 <figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token punctuation">{</span></span>
 <span class="line">  bar<span class="token punctuation">:</span> </span>
 <span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
 <p>很明显会抛出异常</p>
-<p>那么怎么从JS语法层面避免这个异常？ (eval is evil)</p>
-<p>方法一：<code>[&lt;?php?&gt;][0]</code><br>方法二：<code>(x =&gt; x)(&lt;?php&gt;)</code><br>方法三(擦边)：<code>new Object(&lt;?php?&gt;)</code></p>
+<p>那么怎么从 JS 语法层面避免这个异常？ (eval is evil)</p>
+<p>方法一：<code>[&lt;?php?&gt;][0]</code><br>方法二：<code>(x =&gt; x)(&lt;?php&gt;)</code><br>方法三 (擦边)：<code>new Object (&lt;?php?&gt;)</code></p>
 
       </div>
     </article>
@@ -113,13 +113,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/curl-login-pixiv-next.html" title="模拟登录pixiv.net后续">模拟登录pixiv.net后续</a>
+            <a href="https://kotori.love/archives/curl-login-pixiv-next.html" title="模拟登录 pixiv.net 后续">模拟登录 pixiv.net 后续</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/vulnerable-pushstate-in-wechat-browser.html" title="微信浏览器下pushState的坑">微信浏览器下pushState的坑</a>
+            <a href="https://kotori.love/archives/vulnerable-pushstate-in-wechat-browser.html" title="微信浏览器下 pushState 的坑">微信浏览器下 pushState 的坑</a>
           
         </li>
       </ul>
@@ -170,10 +170,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -262,7 +262,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>React Native中的坑 | ことりのおやつにしてやるぞー！</title>
+  <title>React Native 中的坑 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">React Native中的坑</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">React Native 中的坑</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/vulnerable-react-native.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/vulnerable-react-native.html&title=React Native中的坑"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/vulnerable-react-native.html&title=React Native 中的坑"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -80,18 +80,18 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <h3 id="复合组件无法在TouchableOpacity使用"><a href="#复合组件无法在TouchableOpacity使用" class="headerlink" title="复合组件无法在TouchableOpacity使用"></a>复合组件无法在TouchableOpacity使用</h3><pre><code>&lt;TouchableOpacity&gt;
+        <h3 id="复合组件无法在-TouchableOpacity-使用"><a href="#复合组件无法在-TouchableOpacity-使用" class="headerlink" title="复合组件无法在 TouchableOpacity 使用"></a>复合组件无法在 TouchableOpacity 使用</h3><pre><code>&lt;TouchableOpacity&gt;
         &lt;MyButton label=&quot;Press me!&quot; /&gt;
-&lt;/TouchableOpacity&gt;</code></pre><p>会报<code>Touchable child must either be native or forward setNativeProps to a native component</code>，这是因为：</p>
+&lt;/TouchableOpacity&gt;</code></pre><p>会报 <code>Touchable child must either be native or forward setNativeProps to a native component</code>，这是因为：</p>
 <blockquote>
 <p>If you run this you will immediately see this error: Touchable child must either be native or forward setNativeProps to a native component. This occurs because MyButton isn’t directly backed by a native view whose opacity should be set. You can think about it like this: if you define a component with React.createClass you would not expect to be able to set a style prop on it and have that work - you would need to pass the style prop down to a child, unless you are wrapping a native component. Similarly, we are going to forward setNativeProps to a native-backed child component.</p>
 </blockquote>
-<p>解决办法就是在MyButton组件中添加</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token function">setNativeProps</span><span class="token punctuation">(</span>nativeProps<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">this</span><span class="token punctuation">.</span>_root<span class="token punctuation">.</span><span class="token function">setNativeProps</span><span class="token punctuation">(</span>nativeProps<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<p>解决办法就是在 MyButton 组件中添加</p>
+<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line">setNativeProps <span class="token punctuation">(</span>nativeProps<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">this</span><span class="token punctuation">.</span>_root<span class="token punctuation">.</span>setNativeProps <span class="token punctuation">(</span>nativeProps<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line">  <span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<p>其中this._root代表组件的引用</p>
-<h3 id="0-29-0-30中flexDirection-row布局异常"><a href="#0-29-0-30中flexDirection-row布局异常" class="headerlink" title="0.29/0.30中flexDirection: row布局异常"></a>0.29/0.30中<code>flexDirection: row</code>布局异常</h3><p>改动前：</p>
+<p>其中 this._root 代表组件的引用</p>
+<h3 id="0-29-0-30-中-flexDirection-row-布局异常"><a href="#0-29-0-30-中-flexDirection-row-布局异常" class="headerlink" title="0.29/0.30 中 flexDirection: row 布局异常"></a>0.29/0.30 中 <code>flexDirection: row</code> 布局异常</h3><p>改动前：</p>
 <figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line">imageContainer<span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
 <span class="line">    flexDirection<span class="token punctuation">:</span> <span class="token string">'row'</span><span class="token punctuation">,</span></span>
 <span class="line">    flexWrap<span class="token punctuation">:</span> <span class="token string">'wrap'</span></span>
@@ -102,11 +102,11 @@
 <span class="line">    flexWrap<span class="token punctuation">:</span> <span class="token string">'wrap'</span><span class="token punctuation">,</span></span>
 <span class="line">    alignItems<span class="token punctuation">:</span> <span class="token string">'flex-start'</span></span>
 <span class="line">  <span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="引入moment-js"><a href="#引入moment-js" class="headerlink" title="引入moment.js"></a>引入moment.js</h3><p>参考 <a href="https://github.com/facebook/react-native/issues/1629" target="_blank" rel="noopener">facebook/react-native#1629</a></p>
+<h3 id="引入-moment-js"><a href="#引入-moment-js" class="headerlink" title="引入 moment.js"></a>引入 moment.js</h3><p>参考 <a href="https://github.com/facebook/react-native/issues/1629" target="_blank" rel="noopener">facebook/react-native#1629</a></p>
 <figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">import</span> moment <span class="token keyword">from</span> <span class="token string">'moment'</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token keyword">import</span> momentLocale <span class="token keyword">from</span> <span class="token string">'moment/locale/zh-cn'</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token operator">...</span></span>
-<span class="line">moment<span class="token punctuation">.</span><span class="token function">updateLocale</span><span class="token punctuation">(</span><span class="token string">'zh-cn'</span><span class="token punctuation">,</span> momentLocale<span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
+<span class="line">moment<span class="token punctuation">.</span>updateLocale <span class="token punctuation">(</span><span class="token string">'zh-cn'</span><span class="token punctuation">,</span> momentLocale<span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
 
       </div>
     </article>
@@ -128,13 +128,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/pixiv-batch-download.html" title="Pixivの画像を一括ダウンロード">Pixivの画像を一括ダウンロード</a>
+            <a href="https://kotori.love/archives/pixiv-batch-download.html" title="Pixiv の画像を一括ダウンロード">Pixiv の画像を一括ダウンロード</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/react-native-upload.html" title="React Native中的上传">React Native中的上传</a>
+            <a href="https://kotori.love/archives/react-native-upload.html" title="React Native 中的上传">React Native 中的上传</a>
           
         </li>
       </ul>
@@ -185,10 +185,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -277,7 +277,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>初探memcached | ことりのおやつにしてやるぞー！</title>
+  <title>初探 memcached | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">初探memcached</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">初探 memcached</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/php-memcached.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/php-memcached.html&title=初探memcached"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/php-memcached.html&title=初探 memcached"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -85,25 +85,25 @@
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
         <blockquote>
-<p>因为公司下一个项目要用到Memcached集群，所以学习下。。。</p>
+<p>因为公司下一个项目要用到 Memcached 集群，所以学习下。。。</p>
 </blockquote>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> memcached</span>
 <span class="line"><span class="token function">cp</span> /usr/local/Cellar/memcached/1.4.24/homebrew.mxcl.memcached.plist ~/Library/LaunchAgents</span>
 <span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist</span></pre><div class="tools"></div></figure>
 <h3 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">/usr/bin/memcached -d -m 128 -l 192.168.1.1 -p 11211 -u httpd</span></pre><div class="tools"></div></figure>
 <pre><code>-p 监听的端口
--l 连接的IP地址, 默认是本机
--d start 启动memcached服务
--d restart 重起memcached服务
--d stop|shutdown 关闭正在运行的memcached服务
--d install 安装memcached服务
--d uninstall 卸载memcached服务
--u 以的身份运行 (仅在以root运行的时候有效)
--m 最大内存使用，单位MB。默认64MB
+-l 连接的 IP 地址，默认是本机
+-d start 启动 memcached 服务
+-d restart 重起 memcached 服务
+-d stop|shutdown 关闭正在运行的 memcached 服务
+-d install 安装 memcached 服务
+-d uninstall 卸载 memcached 服务
+-u 以的身份运行 (仅在以 root 运行的时候有效)
+-m 最大内存使用，单位 MB。默认 64MB
 -M 内存耗尽时返回错误，而不是删除项
--c 最大同时连接数，默认是1024
--f 块大小增长因子，默认是1.25
--n 最小分配空间，key+value+flags默认是48
+-c 最大同时连接数，默认是 1024
+-f 块大小增长因子，默认是 1.25
+-n 最小分配空间，key+value+flags 默认是 48
 -h 显示帮助</code></pre><h3 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">telnet 127.0.0.1 11211</span>
 <span class="line">stats</span></pre><div class="tools"></div></figure>
 <p>这些状态的说明如下：</p>
@@ -116,7 +116,7 @@
 </thead>
 <tbody><tr>
 <td>pid</td>
-<td>memcache服务器的进程ID</td>
+<td>memcache 服务器的进程 ID</td>
 </tr>
 <tr>
 <td>uptime</td>
@@ -124,15 +124,15 @@
 </tr>
 <tr>
 <td>time</td>
-<td>服务器当前的unix时间戳</td>
+<td>服务器当前的 unix 时间戳</td>
 </tr>
 <tr>
 <td>version</td>
-<td>memcache版本</td>
+<td>memcache 版本</td>
 </tr>
 <tr>
 <td>pointer_size</td>
-<td>当前操作系统的指针大小（32位系统一般是32bit）</td>
+<td>当前操作系统的指针大小（32 位系统一般是 32bit）</td>
 </tr>
 <tr>
 <td>rusage_user</td>
@@ -144,15 +144,15 @@
 </tr>
 <tr>
 <td>curr_items</td>
-<td>服务器当前存储的items数量</td>
+<td>服务器当前存储的 items 数量</td>
 </tr>
 <tr>
 <td>total_items</td>
-<td>从服务器启动以后存储的items总数量</td>
+<td>从服务器启动以后存储的 items 总数量</td>
 </tr>
 <tr>
 <td>bytes</td>
-<td>当前服务器存储items占用的字节数</td>
+<td>当前服务器存储 items 占用的字节数</td>
 </tr>
 <tr>
 <td>curr_connections</td>
@@ -168,11 +168,11 @@
 </tr>
 <tr>
 <td>cmd_get</td>
-<td>get命令（获取）总请求次数</td>
+<td>get 命令（获取）总请求次数</td>
 </tr>
 <tr>
 <td>cmd_set</td>
-<td>set命令（保存）总请求次数</td>
+<td>set 命令（保存）总请求次数</td>
 </tr>
 <tr>
 <td>get_hits</td>
@@ -184,7 +184,7 @@
 </tr>
 <tr>
 <td>evictions</td>
-<td>为获取空闲内存而删除的items数（分配给memcache的空间用满后需要删除旧的items来得到空间分配给新的items）</td>
+<td>为获取空闲内存而删除的 items 数（分配给 memcache 的空间用满后需要删除旧的 items 来得到空间分配给新的 items）</td>
 </tr>
 <tr>
 <td>bytes_read</td>
@@ -196,16 +196,16 @@
 </tr>
 <tr>
 <td>limit_maxbytes</td>
-<td>分配给memcache的内存大小（字节）</td>
+<td>分配给 memcache 的内存大小（字节）</td>
 </tr>
 <tr>
 <td>threads</td>
 <td>当前线程数</td>
 </tr>
 </tbody></table>
-<h3 id="安装-amp-配置php扩展"><a href="#安装-amp-配置php扩展" class="headerlink" title="安装&amp;配置php扩展"></a>安装&amp;配置php扩展</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> homebrew/php/php56-memcached </span>
+<h3 id="安装-amp-配置-php-扩展"><a href="#安装-amp-配置-php-扩展" class="headerlink" title="安装 &amp; 配置 php 扩展"></a>安装 &amp; 配置 php 扩展</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> homebrew/php/php56-memcached </span>
 <span class="line">php-fpm.restart</span></pre><div class="tools"></div></figure>
-<p>查看phpinfo，可以看到配置成功<br><img src="https://static-files.kotori.love/blog/2016/04/214175390.png" alt="954B3550-F804-4CDF-8E46-743F40D90BF0.png"></p>
+<p>查看 phpinfo，可以看到配置成功<br><img src="https://static-files.kotori.love/blog/2016/04/214175390.png" alt="954B3550-F804-4CDF-8E46-743F40D90BF0.png"></p>
 <h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3>
       </div>
     </article>
@@ -227,13 +227,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/react-native-es5-es6-difference.html" title="React/React Native 的ES5 ES6写法对照表">React/React Native 的ES5 ES6写法对照表</a>
+            <a href="https://kotori.love/archives/react-native-es5-es6-difference.html" title="React/React Native 的 ES5 ES6 写法对照表">React/React Native 的 ES5 ES6 写法对照表</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/google-chrome-new-ui-solution.html" title="解决新版Chrome被强制显示的扩展图标">解决新版Chrome被强制显示的扩展图标</a>
+            <a href="https://kotori.love/archives/google-chrome-new-ui-solution.html" title="解决新版 Chrome 被强制显示的扩展图标">解决新版 Chrome 被强制显示的扩展图标</a>
           
         </li>
       </ul>
@@ -284,10 +284,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -376,7 +376,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

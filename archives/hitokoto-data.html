@@ -83,10 +83,10 @@
         <blockquote>
 <p>简单来说，一言（ヒトコト）指的是就是一句话，可以是动漫中的台词，可以是小说中的语句，也可以是网络上的各种小段子。<br>或是感动，或是开心，又或是单纯的回忆，来到这里，留下你所喜欢的那一句句话，与大家分享，这就是一言存在的目的。</p>
 </blockquote>
-<p>但是官方服务器比较慢（<strong>同时有倒闭的威胁</strong>），于是把它同步到本地。提供几个API：</p>
+<p>但是官方服务器比较慢（** 同时有倒闭的威胁 **），于是把它同步到本地。提供几个 API：</p>
 <p><a href="https://kotori.sinaapp.com/hitokoto/all" target="_blank" rel="noopener">HTML TABLE</a><br><a href="https://kotori.sinaapp.com/hitokoto/jsonp" target="_blank" rel="noopener">JSONP</a></p>
 <blockquote>
-<p>参数说明<br>id 一言的ID，可以通过 <a href="http://hitokoto.us/view/{ID}.html" target="_blank" rel="noopener">http://hitokoto.us/view/{ID}.html</a> 查看指定条目<br>hitokoto 一言的正文部分，不包含前后引号<br>cat 分类，对应关系如下<br>a Anime - 动画<br>b Comic - 漫画<br>c Game - 游戏<br>d Novel - 小说<br>e 原创<br>f 来自网络<br>g 其他<br>catname 分类cat对应的名字<br>author 一言的投稿人<br>source 一言的出处，可能为空<br>date 一言的投稿日期</p>
+<p>参数说明<br>id 一言的 ID，可以通过 <a href="http://hitokoto.us/view/{ID}.html" target="_blank" rel="noopener">http://hitokoto.us/view/{ID}.html</a> 查看指定条目<br>hitokoto 一言的正文部分，不包含前后引号<br>cat 分类，对应关系如下<br>a Anime - 动画<br>b Comic - 漫画<br>c Game - 游戏<br>d Novel - 小说<br>e 原创<br>f 来自网络<br>g 其他<br>catname 分类 cat 对应的名字<br>author 一言的投稿人<br>source 一言的出处，可能为空<br>date 一言的投稿日期</p>
 </blockquote>
 
       </div>
@@ -109,13 +109,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/decompile-apk.html" title="Android反编译">Android反编译</a>
+            <a href="https://kotori.love/archives/decompile-apk.html" title="Android 反编译">Android 反编译</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/fetch-gravatar-with-php.html" title="简单使用php获取gravatar头像">简单使用php获取gravatar头像</a>
+            <a href="https://kotori.love/archives/fetch-gravatar-with-php.html" title="简单使用 php 获取 gravatar 头像">简单使用 php 获取 gravatar 头像</a>
           
         </li>
       </ul>
@@ -166,10 +166,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -258,7 +258,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

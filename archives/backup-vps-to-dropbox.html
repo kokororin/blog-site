@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>将VPS备份到Dropbox的脚本 | ことりのおやつにしてやるぞー！</title>
+  <title>将 VPS 备份到 Dropbox 的脚本 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">将VPS备份到Dropbox的脚本</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">将 VPS 备份到 Dropbox 的脚本</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/backup-vps-to-dropbox.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/backup-vps-to-dropbox.html&title=将VPS备份到Dropbox的脚本"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/backup-vps-to-dropbox.html&title=将 VPS 备份到 Dropbox 的脚本"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -84,78 +84,78 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p>首先，需要创建一个Dropbox应用，可以从该网址进行创建：<a href="https://www.dropbox.com/developers/apps/create" target="_blank" rel="noopener">https://www.dropbox.com/developers/apps/create</a>。</p>
-<p>在这里，应用类型选择Dropbox API App，数据存储类型选择Files and datastores，权限选择Yes（应用只需要访问它创建的文件）。然后命名创建。</p>
-<p>下载dropbox备份脚本：</p>
+        <p>首先，需要创建一个 Dropbox 应用，可以从该网址进行创建：<a href="https://www.dropbox.com/developers/apps/create" target="_blank" rel="noopener">https://www.dropbox.com/developers/apps/create</a>。</p>
+<p>在这里，应用类型选择 Dropbox API App，数据存储类型选择 Files and datastores，权限选择 Yes（应用只需要访问它创建的文件）。然后命名创建。</p>
+<p>下载 dropbox 备份脚本：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token comment" spellcheck="true"># wget https://raw.github.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh</span></span></pre><div class="tools"></div></figure>
 <p>然后，为该脚本添加执行权限：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token comment" spellcheck="true"># chmod +x dropbox_uploader.sh</span></span></pre><div class="tools"></div></figure>
 <p>执行该脚本：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token comment" spellcheck="true"># ./dropbox_uploader.sh</span></span></pre><div class="tools"></div></figure>
-<p>根据提示输入Dropbox应用中的App key和App secret，许可类型选择a，确认y，复制给出的权限验证链接到浏览器，确认后回到终端按任意键完成。</p>
-<p>编写定时备份脚本，取名为backup.sh。其代码如下：</p>
+<p>根据提示输入 Dropbox 应用中的 App key 和 App secret，许可类型选择 a，确认 y，复制给出的权限验证链接到浏览器，确认后回到终端按任意键完成。</p>
+<p>编写定时备份脚本，取名为 backup.sh。其代码如下：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token shebang important">#!/bin/bash</span></span>
-<span class="line"><span class="token comment" spellcheck="true">#MYSQL数据库帐号密码</span></span>
+<span class="line"><span class="token comment" spellcheck="true">#MYSQL 数据库帐号密码</span></span>
 <span class="line">MYSQL_USR<span class="token operator">=</span><span class="token string">"root"</span>  <span class="token comment" spellcheck="true"># 数据库帐号</span></span>
 <span class="line">MYSQL_PWD<span class="token operator">=</span><span class="token string">"password"</span>  <span class="token comment" spellcheck="true"># 数据库密码</span></span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">#定义需要备份的目录</span></span>
-<span class="line">NGINX_CONF_DIR<span class="token operator">=</span>/usr/local/nginx/conf  <span class="token comment" spellcheck="true"># nginx配置目录</span></span>
+<span class="line"><span class="token comment" spellcheck="true"># 定义需要备份的目录</span></span>
+<span class="line">NGINX_CONF_DIR<span class="token operator">=</span>/usr/local/nginx/conf  <span class="token comment" spellcheck="true"># nginx 配置目录</span></span>
 <span class="line">WEB_DIR<span class="token operator">=</span>/home/wwwroot  <span class="token comment" spellcheck="true"># 网站数据存放目录</span></span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">#定义备份存放目录</span></span>
-<span class="line">DROPBOX_DIR<span class="token operator">=</span>/<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +%Y-%m-%d<span class="token variable">)</span></span>  <span class="token comment" spellcheck="true"># Dropbox上的备份目录</span></span>
+<span class="line"><span class="token comment" spellcheck="true"># 定义备份存放目录</span></span>
+<span class="line">DROPBOX_DIR<span class="token operator">=</span>/<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +% Y-% m-% d<span class="token variable">)</span></span>  <span class="token comment" spellcheck="true"># Dropbox 上的备份目录</span></span>
 <span class="line">LOCAL_BAK_DIR<span class="token operator">=</span>/home/backup  <span class="token comment" spellcheck="true"># 本地备份文件存放目录</span></span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">#定义备份文件名称</span></span>
-<span class="line">DBBakName<span class="token operator">=</span>DB_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +%Y%m%d<span class="token variable">)</span></span>.tar.gz</span>
-<span class="line">NginxConfBakName<span class="token operator">=</span>NginxConf_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +%Y%m%d<span class="token variable">)</span></span>.tar.gz</span>
-<span class="line">WebBakName<span class="token operator">=</span>Web_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +%Y%m%d<span class="token variable">)</span></span>.tar.gz</span>
+<span class="line"><span class="token comment" spellcheck="true"># 定义备份文件名称</span></span>
+<span class="line">DBBakName<span class="token operator">=</span>DB_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +% Y% m% d<span class="token variable">)</span></span>.tar.gz</span>
+<span class="line">NginxConfBakName<span class="token operator">=</span>NginxConf_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +% Y% m% d<span class="token variable">)</span></span>.tar.gz</span>
+<span class="line">WebBakName<span class="token operator">=</span>Web_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +% Y% m% d<span class="token variable">)</span></span>.tar.gz</span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">#定义旧数据名称</span></span>
-<span class="line">Old_DROPBOX_DIR<span class="token operator">=</span>/<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> -d -7day +%Y-%m-%d<span class="token variable">)</span></span></span>
-<span class="line">OldDBBakName<span class="token operator">=</span>DB_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> -d -10day +%Y%m%d<span class="token variable">)</span></span>.tar.gz</span>
-<span class="line">OldNginxConfBakName<span class="token operator">=</span>NginxConf_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> -d -10day +%Y%m%d<span class="token variable">)</span></span>.tar.gz</span>
-<span class="line">OldWebBakName<span class="token operator">=</span>Web_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> -d -10day +%Y%m%d<span class="token variable">)</span></span>.tar.gz</span>
+<span class="line"><span class="token comment" spellcheck="true"># 定义旧数据名称</span></span>
+<span class="line">Old_DROPBOX_DIR<span class="token operator">=</span>/<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> -d -7day +% Y-% m-% d<span class="token variable">)</span></span></span>
+<span class="line">OldDBBakName<span class="token operator">=</span>DB_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> -d -10day +% Y% m% d<span class="token variable">)</span></span>.tar.gz</span>
+<span class="line">OldNginxConfBakName<span class="token operator">=</span>NginxConf_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> -d -10day +% Y% m% d<span class="token variable">)</span></span>.tar.gz</span>
+<span class="line">OldWebBakName<span class="token operator">=</span>Web_<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> -d -10day +% Y% m% d<span class="token variable">)</span></span>.tar.gz</span>
 <span class="line"></span>
 <span class="line"><span class="token function">cd</span> <span class="token variable">$LOCAL_BAK_DIR</span></span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">#使用命令导出SQL数据库,并且按数据库分个压缩</span></span>
+<span class="line"><span class="token comment" spellcheck="true"># 使用命令导出 SQL 数据库，并且按数据库分个压缩</span></span>
 <span class="line"><span class="token keyword">for</span> db <span class="token keyword">in</span> `mysql -u<span class="token variable">$MYSQL_USR</span> -p<span class="token variable">$MYSQL_PWD</span> -B -N -e <span class="token string">'SHOW DATABASES'</span> <span class="token operator">|</span> xargs`<span class="token punctuation">;</span> <span class="token keyword">do</span></span>
 <span class="line">    <span class="token punctuation">(</span>/usr/local/mysql/bin/mysqldump -u<span class="token variable">$MYSQL_USR</span> -p<span class="token variable">$MYSQL_PWD</span> <span class="token variable">${db}</span> <span class="token operator">|</span> <span class="token function">gzip</span> -9 - <span class="token operator">></span>  <span class="token variable">${db}</span>.sql.gz<span class="token punctuation">)</span></span>
 <span class="line"><span class="token keyword">done</span></span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">#压缩数据库文件合并为一个压缩文件</span></span>
+<span class="line"><span class="token comment" spellcheck="true"># 压缩数据库文件合并为一个压缩文件</span></span>
 <span class="line"><span class="token function">tar</span> zcf <span class="token variable">$LOCAL_BAK_DIR</span>/<span class="token variable">$DBBakName</span> <span class="token variable">$LOCAL_BAK_DIR</span>/*.sql.gz</span>
 <span class="line"><span class="token function">rm</span> -rf <span class="token variable">$LOCAL_BAK_DIR</span>/*.sql.gz</span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">#压缩Nginx配置数据</span></span>
+<span class="line"><span class="token comment" spellcheck="true"># 压缩 Nginx 配置数据</span></span>
 <span class="line"><span class="token function">cd</span> <span class="token variable">$NGINX_CONF_DIR</span></span>
 <span class="line"><span class="token function">tar</span> zcf <span class="token variable">$LOCAL_BAK_DIR</span>/<span class="token variable">$NginxConfBakName</span> ./*</span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">#压缩网站数据</span></span>
+<span class="line"><span class="token comment" spellcheck="true"># 压缩网站数据</span></span>
 <span class="line"><span class="token function">cd</span> <span class="token variable">$WEB_DIR</span></span>
 <span class="line"><span class="token function">tar</span> zcf <span class="token variable">$LOCAL_BAK_DIR</span>/<span class="token variable">$WebBakName</span> ./*</span>
 <span class="line"></span>
 <span class="line"><span class="token function">cd</span> /root/bin</span>
-<span class="line"><span class="token comment" spellcheck="true">#开始上传</span></span>
+<span class="line"><span class="token comment" spellcheck="true"># 开始上传</span></span>
 <span class="line">./dropbox_uploader.sh upload <span class="token variable">$LOCAL_BAK_DIR</span>/<span class="token variable">$DBBakName</span> <span class="token variable">$DROPBOX_DIR</span>/<span class="token variable">$DBBakName</span></span>
 <span class="line">./dropbox_uploader.sh upload <span class="token variable">$LOCAL_BAK_DIR</span>/<span class="token variable">$NginxConfBakName</span> <span class="token variable">$DROPBOX_DIR</span>/<span class="token variable">$NginxConfBakName</span></span>
 <span class="line">./dropbox_uploader.sh upload <span class="token variable">$LOCAL_BAK_DIR</span>/<span class="token variable">$WebBakName</span> <span class="token variable">$DROPBOX_DIR</span>/<span class="token variable">$WebBakName</span></span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">#删除旧数据</span></span>
+<span class="line"><span class="token comment" spellcheck="true"># 删除旧数据</span></span>
 <span class="line"><span class="token function">rm</span> -rf <span class="token variable">$LOCAL_BAK_DIR</span>/<span class="token variable">$OldDBBakName</span> <span class="token variable">$LOCAL_BAK_DIR</span>/<span class="token variable">$OldNginxConfBakName</span> <span class="token variable">$LOCAL_BAK_DIR</span>/<span class="token variable">$OldWebBakName</span></span>
 <span class="line">./dropbox_uploader.sh delete <span class="token variable">$Old_DROPBOX_DIR</span>/</span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">echo</span> -e <span class="token string">"Backup Done!"</span></span></pre><div class="tools"></div></figure>
-<p>其中，用户可以根据自己的需求改编需要备份的目录，以及保留旧数据的时长（比如我这里设置的是Dropbox保留7天，本地保留10天）。</p>
+<p>其中，用户可以根据自己的需求改编需要备份的目录，以及保留旧数据的时长（比如我这里设置的是 Dropbox 保留 7 天，本地保留 10 天）。</p>
 <p>接下来，为这个备份脚本增加执行权限：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token comment" spellcheck="true"># chmod +x backup.sh</span></span></pre><div class="tools"></div></figure>
 <p>此处可以先测试一下能否备份成功：</p>
 <p><img src="https://static-files.kotori.love/blog/2015/04/2.jpg" alt="2"></p>
 <p><img src="https://static-files.kotori.love/blog/2015/04/3.jpg" alt="3"></p>
 <p>crontab –e，添加：</p>
-<pre><code>30 3 * * * /root/bin/backup.sh</code></pre><p>这样，就可以每天凌晨3：30自动备份到Dropbox了。</p>
+<pre><code>30 3 * * * /root/bin/backup.sh</code></pre><p>这样，就可以每天凌晨 3：30 自动备份到 Dropbox 了。</p>
 <blockquote>
 <p>本文参考自：<a href="http://www.pythoner.com/324.html" target="_blank" rel="noopener">http://www.pythoner.com/324.html</a></p>
 </blockquote>
@@ -180,7 +180,7 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/public-dns-hellodns.html" title="HelloDNS公共DNS">HelloDNS公共DNS</a>
+            <a href="https://kotori.love/archives/public-dns-hellodns.html" title="HelloDNS 公共 DNS">HelloDNS 公共 DNS</a>
           
         </li>
 
@@ -237,10 +237,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -329,7 +329,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

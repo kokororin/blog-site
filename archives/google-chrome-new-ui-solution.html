@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>解决新版Chrome被强制显示的扩展图标 | ことりのおやつにしてやるぞー！</title>
+  <title>解决新版 Chrome 被强制显示的扩展图标 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">解决新版Chrome被强制显示的扩展图标</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">解决新版 Chrome 被强制显示的扩展图标</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/google-chrome-new-ui-solution.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/google-chrome-new-ui-solution.html&title=解决新版Chrome被强制显示的扩展图标"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/google-chrome-new-ui-solution.html&title=解决新版 Chrome 被强制显示的扩展图标"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -83,7 +83,7 @@
         <blockquote>
 <p>Google Chrome 48.0.2564.116 开始，所有的扩展图标全部被显示出来了，包括国旗扩展也不能显示在地址栏了，看上去非常难受。</p>
 </blockquote>
-<h3 id="Windows-Linux"><a href="#Windows-Linux" class="headerlink" title="Windows/Linux"></a>Windows/Linux</h3><p>快捷方式/.desktop文件 增加启动项：<code>--extension-action-redesign=0</code></p>
+<h3 id="Windows-Linux"><a href="#Windows-Linux" class="headerlink" title="Windows/Linux"></a>Windows/Linux</h3><p>快捷方式 /.desktop 文件 增加启动项：<code>--extension-action-redesign=0</code></p>
 <h3 id="Mac-OS-X"><a href="#Mac-OS-X" class="headerlink" title="Mac OS X"></a>Mac OS X</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">cd</span> /Applications/Google Chrome.app/Contents/MacOS</span>
 <span class="line"><span class="token function">mv</span> Google\ Chrome Chrome.real</span>
 <span class="line"><span class="token function">printf</span> <span class="token string">'#!/bin/bash\ncd "/Applications/Google Chrome.app/Contents/MacOS"\n"/Applications/Google Chrome.app/Contents/MacOS/Chrome.real" --extension-action-redesign=0 "<span class="token variable">$@</span>"\n'</span> <span class="token operator">></span> Google\ Chrome</span>
@@ -109,13 +109,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/php-memcached.html" title="初探memcached">初探memcached</a>
+            <a href="https://kotori.love/archives/php-memcached.html" title="初探 memcached">初探 memcached</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/typecho-pjax.html" title="Typecho全站pjax方案">Typecho全站pjax方案</a>
+            <a href="https://kotori.love/archives/typecho-pjax.html" title="Typecho 全站 pjax 方案">Typecho 全站 pjax 方案</a>
           
         </li>
       </ul>
@@ -166,10 +166,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -258,7 +258,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

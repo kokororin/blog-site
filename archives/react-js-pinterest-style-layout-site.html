@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>react.jsを利用して、創建した挿絵の画像欄 | ことりのおやつにしてやるぞー！</title>
+  <title>react.js を利用して、創建した挿絵の画像欄 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">react.jsを利用して、創建した挿絵の画像欄</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">react.js を利用して、創建した挿絵の画像欄</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/react-js-pinterest-style-layout-site.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/react-js-pinterest-style-layout-site.html&title=react.jsを利用して、創建した挿絵の画像欄"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/react-js-pinterest-style-layout-site.html&title=react.js を利用して、創建した挿絵の画像欄"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -82,11 +82,11 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p><code>react</code>+<code>redux</code>を使って、Webアプリケーションを組み合わせた。それは<code>pixiv.net</code>の挿絵の画像欄であり、私はそれを<code>pixivの「ラブライブ」発見</code>と呼ばれている。<code>pixiv.net</code>挿絵のインターネットにラブライブに関するラブライブ!学園アイドル祭の作品を用いる。ラブライブがそのアプリケーションが好きになると思う。</p>
+        <p><code>react</code>+<code>redux</code> を使って、Web アプリケーションを組み合わせた。それは <code>pixiv.net</code> の挿絵の画像欄であり、私はそれを <code>pixiv の「ラブライブ」発見</code> と呼ばれている。<code>pixiv.net</code> 挿絵のインターネットにラブライブに関するラブライブ！学園アイドル祭の作品を用いる。ラブライブがそのアプリケーションが好きになると思う。</p>
 <h3 id="特徴"><a href="#特徴" class="headerlink" title="特徴"></a>特徴</h3><ul>
 <li>ラベルによって、挿絵を選別する</li>
 <li>挿絵の詳細情報を調べる</li>
-<li>pixivに登録して、好きな挿絵にブックマークをする</li>
+<li>pixiv に登録して、好きな挿絵にブックマークをする</li>
 </ul>
 <h3 id="主な技術"><a href="#主な技術" class="headerlink" title="主な技術:"></a>主な技術:</h3><ul>
 <li>react</li>
@@ -99,40 +99,40 @@
 <li>whatwg-fetch</li>
 <li>webpack</li>
 </ul>
-<h4 id="AJAXリクエスト"><a href="#AJAXリクエスト" class="headerlink" title="AJAXリクエスト"></a>AJAXリクエスト</h4><p>AJAXリクエストに関して、たくさんの選択肢がある:<code>fetch</code>、<code>superagent</code>、<code>axios</code>、その上 <code>jQuery.ajax</code>。総合的に比べて、標準的な<code>fetch</code>は必ず最高な選択である。</p>
-<p>fetchの主な長所:</p>
+<h4 id="AJAX-リクエスト"><a href="#AJAX-リクエスト" class="headerlink" title="AJAX リクエスト"></a>AJAX リクエスト</h4><p>AJAX リクエストに関して、たくさんの選択肢がある:<code>fetch</code>、<code>superagent</code>、<code>axios</code>、その上 <code>jQuery.ajax</code>。総合的に比べて、標準的な <code>fetch</code> は必ず最高な選択である。</p>
+<p>fetch の主な長所:</p>
 <ul>
 <li>簡単な文法、更に語義化のようだ</li>
-<li>Promiseの標準に基いで、async/awaitにサポートする。</li>
+<li>Promise の標準に基いで、async/await にサポートする。</li>
 <li>便利な同型定理</li>
 </ul>
-<p>原生の支持率は高くない。しかし以下のpolyfillを取り入れて、IE8+にサポートすることができる:</p>
+<p>原生の支持率は高くない。しかし以下の polyfill を取り入れて、IE8 + にサポートすることができる:</p>
 <ul>
-<li>IE8はES3であるから、ES5のpolyfillを取り入れるのが必要である:<a href="https://github.com/es-shims/es5-shim" target="_blank" rel="noopener">es5-shim, es5-sham</a></li>
-<li>Promise のpolyfillを取り入れ: <a href="https://github.com/jakearchibald/es6-promise" target="_blank" rel="noopener">es6-promise</a></li>
-<li>fetch探測倉を取り入れ:<a href="https://github.com/camsong/fetch-detector" target="_blank" rel="noopener">fetch-detector</a></li>
-<li>fetch のpolyfillを取り入れ: <a href="https://github.com/camsong/fetch-ie8" target="_blank" rel="noopener">fetch-ie8</a></li>
-<li>選ばれ:もしjsonpも使えば、<a href="https://github.com/camsong/fetch-jsonp" target="_blank" rel="noopener">fetch-jsonp</a>を取り入れる</li>
-<li>選ばれ:Babelのruntime・モデルを開けて、今、async/awaitを使っていく</li>
+<li>IE8 は ES3 であるから、ES5 の polyfill を取り入れるのが必要である:<a href="https://github.com/es-shims/es5-shim" target="_blank" rel="noopener">es5-shim, es5-sham</a></li>
+<li>Promise の polyfill を取り入れ: <a href="https://github.com/jakearchibald/es6-promise" target="_blank" rel="noopener">es6-promise</a></li>
+<li>fetch 探測倉を取り入れ:<a href="https://github.com/camsong/fetch-detector" target="_blank" rel="noopener">fetch-detector</a></li>
+<li>fetch の polyfill を取り入れ: <a href="https://github.com/camsong/fetch-ie8" target="_blank" rel="noopener">fetch-ie8</a></li>
+<li>選ばれ：もし jsonp も使えば、<a href="https://github.com/camsong/fetch-jsonp" target="_blank" rel="noopener">fetch-jsonp</a> を取り入れる</li>
+<li>選ばれ：Babel の runtime・モデルを開けて、今、async/await を使っていく</li>
 </ul>
-<p>Fetch polyfillの基本的な原理はwindow.fetchの方法があるかどうかを測定する。ないなら、XHRを利用して実現する。これも<a href="https://github.com/github/fetch" target="_blank" rel="noopener">github/fetch</a>の方法であり、しかしあるブラウザー（Chrome45）は元でfetchをサポートする。これらの庫は今、毎日に数千万のリクエストが使用していて、問題ないである！</p>
-<p>fetchのよくある質問</p>
+<p>Fetch polyfill の基本的な原理は window.fetch の方法があるかどうかを測定する。ないなら、XHR を利用して実現する。これも <a href="https://github.com/github/fetch" target="_blank" rel="noopener">github/fetch</a> の方法であり、しかしあるブラウザー（Chrome45）は元で fetch をサポートする。これらの庫は今、毎日に数千万のリクエストが使用していて、問題ないである！</p>
+<p>fetch のよくある質問</p>
 <ul>
-<li>Fetchリクエストは既定にcookieが無いから、<code>fetch(url, {credentials: &#39;include&#39;})</code>を設置するのが必要である。</li>
-<li>サーバーは<code>400</code>、<code>500</code>ミス番号に戻る時、拒絶しない。ネットワーク・ミスのせいで、そのリクエストが完成できない場合、fetchが拒絶される。</li>
+<li>Fetch リクエストは既定に cookie が無いから、<code>fetch (url, {credentials: &#39;include&#39;})</code> を設置するのが必要である。</li>
+<li>サーバーは <code>400</code>、<code>500</code> ミス番号に戻る時、拒絶しない。ネットワーク・ミスのせいで、そのリクエストが完成できない場合、fetch が拒絶される。</li>
 </ul>
-<h4 id="性能合理化"><a href="#性能合理化" class="headerlink" title="性能合理化"></a>性能合理化</h4><p>このアプリケーションの中に、一つの長いリストがあって、すべての画像のモジュールでonClick事件を縛って、もしリストの数量は上がってきて、性能の問題も明らかで、ソリューションは主に以下:</p>
-<h5 id="propsの中でbind方法を使えないでください。"><a href="#propsの中でbind方法を使えないでください。" class="headerlink" title="propsの中でbind方法を使えないでください。"></a>propsの中でbind方法を使えないでください。</h5><p><code>onClick</code>中で<code>bind(this)</code>を操作しないでください。そうすると、毎回<code>render</code>が新しい関数を形成するから、性能に対する影響は顕著である。同じ、矢じり関数<code>()=&gt;{}</code>のを使う場合、同じ理論である。それも一回に自動<code>bind</code>する。良い方案は<code>constructor</code>の中で事前にバンドしたそうである。<a href="https://daveceddia.com/avoid-bind-when-passing-props/" target="_blank" rel="noopener">Don’t Use Bind When Passing Props</a> 。この文章は共に9種類のソリューションに言及して、それぞれ利害がある。</p>
-<h5 id="リストに１つの正しいkey属性をあげる"><a href="#リストに１つの正しいkey属性をあげる" class="headerlink" title="リストに１つの正しいkey属性をあげる"></a>リストに１つの正しいkey属性をあげる</h5><p>周知のように、react循環中のリストは必ず<code>key</code>属性を与えなければならなくて、この属性はユーザーが自分で使うのではなくて、React自分で使ったのです。配列の元素に必ず唯一の<code>key</code>属性を提供しなければならなくて、私達は直接に配列の<code>index</code>を使って<code>key</code>とする。実はそれが何度も一挙であり、<code>key</code>を提供しないなら、reactは黙認に採用したのが<code>index</code>である。良い方案は<a href="https://www.npmjs.com/package/shortid" target="_blank" rel="noopener">shortid</a>を使って形成するのである。それは主に<a href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318#.kxj9ttkx4" target="_blank" rel="noopener">Index as a key is an anti-pattern</a>を参考した。</p>
-<h5 id="setState慎重に用いる"><a href="#setState慎重に用いる" class="headerlink" title="setState慎重に用いる"></a>setState慎重に用いる</h5><p>データを<code>Redux</code>に任せて管理したなら、できるだけ<code>Redux</code>でデータと状態<code>state</code>を管理してください。少数の情況以外、<code>shouldComponentUpdate</code>も<code>state</code>の比較が必要なことを忘れないでください。</p>
-<h5 id="Componentが必要なpropsだけを順送りする"><a href="#Componentが必要なpropsだけを順送りする" class="headerlink" title="Componentが必要なpropsだけを順送りする"></a>Componentが必要なpropsだけを順送りする</h5><p>順送りしたのが多すぎ、あるいは段階が深すぎの場合、<code>shouldComponentUpdate</code>のデータ比較の負担をもたらして、そして、慎重に用いてください。</p>
-<h5 id="shouldComponentUpdate使用"><a href="#shouldComponentUpdate使用" class="headerlink" title="shouldComponentUpdate使用"></a>shouldComponentUpdate使用</h5><p><code>shouldComponentUpdate</code>は黙認状況で<code>true</code>に戻って、つまり<code>props</code>あるいはstateが変化すれば、このモジュールは更新して、そのとおり、<code>props</code>の変化のように、モジュールも更新する可能性がある。 リストの<code>VirtualDOM</code>は毎回レンダリングする時、新生するから、最も簡単な方法はすべてのItemの<code>shouldComponentUpdate</code>を実現することである（現在と取り入れたpropsを比較するのを通じて、更新するかどうかを判断する。属性は<code>object</code>であるのが、内部の変化を判断するのが必要ので、もし私達は<code>immutable―js</code>が必要である）。</p>
-<h5 id="PureRenderMixin"><a href="#PureRenderMixin" class="headerlink" title="PureRenderMixin"></a>PureRenderMixin</h5><p>Reactが提供した<code>PureRenderMixin</code>は、実は以上の必要なことをやってくれて、ファイルの方法に基づいて、十分である。しかし、このプラグインはすべての属性を比較して、いくつか状況で予想するのと違う可能性がある。</p>
-<h5 id="モバイルサイドのロード最適化"><a href="#モバイルサイドのロード最適化" class="headerlink" title="モバイルサイドのロード最適化"></a>モバイルサイドのロード最適化</h5><p>Javascriptを<code>localStorage</code>にキャッシュメモリして、バージョンが変動した後、サーバーで新しいjsをダウンロードする。ソリューションはモバイルWEB通用最適化策略紹介からのである。<code>localStorage</code>は静態の資源をキャッシュメモリして、モバイルサイドと高いバージョンのブラウザーで試み価値があるそうである。ブラウザーを通じて、静的ファイルをキャッシュメモリすることができるけど、いくつか状況で（たとえばf5の更新）、それども<code>cache―control: max―age=0</code>のリクエストを提出する。リクエストを節約する目的で、静態資源のリクエスト方法を改造することができて、すべての静態資源をひとつのリクエストを通じてロードする。そうすれば、いずれにしても、ページはただ一つのリクエストを出す。もし静的なファイルは更新があれば、サーバーは更新するファイル内容に戻って、jsを通じてページの中に挿入して、<code>localStorage</code>の中でキャッシュメモリをする。もし静的ファイルは更新がないなら、直接に<code>localStorage</code>の中から取り出して、ページの中で挿入して十分である。モバイルサイドにとって、jsとcssこれらの静的ファイルのリクエストをひとつに減らして、やはり効果があるそうである。具体的なものは百度のモバイル版、に参考してください。単のページの運用にとって、<code>localStorage</code>の貯蓄枠板を使うのも良い選択である。</p>
-<h5 id="インターネット・リクエスト合理化"><a href="#インターネット・リクエスト合理化" class="headerlink" title="インターネット・リクエスト合理化"></a>インターネット・リクエスト合理化</h5><p>Ajaxのリクエストもキャッシュメモリして、キャッシュメモリが必要なリクエストは期限が切れ時間のカラムに戻る。データを得た後、期限が切れ時間とデータを<code>localStroage</code>中で保存して、次回にのリクエストは期限が切れ時間と現在時間に比べて、再度リクエストが必要かどうかを判断する。</p>
-<p>その他、react各種の問題の集合を進め:<a href="https://github.com/timarney/react-faq" target="_blank" rel="noopener">react-faq</a></p>
+<h4 id="性能合理化"><a href="#性能合理化" class="headerlink" title="性能合理化"></a>性能合理化</h4><p>このアプリケーションの中に、一つの長いリストがあって、すべての画像のモジュールで onClick 事件を縛って、もしリストの数量は上がってきて、性能の問題も明らかで、ソリューションは主に以下:</p>
+<h5 id="props-の中で-bind-方法を使えないでください。"><a href="#props-の中で-bind-方法を使えないでください。" class="headerlink" title="props の中で bind 方法を使えないでください。"></a>props の中で bind 方法を使えないでください。</h5><p><code>onClick</code> 中で <code>bind (this)</code> を操作しないでください。そうすると、毎回 <code>render</code> が新しい関数を形成するから、性能に対する影響は顕著である。同じ、矢じり関数 <code>()=&gt;{}</code> のを使う場合、同じ理論である。それも一回に自動 <code>bind</code> する。良い方案は <code>constructor</code> の中で事前にバンドしたそうである。<a href="https://daveceddia.com/avoid-bind-when-passing-props/" target="_blank" rel="noopener">Don’t Use Bind When Passing Props</a> 。この文章は共に 9 種類のソリューションに言及して、それぞれ利害がある。</p>
+<h5 id="リストに１つの正しい-key-属性をあげる"><a href="#リストに１つの正しい-key-属性をあげる" class="headerlink" title="リストに１つの正しい key 属性をあげる"></a>リストに１つの正しい key 属性をあげる</h5><p>周知のように、react 循環中のリストは必ず <code>key</code> 属性を与えなければならなくて、この属性はユーザーが自分で使うのではなくて、React 自分で使ったのです。配列の元素に必ず唯一の <code>key</code> 属性を提供しなければならなくて、私達は直接に配列の <code>index</code> を使って <code>key</code> とする。実はそれが何度も一挙であり、<code>key</code> を提供しないなら、react は黙認に採用したのが <code>index</code> である。良い方案は <a href="https://www.npmjs.com/package/shortid" target="_blank" rel="noopener">shortid</a> を使って形成するのである。それは主に <a href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318#.kxj9ttkx4" target="_blank" rel="noopener">Index as a key is an anti-pattern</a> を参考した。</p>
+<h5 id="setState-慎重に用いる"><a href="#setState-慎重に用いる" class="headerlink" title="setState 慎重に用いる"></a>setState 慎重に用いる</h5><p>データを <code>Redux</code> に任せて管理したなら、できるだけ <code>Redux</code> でデータと状態 <code>state</code> を管理してください。少数の情況以外、<code>shouldComponentUpdate</code> も <code>state</code> の比較が必要なことを忘れないでください。</p>
+<h5 id="Component-が必要な-props-だけを順送りする"><a href="#Component-が必要な-props-だけを順送りする" class="headerlink" title="Component が必要な props だけを順送りする"></a>Component が必要な props だけを順送りする</h5><p>順送りしたのが多すぎ、あるいは段階が深すぎの場合、<code>shouldComponentUpdate</code> のデータ比較の負担をもたらして、そして、慎重に用いてください。</p>
+<h5 id="shouldComponentUpdate-使用"><a href="#shouldComponentUpdate-使用" class="headerlink" title="shouldComponentUpdate 使用"></a>shouldComponentUpdate 使用</h5><p><code>shouldComponentUpdate</code> は黙認状況で <code>true</code> に戻って、つまり <code>props</code> あるいは state が変化すれば、このモジュールは更新して、そのとおり、<code>props</code> の変化のように、モジュールも更新する可能性がある。 リストの <code>VirtualDOM</code> は毎回レンダリングする時、新生するから、最も簡単な方法はすべての Item の <code>shouldComponentUpdate</code> を実現することである（現在と取り入れた props を比較するのを通じて、更新するかどうかを判断する。属性は <code>object</code> であるのが、内部の変化を判断するのが必要ので、もし私達は <code>immutable―js</code> が必要である）。</p>
+<h5 id="PureRenderMixin"><a href="#PureRenderMixin" class="headerlink" title="PureRenderMixin"></a>PureRenderMixin</h5><p>React が提供した <code>PureRenderMixin</code> は、実は以上の必要なことをやってくれて、ファイルの方法に基づいて、十分である。しかし、このプラグインはすべての属性を比較して、いくつか状況で予想するのと違う可能性がある。</p>
+<h5 id="モバイルサイドのロード最適化"><a href="#モバイルサイドのロード最適化" class="headerlink" title="モバイルサイドのロード最適化"></a>モバイルサイドのロード最適化</h5><p>Javascript を <code>localStorage</code> にキャッシュメモリして、バージョンが変動した後、サーバーで新しい js をダウンロードする。ソリューションはモバイル WEB 通用最適化策略紹介からのである。<code>localStorage</code> は静態の資源をキャッシュメモリして、モバイルサイドと高いバージョンのブラウザーで試み価値があるそうである。ブラウザーを通じて、静的ファイルをキャッシュメモリすることができるけど、いくつか状況で（たとえば f5 の更新）、それども <code>cache―control: max―age=0</code> のリクエストを提出する。リクエストを節約する目的で、静態資源のリクエスト方法を改造することができて、すべての静態資源をひとつのリクエストを通じてロードする。そうすれば、いずれにしても、ページはただ一つのリクエストを出す。もし静的なファイルは更新があれば、サーバーは更新するファイル内容に戻って、js を通じてページの中に挿入して、<code>localStorage</code> の中でキャッシュメモリをする。もし静的ファイルは更新がないなら、直接に <code>localStorage</code> の中から取り出して、ページの中で挿入して十分である。モバイルサイドにとって、js と css これらの静的ファイルのリクエストをひとつに減らして、やはり効果があるそうである。具体的なものは百度のモバイル版、に参考してください。単のページの運用にとって、<code>localStorage</code> の貯蓄枠板を使うのも良い選択である。</p>
+<h5 id="インターネット・リクエスト合理化"><a href="#インターネット・リクエスト合理化" class="headerlink" title="インターネット・リクエスト合理化"></a>インターネット・リクエスト合理化</h5><p>Ajax のリクエストもキャッシュメモリして、キャッシュメモリが必要なリクエストは期限が切れ時間のカラムに戻る。データを得た後、期限が切れ時間とデータを <code>localStroage</code> 中で保存して、次回にのリクエストは期限が切れ時間と現在時間に比べて、再度リクエストが必要かどうかを判断する。</p>
+<p>その他、react 各種の問題の集合を進め:<a href="https://github.com/timarney/react-faq" target="_blank" rel="noopener">react-faq</a></p>
 <p>プロジェクト・アドレス:<br><a href="https://pixiv.moe" target="_blank" rel="noopener">https://pixiv.moe</a><br><a href="https://github.com/LoveLiveSunshine/pixiv.moe" target="_blank" rel="noopener">https://github.com/LoveLiveSunshine/pixiv.moe</a></p>
-<p>1枚のGIFプレビュー図:<br><img src="https://github.com/LoveLiveSunshine/pixiv.moe/blob/master/src/images/intro.gif?raw=true" alt=""></p>
+<p>1 枚の GIF プレビュー図:<br><img src="https://github.com/LoveLiveSunshine/pixiv.moe/blob/master/src/images/intro.gif?raw=true" alt=""></p>
 <p><a href="http://qiita.com/kokororin/items/5c065fb48dcbf61edc6d" target="_blank" rel="noopener">Qiita</a></p>
 
       </div>
@@ -155,13 +155,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/2016-blog-analytics.html" title="2016年度博客统计报告">2016年度博客统计报告</a>
+            <a href="https://kotori.love/archives/2016-blog-analytics.html" title="2016 年度博客统计报告">2016 年度博客统计报告</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/curl-login-pixiv.html" title="模拟登录pixiv.net">模拟登录pixiv.net</a>
+            <a href="https://kotori.love/archives/curl-login-pixiv.html" title="模拟登录 pixiv.net">模拟登录 pixiv.net</a>
           
         </li>
       </ul>
@@ -212,10 +212,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -304,7 +304,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

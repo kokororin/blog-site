@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>如何黑掉彩笔的网站(¬_¬) | ことりのおやつにしてやるぞー！</title>
+  <title>如何黑掉彩笔的网站 (¬_¬) | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">如何黑掉彩笔的网站(¬_¬)</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">如何黑掉彩笔的网站 (¬_¬)</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/how-to-hack-the-crayon-website.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/how-to-hack-the-crayon-website.html&title=如何黑掉彩笔的网站(¬_¬)"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/how-to-hack-the-crayon-website.html&title=如何黑掉彩笔的网站 (¬_¬)"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -81,12 +81,12 @@
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
         <blockquote>
-<p>转自java吧</p>
+<p>转自 java 吧</p>
 <p><a href="http://tieba.baidu.com/p/3567794788" target="_blank" rel="noopener">http://tieba.baidu.com/p/3567794788</a></p>
 <p>刚才看到吧里有只大彩笔在秀自己的网站：</p>
 <p>原帖地址：<a href="http://jump.bdimg.com/safecheck/index?url=x+Z5mMbGPAs95UolpNuq+CwM2BpViN6QF0BYrUCVRu+Ih3iPb8xNxwdoUcOC1TUKLQ1TKOpWHKLzQbcGOL5wzlvJyuAzzWKJT84Xyxbjh0YT+jGWSf0ix6r+9G21ACi5FCwD+tHScJ0N0JW7pjPTVTA8Zu4mdgY0" target="_blank" rel="noopener">http://tieba.baidu.com/p/3567694132</a></p>
 <p>对于这样热情高涨的新手，我们一定要予以关（nue）照（dai），于是心血来潮，</p>
-<p>科普一下XSS（Cross Site Scripting）黑站。</p>
+<p>科普一下 XSS（Cross Site Scripting）黑站。</p>
 <p>中文叫跨站脚本攻击。</p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/2015-02-5.jpg" alt=""></p>
 </blockquote>
@@ -96,11 +96,11 @@
 <p>并且保证这个字符串会在前台页面显示，比如贴吧的发帖之类的功能</p>
 <p>&nbsp;</p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/41_2015-02-5.jpg" alt=""></p>
-<p>找到html标签，我们看到有maxlength属性，这里先干掉再说，因为一会我们要提交js代码</p>
-<p>这里就可见，web的前台验证什么的，都是假的，客户端提交的数据，必须要做后台验证。</p>
+<p>找到 html 标签，我们看到有 maxlength 属性，这里先干掉再说，因为一会我们要提交 js 代码</p>
+<p>这里就可见，web 的前台验证什么的，都是假的，客户端提交的数据，必须要做后台验证。</p>
 <p>&nbsp;</p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/56_2015-02-5.jpg" alt=""></p>
-<p>准备一段js，代表，这里以简单为主，仅仅测试</p>
+<p>准备一段 js，代表，这里以简单为主，仅仅测试</p>
 <p>&nbsp;</p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/62_2015-02-5.jpg" alt=""></p>
 <p>粘到文本框里去</p>
@@ -110,20 +110,20 @@
 <p>看到没？彩笔做的网站，前台框架用得爽，后台验证完全没有，顺利过了</p>
 <p>&nbsp;</p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/87_2015-02-5.jpg" alt=""></p>
-<p>打开相应的显示画面，看到了我们的js已经成功被执行</p>
+<p>打开相应的显示画面，看到了我们的 js 已经成功被执行</p>
 <p>&nbsp;</p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/18_2015-02-5.jpg" alt=""></p>
-<p>查看一下源代码，我们的js已经被嵌入了html</p>
+<p>查看一下源代码，我们的 js 已经被嵌入了 html</p>
 <p>&nbsp;</p>
 <p>总结：</p>
-<p>真正的坏人，不会上传一段alert那么简单。</p>
+<p>真正的坏人，不会上传一段 alert 那么简单。</p>
 <p>正如名字一样，跨站的意思是，大的脚本不会直接上传，一定是再远程。</p>
 <p>如果，他上传的是如下的代码，你觉得后果会如何？</p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/97_2015-02-5.jpg" alt=""></p>
-<p>防范xss的方法，前面已经提到了，用户提交数据的时候，做后台验证是其一。</p>
+<p>防范 xss 的方法，前面已经提到了，用户提交数据的时候，做后台验证是其一。</p>
 <p>其二就是前台展示数据的时候，一定要做代码转义。</p>
 <p>这里隆重推荐，我大微软的 asp.net MVC + razor 真心很强大。</p>
-<p><strong>前台后台验证一条龙，显示转意一句话。</strong></p>
+<p>** 前台后台验证一条龙，显示转意一句话。**</p>
 
       </div>
     </article>
@@ -145,7 +145,7 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/homemade-chrome-theme-love-live.html" title="自制chrome LOVE LIVE!主题">自制chrome LOVE LIVE!主题</a>
+            <a href="https://kotori.love/archives/homemade-chrome-theme-love-live.html" title="自制 chrome LOVE LIVE! 主题">自制 chrome LOVE LIVE! 主题</a>
           
         </li>
 
@@ -202,10 +202,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -294,7 +294,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

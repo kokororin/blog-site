@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>一些好用的git代码段 | ことりのおやつにしてやるぞー！</title>
+  <title>一些好用的 git 代码段 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">一些好用的git代码段</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">一些好用的 git 代码段</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/useful-git-snippets.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/useful-git-snippets.html&title=一些好用的git代码段"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/useful-git-snippets.html&title=一些好用的 git 代码段"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -80,9 +80,9 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <h3 id="添加历史tag"><a href="#添加历史tag" class="headerlink" title="添加历史tag"></a>添加历史tag</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">git</span> tag -a v1.2 9fceb02 -m <span class="token string">"Message here"</span></span>
+        <h3 id="添加历史-tag"><a href="#添加历史-tag" class="headerlink" title="添加历史 tag"></a>添加历史 tag</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">git</span> tag -a v1.2 9fceb02 -m <span class="token string">"Message here"</span></span>
 <span class="line"><span class="token function">git</span> push --tags origin master</span></pre><div class="tools"></div></figure>
-<h3 id="tag排序"><a href="#tag排序" class="headerlink" title="tag排序"></a>tag排序</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token comment" spellcheck="true"># Loop over tags</span></span>
+<h3 id="tag-排序"><a href="#tag-排序" class="headerlink" title="tag 排序"></a>tag 排序</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token comment" spellcheck="true"># Loop over tags</span></span>
 <span class="line"><span class="token function">git</span> tag -l <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token function">read</span> -r tag</span>
 <span class="line"><span class="token keyword">do</span></span>
 <span class="line"></span>
@@ -98,7 +98,7 @@
 <span class="line">    <span class="token comment" spellcheck="true"># don't want your future tags to also have that past date.</span></span>
 <span class="line">    <span class="token comment" spellcheck="true"># Of course, when you close your shell, the variable will no</span></span>
 <span class="line">    <span class="token comment" spellcheck="true"># longer persist.</span></span>
-<span class="line">    GIT_COMMITTER_DATE<span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> show $COMMIT_HASH --format<span class="token operator">=</span>%aD <span class="token operator">|</span> <span class="token function">head</span> -1<span class="token variable">)</span></span>"</span> <span class="token function">git</span> tag -a -f <span class="token variable">$tag</span> -m<span class="token string">"<span class="token variable">$tag</span>"</span> <span class="token variable">$COMMIT_HASH</span></span>
+<span class="line">    GIT_COMMITTER_DATE<span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> show $COMMIT_HASH --format<span class="token operator">=</span>% aD <span class="token operator">|</span> <span class="token function">head</span> -1<span class="token variable">)</span></span>"</span> <span class="token function">git</span> tag -a -f <span class="token variable">$tag</span> -m<span class="token string">"<span class="token variable">$tag</span>"</span> <span class="token variable">$COMMIT_HASH</span></span>
 <span class="line"></span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">done</span></span>
@@ -132,7 +132,7 @@
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/problems-with-react-async-component.html" title="React AsyncComponent的一些问题">React AsyncComponent的一些问题</a>
+            <a href="https://kotori.love/archives/problems-with-react-async-component.html" title="React AsyncComponent 的一些问题">React AsyncComponent 的一些问题</a>
           
         </li>
       </ul>
@@ -183,10 +183,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -275,7 +275,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

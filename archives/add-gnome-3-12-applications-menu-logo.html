@@ -87,34 +87,34 @@
 <p>扩展地址：<a href="https://extensions.gnome.org/extension/6/applications-menu/" target="_blank" rel="noopener">apps-menu@gnome-shell-extensions.gcampax.github.com</a></p>
 <p>步骤：</p>
 <p>一、</p>
-<p>先找一张 png 格式的logo: <a href="http://download.easyicon.net/png/1068656/256/" target="_blank" rel="noopener">http://download.easyicon.net/png/1068656/256/</a> 转换为 svg 格式（注意路径）：</p>
+<p>先找一张 png 格式的 logo: <a href="http://download.easyicon.net/png/1068656/256/" target="_blank" rel="noopener">http://download.easyicon.net/png/1068656/256/</a> 转换为 svg 格式（注意路径）：</p>
 <p><code>mogrify -format svg -resize 48x48 &#39;/usr/share/icons/Numix-Circle/scalable/apps/archlogo.png&#39;</code></p>
 <p>没有 mogrify 命令的话先安装：<code>pacman -S imagemagick</code></p>
 <p>二、</p>
 <p>参照以下代码修改 /usr/share/gnome-shell/extensions/apps-menu@gnome-shell-extensions.gcampax.github.com/extension.js:</p>
 <pre><code>    this.actor.accessible_role = Atk.Role.LABEL;
-    let hbox = new St.BoxLayout({ style_class: &#39;panel-status-menu-box&#39; });
-    // this._label = new St.Label({ text: _(&amp;quot;Applications&amp;quot;),
+    let hbox = new St.BoxLayout ({ style_class: &#39;panel-status-menu-box&#39; });
+    //this._label = new St.Label ({ text: _(&amp;quot;Applications&amp;quot;),
     //                             y_expand: true,
     //                             y_align: Clutter.ActorAlign.CENTER });
 
-    this._box = new St.BoxLayout();
-    this._iconBox = new St.Bin();
-    this._box.add(this._iconBox, { y_align: St.Align.MIDDLE, y_fill: false });
-    let logo = new St.Icon({ icon_name: &#39;archlogo&#39;, style_class: &#39;applications-menu-button-icon&#39;, icon_size: 22 });
+    this._box = new St.BoxLayout ();
+    this._iconBox = new St.Bin ();
+    this._box.add (this._iconBox, { y_align: St.Align.MIDDLE, y_fill: false });
+    let logo = new St.Icon ({ icon_name: &#39;archlogo&#39;, style_class: &#39;applications-menu-button-icon&#39;, icon_size: 22 });
     this._iconBox.child = logo;
-    let label = new St.Label({ text: &amp;quot; &amp;quot; });
-    this._box.add(label, { y_align: St.Align.MIDDLE, y_fill: false });
-    this._label = new St.Label({ text: _(&amp;quot;Applications&amp;quot;) });
-    this._box.add(this._label, { y_align: St.Align.MIDDLE, y_fill: false });
-    this.actor.add_actor(this._box);
+    let label = new St.Label ({ text: &amp;quot; &amp;quot; });
+    this._box.add (label, { y_align: St.Align.MIDDLE, y_fill: false });
+    this._label = new St.Label ({ text: _(&amp;quot;Applications&amp;quot;) });
+    this._box.add (this._label, { y_align: St.Align.MIDDLE, y_fill: false });
+    this.actor.add_actor (this._box);
 
-    hbox.add_child(this._label);
-    hbox.add_child(new St.Label({ text: &#39;u25BE&#39;,
+    hbox.add_child (this._label);
+    hbox.add_child (new St.Label ({ text: &#39;u25BE&#39;,
     y_expand: true,
     y_align: Clutter.ActorAlign.CENTER }));
 
-    this.actor.add_actor(hbox);
+    this.actor.add_actor (hbox);
     this.actor.name = &#39;panelApplications&#39;;
     ....</code></pre><p>三、</p>
 <p>重启 gnome-shell。</p>
@@ -139,7 +139,7 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/gnome-shell-transparent-method.html" title="gnome-shell透明的方法">gnome-shell透明的方法</a>
+            <a href="https://kotori.love/archives/gnome-shell-transparent-method.html" title="gnome-shell 透明的方法">gnome-shell 透明的方法</a>
           
         </li>
 
@@ -196,10 +196,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -288,7 +288,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

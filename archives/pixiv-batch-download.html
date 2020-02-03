@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>Pixivの画像を一括ダウンロード | ことりのおやつにしてやるぞー！</title>
+  <title>Pixiv の画像を一括ダウンロード | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">Pixivの画像を一括ダウンロード</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">Pixiv の画像を一括ダウンロード</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/pixiv-batch-download.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/pixiv-batch-download.html&title=Pixivの画像を一括ダウンロード"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/pixiv-batch-download.html&title=Pixiv の画像を一括ダウンロード"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -85,44 +85,44 @@
 <span class="line"><span class="token delimiter">&lt;?php</span></span>
 <span class="line"><span class="token keyword">require_once</span> <span class="token string">'/path/to/pixiv-api-php/pixiv.php'</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
-<span class="line"><span class="token variable">$word</span> <span class="token operator">=</span> <span class="token string">'南ことり'</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token variable">$word</span> <span class="token operator">=</span> <span class="token string">' 南ことり '</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
-<span class="line"><span class="token variable">$api</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PixivAPI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token variable">$api</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PixivAPI</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
-<span class="line"><span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$api</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">search_works</span><span class="token punctuation">(</span><span class="token variable">$word</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'tag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$api</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">search_works</span> <span class="token punctuation">(</span><span class="token variable">$word</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'tag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token variable">$origin</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">[</span><span class="token string">'pagination'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'next'</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">[</span><span class="token string">'response'</span><span class="token punctuation">]</span> <span class="token keyword">as</span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token function">array_push</span><span class="token punctuation">(</span><span class="token variable">$origin</span><span class="token punctuation">,</span> <span class="token punctuation">[</span></span>
-<span class="line">            <span class="token string">'filename'</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$value</span><span class="token punctuation">[</span><span class="token string">'id'</span><span class="token punctuation">]</span> <span class="token punctuation">.</span> <span class="token string">'_'</span> <span class="token punctuation">.</span> <span class="token variable">$value</span><span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">]</span> <span class="token punctuation">.</span> <span class="token string">'.jpg'</span><span class="token punctuation">,</span></span>
-<span class="line">            <span class="token string">'url'</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$value</span><span class="token punctuation">[</span><span class="token string">'image_urls'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'large'</span><span class="token punctuation">]</span><span class="token punctuation">,</span></span>
+<span class="line"><span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token variable">$result</span> <span class="token punctuation">[</span><span class="token string">'pagination'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'next'</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$result</span> <span class="token punctuation">[</span><span class="token string">'response'</span><span class="token punctuation">]</span> <span class="token keyword">as</span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token function">array_push</span> <span class="token punctuation">(</span><span class="token variable">$origin</span><span class="token punctuation">,</span> <span class="token punctuation">[</span></span>
+<span class="line">            <span class="token string">'filename'</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$value</span> <span class="token punctuation">[</span><span class="token string">'id'</span><span class="token punctuation">]</span> <span class="token punctuation">.</span> <span class="token string">'_'</span> <span class="token punctuation">.</span> <span class="token variable">$value</span> <span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">]</span> <span class="token punctuation">.</span> <span class="token string">'.jpg'</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">'url'</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$value</span> <span class="token punctuation">[</span><span class="token string">'image_urls'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'large'</span><span class="token punctuation">]</span><span class="token punctuation">,</span></span>
 <span class="line">        <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$api</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">search_works</span><span class="token punctuation">(</span><span class="token variable">$word</span><span class="token punctuation">,</span> <span class="token variable">$result</span><span class="token punctuation">[</span><span class="token string">'pagination'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'next'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'tag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token variable">$api</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">search_works</span> <span class="token punctuation">(</span><span class="token variable">$word</span><span class="token punctuation">,</span> <span class="token variable">$result</span> <span class="token punctuation">[</span><span class="token string">'pagination'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'next'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'tag'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token punctuation">}</span></span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$origin</span> <span class="token keyword">as</span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">echo</span> <span class="token string">'start: '</span> <span class="token punctuation">.</span> <span class="token variable">$value</span><span class="token punctuation">[</span><span class="token string">'url'</span><span class="token punctuation">]</span> <span class="token punctuation">.</span> <span class="token constant">PHP_EOL</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">download_image</span><span class="token punctuation">(</span><span class="token variable">$value</span><span class="token punctuation">[</span><span class="token string">'url'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">$value</span><span class="token punctuation">[</span><span class="token string">'filename'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token keyword">echo</span><span class="token string">'start: '</span> <span class="token punctuation">.</span> <span class="token variable">$value</span> <span class="token punctuation">[</span><span class="token string">'url'</span><span class="token punctuation">]</span> <span class="token punctuation">.</span> <span class="token constant">PHP_EOL</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token function">download_image</span> <span class="token punctuation">(</span><span class="token variable">$value</span> <span class="token punctuation">[</span><span class="token string">'url'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">$value</span> <span class="token punctuation">[</span><span class="token string">'filename'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token punctuation">}</span></span>
 <span class="line"></span>
-<span class="line"><span class="token keyword">function</span> <span class="token function">download_image</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">,</span> <span class="token variable">$filename</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">function</span> <span class="token function">download_image</span> <span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">,</span> <span class="token variable">$filename</span><span class="token punctuation">)</span></span>
 <span class="line"><span class="token punctuation">{</span></span>
 <span class="line">    <span class="token variable">$filepath</span> <span class="token operator">=</span> <span class="token constant">__DIR__</span> <span class="token punctuation">.</span> <span class="token string">'/dl/'</span> <span class="token punctuation">.</span> <span class="token variable">$filename</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">is_file</span><span class="token punctuation">(</span><span class="token variable">$filepath</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">is_file</span> <span class="token punctuation">(</span><span class="token variable">$filepath</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="line">        <span class="token keyword">return</span><span class="token punctuation">;</span></span>
 <span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token variable">$ch</span> <span class="token operator">=</span> <span class="token function">curl_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_URL</span><span class="token punctuation">,</span> <span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_RETURNTRANSFER</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_CONNECTTIMEOUT</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_USERAGENT</span><span class="token punctuation">,</span> <span class="token string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_REFERER</span><span class="token punctuation">,</span> 'http<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//www.pixiv.net/');</span></span>
-<span class="line">    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">curl_exec</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_close</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token variable">$filepath</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token variable">$result</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">fclose</span><span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token variable">$ch</span> <span class="token operator">=</span> <span class="token function">curl_init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_URL</span><span class="token punctuation">,</span> <span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_RETURNTRANSFER</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_CONNECTTIMEOUT</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_USERAGENT</span><span class="token punctuation">,</span> <span class="token string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_REFERER</span><span class="token punctuation">,</span> 'http<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//www.pixiv.net/');</span></span>
+<span class="line">    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">curl_exec</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token function">curl_close</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token variable">$fp</span> <span class="token operator">=</span> <span class="token function">fopen</span> <span class="token punctuation">(</span><span class="token variable">$filepath</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token function">fwrite</span> <span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">,</span> <span class="token variable">$result</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token function">fclose</span> <span class="token punctuation">(</span><span class="token variable">$fp</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
 
       </div>
@@ -145,13 +145,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/backup-vps-to-git.html" title="备份服务器数据至git">备份服务器数据至git</a>
+            <a href="https://kotori.love/archives/backup-vps-to-git.html" title="备份服务器数据至 git">备份服务器数据至 git</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/vulnerable-react-native.html" title="React Native中的坑">React Native中的坑</a>
+            <a href="https://kotori.love/archives/vulnerable-react-native.html" title="React Native 中的坑">React Native 中的坑</a>
           
         </li>
       </ul>
@@ -202,10 +202,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -294,7 +294,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

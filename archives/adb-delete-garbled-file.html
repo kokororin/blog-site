@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>adb删除乱码文件(夹) | ことりのおやつにしてやるぞー！</title>
+  <title>adb 删除乱码文件 (夹) | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">adb删除乱码文件(夹)</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">adb 删除乱码文件 (夹)</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/adb-delete-garbled-file.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/adb-delete-garbled-file.html&title=adb删除乱码文件(夹)"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/adb-delete-garbled-file.html&title=adb 删除乱码文件 (夹)"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -83,13 +83,13 @@
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
         <blockquote>
-<p>emmmm…万年不水文</p>
+<p>emmmm… 万年不水文</p>
 </blockquote>
-<p>事情是这样的，在Windows下拷贝了一个中文目录进去，结果在手机上看就乱码了，而且目录里的文件都看不到，于是搜索找到一个Linux下删除乱码的办法：</p>
+<p>事情是这样的，在 Windows 下拷贝了一个中文目录进去，结果在手机上看就乱码了，而且目录里的文件都看不到，于是搜索找到一个 Linux 下删除乱码的办法：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">adb shell</span>
 <span class="line"><span class="token function">ls</span> -i</span></pre><div class="tools"></div></figure>
 <p>看到类似的输出：</p>
-<pre><code> 6283265 鏂板缓\346\226</code></pre><p>然后使用命令删除：</p>
+<pre><code> 6283265 鏂板缓 \346\226</code></pre><p>然后使用命令删除：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">find</span> -inum 6283265 -exec <span class="token function">rm</span> -rf <span class="token punctuation">{</span><span class="token punctuation">}</span> \<span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
 
       </div>
@@ -169,10 +169,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -261,7 +261,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>从外部获取php类的私有属性 | ことりのおやつにしてやるぞー！</title>
+  <title>从外部获取 php 类的私有属性 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">从外部获取php类的私有属性</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">从外部获取 php 类的私有属性</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/php-get-private-property.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/php-get-private-property.html&title=从外部获取php类的私有属性"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/php-get-private-property.html&title=从外部获取 php 类的私有属性"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -83,16 +83,16 @@
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
         <blockquote>
-<p>最近把Typecho升级到了 1.1 (17.8.17)，然后主题部分功能挂了，应该是以前<del>魔改</del>过核心代码导致的，70说国庆会出一个Beta版，看来以后还是不改源代码了 …⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄….</p>
+<p>最近把 Typecho 升级到了 1.1 (17.8.17)，然后主题部分功能挂了，应该是以前～～魔改～～过核心代码导致的，70 说国庆会出一个 Beta 版，看来以后还是不改源代码了 …⁄(⁄ ⁄・⁄ω⁄・⁄ ⁄)⁄….</p>
 </blockquote>
-<p>Typecho评论页中，如果要获取当前的页码是没有办法的，可能需要调用<code>$comments-&gt;_currentPage</code>，但是<code>Widget_Comments_Archive::_currentPage</code>是<code>private</code>的。</p>
-<p>在不修改源代码的情况下，可以使用<a href="http://php.net/manual/zh/class.reflectionclass.php" target="_blank" rel="noopener">ReflectionClass</a>来获取。</p>
+<p>Typecho 评论页中，如果要获取当前的页码是没有办法的，可能需要调用 <code>$comments-&gt;_currentPage</code>，但是 <code>Widget_Comments_Archive::_currentPage</code> 是 <code>private</code> 的。</p>
+<p>在不修改源代码的情况下，可以使用 <a href="http://php.net/manual/zh/class.reflectionclass.php" target="_blank" rel="noopener">ReflectionClass</a> 来获取。</p>
 <p>代码如下：</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token variable">$reflection</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReflectionClass</span><span class="token punctuation">(</span><span class="token variable">$comments</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token variable">$reflection</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReflectionClass</span> <span class="token punctuation">(</span><span class="token variable">$comments</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
-<span class="line"><span class="token variable">$currentPage</span> <span class="token operator">=</span> <span class="token variable">$reflection</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'_currentPage'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token variable">$currentPage</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token variable">$currentPage</span> <span class="token operator">=</span> <span class="token variable">$currentPage</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$comments</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token variable">$currentPage</span> <span class="token operator">=</span> <span class="token variable">$reflection</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">getProperty</span> <span class="token punctuation">(</span><span class="token string">'_currentPage'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token variable">$currentPage</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">setAccessible</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token variable">$currentPage</span> <span class="token operator">=</span> <span class="token variable">$currentPage</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">getValue</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$comments</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">echo</span> <span class="token variable">$currentPage</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
 
@@ -116,13 +116,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/unicode-in-jsx.html" title="React JSX中unicode的处理">React JSX中unicode的处理</a>
+            <a href="https://kotori.love/archives/unicode-in-jsx.html" title="React JSX 中 unicode 的处理">React JSX 中 unicode 的处理</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/lovelive-sif-2017-thanksgiving-virtual-positioning.html" title="定位领取SIF感谢祭奖励">定位领取SIF感谢祭奖励</a>
+            <a href="https://kotori.love/archives/lovelive-sif-2017-thanksgiving-virtual-positioning.html" title="定位领取 SIF 感谢祭奖励">定位领取 SIF 感谢祭奖励</a>
           
         </li>
       </ul>
@@ -173,10 +173,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -265,7 +265,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

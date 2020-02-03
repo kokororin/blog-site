@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>React JSX中unicode的处理 | ことりのおやつにしてやるぞー！</title>
+  <title>React JSX 中 unicode 的处理 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">React JSX中unicode的处理</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">React JSX 中 unicode 的处理</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/unicode-in-jsx.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/unicode-in-jsx.html&title=React JSX中unicode的处理"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/unicode-in-jsx.html&title=React JSX 中 unicode 的处理"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -80,27 +80,27 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p>因为某些需要，创建了一个iconfont的组件，旨在根据unicode的<del>id???</del>来创建对应的图标字体，大致用法是这样的</p>
+        <p>因为某些需要，创建了一个 iconfont 的组件，旨在根据 unicode 的～～id???~~ 来创建对应的图标字体，大致用法是这样的</p>
 <figure class="highlight code" data-language="Js"><pre class="language-js"><span class="line"><span class="token operator">&lt;</span>Icon content<span class="token operator">=</span><span class="token string">"628"</span> <span class="token operator">/</span><span class="token operator">></span></span></pre><div class="tools"></div></figure>
-<p>这样就会生成一段html</p>
+<p>这样就会生成一段 html</p>
 <figure class="highlight code" data-language="Html"><pre class="language-html"><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>iconfont<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token entity" title="&#xe628;">&amp;#xe628;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">></span></span></span></pre><div class="tools"></div></figure>
-<p>如果这样还好办，可以用<code>dangerouslySetInnerHTML</code>达到效果。</p>
+<p>如果这样还好办，可以用 <code>dangerouslySetInnerHTML</code> 达到效果。</p>
 <p>但是，有些情况下，需要达到如下效果</p>
 <figure class="highlight code" data-language="Js"><pre class="language-js"><span class="line"><span class="token operator">&lt;</span>Icon tagName<span class="token operator">=</span><span class="token string">"input"</span> content<span class="token operator">=</span><span class="token string">"628"</span> <span class="token operator">/</span><span class="token operator">></span></span></pre><div class="tools"></div></figure>
-<p>生成这样的html</p>
+<p>生成这样的 html</p>
 <figure class="highlight code" data-language="Html"><pre class="language-html"><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>iconfont<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>&amp;#xe628;<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span></pre><div class="tools"></div></figure>
-<p><del>可是为什么不生成<code>&lt;button type=&quot;button&quot;&gt;&amp;#xe628;&lt;/button&gt;</code>呢(⊙o⊙)</del></p>
-<p>如果在组件中直接拼字符串，会在页面上吧<code>&amp;#xe628;</code>直接输出</p>
+<p><del>~ 可是为什么不生成 <code>&lt;button type=&quot;button&quot;&gt;&amp;#xe628;&lt;/button&gt;</code> 呢 (⊙o⊙)</del></p>
+<p>如果在组件中直接拼字符串，会在页面上吧 <code>&amp;#xe628;</code> 直接输出</p>
 <figure class="highlight code" data-language="Js"><pre class="language-js"><span class="line"><span class="token keyword">const</span> Icon <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> content <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span></span>
 <span class="line">  <span class="token operator">&lt;</span>input className<span class="token operator">=</span><span class="token string">"iconfont"</span> type<span class="token operator">=</span><span class="token string">"button"</span> defaultValue<span class="token operator">=</span><span class="token punctuation">{</span><span class="token template-string"><span class="token string">`&amp;#xe</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;`</span></span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<p>不过，把unicode稍微转换一下就可以啦(●′ω`●)</p>
+<p>不过，把 unicode 稍微转换一下就可以啦 (●′ω`●)</p>
 <figure class="highlight code" data-language="Js"><pre class="language-js"><span class="line"><span class="token keyword">const</span> convertUnicode <span class="token operator">=</span> input <span class="token operator">=</span><span class="token operator">></span></span>
-<span class="line">  input<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/\\u(\w\w\w\w)/g</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span></span>
-<span class="line">    String<span class="token punctuation">.</span><span class="token function">fromCharCode</span><span class="token punctuation">(</span><span class="token function">parseInt</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="line">  input<span class="token punctuation">.</span>replace <span class="token punctuation">(</span><span class="token regex">/\\u (\w\w\w\w)/g</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span></span>
+<span class="line">    String<span class="token punctuation">.</span>fromCharCode <span class="token punctuation">(</span>parseInt <span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
 <span class="line">  <span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">const</span> Icon <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> content <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span></span>
-<span class="line">  <span class="token operator">&lt;</span>input <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"iconfont"</span> type<span class="token operator">=</span><span class="token string">"button"</span> defaultValue<span class="token operator">=</span><span class="token punctuation">{</span><span class="token function">convertUnicode</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`\\ue</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
+<span class="line">  <span class="token operator">&lt;</span>input <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"iconfont"</span> type<span class="token operator">=</span><span class="token string">"button"</span> defaultValue<span class="token operator">=</span><span class="token punctuation">{</span>convertUnicode <span class="token punctuation">(</span><span class="token template-string"><span class="token string">`\\ue</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
 
       </div>
     </article>
@@ -128,7 +128,7 @@
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/php-get-private-property.html" title="从外部获取php类的私有属性">从外部获取php类的私有属性</a>
+            <a href="https://kotori.love/archives/php-get-private-property.html" title="从外部获取 php 类的私有属性">从外部获取 php 类的私有属性</a>
           
         </li>
       </ul>
@@ -179,10 +179,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -271,7 +271,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

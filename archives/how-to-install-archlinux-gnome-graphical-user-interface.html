@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>Archlinux安装gnome图形界面的方法 | ことりのおやつにしてやるぞー！</title>
+  <title>Archlinux 安装 gnome 图形界面的方法 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">Archlinux安装gnome图形界面的方法</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">Archlinux 安装 gnome 图形界面的方法</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/how-to-install-archlinux-gnome-graphical-user-interface.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/how-to-install-archlinux-gnome-graphical-user-interface.html&title=Archlinux安装gnome图形界面的方法"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/how-to-install-archlinux-gnome-graphical-user-interface.html&title=Archlinux 安装 gnome 图形界面的方法"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -82,17 +82,17 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p>基本系统的安装方法就不说了，参照wiki（<a href="https://wiki.archlinux.org/index.php/Beginners%27_guide）即可。" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Beginners%27_guide）即可。</a></p>
-<p>下面说说如何安装gnome。</p>
-<p>1、装X</p>
+        <p>基本系统的安装方法就不说了，参照 wiki（<a href="https://wiki.archlinux.org/index.php/Beginners%27_guide）即可。" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Beginners%27_guide）即可。</a></p>
+<p>下面说说如何安装 gnome。</p>
+<p>1、装 X</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">pacman -S xorg-server xorg-server-utils xorg-xinit xorg-utils</span></pre><div class="tools"></div></figure>
 <p>2、安装显卡驱动（intel）</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">pacman -S xf86-video-intel</span></pre><div class="tools"></div></figure>
 <p>3、安装触摸板和声卡</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">pacman -S xf86-input-synaptics alsa-utils</span></pre><div class="tools"></div></figure>
-<p>4、安装gnome</p>
+<p>4、安装 gnome</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">pacman -S gnome gdm</span></pre><div class="tools"></div></figure>
-<p>5、安装gnome-extra（可选）</p>
+<p>5、安装 gnome-extra（可选）</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">pacman -S gnome-extra</span></pre><div class="tools"></div></figure>
 <p>6、设置服务</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">systemctl <span class="token function">enable</span> gdm</span>
@@ -118,13 +118,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/tutorial-to-build-tieba-assistant.html" title="说好的教程——贴吧助手搭建教程">说好的教程——贴吧助手搭建教程</a>
+            <a href="https://kotori.love/archives/tutorial-to-build-tieba-assistant.html" title="说好的教程 —— 贴吧助手搭建教程">说好的教程 —— 贴吧助手搭建教程</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/archlinux-font-config.html" title="Archlinux字体配置">Archlinux字体配置</a>
+            <a href="https://kotori.love/archives/archlinux-font-config.html" title="Archlinux 字体配置">Archlinux 字体配置</a>
           
         </li>
       </ul>
@@ -175,10 +175,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -267,7 +267,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

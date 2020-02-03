@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>OS X下配置Nginx+PHP+MySQL | ことりのおやつにしてやるぞー！</title>
+  <title>OS X 下配置 Nginx+PHP+MySQL | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">OS X下配置Nginx+PHP+MySQL</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">OS X 下配置 Nginx+PHP+MySQL</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/install-nginx-php-mysql-on-osx.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/install-nginx-php-mysql-on-osx.html&title=OS X下配置Nginx+PHP+MySQL"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/install-nginx-php-mysql-on-osx.html&title=OS X 下配置 Nginx+PHP+MySQL"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -86,32 +86,32 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <h3 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h3><p>Mac下的Homebrew相当于Linux下的apt-get、yum，可以获得最新版的各种安装包。</p>
+        <h3 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h3><p>Mac 下的 Homebrew 相当于 Linux 下的 apt-get、yum，可以获得最新版的各种安装包。</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">ruby -e <span class="token string">"<span class="token variable"><span class="token variable">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="token variable">)</span></span>"</span></span></pre><div class="tools"></div></figure>
 <p>安装完成后，运行以下命令检查是否安装成功</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew doctor</span></pre><div class="tools"></div></figure>
-<p>然后更新、升级下brew源</p>
+<p>然后更新、升级下 brew 源</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew update <span class="token operator">&amp;&amp;</span> brew upgrade</span></pre><div class="tools"></div></figure>
-<h3 id="PHP-FPM"><a href="#PHP-FPM" class="headerlink" title="PHP-FPM"></a>PHP-FPM</h3><h4 id="添加必须的tap"><a href="#添加必须的tap" class="headerlink" title="添加必须的tap"></a>添加必须的tap</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew tap homebrew/dupes</span>
+<h3 id="PHP-FPM"><a href="#PHP-FPM" class="headerlink" title="PHP-FPM"></a>PHP-FPM</h3><h4 id="添加必须的-tap"><a href="#添加必须的-tap" class="headerlink" title="添加必须的 tap"></a>添加必须的 tap</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew tap homebrew/dupes</span>
 <span class="line">brew tap homebrew/php</span></pre><div class="tools"></div></figure>
-<h4 id="安装php5-6"><a href="#安装php5-6" class="headerlink" title="安装php5.6"></a>安装php5.6</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> --without-apache --with-fpm --with-mysql php56</span></pre><div class="tools"></div></figure>
-<h4 id="自动启动php"><a href="#自动启动php" class="headerlink" title="自动启动php"></a>自动启动php</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">mkdir</span> -p ~/Library/LaunchAgents</span>
+<h4 id="安装-php5-6"><a href="#安装-php5-6" class="headerlink" title="安装 php5.6"></a>安装 php5.6</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> --without-apache --with-fpm --with-mysql php56</span></pre><div class="tools"></div></figure>
+<h4 id="自动启动-php"><a href="#自动启动-php" class="headerlink" title="自动启动 php"></a>自动启动 php</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">mkdir</span> -p ~/Library/LaunchAgents</span>
 <span class="line"><span class="token function">ln</span> -sfv /usr/local/opt/php56/homebrew.mxcl.php56.plist ~/Library/LaunchAgents/</span></pre><div class="tools"></div></figure>
-<h4 id="启动php"><a href="#启动php" class="headerlink" title="启动php"></a>启动php</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist</span></pre><div class="tools"></div></figure>
+<h4 id="启动-php"><a href="#启动-php" class="headerlink" title="启动 php"></a>启动 php</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist</span></pre><div class="tools"></div></figure>
 <h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> mysql</span></pre><div class="tools"></div></figure>
-<h4 id="自动启动MySQL"><a href="#自动启动MySQL" class="headerlink" title="自动启动MySQL"></a>自动启动MySQL</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">ln</span> -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents</span></pre><div class="tools"></div></figure>
-<h4 id="启动MySQL"><a href="#启动MySQL" class="headerlink" title="启动MySQL"></a>启动MySQL</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist</span></pre><div class="tools"></div></figure>
+<h4 id="自动启动-MySQL"><a href="#自动启动-MySQL" class="headerlink" title="自动启动 MySQL"></a>自动启动 MySQL</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">ln</span> -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents</span></pre><div class="tools"></div></figure>
+<h4 id="启动-MySQL"><a href="#启动-MySQL" class="headerlink" title="启动 MySQL"></a>启动 MySQL</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist</span></pre><div class="tools"></div></figure>
 <h4 id="配置密码"><a href="#配置密码" class="headerlink" title="配置密码"></a>配置密码</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">mysql_secure_installation</span></pre><div class="tools"></div></figure>
 <h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> nginx</span></pre><div class="tools"></div></figure>
-<h4 id="设置自动启动"><a href="#设置自动启动" class="headerlink" title="设置自动启动"></a>设置自动启动</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">sudo</span> <span class="token function">cp</span> -v /usr/local/opt/nginx/*.plist /Library/LaunchDaemons/</span>
+<h4 id="设置自动启动"><a href="#设置自动启动" class="headerlink" title="设置自动启动"></a>设置自动启动</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">sudo</span> <span class="token function">cp</span> -v /usr/local/opt/nginx/*.plist/Library/LaunchDaemons/</span>
 <span class="line"><span class="token function">sudo</span> <span class="token function">chown</span> root:wheel /Library/LaunchDaemons/homebrew.mxcl.nginx.plist</span></pre><div class="tools"></div></figure>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>创建nginx文件夹及配置文件</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>创建 nginx 文件夹及配置文件</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">mkdir</span> -p /usr/local/etc/nginx/logs</span>
 <span class="line"><span class="token function">mkdir</span> -p /usr/local/etc/nginx/sites-available</span>
 <span class="line"><span class="token function">mkdir</span> -p /usr/local/etc/nginx/sites-enabled</span>
 <span class="line"><span class="token function">mkdir</span> -p /usr/local/etc/nginx/conf.d</span></pre><div class="tools"></div></figure>
-<p>修改/usr/local/etc/nginx/nginx.conf</p>
-<pre><code>user Kotori staff;#修改对应用户名，如果你想把Document Root放在家目录下的话，反之注释
+<p>修改 /usr/local/etc/nginx/nginx.conf</p>
+<pre><code>user Kotori staff;# 修改对应用户名，如果你想把 Document Root 放在家目录下的话，反之注释
 worker_processes  1;
 
 error_log  /usr/local/etc/nginx/logs/error.log debug;
@@ -141,7 +141,7 @@ http {
     index index.html index.php;
 
     include /usr/local/etc/nginx/sites-enabled/*;
-}</code></pre><p>修改/usr/local/etc/nginx/conf.d/php-fpm</p>
+}</code></pre><p>修改 /usr/local/etc/nginx/conf.d/php-fpm</p>
 <pre><code>location ~ \.php$ {
     try_files      $uri = 404;
     fastcgi_pass   127.0.0.1:9000;
@@ -152,7 +152,7 @@ http {
 <pre><code>server {
     listen       80;
     server_name  localhost;
-    root       /Users/Kotori/Documents/htdocs;#这是自定义目录
+    root       /Users/Kotori/Documents/htdocs;# 这是自定义目录
 
     access_log  /usr/local/etc/nginx/logs/default.access.log  main;
 
@@ -169,10 +169,10 @@ http {
     error_page  404     /404.html;
     error_page  403     /403.html;
 }</code></pre><p>软链接配置</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">ln</span> -sfv /usr/local/etc/nginx/sites-available/default /usr/local/etc/nginx/sites-enabled/default</span></pre><div class="tools"></div></figure>
+<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">ln</span> -sfv /usr/local/etc/nginx/sites-available/default/usr/local/etc/nginx/sites-enabled/default</span></pre><div class="tools"></div></figure>
 <p>启动</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">sudo</span> launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist</span></pre><div class="tools"></div></figure>
-<p>一些便利的alias</p>
+<p>一些便利的 alias</p>
 <pre><code>alias nginx.start=&#39;sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist&#39;
 alias nginx.stop=&#39;sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist&#39;
 alias nginx.restart=&#39;nginx.stop &amp;&amp; nginx.start&#39;
@@ -185,7 +185,7 @@ alias mysql.restart=&#39;mysql.stop &amp;&amp; mysql.start&#39;
 alias nginx.logs.error=&#39;tail -250f /usr/local/etc/nginx/logs/error.log&#39;
 alias nginx.logs.access=&#39;tail -250f /usr/local/etc/nginx/logs/access.log&#39;
 alias nginx.logs.default.access=&#39;tail -250f /usr/local/etc/nginx/logs/default.access.log&#39;</code></pre><blockquote>
-<p>参考&amp;精简自 <a href="http://blog.frd.mn/install-nginx-php-fpm-mysql-and-phpmyadmin-on-os-x-mavericks-using-homebrew/" target="_blank" rel="noopener">frdmn’s notes</a></p>
+<p>参考 &amp; 精简自 <a href="http://blog.frd.mn/install-nginx-php-fpm-mysql-and-phpmyadmin-on-os-x-mavericks-using-homebrew/" target="_blank" rel="noopener">frdmn’s notes</a></p>
 </blockquote>
 
       </div>
@@ -208,13 +208,13 @@ alias nginx.logs.default.access=&#39;tail -250f /usr/local/etc/nginx/logs/defaul
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/nginx-config-file.html" title="一些奇怪的nginx配置文件">一些奇怪的nginx配置文件</a>
+            <a href="https://kotori.love/archives/nginx-config-file.html" title="一些奇怪的 nginx 配置文件">一些奇怪的 nginx 配置文件</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/chrome-extension-notes.html" title="Chrome扩展开发笔记">Chrome扩展开发笔记</a>
+            <a href="https://kotori.love/archives/chrome-extension-notes.html" title="Chrome 扩展开发笔记">Chrome 扩展开发笔记</a>
           
         </li>
       </ul>
@@ -265,10 +265,10 @@ alias nginx.logs.default.access=&#39;tail -250f /usr/local/etc/nginx/logs/defaul
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -357,7 +357,6 @@ alias nginx.logs.default.access=&#39;tail -250f /usr/local/etc/nginx/logs/defaul
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

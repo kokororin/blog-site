@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>webpack集成basket.js实现localStorage本地缓存 | ことりのおやつにしてやるぞー！</title>
+  <title>webpack 集成 basket.js 实现 localStorage 本地缓存 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">webpack集成basket.js实现localStorage本地缓存</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">webpack 集成 basket.js 实现 localStorage 本地缓存</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/integrates-basket-into-webpack.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/integrates-basket-into-webpack.html&title=webpack集成basket.js实现localStorage本地缓存"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/integrates-basket-into-webpack.html&title=webpack 集成 basket.js 实现 localStorage 本地缓存"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -80,76 +80,76 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <h3 id="basket-js-是什么"><a href="#basket-js-是什么" class="headerlink" title="basket.js 是什么"></a>basket.js 是什么</h3><p><a href="https://github.com/addyosmani/basket.js" target="_blank" rel="noopener">basket.js</a> 可以用来加载js和css脚本并且保存到 <code>LocalStorage</code> 上，使我们可以更加精准地控制缓存，即使是在 http 缓存过期之后也可以使用。因此可以使我们防止不必要的重新请求 js 脚本，提升网站加载速度。</p>
-<h3 id="basket-js的简单使用方式"><a href="#basket-js的简单使用方式" class="headerlink" title="basket.js的简单使用方式"></a>basket.js的简单使用方式</h3><figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line">basket<span class="token punctuation">.</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token punctuation">:</span> <span class="token string">'helloworld.js'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<h3 id="和浏览器缓存相比的优势"><a href="#和浏览器缓存相比的优势" class="headerlink" title="和浏览器缓存相比的优势"></a>和浏览器缓存相比的优势</h3><p>在PC端和浏览器缓存相比没有任何优势，移动端SPA值得尝试。<br>（特别是在某信的WebView里，304缓存的时间短如<a href="https://zh.moegirl.org/%E6%A8%B1%E5%86%85%E6%A2%A8%E5%AD%90" target="_blank" rel="noopener">小香菇</a>2333）</p>
+        <h3 id="basket-js-是什么"><a href="#basket-js-是什么" class="headerlink" title="basket.js 是什么"></a>basket.js 是什么</h3><p><a href="https://github.com/addyosmani/basket.js" target="_blank" rel="noopener">basket.js</a> 可以用来加载 js 和 css 脚本并且保存到 <code>LocalStorage</code> 上，使我们可以更加精准地控制缓存，即使是在 http 缓存过期之后也可以使用。因此可以使我们防止不必要的重新请求 js 脚本，提升网站加载速度。</p>
+<h3 id="basket-js-的简单使用方式"><a href="#basket-js-的简单使用方式" class="headerlink" title="basket.js 的简单使用方式"></a>basket.js 的简单使用方式</h3><figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line">basket<span class="token punctuation">.</span>require <span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token punctuation">:</span> <span class="token string">'helloworld.js'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
+<h3 id="和浏览器缓存相比的优势"><a href="#和浏览器缓存相比的优势" class="headerlink" title="和浏览器缓存相比的优势"></a>和浏览器缓存相比的优势</h3><p>在 PC 端和浏览器缓存相比没有任何优势，移动端 SPA 值得尝试。<br>（特别是在某信的 WebView 里，304 缓存的时间短如 [小香菇](<a href="https://zh.moegirl.org/%" target="_blank" rel="noopener">https://zh.moegirl.org/%</a> E6% A8% B1% E5%86%85% E6% A2% A8% E5% AD%90) 2333）</p>
 <hr>
-<p>以下总结来自<a href="https://www.zhihu.com/question/28467444" target="_blank" rel="noopener">某乎</a>：</p>
-<h4 id="PC上应用价值不大的原因在于："><a href="#PC上应用价值不大的原因在于：" class="headerlink" title="PC上应用价值不大的原因在于："></a>PC上应用价值不大的原因在于：</h4><ul>
-<li>兼容性不太好，不支持LS的浏览器比例仍然很大</li>
-<li>网络速度快，协商缓存响应快，LS读取+eval很多时候会比不上304</li>
-<li>通常需要SEO，导致css不能缓存，仅缓存js使得整个缓存方案意义进一步减小</li>
+<p>以下总结来自 <a href="https://www.zhihu.com/question/28467444" target="_blank" rel="noopener">某乎</a>：</p>
+<h4 id="PC-上应用价值不大的原因在于："><a href="#PC-上应用价值不大的原因在于：" class="headerlink" title="PC 上应用价值不大的原因在于："></a>PC 上应用价值不大的原因在于：</h4><ul>
+<li>兼容性不太好，不支持 LS 的浏览器比例仍然很大</li>
+<li>网络速度快，协商缓存响应快，LS 读取 + eval 很多时候会比不上 304</li>
+<li>通常需要 SEO，导致 css 不能缓存，仅缓存 js 使得整个缓存方案意义进一步减小</li>
 <li>浏览器本地缓存足够可靠持久</li>
 <li>跨页面间共享缓存即便有浪费也差别不大</li>
 </ul>
-<h4 id="移动端webapp值得一试的原因在于："><a href="#移动端webapp值得一试的原因在于：" class="headerlink" title="移动端webapp值得一试的原因在于："></a>移动端webapp值得一试的原因在于：</h4><ul>
+<h4 id="移动端-webapp-值得一试的原因在于："><a href="#移动端-webapp-值得一试的原因在于：" class="headerlink" title="移动端 webapp 值得一试的原因在于："></a>移动端 webapp 值得一试的原因在于：</h4><ul>
 <li>兼容性好</li>
-<li>网速慢，LS读取+eval大多数情况下快于304</li>
-<li>都说是webapp了，不需要seo，css也可以缓存，再通过js加载</li>
-<li>浏览器缓存经常会被清理，LS被清理的几率低一些</li>
+<li>网速慢，LS 读取 + eval 大多数情况下快于 304</li>
+<li>都说是 webapp 了，不需要 seo，css 也可以缓存，再通过 js 加载</li>
+<li>浏览器缓存经常会被清理，LS 被清理的几率低一些</li>
 <li>以模块文件为单位，缓存失效率低</li>
-<li>不同页面状态直接访问、二次访问、页面状态跳转资源组合是不确定的，不能通过url来缓存资源，否则就不“增量”啦</li>
+<li>不同页面状态直接访问、二次访问、页面状态跳转资源组合是不确定的，不能通过 url 来缓存资源，否则就不 “增量” 啦</li>
 </ul>
-<h3 id="暗中观察"><a href="#暗中观察" class="headerlink" title="暗中观察"></a>暗中观察</h3><p>以最常见的<code>vue-cli</code>来举例（PS：虽然不用Vue，但是它的webpack配置还行，直接抄了），默认会打包出以下几个js文件，在Chrome的<code>network</code>选项卡中可以看到加载过程。<br><img src="https://static-files.kotori.love/blog/2017/11/1423021124.png" alt=""></p>
-<h3 id="改造HtmlWebpackPlugin的模板文件"><a href="#改造HtmlWebpackPlugin的模板文件" class="headerlink" title="改造HtmlWebpackPlugin的模板文件"></a>改造HtmlWebpackPlugin的模板文件</h3><p>在ejs模板中加入以下代码，<code>keys</code>数组可能需要对应自己的<code>entry</code>名来修改。</p>
+<h3 id="暗中观察"><a href="#暗中观察" class="headerlink" title="暗中观察"></a>暗中观察</h3><p>以最常见的 <code>vue-cli</code> 来举例（PS：虽然不用 Vue，但是它的 webpack 配置还行，直接抄了），默认会打包出以下几个 js 文件，在 Chrome 的 <code>network</code> 选项卡中可以看到加载过程。<br><img src="https://static-files.kotori.love/blog/2017/11/1423021124.png" alt=""></p>
+<h3 id="改造-HtmlWebpackPlugin-的模板文件"><a href="#改造-HtmlWebpackPlugin-的模板文件" class="headerlink" title="改造 HtmlWebpackPlugin 的模板文件"></a>改造 HtmlWebpackPlugin 的模板文件</h3><p>在 ejs 模板中加入以下代码，<code>keys</code> 数组可能需要对应自己的 <code>entry</code> 名来修改。</p>
 <figure class="highlight code" data-language="Html"><pre class="language-html"><span class="line">&lt;% if (process.env.NODE_ENV === 'production') { %></span>
 <span class="line">    &lt;script src="&lt;%=htmlWebpackPlugin.files.publicPath %><span class="token script language-javascript">basket<span class="token punctuation">.</span>full<span class="token punctuation">.</span>min<span class="token punctuation">.</span>js"<span class="token operator">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span>
 <span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span></span>
 <span class="line">      &lt;%</span>
 <span class="line">      var resources = [];</span>
 <span class="line">      var keys = ["manifest", "vendor", "main"];</span>
-<span class="line">      // css</span>
+<span class="line">      //css</span>
 <span class="line">      for (var css in htmlWebpackPlugin.files.css) {</span>
-<span class="line">        resources.push({</span>
-<span class="line">          url: htmlWebpackPlugin.files.css[css],</span>
+<span class="line">        resources.push ({</span>
+<span class="line">          url: htmlWebpackPlugin.files.css [css],</span>
 <span class="line">          execute: false</span>
 <span class="line">        });</span>
 <span class="line">      }</span>
-<span class="line">      // js</span>
+<span class="line">      //js</span>
 <span class="line">      var i = -1;</span>
 <span class="line">      for (var chunk in htmlWebpackPlugin.files.chunks) {</span>
 <span class="line">        i++;</span>
-<span class="line">        resources.push({</span>
-<span class="line">          url: htmlWebpackPlugin.files.chunks[chunk].entry,</span>
+<span class="line">        resources.push ({</span>
+<span class="line">          url: htmlWebpackPlugin.files.chunks [chunk].entry,</span>
 <span class="line">          execute: true</span>
 <span class="line">        });</span>
 <span class="line">      }</span>
 <span class="line">      %></span>
-<span class="line">      (function(b) {</span>
-<span class="line">        b.require.apply(this, &lt;%=JSON.stringify(resources) %>)</span>
-<span class="line">          .then(function(responses) {</span>
-<span class="line">            responses.forEach(function(response) {</span>
+<span class="line">      (function (b) {</span>
+<span class="line">        b.require.apply (this, &lt;%=JSON.stringify (resources) %>)</span>
+<span class="line">          .then (function (responses) {</span>
+<span class="line">            responses.forEach (function (response) {</span>
 <span class="line">              if (!response.execute) {</span>
-<span class="line">                var style = document.createElement('style');</span>
+<span class="line">                var style = document.createElement ('style');</span>
 <span class="line">                style.innerHTML = response.data;</span>
-<span class="line">                var head = document.getElementsByTagName('head')[0];</span>
-<span class="line">                head.appendChild(style);</span>
+<span class="line">                var head = document.getElementsByTagName ('head')[0];</span>
+<span class="line">                head.appendChild (style);</span>
 <span class="line">              }</span>
 <span class="line">            });</span>
 <span class="line">          });</span>
 <span class="line">      })(basket);</span>
 <span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span>
 <span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>%</span> <span class="token attr-name">}</span> <span class="token punctuation">></span></span></span></pre><div class="tools"></div></figure>
-<p>webpack配置文件也需要相应修改，因为没有用到CDN上的<code>basket.full.min.js</code>，所以就自己本地托管吧。<br>使用<code>CopyWebpackPlugin</code>把<code>node_modules</code>目录中的js复制到打包目录下：</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">new</span> <span class="token class-name">CopyWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">[</span></span>
+<p>webpack 配置文件也需要相应修改，因为没有用到 CDN 上的 <code>basket.full.min.js</code>，所以就自己本地托管吧。<br>使用 <code>CopyWebpackPlugin</code> 把 <code>node_modules</code> 目录中的 js 复制到打包目录下：</p>
+<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">new</span> <span class="token class-name">CopyWebpackPlugin</span> <span class="token punctuation">(</span><span class="token punctuation">[</span></span>
 <span class="line">      <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">from</span><span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'node_modules/basket.js/dist/basket.full.min.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
-<span class="line">        to<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span></span>
+<span class="line">        <span class="token keyword">from</span><span class="token punctuation">:</span> path<span class="token punctuation">.</span>join <span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'node_modules/basket.js/dist/basket.full.min.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class="line">        to<span class="token punctuation">:</span> path<span class="token punctuation">.</span>join <span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span></span>
 <span class="line">      <span class="token punctuation">}</span></span>
 <span class="line"><span class="token punctuation">]</span><span class="token punctuation">)</span></span></pre><div class="tools"></div></figure>
-<p>同时<code>HtmlWebpackPlugin</code>中<code>inject</code>选项需要设置为<code>false</code>，这样打包的时候就不会在<code>index.html</code>中置入<code>&lt;script&gt;</code>标签啦<del>(≧▽≦)/</del>。</p>
-<h3 id="大成功"><a href="#大成功" class="headerlink" title="大成功"></a>大成功</h3><p>重新打包编译，打开浏览器测试，可以看到结果。<code>basket.js</code>会以ajax的形式调用这些静态文件并缓存到<code>LocalStorage</code>里。<br><img src="https://static-files.kotori.love/blog/2017/11/2026310482.png" alt=""><br><img src="https://static-files.kotori.love/blog/2017/11/1501695632.png" alt="Screenshot from 2017-11-09 13:07:47.png"></p>
-<p>再次刷新页面，就不会有这些请求<del>(≧▽≦)/</del>啦。</p>
+<p>同时 <code>HtmlWebpackPlugin</code> 中 <code>inject</code> 选项需要设置为 <code>false</code>，这样打包的时候就不会在 <code>index.html</code> 中置入 <code>&lt;script&gt;</code> 标签啦～(≧▽≦)/~。</p>
+<h3 id="大成功"><a href="#大成功" class="headerlink" title="大成功"></a>大成功</h3><p>重新打包编译，打开浏览器测试，可以看到结果。<code>basket.js</code> 会以 ajax 的形式调用这些静态文件并缓存到 <code>LocalStorage</code> 里。<br><img src="https://static-files.kotori.love/blog/2017/11/2026310482.png" alt=""><br><img src="https://static-files.kotori.love/blog/2017/11/1501695632.png" alt="Screenshot from 2017-11-09 13:07:47.png"></p>
+<p>再次刷新页面，就不会有这些请求～(≧▽≦)/~ 啦。</p>
 
       </div>
     </article>
@@ -171,13 +171,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/problems-with-react-async-component.html" title="React AsyncComponent的一些问题">React AsyncComponent的一些问题</a>
+            <a href="https://kotori.love/archives/problems-with-react-async-component.html" title="React AsyncComponent 的一些问题">React AsyncComponent 的一些问题</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/webpack-dev-server-issue-in-safari.html" title="webpack-dev-server在Safari中的问题">webpack-dev-server在Safari中的问题</a>
+            <a href="https://kotori.love/archives/webpack-dev-server-issue-in-safari.html" title="webpack-dev-server 在 Safari 中的问题">webpack-dev-server 在 Safari 中的问题</a>
           
         </li>
       </ul>
@@ -228,10 +228,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -320,7 +320,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

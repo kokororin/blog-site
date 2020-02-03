@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>nginx自定义header | ことりのおやつにしてやるぞー！</title>
+  <title>nginx 自定义 header | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">nginx自定义header</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">nginx 自定义 header</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/nginx-custom-header.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/nginx-custom-header.html&title=nginx自定义header"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/nginx-custom-header.html&title=nginx 自定义 header"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -81,7 +81,7 @@
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
         <h3 id="首先放上效果图："><a href="#首先放上效果图：" class="headerlink" title="首先放上效果图："></a>首先放上效果图：</h3><p><img src="https://static-files.kotori.love/blog/2015/08/1779800360.png" alt="无标题.png"></p>
-<p>默认情况下你能看到的http response应该是这样的：</p>
+<p>默认情况下你能看到的 http response 应该是这样的：</p>
 <pre><code>HTTP/1.1 200 OK
 Server: nginx/1.6.0
 Date: Tue, 28 Apr 2015 14:46:43 GMT
@@ -91,28 +91,28 @@ Vary: Accept-Encoding
 X-Powered-By: PHP/5.3.28
 Vary: Accept-Encoding, Cookie
 Cache-Control: max-age=3, must-revalidate</code></pre><blockquote>
-<p>ngx_header_more这个模块用于添加、设置和清除输入和输出的头信息。nginx源码没有包含该模块，需要另行添加。<br>该模块是ngx_http_headers_module模块的增强版，提供了更多的实用工具，比如复位或清除内置头信息，如Content-Type, Content-Length, 和Server。</p>
+<p>ngx_header_more 这个模块用于添加、设置和清除输入和输出的头信息。nginx 源码没有包含该模块，需要另行添加。<br>该模块是 ngx_http_headers_module 模块的增强版，提供了更多的实用工具，比如复位或清除内置头信息，如 Content-Type, Content-Length, 和 Server。</p>
 </blockquote>
-<p>从Github上下载源码包后解压，并进入nginx源码目录，比如：</p>
-<pre><code>cd /root/lnmp/src/nginx-1.8.0</code></pre><p>使用nginx -V查看当前nginx的编译参数，比如我的是：</p>
+<p>从 Github 上下载源码包后解压，并进入 nginx 源码目录，比如：</p>
+<pre><code>cd /root/lnmp/src/nginx-1.8.0</code></pre><p>使用 nginx -V 查看当前 nginx 的编译参数，比如我的是：</p>
 <pre><code>configure arguments: --prefix=/usr/local/nginx --user=www --group=www --with-http_stub_status_module --with-http_spdy_module --with-http_ssl_module --with-ipv6 --with-http_gzip_static_module --with-http_realip_module --with-http_flv_module</code></pre><p>然后把需要编译的模块加入：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">make</span> clean</span>
 <span class="line">./configure --prefix<span class="token operator">=</span>/usr/local/nginx --user<span class="token operator">=</span>www --group<span class="token operator">=</span>www --add-module<span class="token operator">=</span><span class="token punctuation">..</span>/headers-more-nginx-module-0.261 \</span>
 <span class="line">--with-http_stub_status_module --with-http_spdy_module --with-http_ssl_module --with-ipv6 --with-http_gzip_static_module --with-http_realip_module --with-http_flv_module</span>
-<span class="line"><span class="token comment" spellcheck="true"># 以上的../headers-more-nginx-module-0.261就是刚才解压的ngx_headers_more的源码包。</span></span>
+<span class="line"><span class="token comment" spellcheck="true"># 以上的../headers-more-nginx-module-0.261 就是刚才解压的 ngx_headers_more 的源码包。</span></span>
 <span class="line"><span class="token function">make</span></span>
-<span class="line"><span class="token function">mv</span> /usr/local/nginx/sbin/nginx<span class="token punctuation">{</span>,<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +%m%d<span class="token variable">)</span></span><span class="token punctuation">}</span></span>
-<span class="line"><span class="token function">cp</span> objs/nginx /usr/local/nginx/sbin</span>
+<span class="line"><span class="token function">mv</span> /usr/local/nginx/sbin/nginx <span class="token punctuation">{</span>,<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +% m% d<span class="token variable">)</span></span><span class="token punctuation">}</span></span>
+<span class="line"><span class="token function">cp</span> objs/nginx/usr/local/nginx/sbin</span>
 <span class="line"><span class="token function">service</span> nginx restart</span>
 <span class="line"><span class="token function">mkdir</span> -p /var/nginx/cache/one</span>
-<span class="line"><span class="token function">chown</span> -R www.www /var/nginx</span></pre><div class="tools"></div></figure>
-<p>完成后，在nginx.conf中的http块加入：</p>
+<span class="line"><span class="token function">chown</span> -R www.www/var/nginx</span></pre><div class="tools"></div></figure>
+<p>完成后，在 nginx.conf 中的 http 块加入：</p>
 <pre><code>##For Custom Header##
-  map $host $server_x_tag{
+  map $host $server_x_tag {
     &#39;kotori.love&#39; &#39;Kotori&#39;;
     default &#39;nginx&#39;;
-  }</code></pre><p>在虚拟主机配置文件server块中加入：</p>
-<pre><code>more_set_headers &#39;Server: $server_x_tag&#39;;</code></pre><p>最后重新载入nginx即可。</p>
+  }</code></pre><p>在虚拟主机配置文件 server 块中加入：</p>
+<pre><code>more_set_headers &#39;Server: $server_x_tag&#39;;</code></pre><p>最后重新载入 nginx 即可。</p>
 
       </div>
     </article>
@@ -134,13 +134,13 @@ Cache-Control: max-age=3, must-revalidate</code></pre><blockquote>
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/fuck-gfw.html" title="(转)慢慢的，就没有了，就像从未存在过">(转)慢慢的，就没有了，就像从未存在过</a>
+            <a href="https://kotori.love/archives/fuck-gfw.html" title="(转) 慢慢的，就没有了，就像从未存在过">(转) 慢慢的，就没有了，就像从未存在过</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/install-ubuntu-server-and-lnmp.html" title="安装Ubuntu Server并配置LNMP环境">安装Ubuntu Server并配置LNMP环境</a>
+            <a href="https://kotori.love/archives/install-ubuntu-server-and-lnmp.html" title="安装 Ubuntu Server 并配置 LNMP 环境">安装 Ubuntu Server 并配置 LNMP 环境</a>
           
         </li>
       </ul>
@@ -191,10 +191,10 @@ Cache-Control: max-age=3, must-revalidate</code></pre><blockquote>
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -283,7 +283,6 @@ Cache-Control: max-age=3, must-revalidate</code></pre><blockquote>
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

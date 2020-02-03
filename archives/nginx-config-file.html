@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>一些奇怪的nginx配置文件 | ことりのおやつにしてやるぞー！</title>
+  <title>一些奇怪的 nginx 配置文件 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">一些奇怪的nginx配置文件</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">一些奇怪的 nginx 配置文件</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/nginx-config-file.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/nginx-config-file.html&title=一些奇怪的nginx配置文件"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/nginx-config-file.html&title=一些奇怪的 nginx 配置文件"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -101,7 +101,7 @@ server {
     ssl_session_timeout 60m;
     add_header Strict-Transport-Security &quot;max-age=63072000; includeSubdomains; preload&quot;;
 
-    if ( $query_string ~* &quot;.*[\;&#39;\&lt;\&gt;].*&quot; ){
+    if ($query_string ~* &quot;.*[\;&#39;\&lt;\&gt;].*&quot; ){
         return 404;
     }
 
@@ -169,10 +169,10 @@ location / {
     google on;
     google_language zh-CN;
    # subs_filter &#39;_\.ua\(&quot;rwt&quot;,function\(\)\{[^\}]*\}\);&#39; &#39;&#39; igr;
-   subs_filter &#39;&lt;/head&gt;&#39; &#39;&lt;style id=&quot;kotori-custom-css&quot;&gt;#gb_8,#gb_78,#gb_36,#gb_5,#gb_23,#gbztm,#gb_119,#gbi4s1{display:none}&lt;/style&gt;&lt;/head&gt;&#39; o;
+   subs_filter &#39;&lt;/head&gt;&#39; &#39;&lt;style id=&quot;kotori-custom-css&quot;&gt;#gb_8,#gb_78,#gb_36,#gb_5,#gb_23,#gbztm,#gb_119,#gbi4s1 {display:none}&lt;/style&gt;&lt;/head&gt;&#39; o;
    subs_filter &#39;&lt;title&gt;Google&lt;/title&gt;&#39; &#39;&lt;title&gt;Kotori\&#39;s Google&lt;/title&gt;&#39; o;
    subs_filter &#39;&lt;input value=&quot;Google 搜索&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#39; &#39;&lt;input value=&quot;Kotori 一下&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#39; o;
-   subs_filter &#39;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;简体中文&lt;/div&gt;&#39; &#39;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;喵星人&lt;/div&gt;&#39; o; 
+   subs_filter &#39;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt; 简体中文 &lt;/div&gt;&#39; &#39;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot;nowrap=&quot;&quot;&gt; 喵星人 &lt;/div&gt;&#39; o; 
     }
 
 }
@@ -401,13 +401,13 @@ server {
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/typecho-plugin-access.html" title="Typecho仿(?)百度统计插件">Typecho仿(?)百度统计插件</a>
+            <a href="https://kotori.love/archives/typecho-plugin-access.html" title="Typecho 仿 (?) 百度统计插件">Typecho 仿 (?) 百度统计插件</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/install-nginx-php-mysql-on-osx.html" title="OS X下配置Nginx+PHP+MySQL">OS X下配置Nginx+PHP+MySQL</a>
+            <a href="https://kotori.love/archives/install-nginx-php-mysql-on-osx.html" title="OS X 下配置 Nginx+PHP+MySQL">OS X 下配置 Nginx+PHP+MySQL</a>
           
         </li>
       </ul>
@@ -458,10 +458,10 @@ server {
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -550,7 +550,6 @@ server {
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

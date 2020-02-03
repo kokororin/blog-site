@@ -82,15 +82,19 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p>原文在Windows7下安装，经本人测试在ArchLinux下安装成功。</p>
-<h3 id="建议电脑要求"><a href="#建议电脑要求" class="headerlink" title="建议电脑要求"></a>建议电脑要求</h3><p>CPU Intel Core i5 / i7</p>
+        <p>原文在 Windows7 下安装，经本人测试在 ArchLinux 下安装成功。</p>
+<h3 id="建议电脑要求"><a href="#建议电脑要求" class="headerlink" title="建议电脑要求"></a>建议电脑要求</h3><p>CPU Intel Core i5 /i7</p>
 <p>内存 4GB 以上</p>
-<p>硬盘 500GB 以上, NTFS 格式</p></p>
+<p>硬盘 500GB 以上，NTFS 格式 </p></p>
 <p>由于虚拟机不支持 Apple Quartz Extreme/Core Image, 需要 Quartz Extreme 的应用软件例如 iBooks Author，Pixelmator，SketchBook 等不能在虚拟机下使用 。</p>
-<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p>1.下载:  <a href="http://pan.baidu.com/s/1mg5PdGk" target="_blank" rel="noopener">http://pan.baidu.com/s/1mg5PdGk</a></p>
-<p>只需下载两个压缩包，其他软件去Vbox官网即可。</p>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><ol>
+<li>下载:  <a href="http://pan.baidu.com/s/1mg5PdGk" target="_blank" rel="noopener">http://pan.baidu.com/s/1mg5PdGk</a></li>
+</ol>
+<p>只需下载两个压缩包，其他软件去 Vbox 官网即可。</p>
 <p>Mac OSX Yosemite.vdi  (解压 Mac OSX Yosemite.vdi.part1.rar Mac OSX Yosemite.vdi.part2.rar)</p></p>
-<p>2.安装Virtualbox</p>
+<ol start="2">
+<li>安装 Virtualbox</li>
+</ol>
 <p>3.1 在 VirtualBOX 新建虚拟电脑</p>
 <p>名称        :  OSXYosemite</p>
 <p>类型        :  Mac OS X</p>
@@ -113,12 +117,12 @@
 <p>4.3 在 Windows 搜索 cmd , 鼠标右键单击选择 以系统管理员身份执行 cmd</p>
 <p><img src="https://static-files.kotori.love/blog/2015/03/49_2015-03-19.png" alt=""></p>
 <p>4.4 请根据 3.1 虚拟电脑的名称 OSXYosemite ,  在  cmd  命令行依次输入命令如下：</p>
-<p>（linux下直接终端输入以下命令）</p>
+<p>（linux 下直接终端输入以下命令）</p>
 <hr>
 <p>5.3  如需要更改 虚拟机分辨率 1440×900 输入命令如下：</p>
 <ol>
 <li><p>VBoxManage setextradata “OSXYosemite” “VBoxInternal2/EfiGopMode” 4</p>
-<p>其中数字表示如下, 虚拟机默认分辨率值是 2 – 1024×768</p>
+<p>其中数字表示如下，虚拟机默认分辨率值是 2 – 1024×768</p>
 <p>0 – 640×480</p>
 <p>1 – 800×600</p>
 <p>2 – 1024×768</p>
@@ -135,16 +139,16 @@
 <p><img src="https://static-files.kotori.love/blog/2015/03/22_2015-03-19.png" alt=""></p>
 <p>5.5 成功进入 Mac OS X 系统后，开始系统偏好设置</p>
 <p><img src="https://static-files.kotori.love/blog/2015/03/41_2015-03-19.png" alt=""></p>
-<p>如需要更改语言 (左上角的 苹果菜单 -&gt; 系统偏好设置(System Preferences) -&gt; Language &amp; Text, 重新启动后才会更新</p>
+<p>如需要更改语言 (左上角的 苹果菜单 -&gt; 系统偏好设置 (System Preferences) -&gt; Language &amp; Text, 重新启动后才会更新</p>
 <p><img src="https://static-files.kotori.love/blog/2015/03/66_2015-03-19.png" alt=""></p>
-<p>如需要更改时区 (左上角的 苹果菜单 -&gt; 系统偏好设置(System Preferences) -&gt; 日期与时间(Date &amp; Time) -&gt; 时区(Time Zone)</p>
+<p>如需要更改时区 (左上角的 苹果菜单 -&gt; 系统偏好设置 (System Preferences) -&gt; 日期与时间 (Date &amp; Time) -&gt; 时区 (Time Zone)</p>
 <p><img src="https://static-files.kotori.love/blog/2015/03/56_2015-03-19.png" alt=""></p>
-<p>如需要更改密码 (左上角的 苹果菜单 -&gt; 系统偏好设置(System Preferences) -&gt; 用户与群组(Users &amp; Group)</p>
+<p>如需要更改密码 (左上角的 苹果菜单 -&gt; 系统偏好设置 (System Preferences) -&gt; 用户与群组 (Users &amp; Group)</p>
 <p><img src="https://static-files.kotori.love/blog/2015/03/94_2015-03-19.png" alt=""></p>
-<p>如需要更改安全性和隐私 (左上角的 苹果菜单 -&gt; 系统偏好设置(System Preferences) -&gt; 安全性与隐私(Security &amp; Privacy)</p>
+<p>如需要更改安全性和隐私 (左上角的 苹果菜单 -&gt; 系统偏好设置 (System Preferences) -&gt; 安全性与隐私 (Security &amp; Privacy)</p>
 <p><img src="https://static-files.kotori.love/blog/2015/03/25_2015-03-19.png" alt=""></p>
 <p>如需要更改帐户名称或个人目录名称 请参考 -&gt; <a href="http://support.apple.com/kb/HT1428?viewlocale=zh_CN" target="_blank" rel="noopener">http://support.apple.com/kb/HT1428?viewlocale=zh_CN</a></p>
-<p>5.6 开始使用Mac OS X 10.10 Yosemite 优胜美地</p>
+<p>5.6 开始使用 Mac OS X 10.10 Yosemite 优胜美地</p>
 <p><img src="https://static-files.kotori.love/blog/2015/03/13_2015-03-19.png" alt=""></p>
 
       </div>
@@ -173,7 +177,7 @@
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/homemade-chrome-theme-love-live.html" title="自制chrome LOVE LIVE!主题">自制chrome LOVE LIVE!主题</a>
+            <a href="https://kotori.love/archives/homemade-chrome-theme-love-live.html" title="自制 chrome LOVE LIVE! 主题">自制 chrome LOVE LIVE! 主题</a>
           
         </li>
       </ul>
@@ -224,10 +228,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -316,7 +320,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

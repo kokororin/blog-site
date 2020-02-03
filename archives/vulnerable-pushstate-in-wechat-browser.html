@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>微信浏览器下pushState的坑 | ことりのおやつにしてやるぞー！</title>
+  <title>微信浏览器下 pushState 的坑 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">微信浏览器下pushState的坑</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">微信浏览器下 pushState 的坑</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/vulnerable-pushstate-in-wechat-browser.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/vulnerable-pushstate-in-wechat-browser.html&title=微信浏览器下pushState的坑"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/vulnerable-pushstate-in-wechat-browser.html&title=微信浏览器下 pushState 的坑"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -82,32 +82,32 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p>iOS的微信浏览器有一个巨坑，使用pushState改变url后，此时location.href确实变化了，但是微信浏览器认为地址还是打开页面时的地址，这个可以从“在Safari中打开”看到。</p>
-<p>所以下面的代码就会导致JSSDK在pushState后验证失败，报错<code>invalid signature</code>，原因如上。</p>
+        <p>iOS 的微信浏览器有一个巨坑，使用 pushState 改变 url 后，此时 location.href 确实变化了，但是微信浏览器认为地址还是打开页面时的地址，这个可以从 “在 Safari 中打开” 看到。</p>
+<p>所以下面的代码就会导致 JSSDK 在 pushState 后验证失败，报错 <code>invalid signature</code>，原因如上。</p>
 <figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">import</span> wx <span class="token keyword">from</span> <span class="token string">'weixin-js-sdk'</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
-<span class="line"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">initWX</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token function">getConfigFromServer</span><span class="token punctuation">(</span>location<span class="token punctuation">.</span>href<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'#'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span></span>
-<span class="line">        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
-<span class="line">            wx<span class="token punctuation">.</span><span class="token function">config</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">export</span> <span class="token keyword">function</span> initWX <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    getConfigFromServer <span class="token punctuation">(</span>location<span class="token punctuation">.</span>href<span class="token punctuation">.</span>split <span class="token punctuation">(</span><span class="token string">'#'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span></span>
+<span class="line">        <span class="token punctuation">.</span>then <span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
+<span class="line">            wx<span class="token punctuation">.</span>config <span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line">        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token punctuation">}</span></span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">// ...监听路由变化</span></span>
-<span class="line">$router<span class="token punctuation">.</span><span class="token function">onUpdate</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token function">initWX</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token comment" spellcheck="true">//... 监听路由变化</span></span>
+<span class="line">$router<span class="token punctuation">.</span>onUpdate <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
+<span class="line">    initWX <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
 <h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>首先按照正常的地址进行计算签名，如果失败，就按照页面刚进入时的地址来计算。</p>
 <figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token comment" spellcheck="true">// 进入应用时先记录进入时的地址</span></span>
-<span class="line">global<span class="token punctuation">.</span>originalUrl <span class="token operator">=</span> location<span class="token punctuation">.</span>href<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'#'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
+<span class="line">global<span class="token punctuation">.</span>originalUrl <span class="token operator">=</span> location<span class="token punctuation">.</span>href<span class="token punctuation">.</span>split <span class="token punctuation">(</span><span class="token string">'#'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">// initWX方法添加error事件</span></span>
-<span class="line"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">initWX</span><span class="token punctuation">(</span>url <span class="token operator">=</span> location<span class="token punctuation">.</span>href<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'#'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token function">getConfigFromServer</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span></span>
-<span class="line">        <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
-<span class="line">            wx<span class="token punctuation">.</span><span class="token function">config</span><span class="token punctuation">(</span>response<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            wx<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
-<span class="line">                <span class="token function">initWX</span><span class="token punctuation">(</span>global<span class="token punctuation">.</span>originalUrl<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token comment" spellcheck="true">//initWX 方法添加 error 事件</span></span>
+<span class="line"><span class="token keyword">export</span> <span class="token keyword">function</span> initWX <span class="token punctuation">(</span>url <span class="token operator">=</span> location<span class="token punctuation">.</span>href<span class="token punctuation">.</span>split <span class="token punctuation">(</span><span class="token string">'#'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">    getConfigFromServer <span class="token punctuation">(</span>url<span class="token punctuation">)</span></span>
+<span class="line">        <span class="token punctuation">.</span>then <span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
+<span class="line">            wx<span class="token punctuation">.</span>config <span class="token punctuation">(</span>response<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">            wx<span class="token punctuation">.</span>error <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span></span>
+<span class="line">                initWX <span class="token punctuation">(</span>global<span class="token punctuation">.</span>originalUrl<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line">            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line">        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
@@ -132,13 +132,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/a-javascript-question-create-json-object-from-server.html" title="一道神奇的JavaScript面试题">一道神奇的JavaScript面试题</a>
+            <a href="https://kotori.love/archives/a-javascript-question-create-json-object-from-server.html" title="一道神奇的 JavaScript 面试题">一道神奇的 JavaScript 面试题</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/2016-blog-analytics.html" title="2016年度博客统计报告">2016年度博客统计报告</a>
+            <a href="https://kotori.love/archives/2016-blog-analytics.html" title="2016 年度博客统计报告">2016 年度博客统计报告</a>
           
         </li>
       </ul>
@@ -189,10 +189,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -281,7 +281,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

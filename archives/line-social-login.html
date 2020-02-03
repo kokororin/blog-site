@@ -80,18 +80,18 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p>首先要去<a href="https://developers.line.me/" target="_blank" rel="noopener">LINE developers</a>注册一个账号～<br>创建好应用以后获取<code>client_id</code>和<code>client_secret</code></p>
-<p>大致流程和微信是一样的0w0</p>
+        <p>首先要去 <a href="https://developers.line.me/" target="_blank" rel="noopener">LINE developers</a> 注册一个账号～<br>创建好应用以后获取 <code>client_id</code> 和 <code>client_secret</code></p>
+<p>大致流程和微信是一样的 0w0</p>
 <hr>
-<h3 id="获取code"><a href="#获取code" class="headerlink" title="获取code"></a>获取code</h3><p>将用户重定向到<code>https://access.line.me/dialog/oauth/weblogin?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx</code>这个地址</p>
-<p>用户登录完了以后会跳转至上一步的<code>redirect_uri</code>，并带上code参数。</p>
+<h3 id="获取-code"><a href="#获取-code" class="headerlink" title="获取 code"></a>获取 code</h3><p>将用户重定向到 <code>https://access.line.me/dialog/oauth/weblogin?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx</code> 这个地址</p>
+<p>用户登录完了以后会跳转至上一步的 <code>redirect_uri</code>，并带上 code 参数。</p>
 <p><img src="https://static-files.kotori.love/blog/2017/09/1363619783.png" alt="Screenshot from 2017-09-26 11:53:33.png"></p>
-<h3 id="获取access-token"><a href="#获取access-token" class="headerlink" title="获取access_token"></a>获取access_token</h3><p>我们的服务器获取到code以后，向LINE的服务器发送一个POST请求，注意这里的<code>Content-Type</code>是<code>application/x-www-form-urlencoded</code>。</p>
+<h3 id="获取-access-token"><a href="#获取-access-token" class="headerlink" title="获取 access_token"></a>获取 access_token</h3><p>我们的服务器获取到 code 以后，向 LINE 的服务器发送一个 POST 请求，注意这里的 <code>Content-Type</code> 是 <code>application/x-www-form-urlencoded</code>。</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">curl -X POST \</span>
 <span class="line">https://api.line.me/v2/oauth/accessToken \</span>
 <span class="line">-H <span class="token string">'content-type: application/x-www-form-urlencoded'</span> \</span>
 <span class="line">-d <span class="token string">'grant_type=authorization_code&amp;client_id=xxx&amp;client_secret=xxx&amp;code=xxx&amp;redirect_uri=xxx'</span></span></pre><div class="tools"></div></figure>
-<p>LINE服务器会返回如下结果：</p>
+<p>LINE 服务器会返回如下结果：</p>
 <figure class="highlight code" data-language="Json"><pre class="language-json"><span class="line"><span class="token punctuation">{</span></span>
 <span class="line">       <span class="token property">"scope"</span><span class="token operator">:</span><span class="token string">"P"</span><span class="token punctuation">,</span></span>
 <span class="line">       <span class="token property">"access_token"</span><span class="token operator">:</span><span class="token string">"bNl4YEFPI/hjFWhTqexp4MuEw5YPs7qhr6dJDXKwNPuLka..."</span><span class="token punctuation">,</span></span>
@@ -99,7 +99,7 @@
 <span class="line">       <span class="token property">"expires_in"</span><span class="token operator">:</span><span class="token number">2591977</span><span class="token punctuation">,</span></span>
 <span class="line">       <span class="token property">"refresh_token"</span><span class="token operator">:</span><span class="token string">"8iFFRdyxNVNLWYeteMMJ"</span></span>
 <span class="line">     <span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h3><p>最后使用获取到的<code>access_token</code>发送获取用户信息的请求：</p>
+<h3 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h3><p>最后使用获取到的 <code>access_token</code> 发送获取用户信息的请求：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">curl -X GET \</span>
 <span class="line">-H <span class="token string">'Authorization: Bearer bNl4YEFPI/hjFWhTqexp4MuEw5YPs7qhr6dJDXKwNPuLka...'</span> \</span>
 <span class="line">https://api.line.me/v2/profile</span></pre><div class="tools"></div></figure>
@@ -112,7 +112,7 @@
 <span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
 <hr>
 <p>结束惹。很简单吧（x</p>
-<p>最后发现Web版Social Login能唤醒客户端。</p>
+<p>最后发现 Web 版 Social Login 能唤醒客户端。</p>
 
       </div>
     </article>
@@ -134,13 +134,13 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/webpack-dev-server-issue-in-safari.html" title="webpack-dev-server在Safari中的问题">webpack-dev-server在Safari中的问题</a>
+            <a href="https://kotori.love/archives/webpack-dev-server-issue-in-safari.html" title="webpack-dev-server 在 Safari 中的问题">webpack-dev-server 在 Safari 中的问题</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/unicode-in-jsx.html" title="React JSX中unicode的处理">React JSX中unicode的处理</a>
+            <a href="https://kotori.love/archives/unicode-in-jsx.html" title="React JSX 中 unicode 的处理">React JSX 中 unicode 的处理</a>
           
         </li>
       </ul>
@@ -191,10 +191,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -283,7 +283,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

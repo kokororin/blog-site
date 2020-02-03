@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>Android反编译 | ことりのおやつにしてやるぞー！</title>
+  <title>Android 反编译 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">Android反编译</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">Android 反编译</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/decompile-apk.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/decompile-apk.html&title=Android反编译"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/decompile-apk.html&title=Android 反编译"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -89,29 +89,39 @@
 </blockquote>
 <h3 id="首先介绍下要用到的工具："><a href="#首先介绍下要用到的工具：" class="headerlink" title="首先介绍下要用到的工具："></a>首先介绍下要用到的工具：</h3><ul>
 <li>jdk: Java Development Kit</li>
-<li>baksmali：把classes.dex转为为smali文件的工具</li>
-<li>dex2jar：classes.dex转为jar包的工具</li>
-<li>jdgui：阅读jar文件的工具</li>
-<li>smali：把smali文件编译打包为classes.dex的工具</li>
+<li>baksmali：把 classes.dex 转为为 smali 文件的工具</li>
+<li>dex2jar：classes.dex 转为 jar 包的工具</li>
+<li>jdgui：阅读 jar 文件的工具</li>
+<li>smali：把 smali 文件编译打包为 classes.dex 的工具</li>
 </ul>
-<p>其中关于baksmali和smali可以看下<a href="http://code.google.com/p/smali/" target="_blank" rel="noopener">谷歌</a>的介绍</p>
-<p>反编译后得到的dex文件以及转为jar包后都无法进行修改，只能把dex文件转化为smali文件进行修改，然后再编译打包为dex文件，替换掉原有apk中的dex文件，然后对apk进行签名，这样就完成了对apk源码的修改，具体步骤如下：（以下操作是在linux下进行，windows可能会略有差异）</p>
-<p>1.解压apk文件，获取classes.dex并拷贝到资源根目录（使用zip或其他解压工具即可）</p>
-<p>2.使用baksmali工具将classes.dex转为smali文件，在命令行定位到资源根目录并执行：</p>
+<p>其中关于 baksmali 和 smali 可以看下 <a href="http://code.google.com/p/smali/" target="_blank" rel="noopener">谷歌</a> 的介绍</p>
+<p>反编译后得到的 dex 文件以及转为 jar 包后都无法进行修改，只能把 dex 文件转化为 smali 文件进行修改，然后再编译打包为 dex 文件，替换掉原有 apk 中的 dex 文件，然后对 apk 进行签名，这样就完成了对 apk 源码的修改，具体步骤如下：（以下操作是在 linux 下进行，windows 可能会略有差异）</p>
+<ol>
+<li><p>解压 apk 文件，获取 classes.dex 并拷贝到资源根目录（使用 zip 或其他解压工具即可）</p>
+</li>
+<li><p>使用 baksmali 工具将 classes.dex 转为 smali 文件，在命令行定位到资源根目录并执行：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">java -jar baksmali-2.0.3.jar -x classes.dex</span></pre><div class="tools"></div></figure>
-<p>   执行完后会在当前目录下生成out目录，目录结构跟源码相同，在对应目录下查找对应的smali文件</p>
-<p>3.使用dex2jar工具把dex转为jar文件，拷贝classes.dex到资源目录下的dex2jar-0.0.9.15目录下，把命令行定位到该目录并执行：</p>
+<p>执行完后会在当前目录下生成 out 目录，目录结构跟源码相同，在对应目录下查找对应的 smali 文件</p>
+</li>
+<li><p>使用 dex2jar 工具把 dex 转为 jar 文件，拷贝 classes.dex 到资源目录下的 dex2jar-0.0.9.15 目录下，把命令行定位到该目录并执行：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">./dex2jar.sh classes.dex  <span class="token punctuation">(</span>windows:dex2jar.bat classes.dex<span class="token punctuation">)</span></span></pre><div class="tools"></div></figure>
-<p>  执行完后会在当前目录下生成classes_dex2jar.jar文件，然后可以通过jdgui进行查看</p>
-<p>4.使用jdgui工具查看HelloWorld的源码，根据不同的系统打开资源目录下对应的jdgui工具，然后把第3步生成的classes_dex2jar.jar文件拖到工具中</p>
-<p>5.修改对应的smali文件</p>
-<p>6.使用smali-2.0.3.jar工具把smali文件转为dex文件，把命令行定位到资源根目录并执行：</p>
+<p>执行完后会在当前目录下生成 classes_dex2jar.jar 文件，然后可以通过 jdgui 进行查看</p>
+</li>
+<li><p>使用 jdgui 工具查看 HelloWorld 的源码，根据不同的系统打开资源目录下对应的 jdgui 工具，然后把第 3 步生成的 classes_dex2jar.jar 文件拖到工具中</p>
+</li>
+<li><p>修改对应的 smali 文件</p>
+</li>
+<li><p>使用 smali-2.0.3.jar 工具把 smali 文件转为 dex 文件，把命令行定位到资源根目录并执行：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">java -jar smali-2.0.3.jar -o classes.dex out</span></pre><div class="tools"></div></figure>
-<p>   执行完后会生成并替换掉根目录下的classes.dex文件，这样就修改成功了</p>
-<p>7.把新生成的classes.dex文件替换到原来的apk文件里（使用压缩工具）</p>
-<p>8.使用签名工具对apk进行签名，把apk拷贝到资源根目录下的sign_tool目录，把命令行定位到该目录并执行：</p>
+<p>执行完后会生成并替换掉根目录下的 classes.dex 文件，这样就修改成功了</p>
+</li>
+<li><p>把新生成的 classes.dex 文件替换到原来的 apk 文件里（使用压缩工具）</p>
+</li>
+<li><p>使用签名工具对 apk 进行签名，把 apk 拷贝到资源根目录下的 sign_tool 目录，把命令行定位到该目录并执行：</p>
 <figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">java -jar signapk.jar platform.x509.pem platform.pk8 HelloWorld.apk Signed.apk</span></pre><div class="tools"></div></figure>
-<p>执行完后会在该目录下生成Signed.apk文件，这个文件就是最终的文件了。</p>
+</li>
+</ol>
+<p>执行完后会在该目录下生成 Signed.apk 文件，这个文件就是最终的文件了。</p>
 
       </div>
     </article>
@@ -133,7 +143,7 @@
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/kotori-php-framework.html" title="写了个php框架(?)">写了个php框架(?)</a>
+            <a href="https://kotori.love/archives/kotori-php-framework.html" title="写了个 php 框架 (?)">写了个 php 框架 (?)</a>
           
         </li>
 
@@ -190,10 +200,10 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -282,7 +292,6 @@
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

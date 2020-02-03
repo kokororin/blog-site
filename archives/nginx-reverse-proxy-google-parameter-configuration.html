@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>nginx反向代理Google的参数配置 | ことりのおやつにしてやるぞー！</title>
+  <title>nginx 反向代理 Google 的参数配置 | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">nginx反向代理Google的参数配置</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">nginx 反向代理 Google 的参数配置</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/nginx-reverse-proxy-google-parameter-configuration.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/nginx-reverse-proxy-google-parameter-configuration.html&title=nginx反向代理Google的参数配置"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/nginx-reverse-proxy-google-parameter-configuration.html&title=nginx 反向代理 Google 的参数配置"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -86,11 +86,11 @@
 listen 443;
 server_name xxx.xxx;
 ssl on;
-ssl_certificate /usr/local/nginx/xxx.crt;#这里改为你自己的证书路径
-ssl_certificate_key /usr/local/xxx.key;#这里改为你自己的密钥路径
+ssl_certificate /usr/local/nginx/xxx.crt;# 这里改为你自己的证书路径
+ssl_certificate_key /usr/local/xxx.key;# 这里改为你自己的密钥路径
 
 location / {
-proxy_redirect http://www.google.com/ /;
+proxy_redirect http://www.google.com//;
 proxy_cookie_domain google.com xxx.xxx;
 proxy_pass http://173.194.127.48;
 proxy_set_header Accept-Encoding &amp;quot;&amp;quot;;
@@ -108,15 +108,15 @@ server_name xxx.xxx;
 rewrite ^(.*) https://xxx.xxx$1 permanent;
 }
 
-#把所有的xxx.xxx改为你自己的域名
-#不使用 SSL 证书进行反代 Google 的代码如下：
+# 把所有的 xxx.xxx 改为你自己的域名
+# 不使用 SSL 证书进行反代 Google 的代码如下：
 
 server {
 listen 80;
 server_name xxx.xxx;
 
 location / {
-proxy_redirect http://www.google.com/ /;
+proxy_redirect http://www.google.com//;
 proxy_cookie_domain google.com xxx.xxx;
 proxy_pass http://173.194.127.48;
 proxy_set_header Accept-Encoding &amp;quot;&amp;quot;;
@@ -147,7 +147,7 @@ sub_filter_once off;
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/backup-kde-configuration.html" title="备份一下KDE配置">备份一下KDE配置</a>
+            <a href="https://kotori.love/archives/backup-kde-configuration.html" title="备份一下 KDE 配置">备份一下 KDE 配置</a>
           
         </li>
 
@@ -204,10 +204,10 @@ sub_filter_once off;
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -296,7 +296,6 @@ sub_filter_once off;
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         

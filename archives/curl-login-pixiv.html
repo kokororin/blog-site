@@ -10,7 +10,7 @@
   <!-- Blue #448AFF -->
   <!-- Title -->
   
-  <title>模拟登录pixiv.net | ことりのおやつにしてやるぞー！</title>
+  <title>模拟登录 pixiv.net | ことりのおやつにしてやるぞー！</title>
 
   <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
@@ -48,7 +48,7 @@
   <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display: none;">
     <article class="post" style="padding-top: 20px;">
-      <h2 itemprop="name headline" style="font-weight: normal;">模拟登录pixiv.net</h2>
+      <h2 itemprop="name headline" style="font-weight: normal;">模拟登录 pixiv.net</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
@@ -61,7 +61,7 @@
             data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
           <a href="https://plus.google.com/share?url=https://kotori.love/archives/curl-login-pixiv.html" target="_blank" rel="nofollow"
             data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/curl-login-pixiv.html&title=模拟登录pixiv.net"
+          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/curl-login-pixiv.html&title=模拟登录 pixiv.net"
             target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo"
             class="fui-bookmark"></a>
         </div>
@@ -84,11 +84,11 @@
       <!-- 头图 -->
       <!-- end -->
       <div class="post-content" itemprop="articleBody">
-        <p><strong>注意：本文的方法已作废，新方法在<a href="https://kotori.love/archives/curl-login-pixiv-next.html">这里</a></strong></p>
+        <p>** 注意：本文的方法已作废，新方法在 <a href="https://kotori.love/archives/curl-login-pixiv-next.html">这里</a>**</p>
 <blockquote>
-<p>由于pixivAPI有一些内容无法获取，于是模拟登录就派上用场辣</p>
+<p>由于 pixivAPI 有一些内容无法获取，于是模拟登录就派上用场辣</p>
 </blockquote>
-<p>旧版登录接口(<a href="https://www.secure.pixiv.net/login.php" target="_blank" rel="noopener">https://www.secure.pixiv.net/login.php</a>) 已经作废。目前新版登录页是用React渲染的，但是还是为老浏览器用户开启了兼容♂通道，首先找出这段表单代码：</p>
+<p>旧版登录接口 (<a href="https://www.secure.pixiv.net/login.php" target="_blank" rel="noopener">https://www.secure.pixiv.net/login.php</a>) 已经作废。目前新版登录页是用 React 渲染的，但是还是为老浏览器用户开启了兼容♂通道，首先找出这段表单代码：</p>
 <figure class="highlight code" data-language="Html"><pre class="language-html"><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>old-login<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
 <span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/login<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>POST<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
 <span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post_key<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>b827a089c8e7209503d23235d2ba4b43<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
@@ -97,21 +97,21 @@
 <span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>hidden<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>source<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pc<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
 <span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input-field-group<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
 <span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input-field<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pixiv_id<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>邮箱地址/pixiv ID<span class="token punctuation">"</span></span> <span class="token attr-name">autocapitalize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>off<span class="token punctuation">"</span></span> <span class="token attr-name">autocomplete</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>off<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pixiv_id<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>邮箱地址 /pixiv ID<span class="token punctuation">"</span></span> <span class="token attr-name">autocapitalize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>off<span class="token punctuation">"</span></span> <span class="token attr-name">autocomplete</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>off<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
 <span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
 <span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>input-field<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
 <span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>password<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>密码<span class="token punctuation">"</span></span> <span class="token attr-name">autocapitalize</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>off<span class="token punctuation">"</span></span> <span class="token attr-name">autocomplete</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>off<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
 <span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
 <span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
 <span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>error-msg-list<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></span>
-<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>signup-form__submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>登录<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></span>
+<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>signup-form__submit<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 登录 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span></span>
 <span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>signup-form-nav<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
 <span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>left<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>right<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://www.pixiv.net/reminder.php<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>忘记了<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
+<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>right<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://www.pixiv.net/reminder.php<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 忘记了 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
 <span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
 <span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span></span>
 <span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span></pre><div class="tools"></div></figure>
-<p>发现需要post如下参数：</p>
+<p>发现需要 post 如下参数：</p>
 <table>
 <thead>
 <tr>
@@ -121,7 +121,7 @@
 </thead>
 <tbody><tr>
 <td>post_key</td>
-<td>类似于token</td>
+<td>类似于 token</td>
 </tr>
 <tr>
 <td>return_to</td>
@@ -148,81 +148,81 @@
 <td></td>
 </tr>
 </tbody></table>
-<p>因为有token的存在，所以提交的时候也需要登录页的生成的cookie，不提交cookie的后果就是如下的400 Bad Request：(/´Д｀)/<br><img src="https://static-files.kotori.love/blog/2016/10/3972916762.png" alt=""></p>
-<p>下面直接上全宇宙最好的语言进行登录（啪）<br>需要注意，首先需要安装一个HTML DOM解析包<code>sunra/php-simple-html-dom-parse</code>，运行一下<code>composer require &quot;sunra/php-simple-html-dom-parser&quot;</code>就行了。</p>
+<p>因为有 token 的存在，所以提交的时候也需要登录页的生成的 cookie，不提交 cookie 的后果就是如下的 400 Bad Request：(/´Д｀)/<br><img src="https://static-files.kotori.love/blog/2016/10/3972916762.png" alt=""></p>
+<p>下面直接上全宇宙最好的语言进行登录（啪）<br>需要注意，首先需要安装一个 HTML DOM 解析包 <code>sunra/php-simple-html-dom-parse</code>，运行一下 <code>composer require&quot;sunra/php-simple-html-dom-parser&quot;</code> 就行了。</p>
 <p>主要的代码：</p>
 <pre><code>use Sunra\PhpSimple\HtmlDomParser;
 
-define(&#39;BEFORE_LOGIN_COOKIE&#39;, __DIR__ . &#39;/BEFORE_LOGIN_COOKIE.txt&#39;);//登录页面的cookie
-define(&#39;AFTER_LOGIN_COOKIE&#39;, __DIR__ . &#39;/AFTER_LOGIN_COOKIE.txt&#39;);//登录成功后获取到的cookie
-define(&#39;USER_AGENT&#39;, &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.59 Safari/537.36&#39;);
+define (&#39;BEFORE_LOGIN_COOKIE&#39;, __DIR__ . &#39;/BEFORE_LOGIN_COOKIE.txt&#39;);// 登录页面的 cookie
+define (&#39;AFTER_LOGIN_COOKIE&#39;, __DIR__ . &#39;/AFTER_LOGIN_COOKIE.txt&#39;);// 登录成功后获取到的 cookie
+define (&#39;USER_AGENT&#39;, &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.59 Safari/537.36&#39;);
 
-function login_pixiv($username, $password)
+function login_pixiv ($username, $password)
 {
     $login_url = &#39;https://accounts.pixiv.net/login&#39;;
-    //获取登陆页cookie
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $login_url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, BEFORE_LOGIN_COOKIE);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-    curl_setopt($ch, CURLOPT_USERAGENT, USER_AGENT);
+    // 获取登陆页 cookie
+    $ch = curl_init ();
+    curl_setopt ($ch, CURLOPT_URL, $login_url);
+    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt ($ch, CURLOPT_COOKIEJAR, BEFORE_LOGIN_COOKIE);
+    curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 15);
+    curl_setopt ($ch, CURLOPT_TIMEOUT, 15);
+    curl_setopt ($ch, CURLOPT_USERAGENT, USER_AGENT);
 
-    $login_html = curl_exec($ch);
+    $login_html = curl_exec ($ch);
 
-    curl_close($ch);
+    curl_close ($ch);
 
-    $dom = HtmlDomParser::str_get_html($login_html);
+    $dom = HtmlDomParser::str_get_html ($login_html);
 
-    $form = $dom-&gt;find(&#39;#old-login&#39;, 0)-&gt;find(&#39;form&#39;, 0);
+    $form = $dom-&gt;find (&#39;#old-login&#39;, 0)-&gt;find (&#39;form&#39;, 0);
 
-    $data[&#39;post_key&#39;] = $form-&gt;find(&#39;input[name=&quot;post_key&quot;]&#39;, 0)-&gt;value;
-    $data[&#39;return_to&#39;] = $form-&gt;find(&#39;input[name=&quot;return_to&quot;]&#39;, 0)-&gt;value;
-    $data[&#39;lang&#39;] = $form-&gt;find(&#39;input[name=&quot;lang&quot;]&#39;, 0)-&gt;value;
-    $data[&#39;source&#39;] = $form-&gt;find(&#39;input[name=&quot;source&quot;]&#39;, 0)-&gt;value;
-    $data[&#39;pixiv_id&#39;] = $username;
-    $data[&#39;password&#39;] = $password;
+    $data [&#39;post_key&#39;] = $form-&gt;find (&#39;input [name=&quot;post_key&quot;]&#39;, 0)-&gt;value;
+    $data [&#39;return_to&#39;] = $form-&gt;find (&#39;input [name=&quot;return_to&quot;]&#39;, 0)-&gt;value;
+    $data [&#39;lang&#39;] = $form-&gt;find (&#39;input [name=&quot;lang&quot;]&#39;, 0)-&gt;value;
+    $data [&#39;source&#39;] = $form-&gt;find (&#39;input [name=&quot;source&quot;]&#39;, 0)-&gt;value;
+    $data [&#39;pixiv_id&#39;] = $username;
+    $data [&#39;password&#39;] = $password;
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $login_url);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, BEFORE_LOGIN_COOKIE);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, AFTER_LOGIN_COOKIE);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-    curl_exec($ch);
-    curl_close($ch);
-}</code></pre><p>调用<code>login_pixiv()</code>方法登录成功获取到cookie后，就可以<strong>为♂所♂欲♂为</strong>了，这个cookie的有效期为一个月，提供一个验证cookie是否有效的方法：</p>
-<pre><code>function is_cookie_ok($cookie)
+    $ch = curl_init ();
+    curl_setopt ($ch, CURLOPT_URL, $login_url);
+    curl_setopt ($ch, CURLOPT_HEADER, 0);
+    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt ($ch, CURLOPT_COOKIEFILE, BEFORE_LOGIN_COOKIE);
+    curl_setopt ($ch, CURLOPT_COOKIEJAR, AFTER_LOGIN_COOKIE);
+    curl_setopt ($ch, CURLOPT_POST, 1);
+    curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query ($data));
+    curl_exec ($ch);
+    curl_close ($ch);
+}</code></pre><p>调用 <code>login_pixiv ()</code> 方法登录成功获取到 cookie 后，就可以 ** 为♂所♂欲♂为 ** 了，这个 cookie 的有效期为一个月，提供一个验证 cookie 是否有效的方法：</p>
+<pre><code>function is_cookie_ok ($cookie)
 {
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, &#39;http://www.pixiv.net/setting_profile.php&#39;);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_HEADER, 1);
-    curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-    curl_setopt($ch, CURLOPT_USERAGENT, USER_AGENT);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    $response = curl_exec($ch);
-    curl_close($ch);
+    $ch = curl_init ();
+    curl_setopt ($ch, CURLOPT_URL, &#39;http://www.pixiv.net/setting_profile.php&#39;);
+    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt ($ch, CURLOPT_HEADER, 1);
+    curl_setopt ($ch, CURLOPT_AUTOREFERER, 1);
+    curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 15);
+    curl_setopt ($ch, CURLOPT_TIMEOUT, 15);
+    curl_setopt ($ch, CURLOPT_USERAGENT, USER_AGENT);
+    curl_setopt ($ch, CURLOPT_COOKIEFILE, $cookie);
+    $response = curl_exec ($ch);
+    curl_close ($ch);
     $headers = [];
 
-    $header_text = substr($response, 0, strpos($response, &quot;\r\n\r\n&quot;));
+    $header_text = substr ($response, 0, strpos ($response, &quot;\r\n\r\n&quot;));
 
-    foreach (explode(&quot;\r\n&quot;, $header_text) as $i =&gt; $line) {
+    foreach (explode (&quot;\r\n&quot;, $header_text) as $i =&gt; $line) {
         if ($i === 0) {
-            $headers[&#39;http_code&#39;] = $line;
+            $headers [&#39;http_code&#39;] = $line;
         } else {
-            list($key, $value) = explode(&#39;: &#39;, $line);
+            list ($key, $value) = explode (&#39;: &#39;, $line);
 
-            $headers[$key] = $value;
+            $headers [$key] = $value;
         }
     }
 
-    if (strpos($headers[&#39;http_code&#39;], &#39;200&#39;) === false) {
+    if (strpos ($headers [&#39;http_code&#39;], &#39;200&#39;) === false) {
         return false;
     }
     return true;
@@ -248,13 +248,13 @@ function login_pixiv($username, $password)
 
         <li class="previous">
           
-            <a href="https://kotori.love/archives/react-js-pinterest-style-layout-site.html" title="react.jsを利用して、創建した挿絵の画像欄">react.jsを利用して、創建した挿絵の画像欄</a>
+            <a href="https://kotori.love/archives/react-js-pinterest-style-layout-site.html" title="react.js を利用して、創建した挿絵の画像欄">react.js を利用して、創建した挿絵の画像欄</a>
           
         </li>
 
         <li class="next">
           
-            <a href="https://kotori.love/archives/backup-vps-to-git.html" title="备份服务器数据至git">备份服务器数据至git</a>
+            <a href="https://kotori.love/archives/backup-vps-to-git.html" title="备份服务器数据至 git">备份服务器数据至 git</a>
           
         </li>
       </ul>
@@ -305,10 +305,10 @@ function login_pixiv($username, $password)
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqusloader.js"></script>
+<script src="/js/disqus-loader.js"></script>
 
 
-<script type="text/javascript">
+<script>
   (function() {
     var Moricolor = function() {
       this.initDom();
@@ -397,7 +397,6 @@ function login_pixiv($username, $password)
             disqusConfig: function() {
               this.page.url = $('#disqus_thread').attr('data-permalink');
               this.page.identifier = $('#disqus_thread').attr('data-permalink');
-              console.log($('#disqus_thread').attr('data-permalink'))
             }
           });
         
