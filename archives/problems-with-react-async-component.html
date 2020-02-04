@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">React AsyncComponent 的一些问题</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/problems-with-react-async-component.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/problems-with-react-async-component.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -77,48 +78,54 @@
       
       
       <div class="post-content" itemprop="articleBody">
-        <p>找到一个 <a href="https://github.com/ctrlplusb/react-async-component" target="_blank" rel="noopener">react-async-component</a> 可以实现 React 组件的异步加载。</p>
-<p>使用方法大概是这样的：（以 <code>react-cropper</code> 为例）</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">import</span> <span class="token punctuation">{</span> asyncComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-async-component'</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> asyncComponent <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">  resolve<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">import</span> <span class="token punctuation">(</span><span class="token string">'react-cropper'</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<p>但是这样导致的问题是无法获取到 <code>react-cropper</code> 组件的 ref 属性，此时获取到的 ref 是 <code>AsyncComponent</code>。<br><img src="https://static-files.kotori.love/blog/2017/11/3017572352.jpg" alt=""></p>
-<p>所以需要把 <code>react-cropper</code> 包一层：</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token comment" spellcheck="true">// Cropper.js</span></span>
-<span class="line"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">import</span> PropTypes <span class="token keyword">from</span> <span class="token string">'prop-types'</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">import</span> ReactCropper <span class="token keyword">from</span> <span class="token string">'react-cropper'</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">import</span> <span class="token string">'cropperjs/dist/cropper.css'</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">Cropper</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token keyword">static</span> defaultProps <span class="token operator">=</span> <span class="token punctuation">{</span></span>
-<span class="line">    onRef <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span>
-<span class="line">  <span class="token punctuation">}</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">  <span class="token keyword">static</span> propTypes <span class="token operator">=</span> <span class="token punctuation">{</span></span>
-<span class="line">    onRef<span class="token punctuation">:</span> PropTypes<span class="token punctuation">.</span>func</span>
-<span class="line">  <span class="token punctuation">}</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">  componentDidMount <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>onRef <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>cropperRef<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">  <span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line">  render <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">return</span> <span class="token punctuation">(</span></span>
-<span class="line">      <span class="token operator">&lt;</span>ReactCropper ref<span class="token operator">=</span><span class="token punctuation">{</span>ref <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>cropperRef <span class="token operator">=</span> ref<span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span></span>
-<span class="line">    <span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">  <span class="token punctuation">}</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token comment" spellcheck="true">// AsyncCropper.js</span></span>
-<span class="line"><span class="token keyword">import</span> <span class="token punctuation">{</span> asyncComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-async-component'</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> asyncComponent <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">  resolve<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">import</span> <span class="token punctuation">(</span><span class="token string">'@/components/Cropper'</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<p>然后引入 <code>AsyncCropper</code> 就可以了 = w=</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token operator">&lt;</span>AsyncCropper onRef<span class="token operator">=</span><span class="token punctuation">{</span>ref<span class="token operator">=</span><span class="token operator">></span><span class="token keyword">this</span><span class="token punctuation">.</span>cropper <span class="token operator">=</span> ref<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span></span></pre><div class="tools"></div></figure>
+        <p>找到一个<a href="https://github.com/ctrlplusb/react-async-component" target="_blank" rel="noopener"> react-async-component</a> 可以实现 React 组件的异步加载。</p>
+<p>使用方法大概是这样的：（以 <code>react-cropper</code>  为例）</p>
+<pre><code class="language-javascript">import { asyncComponent } from 'react-async-component';
+
+export default asyncComponent({
+  resolve: () =&gt; import('react-cropper')
+});
+</code></pre>
+<p>但是这样导致的问题是无法获取到 <code>react-cropper</code>  组件的 ref 属性，此时获取到的 ref 是 <code>AsyncComponent</code> 。<br>
+<img src="https://static-files.kotori.love/blog/2017/11/3017572352.jpg" alt=""></p>
+<p>所以需要把 <code>react-cropper</code>  包一层：</p>
+<pre><code class="language-javascript">// Cropper.js
+import React from 'react';
+import PropTypes from 'prop-types';
+import ReactCropper from 'react-cropper';
+import 'cropperjs/dist/cropper.css';
+
+export default class Cropper extends React.Component {
+  static defaultProps = {
+    onRef() {}
+  };
+
+  static propTypes = {
+    onRef: PropTypes.func
+  };
+
+  componentDidMount() {
+    this.props.onRef(this.cropperRef);
+  }
+
+  render() {
+    return (
+      &lt;ReactCropper ref={ref =&gt; (this.cropperRef = ref)} {...this.props} /&gt;
+    );
+  }
+}
+</code></pre>
+<pre><code class="language-javascript">// AsyncCropper.js
+import { asyncComponent } from 'react-async-component';
+
+export default asyncComponent({
+  resolve: () =&gt; import('@/components/Cropper')
+});
+
+</code></pre>
+<p>然后引入 <code>AsyncCropper</code>  就可以了 = w=</p>
+<pre><code class="language-javascript">&lt;AsyncCropper onRef={ref=&gt;this.cropper = ref} /&gt;
+</code></pre>
 
       </div>
     </article>
@@ -132,7 +139,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -153,32 +160,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/problems-with-react-async-component.html"></div>
+  <div id="disqus_thread" data-title="React AsyncComponent 的一些问题" data-permalink="https://kotori.love/archives/problems-with-react-async-component.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -187,13 +191,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

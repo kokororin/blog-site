@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -53,7 +53,8 @@
   </header>
 
 
-  <div class="container" id="main-archive" style="display:none">
+  <div id="pjax-container">
+    <div class="container" id="main-archive" style="display:none">
   <div class="post-content">
   
     <h4 class="archive-title">Archive: 2015/10 </h4>
@@ -81,26 +82,23 @@
   </div>
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -109,13 +107,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(n,a){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){a.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){a("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){a("a").each(function(t,o){var n=a(o),i=n.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,n.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void n.attr("_target","blank"))})},t.prototype.initDom=function(){if(a("#main-index").fadeIn(800),a("#main-archive").fadeIn(800),a("#main-post").fadeIn(500),a("#postnav").fadeIn(800),a("#main-page").fadeIn(500),a("#pagenav").fadeIn(800),a("#bottomtools").fadeIn(1200),""!=n.location.hash){var t=n.location.hash.indexOf("#disqus_thread"),o=n.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||a("#disqus_thread").fadeIn(1e3)}a("#thatsi").fadeIn(1300),a("#footer").css("display","block"),a("#outcomment").click(function(){a("#disqus_thread").fadeIn(1e3)}),a("#comment_go").click(function(){a("#disqus_thread").fadeIn(1e3)}),a("#tor_show").click(function(){"none;"==a("#postTor").css("display")?(a("#postTor").fadeIn(400),a("#postTor").css("display","inline-block")):a("#postTor").fadeOut(400)}),a("[data-toggle=tooltip]").tooltip()},new t}(window,(document,jQuery))</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

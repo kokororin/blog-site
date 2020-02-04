@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">诺艾尔……</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/noel.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/noel.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -84,16 +85,16 @@
 <p><img src="https://static-files.kotori.love/blog/2014/11/1253620735fae6cda54b56370cb30f2443a70f66.jpg" alt=""></p>
 <p>Hp：-18956/100</p>
 <p><img src="https://static-files.kotori.love/blog/2014/11/caba63628535e5dd656c598975c6a7efcf1b6299.jpg" alt=""></p>
-<p><img src="https://static-files.kotori.love/blog/2014/11/i_f25.png?t=20140803" alt=""> 怪兽先生生病？<img src="https://static-files.kotori.love/blog/2014/11/6e80ac4c510fd9f99f56a93f262dd42a2934a498.jpg" alt=""></p>
+<p><img src="https://static-files.kotori.love/blog/2014/11/i_f25.png?t=20140803" alt="">怪兽先生生病？<img src="https://static-files.kotori.love/blog/2014/11/6e80ac4c510fd9f99f56a93f262dd42a2934a498.jpg" alt=""></p>
 <p><img src="https://static-files.kotori.love/blog/2014/11/i_f23.png?t=20140803" alt="">【怪兽先生】受到诺艾尔的萌系光芒，失去了一只手臂。</p>
 <p><img src="https://static-files.kotori.love/blog/2014/11/556ebf24ab18972b0e44fc9ce5cd7b899f510ae7.jpg" alt=""></p>
 <p><img src="https://static-files.kotori.love/blog/2014/11/aa560f389b504fc2aa194c53e6dde71191ef6d9f.jpg" alt=""></p>
-<p><img src="https://static-files.kotori.love/blog/2014/11/i_f33.png?t=20140803" alt=""> 然后又变成 [怪兽][先生] 了</p>
+<p><img src="https://static-files.kotori.love/blog/2014/11/i_f33.png?t=20140803" alt="">然后又变成 [怪兽][先生] 了</p>
 <p><img src="https://static-files.kotori.love/blog/2014/11/9540e543fbf2b211cd507918c98065380dd78ee7.jpg" alt=""></p>
-<p><img src="https://static-files.kotori.love/blog/2014/11/i_f25.png?t=20140803" alt=""> 这时候，哥哥的开始发挥作用了</p>
+<p><img src="https://static-files.kotori.love/blog/2014/11/i_f25.png?t=20140803" alt="">这时候，哥哥的开始发挥作用了</p>
 <p><img src="https://static-files.kotori.love/blog/2014/11/78821951f3deb48f00115d88f31f3a292cf578e1.jpg" alt=""></p>
 <p><img src="https://static-files.kotori.love/blog/2014/11/2c943c13632762d0d17d58e9a3ec08fa503dc69a.jpg" alt=""></p>
-<p><img src="https://static-files.kotori.love/blog/2014/11/i_f23.png?t=20140803" alt=""> 然后就玩脱了</p>
+<p><img src="https://static-files.kotori.love/blog/2014/11/i_f23.png?t=20140803" alt="">然后就玩脱了</p>
 <p><img src="https://static-files.kotori.love/blog/2014/11/8f03b4087bf40ad17ca73bb5542c11dfa8ecce9a.jpg" alt=""></p>
 <p>怪兽先生：我被你们两个调戏调戏戏……</p>
 <p><img src="https://static-files.kotori.love/blog/2014/11/c970d8061d950a7b1841b19209d162d9f3d3c9ed.jpg" alt=""></p>
@@ -116,7 +117,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -137,32 +138,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/noel.html"></div>
+  <div id="disqus_thread" data-title="诺艾尔……" data-permalink="https://kotori.love/archives/noel.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -171,13 +169,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

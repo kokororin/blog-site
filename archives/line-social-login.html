@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">LINE 社交登录简单记录</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/line-social-login.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/line-social-login.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -75,36 +76,44 @@
       
       
       <div class="post-content" itemprop="articleBody">
-        <p>首先要去 <a href="https://developers.line.me/" target="_blank" rel="noopener">LINE developers</a> 注册一个账号～<br>创建好应用以后获取 <code>client_id</code> 和 <code>client_secret</code></p>
+        <p>首先要去<a href="https://developers.line.me/" target="_blank" rel="noopener"> LINE developers</a> 注册一个账号～<br>
+创建好应用以后获取 <code>client_id</code>  和 <code>client_secret</code></p>
 <p>大致流程和微信是一样的 0w0</p>
 <hr>
-<h3 id="获取-code"><a href="#获取-code" class="headerlink" title="获取 code"></a>获取 code</h3><p>将用户重定向到 <code>https://access.line.me/dialog/oauth/weblogin?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx</code> 这个地址</p>
-<p>用户登录完了以后会跳转至上一步的 <code>redirect_uri</code>，并带上 code 参数。</p>
+<h3 id="获取code">获取 code</h3>
+<p>将用户重定向到 <code>https://access.line.me/dialog/oauth/weblogin?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx</code>  这个地址</p>
+<p>用户登录完了以后会跳转至上一步的 <code>redirect_uri</code> ，并带上 code 参数。</p>
 <p><img src="https://static-files.kotori.love/blog/2017/09/1363619783.png" alt="Screenshot from 2017-09-26 11:53:33.png"></p>
-<h3 id="获取-access-token"><a href="#获取-access-token" class="headerlink" title="获取 access_token"></a>获取 access_token</h3><p>我们的服务器获取到 code 以后，向 LINE 的服务器发送一个 POST 请求，注意这里的 <code>Content-Type</code> 是 <code>application/x-www-form-urlencoded</code>。</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">curl -X POST \</span>
-<span class="line">https://api.line.me/v2/oauth/accessToken \</span>
-<span class="line">-H <span class="token string">'content-type: application/x-www-form-urlencoded'</span> \</span>
-<span class="line">-d <span class="token string">'grant_type=authorization_code&amp;client_id=xxx&amp;client_secret=xxx&amp;code=xxx&amp;redirect_uri=xxx'</span></span></pre><div class="tools"></div></figure>
+<h3 id="获取access-token">获取 access_token</h3>
+<p>我们的服务器获取到 code 以后，向 LINE 的服务器发送一个 POST 请求，注意这里的 <code>Content-Type</code>  是 <code>application/x-www-form-urlencoded</code> 。</p>
+<pre><code class="language-bash">curl -X POST \
+https://api.line.me/v2/oauth/accessToken \
+-H 'content-type: application/x-www-form-urlencoded' \
+-d 'grant_type=authorization_code&amp;client_id=xxx&amp;client_secret=xxx&amp;code=xxx&amp;redirect_uri=xxx'
+</code></pre>
 <p>LINE 服务器会返回如下结果：</p>
-<figure class="highlight code" data-language="Json"><pre class="language-json"><span class="line"><span class="token punctuation">{</span></span>
-<span class="line">       <span class="token property">"scope"</span><span class="token operator">:</span><span class="token string">"P"</span><span class="token punctuation">,</span></span>
-<span class="line">       <span class="token property">"access_token"</span><span class="token operator">:</span><span class="token string">"bNl4YEFPI/hjFWhTqexp4MuEw5YPs7qhr6dJDXKwNPuLka..."</span><span class="token punctuation">,</span></span>
-<span class="line">       <span class="token property">"token_type"</span><span class="token operator">:</span><span class="token string">"Bearer"</span><span class="token punctuation">,</span></span>
-<span class="line">       <span class="token property">"expires_in"</span><span class="token operator">:</span><span class="token number">2591977</span><span class="token punctuation">,</span></span>
-<span class="line">       <span class="token property">"refresh_token"</span><span class="token operator">:</span><span class="token string">"8iFFRdyxNVNLWYeteMMJ"</span></span>
-<span class="line">     <span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h3><p>最后使用获取到的 <code>access_token</code> 发送获取用户信息的请求：</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">curl -X GET \</span>
-<span class="line">-H <span class="token string">'Authorization: Bearer bNl4YEFPI/hjFWhTqexp4MuEw5YPs7qhr6dJDXKwNPuLka...'</span> \</span>
-<span class="line">https://api.line.me/v2/profile</span></pre><div class="tools"></div></figure>
+<pre><code class="language-json">    {
+       &quot;scope&quot;:&quot;P&quot;,
+       &quot;access_token&quot;:&quot;bNl4YEFPI/hjFWhTqexp4MuEw5YPs7qhr6dJDXKwNPuLka...&quot;,
+       &quot;token_type&quot;:&quot;Bearer&quot;,
+       &quot;expires_in&quot;:2591977,
+       &quot;refresh_token&quot;:&quot;8iFFRdyxNVNLWYeteMMJ&quot;
+     }
+</code></pre>
+<h3 id="获取用户信息">获取用户信息</h3>
+<p>最后使用获取到的 <code>access_token</code>  发送获取用户信息的请求：</p>
+<pre><code class="language-bash">curl -X GET \
+-H 'Authorization: Bearer bNl4YEFPI/hjFWhTqexp4MuEw5YPs7qhr6dJDXKwNPuLka...' \
+https://api.line.me/v2/profile
+</code></pre>
 <p>结果是酱紫的：</p>
-<figure class="highlight code" data-language="Json"><pre class="language-json"><span class="line"><span class="token punctuation">{</span></span>
-<span class="line">  <span class="token property">"userId"</span><span class="token operator">:</span><span class="token string">"Ufr47556f2e40dba2456887320ba7c76d"</span><span class="token punctuation">,</span></span>
-<span class="line">  <span class="token property">"displayName"</span><span class="token operator">:</span><span class="token string">"Brown"</span><span class="token punctuation">,</span></span>
-<span class="line">  <span class="token property">"pictureUrl"</span><span class="token operator">:</span><span class="token string">"https://example.com/abcdefghijklmn"</span><span class="token punctuation">,</span></span>
-<span class="line">  <span class="token property">"statusMessage"</span><span class="token operator">:</span><span class="token string">"Hello, LINE!"</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+<pre><code class="language-json">{
+  &quot;userId&quot;:&quot;Ufr47556f2e40dba2456887320ba7c76d&quot;,
+  &quot;displayName&quot;:&quot;Brown&quot;,
+  &quot;pictureUrl&quot;:&quot;https://example.com/abcdefghijklmn&quot;,
+  &quot;statusMessage&quot;:&quot;Hello, LINE!&quot;
+}
+</code></pre>
 <hr>
 <p>结束惹。很简单吧（x</p>
 <p>最后发现 Web 版 Social Login 能唤醒客户端。</p>
@@ -121,7 +130,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -142,32 +151,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/line-social-login.html"></div>
+  <div id="disqus_thread" data-title="LINE 社交登录简单记录" data-permalink="https://kotori.love/archives/line-social-login.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -176,13 +182,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

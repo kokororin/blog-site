@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">React Native 中的坑</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/vulnerable-react-native.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/vulnerable-react-native.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -75,33 +76,42 @@
       
       
       <div class="post-content" itemprop="articleBody">
-        <h3 id="复合组件无法在-TouchableOpacity-使用"><a href="#复合组件无法在-TouchableOpacity-使用" class="headerlink" title="复合组件无法在 TouchableOpacity 使用"></a>复合组件无法在 TouchableOpacity 使用</h3><pre><code>&lt;TouchableOpacity&gt;
+        <h3 id="复合组件无法在TouchableOpacity使用">复合组件无法在 TouchableOpacity 使用</h3>
+<pre><code>&lt;TouchableOpacity&gt;
         &lt;MyButton label=&quot;Press me!&quot; /&gt;
-&lt;/TouchableOpacity&gt;</code></pre><p>会报 <code>Touchable child must either be native or forward setNativeProps to a native component</code>，这是因为：</p>
+&lt;/TouchableOpacity&gt;
+</code></pre>
+<p>会报 <code>Touchable child must either be native or forward setNativeProps to a native component</code> ，这是因为：</p>
 <blockquote>
 <p>If you run this you will immediately see this error: Touchable child must either be native or forward setNativeProps to a native component. This occurs because MyButton isn’t directly backed by a native view whose opacity should be set. You can think about it like this: if you define a component with React.createClass you would not expect to be able to set a style prop on it and have that work - you would need to pass the style prop down to a child, unless you are wrapping a native component. Similarly, we are going to forward setNativeProps to a native-backed child component.</p>
 </blockquote>
 <p>解决办法就是在 MyButton 组件中添加</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line">setNativeProps <span class="token punctuation">(</span>nativeProps<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">this</span><span class="token punctuation">.</span>_root<span class="token punctuation">.</span>setNativeProps <span class="token punctuation">(</span>nativeProps<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">  <span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+<pre><code class="language-javascript">setNativeProps(nativeProps) {
+    this._root.setNativeProps(nativeProps);
+  }
+</code></pre>
 <p>其中 this._root 代表组件的引用</p>
-<h3 id="0-29-0-30-中-flexDirection-row-布局异常"><a href="#0-29-0-30-中-flexDirection-row-布局异常" class="headerlink" title="0.29/0.30 中 flexDirection: row 布局异常"></a>0.29/0.30 中 <code>flexDirection: row</code> 布局异常</h3><p>改动前：</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line">imageContainer<span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
-<span class="line">    flexDirection<span class="token punctuation">:</span> <span class="token string">'row'</span><span class="token punctuation">,</span></span>
-<span class="line">    flexWrap<span class="token punctuation">:</span> <span class="token string">'wrap'</span></span>
-<span class="line">  <span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+<h3 id="0-29-0-30中flexDirection-row布局异常">0.29/0.30 中 <code>flexDirection: row</code>  布局异常</h3>
+<p>改动前：</p>
+<pre><code class="language-javascript"> imageContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  }
+</code></pre>
 <p>改动后：</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line">imageContainer<span class="token punctuation">:</span> <span class="token punctuation">{</span></span>
-<span class="line">    flexDirection<span class="token punctuation">:</span> <span class="token string">'row'</span><span class="token punctuation">,</span></span>
-<span class="line">    flexWrap<span class="token punctuation">:</span> <span class="token string">'wrap'</span><span class="token punctuation">,</span></span>
-<span class="line">    alignItems<span class="token punctuation">:</span> <span class="token string">'flex-start'</span></span>
-<span class="line">  <span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="引入-moment-js"><a href="#引入-moment-js" class="headerlink" title="引入 moment.js"></a>引入 moment.js</h3><p>参考 <a href="https://github.com/facebook/react-native/issues/1629" target="_blank" rel="noopener">facebook/react-native#1629</a></p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">import</span> moment <span class="token keyword">from</span> <span class="token string">'moment'</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">import</span> momentLocale <span class="token keyword">from</span> <span class="token string">'moment/locale/zh-cn'</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token operator">...</span></span>
-<span class="line">moment<span class="token punctuation">.</span>updateLocale <span class="token punctuation">(</span><span class="token string">'zh-cn'</span><span class="token punctuation">,</span> momentLocale<span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
+<pre><code class="language-javascript"> imageContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start'
+  }
+</code></pre>
+<h3 id="引入moment-js">引入 moment.js</h3>
+<p>参考 <a href="https://github.com/facebook/react-native/issues/1629" target="_blank" rel="noopener">facebook/react-native#1629</a></p>
+<pre><code class="language-javascript">import moment from 'moment';
+import momentLocale from 'moment/locale/zh-cn';
+...
+moment.updateLocale('zh-cn', momentLocale);
+</code></pre>
 
       </div>
     </article>
@@ -115,7 +125,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -136,32 +146,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/vulnerable-react-native.html"></div>
+  <div id="disqus_thread" data-title="React Native 中的坑" data-permalink="https://kotori.love/archives/vulnerable-react-native.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -170,13 +177,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

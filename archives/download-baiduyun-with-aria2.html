@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">使用 aria2 黑科技高速下载百度等网盘文件</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/download-baiduyun-with-aria2.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/download-baiduyun-with-aria2.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -78,16 +79,18 @@
       
       <div class="post-content" itemprop="articleBody">
         <blockquote>
-<p>百度云已经开始了强退会员的政策，没有会员的用户速度 ** 稳定保持 ** 在 200KB/s。</p>
+<p>百度云已经开始了强退会员的政策，没有会员的用户速度<strong>稳定保持</strong>在 200KB/s。</p>
 </blockquote>
-<p>虽然有破解版的百度云管家，不过还是不太稳定。偶然发现一个使用 VPS 下载百度云的方法：<br>需要做以下准备工作：</p>
+<p>虽然有破解版的百度云管家，不过还是不太稳定。偶然发现一个使用 VPS 下载百度云的方法：<br>
+需要做以下准备工作：</p>
 <ul>
 <li>Chrome 浏览器或 Firefox 浏览器</li>
 </ul>
 <p>这里以 Chrome 举例：</p>
-<p><del>~ 首先安装 <a href="https://chrome.google.com/webstore/detail/baiduexporter/mjaenbjdjmgolhoafkohbhhbaiedbkno" target="_blank" rel="noopener">百度网盘助手</a> 扩展程序。</del><br>已下架，可以去 <a href="https://github.com/acgotaku/BaiduExporter" target="_blank" rel="noopener">GItHub</a> 手动安装。</p>
-<p>支持一些其它网盘 <a href="https://chrome.google.com/webstore/detail/115exporter/ojafklbojgenkohhdgdjeaepnbjffdjf?hl=zh-CN" target="_blank" rel="noopener">115 下载助手</a></p>
-<p>打开某百度盘 <a href="http://pan.baidu.com/s/1kTiv3oV" target="_blank" rel="noopener">页面</a>，选择导出下载，复制 aria2 链接。</p>
+<p><s>首先安装<a href="https://chrome.google.com/webstore/detail/baiduexporter/mjaenbjdjmgolhoafkohbhhbaiedbkno" target="_blank" rel="noopener">百度网盘助手</a>扩展程序。</s><br>
+已下架，可以去<a href="https://github.com/acgotaku/BaiduExporter" target="_blank" rel="noopener"> GItHub</a> 手动安装。</p>
+<p>支持一些其它网盘<a href="https://chrome.google.com/webstore/detail/115exporter/ojafklbojgenkohhdgdjeaepnbjffdjf?hl=zh-CN" target="_blank" rel="noopener"> 115 下载助手</a></p>
+<p>打开某百度盘<a href="http://pan.baidu.com/s/1kTiv3oV" target="_blank" rel="noopener">页面</a>，选择导出下载，复制 aria2 链接。</p>
 <p><img src="https://static-files.kotori.love/blog/2015/09/453939414.png" alt="CEAE92F0-13AE-4B03-B416-17439AF3A803.png"></p>
 <p>登录 SSH，或者直接在 Mac/Linux 终端中直接粘贴刚才的链接。</p>
 <p><img src="https://static-files.kotori.love/blog/2015/09/2182953146.png" alt="659F791D-B418-45AA-B0B4-0CC34CB843C4.png"></p>
@@ -105,7 +108,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -126,32 +129,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/download-baiduyun-with-aria2.html"></div>
+  <div id="disqus_thread" data-title="使用 aria2 黑科技高速下载百度等网盘文件" data-permalink="https://kotori.love/archives/download-baiduyun-with-aria2.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -160,13 +160,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

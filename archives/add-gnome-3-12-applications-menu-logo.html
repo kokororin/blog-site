@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">Gnome 3.12 Applications Menu 添加 Logo</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/add-gnome-3-12-applications-menu-logo.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/add-gnome-3-12-applications-menu-logo.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -83,35 +84,37 @@
 <p>步骤：</p>
 <p>一、</p>
 <p>先找一张 png 格式的 logo: <a href="http://download.easyicon.net/png/1068656/256/" target="_blank" rel="noopener">http://download.easyicon.net/png/1068656/256/</a> 转换为 svg 格式（注意路径）：</p>
-<p><code>mogrify -format svg -resize 48x48 &#39;/usr/share/icons/Numix-Circle/scalable/apps/archlogo.png&#39;</code></p>
-<p>没有 mogrify 命令的话先安装：<code>pacman -S imagemagick</code></p>
+<p><code>mogrify -format svg -resize 48x48 '/usr/share/icons/Numix-Circle/scalable/apps/archlogo.png'</code></p>
+<p>没有 mogrify 命令的话先安装： <code>pacman -S imagemagick</code></p>
 <p>二、</p>
 <p>参照以下代码修改 /usr/share/gnome-shell/extensions/apps-menu@gnome-shell-extensions.gcampax.github.com/extension.js:</p>
 <pre><code>    this.actor.accessible_role = Atk.Role.LABEL;
-    let hbox = new St.BoxLayout ({ style_class: &#39;panel-status-menu-box&#39; });
-    //this._label = new St.Label ({ text: _(&amp;quot;Applications&amp;quot;),
+    let hbox = new St.BoxLayout({ style_class: 'panel-status-menu-box' });
+    // this._label = new St.Label({ text: _(&amp;quot;Applications&amp;quot;),
     //                             y_expand: true,
     //                             y_align: Clutter.ActorAlign.CENTER });
 
-    this._box = new St.BoxLayout ();
-    this._iconBox = new St.Bin ();
-    this._box.add (this._iconBox, { y_align: St.Align.MIDDLE, y_fill: false });
-    let logo = new St.Icon ({ icon_name: &#39;archlogo&#39;, style_class: &#39;applications-menu-button-icon&#39;, icon_size: 22 });
+    this._box = new St.BoxLayout();
+    this._iconBox = new St.Bin();
+    this._box.add(this._iconBox, { y_align: St.Align.MIDDLE, y_fill: false });
+    let logo = new St.Icon({ icon_name: 'archlogo', style_class: 'applications-menu-button-icon', icon_size: 22 });
     this._iconBox.child = logo;
-    let label = new St.Label ({ text: &amp;quot; &amp;quot; });
-    this._box.add (label, { y_align: St.Align.MIDDLE, y_fill: false });
-    this._label = new St.Label ({ text: _(&amp;quot;Applications&amp;quot;) });
-    this._box.add (this._label, { y_align: St.Align.MIDDLE, y_fill: false });
-    this.actor.add_actor (this._box);
+    let label = new St.Label({ text: &amp;quot; &amp;quot; });
+    this._box.add(label, { y_align: St.Align.MIDDLE, y_fill: false });
+    this._label = new St.Label({ text: _(&amp;quot;Applications&amp;quot;) });
+    this._box.add(this._label, { y_align: St.Align.MIDDLE, y_fill: false });
+    this.actor.add_actor(this._box);
 
-    hbox.add_child (this._label);
-    hbox.add_child (new St.Label ({ text: &#39;u25BE&#39;,
+    hbox.add_child(this._label);
+    hbox.add_child(new St.Label({ text: 'u25BE',
     y_expand: true,
     y_align: Clutter.ActorAlign.CENTER }));
 
-    this.actor.add_actor (hbox);
-    this.actor.name = &#39;panelApplications&#39;;
-    ....</code></pre><p>三、</p>
+    this.actor.add_actor(hbox);
+    this.actor.name = 'panelApplications';
+    ....
+</code></pre>
+<p>三、</p>
 <p>重启 gnome-shell。</p>
 
       </div>
@@ -126,7 +129,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -147,32 +150,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/add-gnome-3-12-applications-menu-logo.html"></div>
+  <div id="disqus_thread" data-title="Gnome 3.12 Applications Menu 添加 Logo" data-permalink="https://kotori.love/archives/add-gnome-3-12-applications-menu-logo.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -181,13 +181,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

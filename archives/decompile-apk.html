@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">Android 反编译</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/decompile-apk.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/decompile-apk.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -82,40 +83,35 @@
         <blockquote>
 <p>这篇草稿存了好久了，还是发出来吧。</p>
 </blockquote>
-<h3 id="首先介绍下要用到的工具："><a href="#首先介绍下要用到的工具：" class="headerlink" title="首先介绍下要用到的工具："></a>首先介绍下要用到的工具：</h3><ul>
+<h3 id="首先介绍下要用到的工具：">首先介绍下要用到的工具：</h3>
+<ul>
 <li>jdk: Java Development Kit</li>
 <li>baksmali：把 classes.dex 转为为 smali 文件的工具</li>
 <li>dex2jar：classes.dex 转为 jar 包的工具</li>
 <li>jdgui：阅读 jar 文件的工具</li>
 <li>smali：把 smali 文件编译打包为 classes.dex 的工具</li>
 </ul>
-<p>其中关于 baksmali 和 smali 可以看下 <a href="http://code.google.com/p/smali/" target="_blank" rel="noopener">谷歌</a> 的介绍</p>
+<p>其中关于 baksmali 和 smali 可以看下<a href="http://code.google.com/p/smali/" target="_blank" rel="noopener">谷歌</a>的介绍</p>
 <p>反编译后得到的 dex 文件以及转为 jar 包后都无法进行修改，只能把 dex 文件转化为 smali 文件进行修改，然后再编译打包为 dex 文件，替换掉原有 apk 中的 dex 文件，然后对 apk 进行签名，这样就完成了对 apk 源码的修改，具体步骤如下：（以下操作是在 linux 下进行，windows 可能会略有差异）</p>
-<ol>
-<li><p>解压 apk 文件，获取 classes.dex 并拷贝到资源根目录（使用 zip 或其他解压工具即可）</p>
-</li>
-<li><p>使用 baksmali 工具将 classes.dex 转为 smali 文件，在命令行定位到资源根目录并执行：</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">java -jar baksmali-2.0.3.jar -x classes.dex</span></pre><div class="tools"></div></figure>
+<p>1. 解压 apk 文件，获取 classes.dex 并拷贝到资源根目录（使用 zip 或其他解压工具即可）</p>
+<p>2. 使用 baksmali 工具将 classes.dex 转为 smali 文件，在命令行定位到资源根目录并执行：</p>
+<pre><code class="language-bash">java -jar baksmali-2.0.3.jar -x classes.dex 
+</code></pre>
 <p>执行完后会在当前目录下生成 out 目录，目录结构跟源码相同，在对应目录下查找对应的 smali 文件</p>
-</li>
-<li><p>使用 dex2jar 工具把 dex 转为 jar 文件，拷贝 classes.dex 到资源目录下的 dex2jar-0.0.9.15 目录下，把命令行定位到该目录并执行：</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">./dex2jar.sh classes.dex  <span class="token punctuation">(</span>windows:dex2jar.bat classes.dex<span class="token punctuation">)</span></span></pre><div class="tools"></div></figure>
+<p>3. 使用 dex2jar 工具把 dex 转为 jar 文件，拷贝 classes.dex 到资源目录下的 dex2jar-0.0.9.15 目录下，把命令行定位到该目录并执行：</p>
+<pre><code class="language-bash">   ./dex2jar.sh classes.dex  (windows:dex2jar.bat classes.dex)
+</code></pre>
 <p>执行完后会在当前目录下生成 classes_dex2jar.jar 文件，然后可以通过 jdgui 进行查看</p>
-</li>
-<li><p>使用 jdgui 工具查看 HelloWorld 的源码，根据不同的系统打开资源目录下对应的 jdgui 工具，然后把第 3 步生成的 classes_dex2jar.jar 文件拖到工具中</p>
-</li>
-<li><p>修改对应的 smali 文件</p>
-</li>
-<li><p>使用 smali-2.0.3.jar 工具把 smali 文件转为 dex 文件，把命令行定位到资源根目录并执行：</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">java -jar smali-2.0.3.jar -o classes.dex out</span></pre><div class="tools"></div></figure>
+<p>4. 使用 jdgui 工具查看 HelloWorld 的源码，根据不同的系统打开资源目录下对应的 jdgui 工具，然后把第 3 步生成的 classes_dex2jar.jar 文件拖到工具中</p>
+<p>5. 修改对应的 smali 文件</p>
+<p>6. 使用 smali-2.0.3.jar 工具把 smali 文件转为 dex 文件，把命令行定位到资源根目录并执行：</p>
+<pre><code class="language-bash">  java -jar smali-2.0.3.jar -o classes.dex out 
+</code></pre>
 <p>执行完后会生成并替换掉根目录下的 classes.dex 文件，这样就修改成功了</p>
-</li>
-<li><p>把新生成的 classes.dex 文件替换到原来的 apk 文件里（使用压缩工具）</p>
-</li>
-<li><p>使用签名工具对 apk 进行签名，把 apk 拷贝到资源根目录下的 sign_tool 目录，把命令行定位到该目录并执行：</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">java -jar signapk.jar platform.x509.pem platform.pk8 HelloWorld.apk Signed.apk</span></pre><div class="tools"></div></figure>
-</li>
-</ol>
+<p>7. 把新生成的 classes.dex 文件替换到原来的 apk 文件里（使用压缩工具）</p>
+<p>8. 使用签名工具对 apk 进行签名，把 apk 拷贝到资源根目录下的 sign_tool 目录，把命令行定位到该目录并执行：</p>
+<pre><code class="language-bash">   java -jar signapk.jar platform.x509.pem platform.pk8 HelloWorld.apk Signed.apk
+</code></pre>
 <p>执行完后会在该目录下生成 Signed.apk 文件，这个文件就是最终的文件了。</p>
 
       </div>
@@ -130,7 +126,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -151,32 +147,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/decompile-apk.html"></div>
+  <div id="disqus_thread" data-title="Android 反编译" data-permalink="https://kotori.love/archives/decompile-apk.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -185,13 +178,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

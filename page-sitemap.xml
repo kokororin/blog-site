@@ -8,22 +8,22 @@
     </url>
     
     <url>
-        <loc>https://kotori.love/about/</loc>
-        <lastmod>2020-02-02T14:46:18.567Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
         <loc>https://kotori.love/links/</loc>
-        <lastmod>2020-02-02T10:45:29.430Z</lastmod>
+        <lastmod>2020-02-03T15:03:00.694Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://kotori.love/guestbook/</loc>
-        <lastmod>2020-02-02T10:44:37.588Z</lastmod>
+        <lastmod>2020-02-03T15:02:54.283Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://kotori.love/about/</loc>
+        <lastmod>2020-02-03T15:02:48.676Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>

@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -53,22 +53,26 @@
   </header>
 
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-page" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">Links</h2>
       
       
       <div class="post-content" itemprop="articleBody">
-        <p>排序为伪随机，不分先后。<br>如果要交换友链请在 Guestbook 留言ヘ（。□°）ヘ<br>2017.09.02 清理了一波打不开的友链</p>
-<h3 id="MoeFront"><a href="#MoeFront" class="headerlink" title="MoeFront"></a><a href="https://moefront.github.io" target="_blank" rel="noopener">MoeFront</a></h3><ul>
+        <p>如果要交换友链请在 Guestbook 留言ヘ（。□°）ヘ<br>
+ 2017.09.02 清理了一波打不开的友链</p>
+<h3 id="MoeFront"><a href="https://moefront.github.io" target="_blank" rel="noopener">MoeFront</a></h3>
+<ul>
 <li><a href="https://kirainmoe.com/" target="_blank" rel="noopener">吟梦</a></li>
 <li><a href="https://elven.coding.me" target="_blank" rel="noopener">茯苓猫</a></li>
 <li><a href="http://freedom.moe/" target="_blank" rel="noopener">立华の神社</a></li>
 <li><a href="https://boot.pw/" target="_blank" rel="noopener">TyanBoot</a></li>
 <li><a href="https://blog.cdog.me" target="_blank" rel="noopener">CDog</a></li>
 </ul>
-<h3 id="その他"><a href="#その他" class="headerlink" title="その他"></a>その他</h3><ul>
+<h3 id="その他">その他</h3>
+<ul>
 <li><a href="https://alone.run/" target="_blank" rel="noopener">之行</a></li>
 <li><a href="http://hran.me/" target="_blank" rel="noopener">Hran’s</a></li>
 <li><a href="https://i95.me/" target="_blank" rel="noopener">Jaxson’s Blog</a></li>
@@ -95,13 +99,14 @@
 <li><a href="https://waxxh.me" target="_blank" rel="noopener">Waxxh’s Blog</a></li>
 <li><a href="https://zhiyouli.cn/" target="_blank" rel="noopener">三秋</a></li>
 <li><a href="https://www.ailoli.org" target="_blank" rel="noopener">Ailoli</a></li>
-<li><a href="https://blog.mxpkx.com/" target="_blank" rel="noopener">kanxi pu’s Blog</a></li>
+<li><a href="https://blog.mxpkx.com/" target="_blank" rel="noopener">kanxi pu 's Blog</a></li>
 <li><a href="http://aishiteru.cn/" target="_blank" rel="noopener">dx</a></li>
 <li><a href="https://lishaoy.net" target="_blank" rel="noopener">persilee’s blog</a></li>
 <li><a href="https://kobbv.waxxh.me" target="_blank" rel="noopener">Kira’s Blog</a></li>
 <li><a href="https://ibop.top/" target="_blank" rel="noopener">某念 P </a></li>
 </ul>
-<h3 id="单向"><a href="#单向" class="headerlink" title="单向"></a>单向</h3><ul>
+<h3 id="单向">单向</h3>
+<ul>
 <li><a href="http://blog.linuxeye.com/" target="_blank" rel="noopener">Linux 运维笔记</a></li>
 <li><a href="http://justjavac.com/" target="_blank" rel="noopener">迷渡</a></li>
 <li><a href="http://www.byends.com/" target="_blank" rel="noopener">羽飞</a></li>
@@ -124,7 +129,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -133,30 +138,27 @@
       </ul>
     </div>
   </center>
-  <div id="disqus_thread" data-permalink="https://kotori.love/links/"></div>
+  <div id="disqus_thread" data-title="links" data-permalink="https://kotori.love/links/" data-allow-comment="false"></div>
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -165,13 +167,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">一些好用的 git 代码段</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/useful-git-snippets.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/useful-git-snippets.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -75,31 +76,35 @@
       
       
       <div class="post-content" itemprop="articleBody">
-        <h3 id="添加历史-tag"><a href="#添加历史-tag" class="headerlink" title="添加历史 tag"></a>添加历史 tag</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">git</span> tag -a v1.2 9fceb02 -m <span class="token string">"Message here"</span></span>
-<span class="line"><span class="token function">git</span> push --tags origin master</span></pre><div class="tools"></div></figure>
-<h3 id="tag-排序"><a href="#tag-排序" class="headerlink" title="tag 排序"></a>tag 排序</h3><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token comment" spellcheck="true"># Loop over tags</span></span>
-<span class="line"><span class="token function">git</span> tag -l <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token function">read</span> -r tag</span>
-<span class="line"><span class="token keyword">do</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token comment" spellcheck="true"># get the commit hash of the current tag</span></span>
-<span class="line">    COMMIT_HASH<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> rev-list -1 $tag<span class="token variable">)</span></span></span>
-<span class="line"></span>
-<span class="line">    <span class="token comment" spellcheck="true"># get the commit date of the tag and create a new tag using</span></span>
-<span class="line">    <span class="token comment" spellcheck="true"># the tag's name and message. By specifying the environment</span></span>
-<span class="line">    <span class="token comment" spellcheck="true"># environment variable GIT_COMMITTER_DATE before this is</span></span>
-<span class="line">    <span class="token comment" spellcheck="true"># run, we override the default tag date. Note that if you</span></span>
-<span class="line">    <span class="token comment" spellcheck="true"># specify the variable on a different line, it will apply to</span></span>
-<span class="line">    <span class="token comment" spellcheck="true"># the current environment. This isn't desired as probably</span></span>
-<span class="line">    <span class="token comment" spellcheck="true"># don't want your future tags to also have that past date.</span></span>
-<span class="line">    <span class="token comment" spellcheck="true"># Of course, when you close your shell, the variable will no</span></span>
-<span class="line">    <span class="token comment" spellcheck="true"># longer persist.</span></span>
-<span class="line">    GIT_COMMITTER_DATE<span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> show $COMMIT_HASH --format<span class="token operator">=</span>% aD <span class="token operator">|</span> <span class="token function">head</span> -1<span class="token variable">)</span></span>"</span> <span class="token function">git</span> tag -a -f <span class="token variable">$tag</span> -m<span class="token string">"<span class="token variable">$tag</span>"</span> <span class="token variable">$COMMIT_HASH</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">done</span></span>
-<span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true"># Force push tags and overwrite ones on the server with the same name</span></span>
-<span class="line"><span class="token function">git</span> push --tags --force</span></pre><div class="tools"></div></figure>
+        <h3 id="添加历史tag">添加历史 tag</h3>
+<pre><code class="language-bash">git tag -a v1.2 9fceb02 -m &quot;Message here&quot;
+git push --tags origin master
+</code></pre>
+<h3 id="tag排序">tag 排序</h3>
+<pre><code class="language-bash"># Loop over tags
+git tag -l | while read -r tag
+do
+
+    # get the commit hash of the current tag
+    COMMIT_HASH=$(git rev-list -1 $tag)
+
+    # get the commit date of the tag and create a new tag using
+    # the tag's name and message. By specifying the environment
+    # environment variable GIT_COMMITTER_DATE before this is
+    # run, we override the default tag date. Note that if you
+    # specify the variable on a different line, it will apply to
+    # the current environment. This isn't desired as probably
+    # don't want your future tags to also have that past date.
+    # Of course, when you close your shell, the variable will no
+    # longer persist.
+    GIT_COMMITTER_DATE=&quot;$(git show $COMMIT_HASH --format=%aD | head -1)&quot; git tag -a -f $tag -m&quot;$tag&quot; $COMMIT_HASH
+
+
+done
+
+# Force push tags and overwrite ones on the server with the same name
+git push --tags --force
+</code></pre>
 
       </div>
     </article>
@@ -113,7 +118,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -134,32 +139,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/useful-git-snippets.html"></div>
+  <div id="disqus_thread" data-title="一些好用的 git 代码段" data-permalink="https://kotori.love/archives/useful-git-snippets.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -168,13 +170,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

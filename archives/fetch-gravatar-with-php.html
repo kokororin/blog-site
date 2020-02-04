@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">简单使用 php 获取 gravatar 头像</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/fetch-gravatar-with-php.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/fetch-gravatar-with-php.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -80,35 +81,41 @@
         <blockquote>
 <p>Gravatar 头像已经成为了博客、论坛等非常流行的通用头像，他能使你的网站的留言者根据自己的邮箱匹配不同的 Gravatar 头像。但不可否认的是 Gravatar 头像的服务器及缓存服务器位于国外，由于受到了干扰，国内无法打开 Gravatar 头像服务器及缓存服务器，导致了 Gravatar 头像无法显示，这样严重的拖累了网站的打开速度，甚至会因为一篇文章的留言非常多，需要加载几百个 Gravatar 头像图片，大量 HTTP 请求的发送，直接导致了网页加载缓慢、网站出现打不开的现象。</p>
 </blockquote>
-<p>   po 主之前用的是 v2ex 的源，感觉速度不太理想，所以以下代码就诞生了。</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token function">header</span> <span class="token punctuation">(</span><span class="token string">"Content-type:image/png"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token variable">$path_info</span>  <span class="token operator">=</span> <span class="token variable">$_SERVER</span> <span class="token punctuation">[</span><span class="token string">'PATH_INFO'</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token variable">$path_array</span> <span class="token operator">=</span> <span class="token function">explode</span> <span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token variable">$path_info</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"><span class="token variable">$m</span>     <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token variable">$path_array</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$path_array</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token punctuation">:</span> <span class="token variable">$_GET</span> <span class="token punctuation">[</span><span class="token string">'m'</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token variable">$s</span>     <span class="token operator">=</span> <span class="token function">isset</span> <span class="token punctuation">(</span><span class="token variable">$_GET</span> <span class="token punctuation">[</span><span class="token string">'s'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$_GET</span> <span class="token punctuation">[</span><span class="token string">'s'</span><span class="token punctuation">]</span> <span class="token punctuation">:</span> <span class="token string">'60'</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token variable">$r</span>     <span class="token operator">=</span> <span class="token function">isset</span> <span class="token punctuation">(</span><span class="token variable">$_GET</span> <span class="token punctuation">[</span><span class="token string">'r'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$_GET</span> <span class="token punctuation">[</span><span class="token string">'r'</span><span class="token punctuation">]</span> <span class="token punctuation">:</span> <span class="token string">'g'</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token variable">$query</span> <span class="token operator">=</span> <span class="token function">http_build_query</span> <span class="token punctuation">(</span><span class="token keyword">array</span> <span class="token punctuation">(</span></span>
-<span class="line">    <span class="token string">'gravatar_id'</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$m</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token string">'size'</span>        <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$s</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token string">'rating'</span>      <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$r</span><span class="token punctuation">,</span></span>
-<span class="line"><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"><span class="token variable">$url</span> <span class="token operator">=</span> 'https<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//secure.gravatar.com/avatar/index.php?' . $query;</span></span>
-<span class="line"><span class="token variable">$ch</span>  <span class="token operator">=</span> <span class="token function">curl_init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_URL</span><span class="token punctuation">,</span> <span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_RETURNTRANSFER</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_CONNECTTIMEOUT</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token variable">$res</span> <span class="token operator">=</span> <span class="token function">curl_exec</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">echo</span> <span class="token variable">$res</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token function">curl_close</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<h3 id="演示地址："><a href="#演示地址：" class="headerlink" title="演示地址："></a>演示地址：</h3><p><a href="http://api.kotori.love/gravatar/06a2950d128ec9faf155e28d9e889baa?s=100&r=g" target="_blank" rel="noopener">http://api.kotori.love/gravatar/06a2950d128ec9faf155e28d9e889baa?s=100&amp;r=g</a><br>如果要使用缓存的话，<a href="https://github.com/soulteary/AvatarCache" target="_blank" rel="noopener">Github</a> 上有一个现成的项目。<br>要应用在 WordPress 中，将以下代码加入 functions.php 中：</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">function</span> <span class="token function">MyAvatar</span> <span class="token punctuation">(</span><span class="token variable">$avatar</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token variable">$avatar</span> <span class="token operator">=</span> <span class="token function">str_replace</span> <span class="token punctuation">(</span><span class="token keyword">array</span> <span class="token punctuation">(</span><span class="token string">"www.gravatar.com/avatar"</span><span class="token punctuation">,</span><span class="token string">"0.gravatar.com/avatar"</span><span class="token punctuation">,</span><span class="token string">"1.gravatar.com/avatar"</span><span class="token punctuation">,</span><span class="token string">"2.gravatar.com/avatar"</span><span class="token punctuation">,</span><span class="token string">"secure.gravatar.com"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">"beta.api.kotori.love/gravatar"</span><span class="token punctuation">,</span><span class="token variable">$avatar</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">return</span> <span class="token variable">$avatar</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"><span class="token function">add_filter</span> <span class="token punctuation">(</span><span class="token string">'get_avatar'</span><span class="token punctuation">,</span> <span class="token string">'MyAvatar'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<h3 id="最后附上一个-Nginx-反代的配置："><a href="#最后附上一个-Nginx-反代的配置：" class="headerlink" title="最后附上一个 Nginx 反代的配置："></a>最后附上一个 Nginx 反代的配置：</h3><pre><code>http {
+<p>po 主之前用的是 v2ex 的源，感觉速度不太理想，所以以下代码就诞生了。</p>
+<pre><code class="language-php">header(&quot;Content-type:image/png&quot;);
+$path_info  = $_SERVER['PATH_INFO'];
+$path_array = explode('/', $path_info);
+
+$m     = ($path_array[2] != null) ? $path_array[2] : $_GET['m'];
+$s     = isset($_GET['s']) ? $_GET['s'] : '60';
+$r     = isset($_GET['r']) ? $_GET['r'] : 'g';
+$query = http_build_query(array(
+    'gravatar_id' =&gt; $m,
+    'size'        =&gt; $s,
+    'rating'      =&gt; $r,
+));
+
+$url = 'https://secure.gravatar.com/avatar/index.php?' . $query;
+$ch  = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+$res = curl_exec($ch);
+echo $res;
+curl_close($ch);
+</code></pre>
+<h3 id="演示地址：">演示地址：</h3>
+<p><a href="http://api.kotori.love/gravatar/06a2950d128ec9faf155e28d9e889baa?s=100&amp;r=g" target="_blank" rel="noopener">http://api.kotori.love/gravatar/06a2950d128ec9faf155e28d9e889baa?s=100&amp;r=g</a><br>
+ 如果要使用缓存的话，<a href="https://github.com/soulteary/AvatarCache" target="_blank" rel="noopener">Github</a> 上有一个现成的项目。<br>
+要应用在 WordPress 中，将以下代码加入 functions.php 中：</p>
+<pre><code class="language-php">function MyAvatar($avatar) {
+        $avatar = str_replace(array(&quot;www.gravatar.com/avatar&quot;,&quot;0.gravatar.com/avatar&quot;,&quot;1.gravatar.com/avatar&quot;,&quot;2.gravatar.com/avatar&quot;,&quot;secure.gravatar.com&quot;),&quot;beta.api.kotori.love/gravatar&quot;,$avatar);
+        return $avatar;
+}
+add_filter('get_avatar', 'MyAvatar');
+</code></pre>
+<h3 id="最后附上一个Nginx-反代的配置：">最后附上一个 Nginx 反代的配置：</h3>
+<pre><code>http {
   proxy_cache_path  /var/cache/nginx levels=1:2 keys_zone=gravatar:8m max_size=10000m inactive=600m;
   proxy_temp_path /var/cache/nginx/tmp;
 
@@ -130,7 +137,9 @@
       expires           7d;
     }
   }
-}</code></pre>
+}
+</code></pre>
+
       </div>
     </article>
   </div>
@@ -143,7 +152,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -164,32 +173,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/fetch-gravatar-with-php.html"></div>
+  <div id="disqus_thread" data-title="简单使用 php 获取 gravatar 头像" data-permalink="https://kotori.love/archives/fetch-gravatar-with-php.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -198,13 +204,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

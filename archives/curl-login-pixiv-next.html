@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">模拟登录 pixiv.net 后续</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/curl-login-pixiv-next.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/curl-login-pixiv-next.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -79,73 +80,78 @@
       
       
       <div class="post-content" itemprop="articleBody">
-        <p>继上一篇文章 <a href="https://kotori.love/archives/curl-login-pixiv.html">《模拟登录 pixiv.net 后续》</a>，老接口已经在 html 上消失了，那么只能按新版接口来惹<br>直接上代码，添加了登录错误的异常 = w= 同时不再需要 <code>sunra/php-simple-html-dom-parse</code>。<br>可以看到 p 站添加了 <code>Google reCAPTCHA</code>，但是目前没有碰到验证码。<br>PS: <code>is_cookie_ok</code> 没有改动，依旧按原来的使用。<br>PSS: nodejs 版 <a href="https://github.com/kokororin/pixiv-cookie" target="_blank" rel="noopener">pixiv-cookie</a></p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token function">define</span> <span class="token punctuation">(</span><span class="token string">'BEFORE_LOGIN_COOKIE'</span><span class="token punctuation">,</span> <span class="token constant">__DIR__</span> <span class="token punctuation">.</span> <span class="token string">'/BEFORE_LOGIN_COOKIE.txt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 登录页面的 cookie</span></span>
-<span class="line"><span class="token function">define</span> <span class="token punctuation">(</span><span class="token string">'AFTER_LOGIN_COOKIE'</span><span class="token punctuation">,</span> <span class="token constant">__DIR__</span> <span class="token punctuation">.</span> <span class="token string">'/AFTER_LOGIN_COOKIE.txt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 登录成功后获取到的 cookie</span></span>
-<span class="line"><span class="token function">define</span> <span class="token punctuation">(</span><span class="token string">'USER_AGENT'</span><span class="token punctuation">,</span> <span class="token string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.59 Safari/537.36'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"><span class="token function">login_pixiv</span> <span class="token punctuation">(</span><span class="token string">'YOUR_PIXIVID'</span><span class="token punctuation">,</span> <span class="token string">'YOUR_PWD'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token function">var_dump</span> <span class="token punctuation">(</span><span class="token function">is_cookie_ok</span> <span class="token punctuation">(</span><span class="token constant">AFTER_LOGIN_COOKIE</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">function</span> <span class="token function">login_pixiv</span> <span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">,</span> <span class="token variable">$password</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token comment" spellcheck="true">// 获取登陆页 cookie</span></span>
-<span class="line">    <span class="token variable">$ch</span> <span class="token operator">=</span> <span class="token function">curl_init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_URL</span><span class="token punctuation">,</span> 'http<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//www.pixiv.net');</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_RETURNTRANSFER</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_COOKIEJAR</span><span class="token punctuation">,</span> <span class="token constant">BEFORE_LOGIN_COOKIE</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_CONNECTTIMEOUT</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_TIMEOUT</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_USERAGENT</span><span class="token punctuation">,</span> <span class="token constant">USER_AGENT</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token variable">$login_html</span> <span class="token operator">=</span> <span class="token function">curl_exec</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_close</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token function">preg_match</span> <span class="token punctuation">(</span><span class="token string">'/pixiv\.context\.token (.*)=(.*?)(\"|\')(.*?)(\"|\')/'</span><span class="token punctuation">,</span> <span class="token variable">$login_html</span><span class="token punctuation">,</span> <span class="token variable">$matches</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isset</span> <span class="token punctuation">(</span><span class="token variable">$matches</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Exception</span> <span class="token punctuation">(</span><span class="token string">' 没有获取到 token'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token variable">$data</span> <span class="token punctuation">[</span><span class="token string">'pixiv_id'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$username</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$data</span> <span class="token punctuation">[</span><span class="token string">'password'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$password</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$data</span> <span class="token punctuation">[</span><span class="token string">'captcha'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$data</span> <span class="token punctuation">[</span><span class="token string">'g_recaptcha_response'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$data</span> <span class="token punctuation">[</span><span class="token string">'post_key'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$matches</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$data</span> <span class="token punctuation">[</span><span class="token string">'source'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'pc'</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$data</span> <span class="token punctuation">[</span><span class="token string">'ref'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'wwwtop_accounts_index'</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$data</span> <span class="token punctuation">[</span><span class="token string">'return_to'</span><span class="token punctuation">]</span> <span class="token operator">=</span> 'http<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//www.pixiv.net/';</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token variable">$ch</span> <span class="token operator">=</span> <span class="token function">curl_init</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_URL</span><span class="token punctuation">,</span> 'https<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//accounts.pixiv.net/api/login?lang=zh');</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_HTTPHEADER</span><span class="token punctuation">,</span> <span class="token keyword">array</span> <span class="token punctuation">(</span></span>
-<span class="line">        'Origin<span class="token punctuation">:</span> https<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//accounts.pixiv.net',</span></span>
-<span class="line">        <span class="token string">'User-Agent: '</span> <span class="token punctuation">.</span> <span class="token constant">USER_AGENT</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">'Content-Type: application/x-www-form-urlencoded; charset=UTF-8'</span><span class="token punctuation">,</span></span>
-<span class="line">        'Referer<span class="token punctuation">:</span> https<span class="token punctuation">:</span><span class="token comment" spellcheck="true">//accounts.pixiv.net/login?lang=zh&amp;source=pc&amp;view_type=page&amp;ref=wwwtop_accounts_index',</span></span>
-<span class="line">        <span class="token string">'X-Requested-With: XMLHttpRequest'</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_RETURNTRANSFER</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_COOKIEFILE</span><span class="token punctuation">,</span> <span class="token constant">BEFORE_LOGIN_COOKIE</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_COOKIEJAR</span><span class="token punctuation">,</span> <span class="token constant">AFTER_LOGIN_COOKIE</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_POST</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_POSTFIELDS</span><span class="token punctuation">,</span> <span class="token function">http_build_query</span> <span class="token punctuation">(</span><span class="token variable">$data</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_SSL_VERIFYHOST</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">curl_setopt</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_SSL_VERIFYPEER</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">curl_exec</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$result</span> <span class="token operator">===</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Exception</span> <span class="token punctuation">(</span><span class="token function">curl_error</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">json_decode</span> <span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$result</span> <span class="token punctuation">[</span><span class="token string">'error'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Exception</span> <span class="token punctuation">(</span><span class="token variable">$result</span> <span class="token punctuation">[</span><span class="token string">'message'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$result</span> <span class="token punctuation">[</span><span class="token string">'body'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'success'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Exception</span> <span class="token punctuation">(</span><span class="token function">json_encode</span> <span class="token punctuation">(</span><span class="token variable">$result</span> <span class="token punctuation">[</span><span class="token string">'body'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token function">curl_close</span> <span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+        <p>继上一篇文章<a href="https://kotori.love/archives/curl-login-pixiv.html">《模拟登录 pixiv.net 后续》</a>，老接口已经在 html 上消失了，那么只能按新版接口来惹<br>
+直接上代码，添加了登录错误的异常 = w= 同时不再需要 <code>sunra/php-simple-html-dom-parse</code> 。<br>
+可以看到 p 站添加了 <code>Google reCAPTCHA</code> ，但是目前没有碰到验证码。<br>
+PS:  <code>is_cookie_ok</code>  没有改动，依旧按原来的使用。<br>
+PSS: nodejs 版 <a href="https://github.com/kokororin/pixiv-cookie" target="_blank" rel="noopener">pixiv-cookie</a></p>
+<pre><code class="language-php">define('BEFORE_LOGIN_COOKIE', __DIR__ . '/BEFORE_LOGIN_COOKIE.txt'); //登录页面的cookie
+define('AFTER_LOGIN_COOKIE', __DIR__ . '/AFTER_LOGIN_COOKIE.txt'); //登录成功后获取到的cookie
+define('USER_AGENT', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.59 Safari/537.36');
+
+login_pixiv('YOUR_PIXIVID', 'YOUR_PWD');
+var_dump(is_cookie_ok(AFTER_LOGIN_COOKIE));
+
+function login_pixiv($username, $password)
+{
+    //获取登陆页cookie
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://www.pixiv.net');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, BEFORE_LOGIN_COOKIE);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+    curl_setopt($ch, CURLOPT_USERAGENT, USER_AGENT);
+
+    $login_html = curl_exec($ch);
+    curl_close($ch);
+
+    preg_match('/pixiv\.context\.token(.*)=(.*?)(\&quot;|\')(.*?)(\&quot;|\')/', $login_html, $matches);
+    if (!isset($matches[4])) {
+        throw new Exception('没有获取到token');
+    }
+
+    $data['pixiv_id'] = $username;
+    $data['password'] = $password;
+    $data['captcha'] = '';
+    $data['g_recaptcha_response'] = '';
+    $data['post_key'] = $matches[4];
+    $data['source'] = 'pc';
+    $data['ref'] = 'wwwtop_accounts_index';
+    $data['return_to'] = 'http://www.pixiv.net/';
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://accounts.pixiv.net/api/login?lang=zh');
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Origin: https://accounts.pixiv.net',
+        'User-Agent: ' . USER_AGENT,
+        'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
+        'Referer: https://accounts.pixiv.net/login?lang=zh&amp;source=pc&amp;view_type=page&amp;ref=wwwtop_accounts_index',
+        'X-Requested-With: XMLHttpRequest',
+    ));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_COOKIEFILE, BEFORE_LOGIN_COOKIE);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, AFTER_LOGIN_COOKIE);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    $result = curl_exec($ch);
+    if ($result === false) {
+        throw new Exception(curl_error($ch));
+    } else {
+        $result = json_decode($result, true);
+        if ($result['error']) {
+            throw new Exception($result['message']);
+        } else {
+            if (!$result['body']['success']) {
+                throw new Exception(json_encode($result['body']));
+            }
+        }
+    }
+    curl_close($ch);
+}
+</code></pre>
 
       </div>
     </article>
@@ -159,7 +165,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -180,32 +186,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/curl-login-pixiv-next.html"></div>
+  <div id="disqus_thread" data-title="模拟登录 pixiv.net 后续" data-permalink="https://kotori.love/archives/curl-login-pixiv-next.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -214,13 +217,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

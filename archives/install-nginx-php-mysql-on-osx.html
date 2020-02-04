@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">OS X 下配置 Nginx+PHP+MySQL</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/install-nginx-php-mysql-on-osx.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/install-nginx-php-mysql-on-osx.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -81,32 +82,61 @@
       
       
       <div class="post-content" itemprop="articleBody">
-        <h3 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h3><p>Mac 下的 Homebrew 相当于 Linux 下的 apt-get、yum，可以获得最新版的各种安装包。</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">ruby -e <span class="token string">"<span class="token variable"><span class="token variable">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="token variable">)</span></span>"</span></span></pre><div class="tools"></div></figure>
+        <h3 id="Homebrew">Homebrew</h3>
+<p>Mac 下的 Homebrew 相当于 Linux 下的 apt-get、yum，可以获得最新版的各种安装包。</p>
+<pre><code class="language-bash">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
 <p>安装完成后，运行以下命令检查是否安装成功</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew doctor</span></pre><div class="tools"></div></figure>
+<pre><code class="language-bash">brew doctor
+</code></pre>
 <p>然后更新、升级下 brew 源</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew update <span class="token operator">&amp;&amp;</span> brew upgrade</span></pre><div class="tools"></div></figure>
-<h3 id="PHP-FPM"><a href="#PHP-FPM" class="headerlink" title="PHP-FPM"></a>PHP-FPM</h3><h4 id="添加必须的-tap"><a href="#添加必须的-tap" class="headerlink" title="添加必须的 tap"></a>添加必须的 tap</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew tap homebrew/dupes</span>
-<span class="line">brew tap homebrew/php</span></pre><div class="tools"></div></figure>
-<h4 id="安装-php5-6"><a href="#安装-php5-6" class="headerlink" title="安装 php5.6"></a>安装 php5.6</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> --without-apache --with-fpm --with-mysql php56</span></pre><div class="tools"></div></figure>
-<h4 id="自动启动-php"><a href="#自动启动-php" class="headerlink" title="自动启动 php"></a>自动启动 php</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">mkdir</span> -p ~/Library/LaunchAgents</span>
-<span class="line"><span class="token function">ln</span> -sfv /usr/local/opt/php56/homebrew.mxcl.php56.plist ~/Library/LaunchAgents/</span></pre><div class="tools"></div></figure>
-<h4 id="启动-php"><a href="#启动-php" class="headerlink" title="启动 php"></a>启动 php</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist</span></pre><div class="tools"></div></figure>
-<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> mysql</span></pre><div class="tools"></div></figure>
-<h4 id="自动启动-MySQL"><a href="#自动启动-MySQL" class="headerlink" title="自动启动 MySQL"></a>自动启动 MySQL</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">ln</span> -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents</span></pre><div class="tools"></div></figure>
-<h4 id="启动-MySQL"><a href="#启动-MySQL" class="headerlink" title="启动 MySQL"></a>启动 MySQL</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist</span></pre><div class="tools"></div></figure>
-<h4 id="配置密码"><a href="#配置密码" class="headerlink" title="配置密码"></a>配置密码</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">mysql_secure_installation</span></pre><div class="tools"></div></figure>
-<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">brew <span class="token function">install</span> nginx</span></pre><div class="tools"></div></figure>
-<h4 id="设置自动启动"><a href="#设置自动启动" class="headerlink" title="设置自动启动"></a>设置自动启动</h4><figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">sudo</span> <span class="token function">cp</span> -v /usr/local/opt/nginx/*.plist/Library/LaunchDaemons/</span>
-<span class="line"><span class="token function">sudo</span> <span class="token function">chown</span> root:wheel /Library/LaunchDaemons/homebrew.mxcl.nginx.plist</span></pre><div class="tools"></div></figure>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>创建 nginx 文件夹及配置文件</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">mkdir</span> -p /usr/local/etc/nginx/logs</span>
-<span class="line"><span class="token function">mkdir</span> -p /usr/local/etc/nginx/sites-available</span>
-<span class="line"><span class="token function">mkdir</span> -p /usr/local/etc/nginx/sites-enabled</span>
-<span class="line"><span class="token function">mkdir</span> -p /usr/local/etc/nginx/conf.d</span></pre><div class="tools"></div></figure>
+<pre><code class="language-bash">brew update &amp;&amp; brew upgrade
+</code></pre>
+<h3 id="PHP-FPM">PHP-FPM</h3>
+<h4 id="添加必须的tap">添加必须的 tap</h4>
+<pre><code class="language-bash">brew tap homebrew/dupes
+brew tap homebrew/php
+</code></pre>
+<h4 id="安装php5-6">安装 php5.6</h4>
+<pre><code class="language-bash">brew install --without-apache --with-fpm --with-mysql php56
+</code></pre>
+<h4 id="自动启动php">自动启动 php</h4>
+<pre><code class="language-bash">mkdir -p ~/Library/LaunchAgents
+ln -sfv /usr/local/opt/php56/homebrew.mxcl.php56.plist ~/Library/LaunchAgents/
+</code></pre>
+<h4 id="启动php">启动 php</h4>
+<pre><code class="language-bash">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist
+</code></pre>
+<h3 id="MySQL">MySQL</h3>
+<h4 id="安装">安装</h4>
+<pre><code class="language-bash">brew install mysql
+</code></pre>
+<h4 id="自动启动MySQL">自动启动 MySQL</h4>
+<pre><code class="language-bash">ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+</code></pre>
+<h4 id="启动MySQL">启动 MySQL</h4>
+<pre><code class="language-bash">launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+</code></pre>
+<h4 id="配置密码">配置密码</h4>
+<pre><code class="language-bash">mysql_secure_installation
+</code></pre>
+<h3 id="Nginx">Nginx</h3>
+<h4 id="安装-2">安装</h4>
+<pre><code class="language-bash">brew install nginx
+</code></pre>
+<h4 id="设置自动启动">设置自动启动</h4>
+<pre><code class="language-bash">sudo cp -v /usr/local/opt/nginx/*.plist /Library/LaunchDaemons/
+sudo chown root:wheel /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
+</code></pre>
+<h4 id="配置">配置</h4>
+<p>创建 nginx 文件夹及配置文件</p>
+<pre><code class="language-bash">mkdir -p /usr/local/etc/nginx/logs
+mkdir -p /usr/local/etc/nginx/sites-available
+mkdir -p /usr/local/etc/nginx/sites-enabled
+mkdir -p /usr/local/etc/nginx/conf.d
+</code></pre>
 <p>修改 /usr/local/etc/nginx/nginx.conf</p>
-<pre><code>user Kotori staff;# 修改对应用户名，如果你想把 Document Root 放在家目录下的话，反之注释
+<pre><code>user Kotori staff;#修改对应用户名，如果你想把Document Root放在家目录下的话，反之注释
 worker_processes  1;
 
 error_log  /usr/local/etc/nginx/logs/error.log debug;
@@ -119,9 +149,9 @@ http {
     include             mime.types;
     default_type        application/octet-stream;
 
-    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
-                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
-                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+    log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+                      '$status $body_bytes_sent &quot;$http_referer&quot; '
+                      '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
 
     access_log  /usr/local/etc/nginx/logs/access.log  main;
 
@@ -136,18 +166,23 @@ http {
     index index.html index.php;
 
     include /usr/local/etc/nginx/sites-enabled/*;
-}</code></pre><p>修改 /usr/local/etc/nginx/conf.d/php-fpm</p>
+}
+</code></pre>
+<p>修改 /usr/local/etc/nginx/conf.d/php-fpm</p>
 <pre><code>location ~ \.php$ {
     try_files      $uri = 404;
     fastcgi_pass   127.0.0.1:9000;
     fastcgi_index  index.php;
     fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
     include        fastcgi_params;
-}</code></pre><p>修改默认虚拟主机配置<br>/usr/local/etc/nginx/sites-available/default</p>
+}
+</code></pre>
+<p>修改默认虚拟主机配置<br>
+ /usr/local/etc/nginx/sites-available/default</p>
 <pre><code>server {
     listen       80;
     server_name  localhost;
-    root       /Users/Kotori/Documents/htdocs;# 这是自定义目录
+    root       /Users/Kotori/Documents/htdocs;#这是自定义目录
 
     access_log  /usr/local/etc/nginx/logs/default.access.log  main;
 
@@ -163,23 +198,29 @@ http {
 
     error_page  404     /404.html;
     error_page  403     /403.html;
-}</code></pre><p>软链接配置</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">ln</span> -sfv /usr/local/etc/nginx/sites-available/default/usr/local/etc/nginx/sites-enabled/default</span></pre><div class="tools"></div></figure>
+}
+</code></pre>
+<p>软链接配置</p>
+<pre><code class="language-bash">ln -sfv /usr/local/etc/nginx/sites-available/default /usr/local/etc/nginx/sites-enabled/default
+</code></pre>
 <p>启动</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line"><span class="token function">sudo</span> launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist</span></pre><div class="tools"></div></figure>
+<pre><code class="language-bash">sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
+</code></pre>
 <p>一些便利的 alias</p>
-<pre><code>alias nginx.start=&#39;sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist&#39;
-alias nginx.stop=&#39;sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist&#39;
-alias nginx.restart=&#39;nginx.stop &amp;&amp; nginx.start&#39;
+<pre><code>alias nginx.start='sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+alias nginx.stop='sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+alias nginx.restart='nginx.stop &amp;&amp; nginx.start'
 alias php-fpm.start=&quot;launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist&quot;
 alias php-fpm.stop=&quot;launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist&quot;
-alias php-fpm.restart=&#39;php-fpm.stop &amp;&amp; php-fpm.start&#39;
+alias php-fpm.restart='php-fpm.stop &amp;&amp; php-fpm.start'
 alias mysql.start=&quot;launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist&quot;
 alias mysql.stop=&quot;launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist&quot;
-alias mysql.restart=&#39;mysql.stop &amp;&amp; mysql.start&#39;
-alias nginx.logs.error=&#39;tail -250f /usr/local/etc/nginx/logs/error.log&#39;
-alias nginx.logs.access=&#39;tail -250f /usr/local/etc/nginx/logs/access.log&#39;
-alias nginx.logs.default.access=&#39;tail -250f /usr/local/etc/nginx/logs/default.access.log&#39;</code></pre><blockquote>
+alias mysql.restart='mysql.stop &amp;&amp; mysql.start'
+alias nginx.logs.error='tail -250f /usr/local/etc/nginx/logs/error.log'
+alias nginx.logs.access='tail -250f /usr/local/etc/nginx/logs/access.log'
+alias nginx.logs.default.access='tail -250f /usr/local/etc/nginx/logs/default.access.log'
+</code></pre>
+<blockquote>
 <p>参考 &amp; 精简自 <a href="http://blog.frd.mn/install-nginx-php-fpm-mysql-and-phpmyadmin-on-os-x-mavericks-using-homebrew/" target="_blank" rel="noopener">frdmn’s notes</a></p>
 </blockquote>
 
@@ -195,7 +236,7 @@ alias nginx.logs.default.access=&#39;tail -250f /usr/local/etc/nginx/logs/defaul
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -216,32 +257,29 @@ alias nginx.logs.default.access=&#39;tail -250f /usr/local/etc/nginx/logs/defaul
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/install-nginx-php-mysql-on-osx.html"></div>
+  <div id="disqus_thread" data-title="OS X 下配置 Nginx+PHP+MySQL" data-permalink="https://kotori.love/archives/install-nginx-php-mysql-on-osx.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -250,13 +288,19 @@ alias nginx.logs.default.access=&#39;tail -250f /usr/local/etc/nginx/logs/defaul
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

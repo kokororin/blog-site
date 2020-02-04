@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">Chrome 扩展开发笔记</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/chrome-extension-notes.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/chrome-extension-notes.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -81,456 +82,478 @@
 <p>先看看这个拓展的效果，如下图:</p>
 <p><img src="https://static-files.kotori.love/blog/2015/10/2407146113.png" alt="EC25D950-E3CB-4BE5-ACF8-EF7C1843BAA4.png"></p>
 <p><img src="https://static-files.kotori.love/blog/2015/10/1859953824.png" alt="216C02A1-A210-4032-8214-CF0433421D0E.png"></p>
-<h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><p>Chrome 扩展都包含一个 Manifest 文件 ——manifest.json，这个文件可以告诉 Chrome 关于这个扩展的相关信息，它是整个扩展的入口，也是 Chrome 扩展必不可少的部分。 Chrome 扩展的 Manifest 文件必须包含 name、version 和 manifest_version 属性，目前来说 manifest_version 属性值只能为数字 2，对于应用来说，还必须包含 app 属性。</p>
+<h3 id="基本结构">基本结构</h3>
+<p>Chrome 扩展都包含一个 Manifest 文件 ——manifest.json，这个文件可以告诉 Chrome 关于这个扩展的相关信息，它是整个扩展的入口，也是 Chrome 扩展必不可少的部分。 Chrome 扩展的 Manifest 文件必须包含 name、version 和 manifest_version 属性，目前来说 manifest_version 属性值只能为数字 2，对于应用来说，还必须包含 app 属性。</p>
 <p>其他常用的可选属性还有 browser_action、page_action、background、permissions、options_page、content_scripts，所以我们可以保留一份 manifest.json 模板，当编写新的扩展时直接填入相应的属性值。如果我们需要的属性不在这个模板中，可以再去查阅官方文档，但我想这样的一份模板可以应对大部分的扩展了。下面就放上 Kotori Music Player 的 manifest.json 文件模板：</p>
-<figure class="highlight code" data-language="Json"><pre class="language-json"><span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token property">"icons"</span><span class="token operator">:</span> <span class="token punctuation">{</span> // 定义了一些图标文件，放在 images 文件夹下，每个图标的名称和像素需要对应。</span>
-<span class="line">        <span class="token property">"16"</span><span class="token operator">:</span> <span class="token string">"images/icon-16.png"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token property">"32"</span><span class="token operator">:</span> <span class="token string">"images/icon-32.png"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token property">"48"</span><span class="token operator">:</span> <span class="token string">"images/icon-48.png"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token property">"128"</span><span class="token operator">:</span> <span class="token string">"images/icon-128.png"</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token property">"browser_action"</span><span class="token operator">:</span> <span class="token punctuation">{</span> //browser_action 指定扩展的图标放在 Chrome 的工具栏中</span>
-<span class="line">        <span class="token property">"default_popup"</span><span class="token operator">:</span> <span class="token string">"popup.html"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token property">"default_icon"</span><span class="token operator">:</span> <span class="token punctuation">{</span> // 定义了在工具栏中显示的图标</span>
-<span class="line">            <span class="token property">"19"</span><span class="token operator">:</span> <span class="token string">"images/icon-19.png"</span><span class="token punctuation">,</span></span>
-<span class="line">            <span class="token property">"38"</span><span class="token operator">:</span> <span class="token string">"images/icon-38.png"</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token property">"manifest_version"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>//manifest 的版本，这里现在填 <span class="token number">2</span> 就好了</span>
-<span class="line">    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Kotori Music Player"</span><span class="token punctuation">,</span>// 扩展的名字</span>
-<span class="line">    <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.4"</span><span class="token punctuation">,</span> 扩展的当前版本，这里由你自己控制，以后升级的时候，要比当前版本高就好了。</span>
-<span class="line">    <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"调用虾米 API 播放选定的精选集，支持歌词同步显示。"</span><span class="token punctuation">,</span>// 对于这个拓展的描述</span>
-<span class="line">    <span class="token property">"background"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token property">"page"</span><span class="token operator">:</span> <span class="token string">"background.html"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token property">"persistent"</span><span class="token operator">:</span> <span class="token boolean">true</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token property">"options_page"</span><span class="token operator">:</span> <span class="token string">"options.html"</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token property">"permissions"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
-<span class="line">        <span class="token string">"tabs"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">"storage"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">"notifications"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">"http://*/*"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">"https://*/*"</span></span>
-<span class="line">    <span class="token punctuation">]</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<p>以上除了 permissions 都能根据字面意思理解，permissions 属性中声明需要跨域的权限。一些 API 比如 tabs,notifications,<br>contextMenus 等都需要在 permissions 中声明。</p>
+<pre><code class="language-json">{
+    &quot;icons&quot;: { //定义了一些图标文件，放在images文件夹下，每个图标的名称和像素需要对应。
+        &quot;16&quot;: &quot;images/icon-16.png&quot;,
+        &quot;32&quot;: &quot;images/icon-32.png&quot;,
+        &quot;48&quot;: &quot;images/icon-48.png&quot;,
+        &quot;128&quot;: &quot;images/icon-128.png&quot;
+    },
+    &quot;browser_action&quot;: { // browser_action指定扩展的图标放在Chrome的工具栏中
+        &quot;default_popup&quot;: &quot;popup.html&quot;,
+        &quot;default_icon&quot;: { // 定义了在工具栏中显示的图标
+            &quot;19&quot;: &quot;images/icon-19.png&quot;,
+            &quot;38&quot;: &quot;images/icon-38.png&quot;
+        }
+    },
+    &quot;manifest_version&quot;: 2,//manifest的版本，这里现在填2就好了
+    &quot;name&quot;: &quot;Kotori Music Player&quot;,//扩展的名字
+    &quot;version&quot;: &quot;1.4&quot;,扩展的当前版本，这里由你自己控制，以后升级的时候，要比当前版本高就好了。
+    &quot;description&quot;: &quot;调用虾米API播放选定的精选集，支持歌词同步显示。&quot;,// 对于这个拓展的描述
+    &quot;background&quot;: {
+        &quot;page&quot;: &quot;background.html&quot;,
+        &quot;persistent&quot;: true
+    },
+    &quot;options_page&quot;: &quot;options.html&quot;,
+    &quot;permissions&quot;: [
+        &quot;tabs&quot;,
+        &quot;storage&quot;,
+        &quot;notifications&quot;,
+        &quot;http://*/*&quot;,
+        &quot;https://*/*&quot;
+    ]
+}
+</code></pre>
+<p>以上除了 permissions 都能根据字面意思理解，permissions 属性中声明需要跨域的权限。一些 API 比如 tabs,notifications,<br>
+contextMenus 等都需要在 permissions 中声明。</p>
 <p>接下来看一下 background.html，主要就是放置一个 audio 标签，用于后台播放歌曲文件。</p>
-<figure class="highlight code" data-language="Html"><pre class="language-html"><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span></span>
-<span class="line">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>audio</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>music<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>audio</span><span class="token punctuation">></span></span></span>
-<span class="line">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/jquery.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span>
-<span class="line">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/global.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span>
-<span class="line">   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/background.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></span></pre><div class="tools"></div></figure>
+<pre><code class="language-html">&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;audio id=&quot;music&quot; src=&quot;&quot;&gt;&lt;/audio&gt;
+   &lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery.min.js&quot;&gt;&lt;/script&gt;
+   &lt;script type=&quot;text/javascript&quot; src=&quot;js/global.js&quot;&gt;&lt;/script&gt;
+   &lt;script type=&quot;text/javascript&quot; src=&quot;js/background.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 <p>其中主要的 JavaScript 脚本 background.js 如下，主要包括精选集解析，歌曲解析，LRC 格式歌词解析。在 background 处理完必要的事件后，将一些需要和前台 popup 交互的元素复制到变量里：</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token comment" spellcheck="true">// 各种需要用到的变量</span></span>
-<span class="line"><span class="token keyword">var</span> audio <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#music'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">get</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> item <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> isPlaying <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> currentMusic <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> prevMusic <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> repeat <span class="token operator">=</span> parseInt <span class="token punctuation">(</span>localStorage<span class="token punctuation">.</span>repeat<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> ratio <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> name <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> artist <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> cover <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> playlist <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> lyricUrl <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> lyric <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">var</span> collectID <span class="token operator">=</span> getCollectID <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">$<span class="token punctuation">.</span>ajax <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">    url<span class="token punctuation">:</span> <span class="token string">'http://kotori.sinaapp.com/xiami/collect/'</span> <span class="token operator">+</span> collectID<span class="token punctuation">,</span></span>
-<span class="line">    type<span class="token punctuation">:</span> <span class="token string">'get'</span><span class="token punctuation">,</span></span>
-<span class="line">    dataType<span class="token punctuation">:</span> <span class="token string">'json'</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token keyword">async</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span></span>
-<span class="line">    success<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        playlist <span class="token operator">=</span> data<span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">    error<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        showNotification <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">            type<span class="token punctuation">:</span> <span class="token string">"basic"</span><span class="token punctuation">,</span></span>
-<span class="line">            title<span class="token punctuation">:</span> <span class="token string">'Message'</span><span class="token punctuation">,</span></span>
-<span class="line">            message<span class="token punctuation">:</span> <span class="token string">'Kotori API Error'</span><span class="token punctuation">,</span></span>
-<span class="line">            iconUrl<span class="token punctuation">:</span> <span class="token string">'images/icon-128.png'</span></span>
-<span class="line">        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line">console<span class="token punctuation">.</span>log <span class="token punctuation">(</span><span class="token string">'&lt;&lt;&lt;Kotori の电台 >>>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">console<span class="token punctuation">.</span>log <span class="token punctuation">(</span><span class="token string">'Version : 20150719'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">console<span class="token punctuation">.</span>log <span class="token punctuation">(</span><span class="token string">'Current Music: '</span> <span class="token operator">+</span> currentMusic <span class="token operator">+</span> <span class="token string">' Repeat: '</span> <span class="token operator">+</span> repeat<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> loadMusic <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line"></span>
-<span class="line">    currentMusic <span class="token operator">=</span> localStorage<span class="token punctuation">.</span>currentMusic <span class="token operator">=</span> i<span class="token punctuation">;</span></span>
-<span class="line">    <span class="token comment" spellcheck="true">//console.log (localStorage.currentMusic);</span></span>
-<span class="line">    item <span class="token operator">=</span> playlist <span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">    $<span class="token punctuation">.</span>ajax <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">        type<span class="token punctuation">:</span> <span class="token string">"get"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token keyword">async</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span></span>
-<span class="line">        dataType<span class="token punctuation">:</span> <span class="token string">"json"</span><span class="token punctuation">,</span></span>
-<span class="line">        url<span class="token punctuation">:</span> <span class="token string">'https://kotori.sinaapp.com/xiami/single/'</span> <span class="token operator">+</span> item<span class="token punctuation">.</span>id<span class="token punctuation">,</span></span>
-<span class="line">        success<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line"></span>
-<span class="line">            <span class="token keyword">if</span> <span class="token punctuation">(</span>data<span class="token punctuation">.</span>url <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                src <span class="token operator">=</span> data<span class="token punctuation">.</span>url<span class="token punctuation">;</span></span>
-<span class="line">                audio<span class="token punctuation">.</span>setAttribute <span class="token punctuation">(</span><span class="token string">"src"</span><span class="token punctuation">,</span> src<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                cover <span class="token operator">=</span> data<span class="token punctuation">.</span>img<span class="token punctuation">;</span></span>
-<span class="line">                artist <span class="token operator">=</span> data<span class="token punctuation">.</span>artist_name<span class="token punctuation">;</span></span>
-<span class="line">                name <span class="token operator">=</span> data<span class="token punctuation">.</span>name<span class="token punctuation">;</span></span>
-<span class="line">                lyricUrl <span class="token operator">=</span> data<span class="token punctuation">.</span>lyric<span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">                <span class="token keyword">if</span> <span class="token punctuation">(</span>isPlaying<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                    play <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">                     showNotification <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">                         type<span class="token punctuation">:</span> <span class="token string">"basic"</span><span class="token punctuation">,</span></span>
-<span class="line">                         title<span class="token punctuation">:</span> name<span class="token punctuation">,</span></span>
-<span class="line">                         message<span class="token punctuation">:</span> artist<span class="token punctuation">,</span></span>
-<span class="line">                         iconUrl<span class="token punctuation">:</span> cover</span>
-<span class="line">                     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">                <span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line">                console<span class="token punctuation">.</span>log <span class="token punctuation">(</span><span class="token string">'Song Title: '</span> <span class="token operator">+</span> data<span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">' Song Artist: '</span> <span class="token operator">+</span> data<span class="token punctuation">.</span>artist_name<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line"></span>
-<span class="line">                showNotification <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">                    type<span class="token punctuation">:</span> <span class="token string">"basic"</span><span class="token punctuation">,</span></span>
-<span class="line">                    title<span class="token punctuation">:</span> <span class="token string">'Message'</span><span class="token punctuation">,</span></span>
-<span class="line">                    message<span class="token punctuation">:</span> <span class="token string">' 歌曲获取失败，请重试。'</span><span class="token punctuation">,</span></span>
-<span class="line">                    iconUrl<span class="token punctuation">:</span> <span class="token string">'images/icon-128.png'</span></span>
-<span class="line">                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line">        <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> changeMusic <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    loadMusic <span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> randomNum <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>min<span class="token punctuation">,</span> max<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">return</span> Math<span class="token punctuation">.</span>floor <span class="token punctuation">(</span>min <span class="token operator">+</span> Math<span class="token punctuation">.</span>random <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>max <span class="token operator">-</span> min<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> autoChange <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">var</span> nextMusic <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">switch</span> <span class="token punctuation">(</span>repeat<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">case</span> <span class="token number">0</span><span class="token punctuation">:</span></span>
-<span class="line">            prevMusic <span class="token operator">=</span> currentMusic<span class="token punctuation">;</span></span>
-<span class="line">            nextMusic <span class="token operator">=</span> randomNum <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> playlist<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            changeMusic <span class="token punctuation">(</span>nextMusic<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token keyword">break</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">case</span> <span class="token number">1</span><span class="token punctuation">:</span></span>
-<span class="line">            audio<span class="token punctuation">.</span>currentTime <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span></span>
-<span class="line">            play <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token keyword">break</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">case</span> <span class="token number">2</span><span class="token punctuation">:</span></span>
-<span class="line">            <span class="token keyword">if</span> <span class="token punctuation">(</span>currentMusic <span class="token operator">==</span> playlist<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                changeMusic <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">                changeMusic <span class="token punctuation">(</span>currentMusic <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line">            <span class="token keyword">break</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> updateProgress <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span>audio<span class="token punctuation">.</span>currentTime <span class="token operator">==</span> audio<span class="token punctuation">.</span>duration<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token comment" spellcheck="true">//autoChange ();</span></span>
-<span class="line">        next <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    ratio <span class="token operator">=</span> audio<span class="token punctuation">.</span>currentTime<span class="token operator">/</span>audio<span class="token punctuation">.</span>duration <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> getLyric <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span>lyricUrl <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">return</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    $<span class="token punctuation">.</span>ajax <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">        url<span class="token punctuation">:</span> lyricUrl<span class="token punctuation">,</span></span>
-<span class="line">        type<span class="token punctuation">:</span> <span class="token string">'get'</span><span class="token punctuation">,</span></span>
-<span class="line">        dataType<span class="token punctuation">:</span> <span class="token string">'text'</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token keyword">async</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span></span>
-<span class="line">        success<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            lyric <span class="token operator">=</span> parseLyric <span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">        error<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            showNotification <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">                type<span class="token punctuation">:</span> <span class="token string">"basic"</span><span class="token punctuation">,</span></span>
-<span class="line">                title<span class="token punctuation">:</span> <span class="token string">'Message'</span><span class="token punctuation">,</span></span>
-<span class="line">                message<span class="token punctuation">:</span> <span class="token string">'Lyric Fetch Error'</span><span class="token punctuation">,</span></span>
-<span class="line">                iconUrl<span class="token punctuation">:</span> <span class="token string">'images/icon-128.png'</span></span>
-<span class="line">            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> parseLyric <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>text<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token comment" spellcheck="true">//get each line from the text</span></span>
-<span class="line">    <span class="token keyword">var</span> lines <span class="token operator">=</span> text<span class="token punctuation">.</span>split <span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token comment" spellcheck="true">//this regex mathes the time [00.12.78]</span></span>
-<span class="line">        pattern <span class="token operator">=</span> <span class="token regex">/\[\d {2}:\d {2}.\d {2}\]/g</span><span class="token punctuation">,</span></span>
-<span class="line">        result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token comment" spellcheck="true">// Get offset from lyrics</span></span>
-<span class="line">    <span class="token keyword">var</span> offset <span class="token operator">=</span> getOffset <span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token comment" spellcheck="true">//exclude the description parts or empty parts of the lyric</span></span>
-<span class="line">    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>pattern<span class="token punctuation">.</span>test <span class="token punctuation">(</span>lines <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        lines <span class="token operator">=</span> lines<span class="token punctuation">.</span>slice <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token comment" spellcheck="true">//remove the last empty item</span></span>
-<span class="line">    lines <span class="token punctuation">[</span>lines<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> lines<span class="token punctuation">.</span>pop <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token comment" spellcheck="true">//display all content on the page</span></span>
-<span class="line">    lines<span class="token punctuation">.</span>forEach <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>v<span class="token punctuation">,</span> i<span class="token punctuation">,</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">var</span> time <span class="token operator">=</span> v<span class="token punctuation">.</span>match <span class="token punctuation">(</span>pattern<span class="token punctuation">)</span><span class="token punctuation">,</span></span>
-<span class="line">            value <span class="token operator">=</span> v<span class="token punctuation">.</span>replace <span class="token punctuation">(</span>pattern<span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        time<span class="token punctuation">.</span>forEach <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>v1<span class="token punctuation">,</span> i1<span class="token punctuation">,</span> a1<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token comment" spellcheck="true">//convert the [min:sec] to secs format then store into result</span></span>
-<span class="line">            <span class="token keyword">var</span> t <span class="token operator">=</span> v1<span class="token punctuation">.</span>slice <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split <span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            result<span class="token punctuation">.</span>push <span class="token punctuation">(</span><span class="token punctuation">[</span>parseInt <span class="token punctuation">(</span>t <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">+</span> parseFloat <span class="token punctuation">(</span>t <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> parseInt <span class="token punctuation">(</span>offset<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">1000</span><span class="token punctuation">,</span> value<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token comment" spellcheck="true">//sort the result by time</span></span>
-<span class="line">    result<span class="token punctuation">.</span>sort <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">return</span> a <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> b <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">return</span> result<span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> getOffset <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>text<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token comment" spellcheck="true">//Returns offset in miliseconds.</span></span>
-<span class="line">    <span class="token keyword">var</span> offset <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">try</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token comment" spellcheck="true">// Pattern matches [offset:1000]</span></span>
-<span class="line">        <span class="token keyword">var</span> offsetPattern <span class="token operator">=</span> <span class="token regex">/\[offset:\-?\+?\d+\]/g</span><span class="token punctuation">,</span></span>
-<span class="line">            <span class="token comment" spellcheck="true">// Get only the first match.</span></span>
-<span class="line">            offset_line <span class="token operator">=</span> text<span class="token punctuation">.</span>match <span class="token punctuation">(</span>offsetPattern<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span></span>
-<span class="line">            <span class="token comment" spellcheck="true">// Get the second part of the offset.</span></span>
-<span class="line">            offset_str <span class="token operator">=</span> offset_line<span class="token punctuation">.</span>split <span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token comment" spellcheck="true">// Convert it to Int.</span></span>
-<span class="line">        offset <span class="token operator">=</span> parseInt <span class="token punctuation">(</span>offset_str<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">err</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token comment" spellcheck="true">//alert ("offset error:"+err.message);</span></span>
-<span class="line">        offset <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token keyword">return</span> offset<span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> play <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    audio<span class="token punctuation">.</span>play <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    getLyric <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    timeout <span class="token operator">=</span> setInterval <span class="token punctuation">(</span>updateProgress<span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token comment" spellcheck="true">//setInterval (showLyric, 1000);</span></span>
-<span class="line">    isPlaying <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> pause <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    audio<span class="token punctuation">.</span>pause <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    clearInterval <span class="token punctuation">(</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    isPlaying <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> next <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span>repeat <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        prevMusic <span class="token operator">=</span> currentMusic<span class="token punctuation">;</span></span>
-<span class="line">        nextMusic <span class="token operator">=</span> randomNum <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> playlist<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        changeMusic <span class="token punctuation">(</span>nextMusic<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>currentMusic <span class="token operator">==</span> playlist<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        changeMusic <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">        changeMusic <span class="token punctuation">(</span>currentMusic <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token keyword">var</span> previous <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span>repeat <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> prevMusic <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        changeMusic <span class="token punctuation">(</span>prevMusic<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        prevMusic <span class="token operator">=</span> randomNum <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> playlist<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>currentMusic <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        changeMusic <span class="token punctuation">(</span>playlist<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">        changeMusic <span class="token punctuation">(</span>currentMusic <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"><span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span class="token comment" spellcheck="true">// 初始化操作</span></span>
-<span class="line">loadMusic <span class="token punctuation">(</span>currentMusic<span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
+<pre><code class="language-javascript">//各种需要用到的变量
+var audio = $('#music').get(0);
+var item = null;
+var isPlaying = false;
+var currentMusic = 0;
+var prevMusic = -1;
+var repeat = parseInt(localStorage.repeat);
+var ratio = 0;
+var name = '';
+var artist = '';
+var cover = '';
+var playlist = null;
+var lyricUrl = null;
+var lyric = null;
+var collectID = getCollectID();
+
+$.ajax({
+    url: 'http://kotori.sinaapp.com/xiami/collect/' + collectID,
+    type: 'get',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        playlist = data;
+    },
+    error: function() {
+        showNotification({
+            type: &quot;basic&quot;,
+            title: 'Message',
+            message: 'Kotori API Error',
+            iconUrl: 'images/icon-128.png'
+        });
+    }
+});
+
+
+console.log('&lt;&lt;&lt;Kotoriの电台&gt;&gt;&gt;');
+console.log('Version : 20150719');
+console.log('Current Music: ' + currentMusic + ' Repeat: ' + repeat);
+
+
+var loadMusic = function(i) {
+
+    currentMusic = localStorage.currentMusic = i;
+    //console.log(localStorage.currentMusic);
+    item = playlist[i];
+
+    $.ajax({
+        type: &quot;get&quot;,
+        async: false,
+        dataType: &quot;json&quot;,
+        url: 'https://kotori.sinaapp.com/xiami/single/' + item.id,
+        success: function(data) {
+
+            if (data.url != null) {
+                src = data.url;
+                audio.setAttribute(&quot;src&quot;, src);
+                cover = data.img;
+                artist = data.artist_name;
+                name = data.name;
+                lyricUrl = data.lyric;
+
+                if (isPlaying) {
+                    play();
+                    
+                     showNotification({
+                         type: &quot;basic&quot;,
+                         title: name,
+                         message: artist,
+                         iconUrl: cover
+                     });
+                    
+                }
+
+                console.log('Song Title: ' + data.name + ' Song Artist: ' + data.artist_name);
+            } else {
+
+                showNotification({
+                    type: &quot;basic&quot;,
+                    title: 'Message',
+                    message: '歌曲获取失败，请重试。',
+                    iconUrl: 'images/icon-128.png'
+                });
+
+            }
+        },
+    });
+}
+
+var changeMusic = function(i) {
+    loadMusic(i);
+}
+
+var randomNum = function(min, max) {
+    return Math.floor(min + Math.random() * (max - min));
+}
+
+var autoChange = function() {
+    var nextMusic = 0;
+    switch (repeat) {
+        case 0:
+            prevMusic = currentMusic;
+            nextMusic = randomNum(0, playlist.length);
+            changeMusic(nextMusic);
+            break;
+        case 1:
+            audio.currentTime = 0.0;
+            play();
+            break;
+        case 2:
+            if (currentMusic == playlist.length - 1) {
+                changeMusic(0);
+            } else {
+                changeMusic(currentMusic + 1);
+            }
+            break;
+    }
+}
+
+var updateProgress = function() {
+    if (audio.currentTime == audio.duration) {
+        //autoChange();
+        next();
+    }
+    ratio = audio.currentTime / audio.duration * 100;
+}
+
+
+var getLyric = function() {
+    if (lyricUrl == null) {
+        return;
+    }
+    $.ajax({
+        url: lyricUrl,
+        type: 'get',
+        dataType: 'text',
+        async: false,
+        success: function(data) {
+            lyric = parseLyric(data);
+        },
+        error: function() {
+            showNotification({
+                type: &quot;basic&quot;,
+                title: 'Message',
+                message: 'Lyric Fetch Error',
+                iconUrl: 'images/icon-128.png'
+            });
+        }
+    });
+}
+
+var parseLyric = function(text) {
+    //get each line from the text
+    var lines = text.split('\n'),
+        //this regex mathes the time [00.12.78]
+        pattern = /\[\d{2}:\d{2}.\d{2}\]/g,
+        result = [];
+
+    // Get offset from lyrics
+    var offset = getOffset(text);
+
+    //exclude the description parts or empty parts of the lyric
+    while (!pattern.test(lines[0])) {
+        lines = lines.slice(1);
+    };
+    //remove the last empty item
+    lines[lines.length - 1].length === 0 &amp;&amp; lines.pop();
+    //display all content on the page
+    lines.forEach(function(v, i, a) {
+        var time = v.match(pattern),
+            value = v.replace(pattern, '');
+        time.forEach(function(v1, i1, a1) {
+            //convert the [min:sec] to secs format then store into result
+            var t = v1.slice(1, -1).split(':');
+            result.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]) + parseInt(offset) / 1000, value]);
+        });
+    });
+    //sort the result by time
+    result.sort(function(a, b) {
+        return a[0] - b[0];
+    });
+    return result;
+}
+
+var getOffset = function(text) {
+    //Returns offset in miliseconds.
+    var offset = 0;
+    try {
+        // Pattern matches [offset:1000]
+        var offsetPattern = /\[offset:\-?\+?\d+\]/g,
+            // Get only the first match.
+            offset_line = text.match(offsetPattern)[0],
+            // Get the second part of the offset.
+            offset_str = offset_line.split(':')[1];
+        // Convert it to Int.
+        offset = parseInt(offset_str);
+    } catch (err) {
+        //alert(&quot;offset error: &quot;+err.message);
+        offset = 0;
+    }
+    return offset;
+}
+
+
+var play = function() {
+    audio.play();
+    getLyric();
+    timeout = setInterval(updateProgress, 500);
+    //setInterval(showLyric, 1000);
+    isPlaying = true;
+
+}
+
+
+var pause = function() {
+    audio.pause();
+    clearInterval(timeout);
+    isPlaying = false;
+}
+
+var next = function() {
+    if (repeat == 0) {
+        prevMusic = currentMusic;
+        nextMusic = randomNum(0, playlist.length);
+        changeMusic(nextMusic);
+    } else if (currentMusic == playlist.length - 1) {
+        changeMusic(0);
+    } else {
+        changeMusic(currentMusic + 1);
+    }
+}
+
+var previous = function() {
+    if (repeat == 0 &amp;&amp; prevMusic != -1) {
+        changeMusic(prevMusic);
+        prevMusic = randomNum(0, playlist.length);
+    } else if (currentMusic == 0) {
+        changeMusic(playlist.length - 1);
+    } else {
+        changeMusic(currentMusic - 1);
+    }
+}
+
+
+//初始化操作
+loadMusic(currentMusic);
+
+</code></pre>
 <p>关于 LRC 歌词文件，一般格式如下：</p>
-<pre><code>[ar: 文筱芮]
+<pre><code>[ar:文筱芮]
 [by:airplay]
-[00:00.00] 那个
-[00:03.00] 作词：文筱芮 作曲：文筱芮
-[00:06.00] 编曲：于韵非
-[00:09.00] 制作人：胡海泉 秦天
-[00:12.00] 演唱：文筱芮</code></pre><p>这样挺有规律的，用正则可以很方便地将时间与歌词提取分离。</p>
+[00:00.00]那个
+[00:03.00]作词:文筱芮 作曲:文筱芮
+[00:06.00]编曲:于韵非
+[00:09.00]制作人:胡海泉 秦天
+[00:12.00]演唱:文筱芮
+</code></pre>
+<p>这样挺有规律的，用正则可以很方便地将时间与歌词提取分离。</p>
 <p>但凡事得多个心眼啊。事后发生的事情证明这句话有多正确。我在整理歌词时还发现了另外一种形式，像下面这样：</p>
-<pre><code>[ar: 庭竹]
-[al: 爱的九宫格]
+<pre><code>[ar:庭竹]
+[al:爱的九宫格]
 [by:airplay]
-[00:00.17] 庭竹 - 公主的天堂
-[00:05.40] 作曲：陈嘉唯、Skot Suyama 陶山、庭竹
-[00:07.33] 作词：庭竹
-[00:15.59] 风铃的音谱 在耳边打转
-[00:18.62] 城堡里 公主也摆脱了黑暗的囚禁
-[00:22.82] 她一点点地 无声悄悄地慢慢长大
-[00:26.36] 期待着 深锁木门后的世界
+[00:00.17]庭竹 - 公主的天堂
+[00:05.40]作曲:陈嘉唯、Skot Suyama 陶山、庭竹
+[00:07.33]作词:庭竹
+[00:15.59]风铃的音谱 在耳边打转
+[00:18.62]城堡里 公主也摆脱了黑暗的囚禁
+[00:22.82]她一点点地 无声悄悄地慢慢长大
+[00:26.36]期待着 深锁木门后的世界
 [01:38.72][00:29.76]
-[01:51.48][00:30.32] 树上 小鸟的轻响 在身边打转
-[01:55.35][00:34.09] 公主已 忘记木制衣橱背后的惆怅
-[01:59.65][00:38.35] 她跳舞唱歌天真无邪地寻找属于自己的光亮和快乐
+[01:51.48][00:30.32]树上 小鸟的轻响 在身边打转
+[01:55.35][00:34.09]公主已 忘记木制衣橱背后的惆怅
+[01:59.65][00:38.35]她跳舞唱歌天真无邪地寻找属于自己的光亮和快乐
 [02:06.98][00:45.76]
-[02:07.41][00:46.06] 树叶一层层拨开了伪装
-[02:11.29][00:50.25] 彩虹一步步露出美丽脸庞 无限的光亮</code></pre><p>这种形式的歌词把歌词内容相同但时间不同的部分合并，节省了篇幅。</p>
+[02:07.41][00:46.06]树叶一层层拨开了伪装
+[02:11.29][00:50.25]彩虹一步步露出美丽脸庞 无限的光亮
+</code></pre>
+<p>这种形式的歌词把歌词内容相同但时间不同的部分合并，节省了篇幅。</p>
 <p>所以，现在知道的歌词其实有两种写法了，不过都还算规律，用正则可以搞定，只是对于第二种，处理时得将时间再次分割。</p>
 <p>JavaScript 解析法上面已经给出，本扩展最开始采用的是 PHP 解析成 JSON 格式，但是试过效率并不高，代码如下：</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">private</span> <span class="token keyword">function</span> <span class="token function">parseLyric</span> <span class="token punctuation">(</span><span class="token variable">$lyric</span><span class="token punctuation">)</span></span>
-<span class="line">    <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$lyric</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token comment" spellcheck="true">// 远程获取歌词内容</span></span>
-<span class="line">            <span class="token variable">$content</span> <span class="token operator">=</span> @<span class="token function">file_get_contents</span> <span class="token punctuation">(</span><span class="token variable">$lyric</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">            <span class="token comment" spellcheck="true">// 按” 回车换行 “将歌词切割成数组</span></span>
-<span class="line">            <span class="token variable">$array</span> <span class="token operator">=</span> <span class="token function">explode</span> <span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token variable">$lrc</span> <span class="token operator">=</span> <span class="token keyword">array</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$array</span> <span class="token keyword">as</span> <span class="token variable">$val</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                <span class="token comment" spellcheck="true">// 清除掉” 回车不换行 “符号</span></span>
-<span class="line">                <span class="token variable">$val</span> <span class="token operator">=</span> <span class="token function">preg_replace</span> <span class="token punctuation">(</span><span class="token string">'/\r/'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token variable">$val</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">                <span class="token comment" spellcheck="true">// 正则匹配歌词时间</span></span>
-<span class="line">                <span class="token variable">$temp</span> <span class="token operator">=</span> <span class="token function">preg_match_all</span> <span class="token punctuation">(</span><span class="token string">'/\[\d {2}\:\d {2}\.\d {2}\]/'</span><span class="token punctuation">,</span> <span class="token variable">$val</span><span class="token punctuation">,</span> <span class="token variable">$matches</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">empty</span> <span class="token punctuation">(</span><span class="token variable">$matches</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                    <span class="token variable">$data_plus</span> <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token variable">$time_array</span> <span class="token operator">=</span> <span class="token keyword">array</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">                    <span class="token comment" spellcheck="true">// 将可能匹配的多个时间挑选出来，例如：[00:21]、[03:40]</span></span>
-<span class="line">                    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$matches</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">as</span> <span class="token variable">$V</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                        <span class="token variable">$data_plus</span> <span class="token punctuation">.</span><span class="token operator">=</span> <span class="token variable">$V</span><span class="token punctuation">;</span></span>
-<span class="line">                        <span class="token variable">$V</span> <span class="token operator">=</span> <span class="token function">str_replace</span> <span class="token punctuation">(</span><span class="token string">"["</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> <span class="token variable">$V</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                        <span class="token variable">$V</span> <span class="token operator">=</span> <span class="token function">str_replace</span> <span class="token punctuation">(</span><span class="token string">"]"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> <span class="token variable">$V</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                        <span class="token variable">$date_array</span> <span class="token operator">=</span> <span class="token function">explode</span> <span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">,</span> <span class="token variable">$V</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">                        <span class="token comment" spellcheck="true">// 将例如：00:21、03:40 转换成秒</span></span>
-<span class="line">                        <span class="token variable">$time_array</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">intval</span> <span class="token punctuation">(</span><span class="token function">intval</span> <span class="token punctuation">(</span><span class="token variable">$date_array</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">60</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">intval</span> <span class="token punctuation">(</span><span class="token variable">$date_array</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line">                    <span class="token comment" spellcheck="true">// 将上面的得到的时间，例如：[00:21][03:40]，替换成空，得到歌词</span></span>
-<span class="line">                    <span class="token variable">$data_plus</span> <span class="token operator">=</span> <span class="token function">str_replace</span> <span class="token punctuation">(</span><span class="token variable">$data_plus</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> <span class="token variable">$val</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">                    <span class="token comment" spellcheck="true">// 将时间和歌词组合到数组中</span></span>
-<span class="line">                    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$time_array</span> <span class="token keyword">as</span> <span class="token variable">$V</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                        <span class="token comment" spellcheck="true">//$lrc [] = array ($V, $data_plus);</span></span>
-<span class="line">                        <span class="token variable">$lrc</span> <span class="token punctuation">[</span><span class="token string">'time'</span> <span class="token punctuation">.</span> <span class="token variable">$V</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$data_plus</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token punctuation">}</span></span>
-<span class="line">                <span class="token punctuation">}</span></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line">            <span class="token comment" spellcheck="true">// 按时间顺序来排序数组</span></span>
-<span class="line">            <span class="token comment" spellcheck="true">//$lrc = $this->bsort ($lrc);</span></span>
-<span class="line"></span>
-<span class="line">            <span class="token comment" spellcheck="true">// 输出 json 格式</span></span>
-<span class="line">            <span class="token keyword">return</span> <span class="token function">json_encode</span> <span class="token punctuation">(</span><span class="token variable">$lrc</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">        <span class="token keyword">return</span> <span class="token string">'no lyric'</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"><span class="token keyword">private</span> <span class="token keyword">function</span> <span class="token function">bsort</span> <span class="token punctuation">(</span><span class="token keyword">array</span> <span class="token variable">$array</span><span class="token punctuation">)</span></span>
-<span class="line">    <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token variable">$count</span> <span class="token operator">=</span> <span class="token function">count</span> <span class="token punctuation">(</span><span class="token variable">$array</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token variable">$i</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token variable">$i</span> <span class="token operator">&lt;</span> <span class="token variable">$count</span><span class="token punctuation">;</span> <span class="token variable">$i</span><span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token variable">$j</span> <span class="token operator">=</span> <span class="token variable">$count</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token variable">$j</span> <span class="token operator">></span> <span class="token variable">$i</span><span class="token punctuation">;</span> <span class="token variable">$j</span><span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$array</span> <span class="token punctuation">[</span><span class="token variable">$j</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token variable">$array</span> <span class="token punctuation">[</span><span class="token variable">$j</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                    <span class="token variable">$temp</span> <span class="token operator">=</span> <span class="token variable">$array</span> <span class="token punctuation">[</span><span class="token variable">$j</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token variable">$array</span> <span class="token punctuation">[</span><span class="token variable">$j</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$array</span> <span class="token punctuation">[</span><span class="token variable">$j</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token variable">$array</span> <span class="token punctuation">[</span><span class="token variable">$j</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$temp</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token punctuation">}</span></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">        <span class="token keyword">return</span> <span class="token variable">$array</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+<pre><code class="language-php">    private function parseLyric($lyric)
+    {
+        if ($lyric) {
+            // 远程获取歌词内容
+            $content = @file_get_contents($lyric);
+
+            // 按”回车换行“将歌词切割成数组
+            $array = explode(&quot;\n&quot;, $content);
+            $lrc = array();
+
+            foreach ($array as $val) {
+                // 清除掉”回车不换行“符号
+                $val = preg_replace('/\r/', '', $val);
+
+                // 正则匹配歌词时间
+                $temp = preg_match_all('/\[\d{2}\:\d{2}\.\d{2}\]/', $val, $matches);
+                if (!empty($matches[0])) {
+                    $data_plus = &quot;&quot;;
+                    $time_array = array();
+
+                    // 将可能匹配的多个时间挑选出来，例如：[00:21]、[03:40]
+                    foreach ($matches[0] as $V) {
+                        $data_plus .= $V;
+                        $V = str_replace(&quot;[&quot;, &quot;&quot;, $V);
+                        $V = str_replace(&quot;]&quot;, &quot;&quot;, $V);
+                        $date_array = explode(&quot;:&quot;, $V);
+
+                        // 将例如：00:21、03:40 转换成秒
+                        $time_array[] = intval(intval($date_array[0] * 60) + intval($date_array[1]));
+                    }
+
+                    // 将上面的得到的时间，例如：[00:21][03:40]，替换成空，得到歌词
+                    $data_plus = str_replace($data_plus, &quot;&quot;, $val);
+
+                    // 将时间和歌词组合到数组中
+                    foreach ($time_array as $V) {
+                        //$lrc[] = array($V, $data_plus);
+                        $lrc['time' . $V] = $data_plus;
+                    }
+                }
+            }
+
+            // 按时间顺序来排序数组
+            //$lrc = $this-&gt;bsort($lrc);
+
+            // 输出 json格式
+            return json_encode($lrc);
+        }
+        return 'no lyric';
+    }
+private function bsort(array $array)
+    {
+        $count = count($array);
+        for ($i = 0; $i &lt; $count; $i++) {
+            for ($j = $count - 1; $j &gt; $i; $j--) {
+                if ($array[$j][0] &lt; $array[$j - 1][0]) {
+                    $temp = $array[$j];
+                    $array[$j] = $array[$j - 1];
+                    $array[$j - 1] = $temp;
+                }
+            }
+        }
+        return $array;
+    }
+</code></pre>
 <p>下面看一下 popup.html 文件的内容，该页面主要就是播放器和播放列表。</p>
-<figure class="highlight code" data-language="Html"><pre class="language-html"><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span></span>
-<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>css/popup.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span></span>
-<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>popup<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>nav_buttons<span class="token punctuation">"</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>breadcrumb-part<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tab-text<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 正在播放 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>搜索播放列表...<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>search<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">display</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
-<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>loadingOverlay<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>regularLoadingOverlay<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>close_nav<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">display</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Click to close navigation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>X<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>navigate<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">display</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line"></span>
-<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>player<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>album_art<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>big_art<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>album_art_img<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>../images/default_album_med.png<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>128<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>128<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>song_indicator<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>song_info<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>song_title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>artist<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>lyric<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>time_and_slider<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>player-middle<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>slider<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>goog-slider-horizontal goog-slider-track<span class="token punctuation">"</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>slider<span class="token punctuation">"</span></span> <span class="token attr-name">tabindex</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>playing-progress-background<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>played_slider<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>goog-slider-thumb<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">top</span><span class="token punctuation">:</span> <span class="token number">21</span>px<span class="token punctuation">;</span> <span class="token property">left</span><span class="token punctuation">:</span> <span class="token number">15</span>px<span class="token punctuation">;</span> <span class="token property">display</span><span class="token punctuation">:</span>none<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>time<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>current_time<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>0:00<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span> / <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>total_time<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>0:00<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>controls<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>rew<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>goog-flat-button goog-inline-block<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Previous song<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">-webkit-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>playPause<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>goog-flat-button goog-inline-block<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Play<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">-webkit-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ff<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>goog-flat-button goog-inline-block<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Next song<span class="token punctuation">"</span></span> <span class="token attr-name">role</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">-webkit-user-select</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line"></span>
-<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
-<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/jquery.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span>
-<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>js/popup.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></span></pre><div class="tools"></div></figure>
-<p>这里的 js 文件主要就是控制 background 页面中的 audio 标签，就不给出篇幅了。<br>关键一句就是 <code>var bg = chrome.extension.getBackgroundPage ();</code><br>通过 bg.xx 就可以调用 background 中的变量和方法。</p>
+<pre><code class="language-html">&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;css/popup.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;popup&quot;&gt;
+    &lt;div id=&quot;nav_buttons&quot; role=&quot;button&quot;&gt;
+      &lt;div class=&quot;breadcrumb-part&quot;&gt;&lt;/div&gt;
+      &lt;span class=&quot;tab-text&quot;&gt;正在播放&lt;/span&gt;
+      &lt;input type=&quot;text&quot; placeholder=&quot;搜索播放列表...&quot; id=&quot;search&quot; style=&quot;display:none;&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;loadingOverlay&quot; style=&quot;display: none;&quot; class=&quot;regularLoadingOverlay&quot;&gt;&lt;/div&gt;
+    &lt;div id=&quot;close_nav&quot; style=&quot;display:none;&quot; title=&quot;Click to close navigation&quot;&gt;X&lt;/div&gt;
+    &lt;div id=&quot;navigate&quot; style=&quot;display:none;&quot;&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;player&quot;&gt;
+      &lt;div id=&quot;album_art&quot; class=&quot;big_art&quot;&gt;
+        &lt;img id=&quot;album_art_img&quot; src=&quot;../images/default_album_med.png&quot; height=&quot;128&quot; width=&quot;128&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;song_indicator&quot;&gt;&lt;/div&gt;
+      &lt;div id=&quot;song_info&quot;&gt;
+        &lt;div id=&quot;song_title&quot;&gt;&lt;/div&gt;
+        &lt;div id=&quot;artist&quot;&gt;&lt;/div&gt;
+        &lt;div id=&quot;lyric&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;time_and_slider&quot;&gt;
+        &lt;div class=&quot;player-middle&quot;&gt;
+          &lt;div id=&quot;slider&quot; class=&quot;goog-slider-horizontal goog-slider-track&quot; role=&quot;slider&quot; tabindex=&quot;0&quot;&gt;
+            &lt;div class=&quot;playing-progress-background&quot;&gt;
+              &lt;div id=&quot;played_slider&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;goog-slider-thumb&quot; style=&quot;top: 21px; left: 15px; display:none;&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;time&quot;&gt;
+          &lt;span id=&quot;current_time&quot;&gt;0:00&lt;/span&gt; / &lt;span id=&quot;total_time&quot;&gt;0:00&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;controls&quot;&gt;
+        &lt;div id=&quot;rew&quot; class=&quot;goog-flat-button goog-inline-block&quot; title=&quot;Previous song&quot; style=&quot;-webkit-user-select: none; &quot;&gt;&lt;/div&gt;
+        &lt;div id=&quot;playPause&quot; class=&quot;goog-flat-button goog-inline-block&quot; title=&quot;Play&quot; style=&quot;-webkit-user-select: none; &quot;&gt;&lt;/div&gt;
+        &lt;div id=&quot;ff&quot; class=&quot;goog-flat-button goog-inline-block&quot; title=&quot;Next song&quot; role=&quot;button&quot; style=&quot;-webkit-user-select: none; &quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+  &lt;script src=&quot;js/jquery.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;js/popup.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>这里的 js 文件主要就是控制 background 页面中的 audio 标签，就不给出篇幅了。<br>
+关键一句就是 <code>var bg = chrome.extension.getBackgroundPage();</code> <br>
+ 通过 bg.xx 就可以调用 background 中的变量和方法。</p>
 <p>歌词同步的具体思路：</p>
 <ul>
 <li>首先将 LRC 文件读取为文本</li>
-<li>用 String.prototype.split (‘\n’); 将整个文本以换行符为单位分隔成一行一行的文本，保存到一个数组中</li>
+<li>用 String.prototype.split (’\n’); 将整个文本以换行符为单位分隔成一行一行的文本，保存到一个数组中</li>
 <li>然后将开头部分不属于歌词的文本去掉，得到只有时间与歌词的干净文件</li>
 <li>对于每一行，匹配出时间与文字，分别存入数组 [time,text]，然后将每行得到的这样的数组存入一个大的数组 [[time,text],[time,text]…]</li>
 <li>利用 Audio 标签的 ontimeupdate 事件，不断比较当然播放时间 audio.currentTime 与数组中每个元素中时间，如果当前时间大于某个歌词中的时间，则显示该歌词</li>
 </ul>
 <p>到这里本文就基本结束了，以后再补充好了 233333</p>
-<h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a href="https://github.com/kokororin/KotoriMusicPlayer" target="_blank" rel="noopener">GitHub</a></p>
-<h3 id="安装地址"><a href="#安装地址" class="headerlink" title="安装地址"></a>安装地址</h3><p><a href="https://chrome.google.com/webstore/detail/jfibodpknfkelhgncgbicgoeifilampg" target="_blank" rel="noopener">Chrome Web Store</a></p>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://crxdoc-zh.appspot.com/extensions/getstarted" target="_blank" rel="noopener">入门：建立 Chrome 扩展程序</a><br><a href="https://crxdoc-zh.appspot.com/extensions/tabs" target="_blank" rel="noopener">chrome.tabs</a><br><a href="http://www.zhihu.com/question/20179805" target="_blank" rel="noopener">如何从零开始写一个 Chrome 扩展？</a><br><a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="noopener">官方入门文档</a><br><a href="http://www.w3ctech.com/topic/283" target="_blank" rel="noopener">Chrome 扩展开发笔记</a><br><a href="http://www.cnblogs.com/Wayou/p/sync_lyric_with_html5_audio.html" target="_blank" rel="noopener">论 HTML5 Audio 标签歌词同步的实现</a></p>
+<h3 id="项目地址">项目地址</h3>
+<p><a href="https://github.com/kokororin/KotoriMusicPlayer" target="_blank" rel="noopener">GitHub</a></p>
+<h3 id="安装地址">安装地址</h3>
+<p><a href="https://chrome.google.com/webstore/detail/jfibodpknfkelhgncgbicgoeifilampg" target="_blank" rel="noopener">Chrome Web Store</a></p>
+<h3 id="参考文档">参考文档</h3>
+<p><a href="https://crxdoc-zh.appspot.com/extensions/getstarted" target="_blank" rel="noopener">入门：建立 Chrome 扩展程序</a><br>
+<a href="https://crxdoc-zh.appspot.com/extensions/tabs" target="_blank" rel="noopener"> chrome.tabs</a><br>
+<a href="http://www.zhihu.com/question/20179805" target="_blank" rel="noopener"> 如何从零开始写一个 Chrome 扩展？</a><br>
+<a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="noopener">官方入门文档</a><br>
+<a href="http://www.w3ctech.com/topic/283" target="_blank" rel="noopener"> Chrome 扩展开发笔记</a><br>
+<a href="http://www.cnblogs.com/Wayou/p/sync_lyric_with_html5_audio.html" target="_blank" rel="noopener">论 HTML5 Audio 标签歌词同步的实现</a></p>
 
       </div>
     </article>
@@ -544,7 +567,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -565,32 +588,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/chrome-extension-notes.html"></div>
+  <div id="disqus_thread" data-title="Chrome 扩展开发笔记" data-permalink="https://kotori.love/archives/chrome-extension-notes.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -599,13 +619,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

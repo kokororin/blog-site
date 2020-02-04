@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">Archlinux 字体配置</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/archlinux-font-config.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/archlinux-font-config.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -83,9 +84,11 @@
 <p>安装用 infinality 打包过的 freetype2 和 fontconfig。freetype 是字体渲染程序，fontconfig 是对字体的配置规则。</p>
 <p>默认情况下的绘字库的显示效果不是很好，所以我们要安装打过补丁的版本。</p>
 <p>两个打过补丁的包名字叫做 freetype2-infinality 和 fontconfig-infinality。不过只能用 yaourt 安装。安装 yaourt：</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">pacman -S yaourt</span></pre><div class="tools"></div></figure>
+<pre><code class="language-bash">pacman -S yaourt
+</code></pre>
 <p>然后运行：</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">yaourt freetype2-infinality</span></pre><div class="tools"></div></figure>
+<pre><code class="language-bash">yaourt freetype2-infinality
+</code></pre>
 <p>之后可能会出现这样的一个列表：</p>
 <pre><code>    2 aur/fontconfig-infinality-git 101.91eb8e6-1 (57) Fontconfig files for use with freetype2-infinality. GIT version.
     3 aur/freetype2-infinality 2.4.12-2 (551) TrueType font rendering library with infinality patch
@@ -94,11 +97,16 @@
     6 aur/lib32-freetype2-infinality-git 2.4.99.git20130513-1 (28) TrueType font rendering library (32-bit) with Infinality patch
     7 aur/libreoffice-uglyfix-freetype2-infinality 2.4.6-1 (43) Compiles freetype2 .so files and puts them in the libreoffice directory to fix font ugliness
     8 aur/openoffice-uglyfix-freetype2-infinality 2.4.6-1 (10) Compiles freetype2 .so files and puts them in the openoffice directory to fix font ugliness==&amp;amp;gt;
-     Enter n° of packages to be installed (ex: 1 2 3 or 1-3)==</code></pre><p>这时输入 “1 3”（1 空格 3）就可以安装这两个包了。如果你不是 root 用户，可能会要你输入密码。 当出现 “Edit PKGBUILD ?[Y/n]” 或者 “Edit install.sh ?[Y/n]” 字样的时候，输入 “n” 表示不编辑。 在 “Continue building xxxx ?[Y/n]” 出现之后输入 “y” 表示继续安装。</p>
+     Enter n° of packages to be installed (ex: 1 2 3 or 1-3)==
+</code></pre>
+<p>这时输入 “1 3”（1 空格 3）就可以安装这两个包了。如果你不是 root 用户，可能会要你输入密码。 当出现 &quot;Edit PKGBUILD ?[Y/n]&quot; 或者 &quot;Edit <a href="http://install.sh" target="_blank" rel="noopener">install.sh</a> ?[Y/n]&quot;字样的时候，输入&quot;n&quot;表示不编辑。 在&quot;Continue building xxxx ?[Y/n]&quot;出现之后输入&quot;y&quot; 表示继续安装。</p>
 <p>由于 SourceForge 被墙，yaourt 无法下载 freetype 的源码包。这时候可以用代理手动安装。</p>
-<pre><code>source=(&quot;freetype/freetype-${pkgver}.tar.bz2&quot; &quot;http://www.infinality.net/fedora/linux/zips/freetype-infinality-${pkgver}-${_pkgdate}_${_pkgrel}-x86_64.tar.bz2&quot; &quot;freetype-2.2.1-enable-valid.patch::https://projects.archlinux.org/svntogit/packages.git/plain/trunk/freetype-2.2.1-enable-valid.patch?h=packages/freetype2&quot;)</code></pre><p>然后执行 makepkg -si 以安装，中间如果出现提示一直选择是。</p>
+<pre><code>source=(&quot;freetype/freetype-${pkgver}.tar.bz2&quot; &quot;http://www.infinality.net/fedora/linux/zips/freetype-infinality-${pkgver}-${_pkgdate}_${_pkgrel}-x86_64.tar.bz2&quot; &quot;freetype-2.2.1-enable-valid.patch::https://projects.archlinux.org/svntogit/packages.git/plain/trunk/freetype-2.2.1-enable-valid.patch?h=packages/freetype2&quot;)
+</code></pre>
+<p>然后执行 makepkg -si 以安装，中间如果出现提示一直选择是。</p>
 <p>安装 fontconfig-infinality：</p>
-<figure class="highlight code" data-language="Bash"><pre class="language-bash"><span class="line">yaourt fontconfig-infinality</span></pre><div class="tools"></div></figure>
+<pre><code class="language-bash">yaourt fontconfig-infinality
+</code></pre>
 <p>完毕之后，执行 /etc/fonts/infinality/infctl.sh setstyle，然后选择一个渲染风格（我设置了 5）。</p>
 
       </div>
@@ -113,7 +121,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -134,32 +142,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/archlinux-font-config.html"></div>
+  <div id="disqus_thread" data-title="Archlinux 字体配置" data-permalink="https://kotori.love/archives/archlinux-font-config.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -168,13 +173,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

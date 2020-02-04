@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">Typecho 主题制作总结</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/typecho-theme-tips.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/typecho-theme-tips.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -78,287 +79,312 @@
       
       <div class="post-content" itemprop="articleBody">
         <p>由于 Typecho 相比 WordPress，所提供的接口较少，所以有些地方需要注意下。</p>
-<h3 id="首页文章无限加载文章"><a href="#首页文章无限加载文章" class="headerlink" title="首页文章无限加载文章"></a>首页文章无限加载文章</h3><p>首先在 functions.php 中加入一段判断 ajax 请求的方法：</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">function</span> <span class="token function">is_ajax</span> <span class="token punctuation">(</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isset</span> <span class="token punctuation">(</span><span class="token variable">$_SERVER</span> <span class="token punctuation">[</span><span class="token string">'HTTP_X_REQUESTED_WITH'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">'xmlhttprequest'</span> <span class="token operator">==</span> <span class="token function">strtolower</span> <span class="token punctuation">(</span><span class="token variable">$_SERVER</span> <span class="token punctuation">[</span><span class="token string">'HTTP_X_REQUESTED_WITH'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<p>然后在首页模板 index.php 中加入判断，if (is_ajax ()): 则不输出 header footer 等信息。<br>最后一步，再模板公共 js 文件中加入以下代码：</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">var</span> page <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">var</span> $body <span class="token operator">=</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>opera<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">(</span>document<span class="token punctuation">.</span>compatMode <span class="token operator">==</span> <span class="token string">"CSS1Compat"</span> <span class="token operator">?</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'html'</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'body'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'html,body'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#blog_load_more'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>click <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hide <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#spinner'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>show <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        $<span class="token punctuation">.</span>ajax <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">            type<span class="token punctuation">:</span> <span class="token string">'get'</span><span class="token punctuation">,</span></span>
-<span class="line">            url<span class="token punctuation">:</span> SITE<span class="token punctuation">.</span>default_url <span class="token operator">+</span> <span class="token string">'/page/'</span> <span class="token operator">+</span> parseInt <span class="token punctuation">(</span>page <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
-<span class="line">            success<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> textStatus<span class="token punctuation">,</span> XMLHttpRequest<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                page<span class="token operator">++</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'.w-blog-list'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>append <span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#spinner'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hide <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#blog_load_more'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>show <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">            error<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>MLHttpRequest<span class="token punctuation">,</span> textStatus<span class="token punctuation">,</span> errorThrown<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#spinner'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>hide <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                $<span class="token punctuation">.</span>jGrowl <span class="token punctuation">(</span><span class="token string">'Network Error'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line">        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span></pre><div class="tools"></div></figure>
-<p>其中 #blog_load_more 为需要绑定的加载更多按钮，#spinner 为加载过程中的动画，.w-blog-list 为首页文章列表容器。<br>由于 Typecho 并没有 Ajax 钩子函数，所以需要在 functions.php 中加入以下代码：</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">function</span> <span class="token function">site_data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token variable">$array</span> <span class="token operator">=</span> <span class="token keyword">array</span> <span class="token punctuation">(</span></span>
-<span class="line">        <span class="token string">'site_url'</span>         <span class="token operator">=</span><span class="token operator">></span> Helper<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">options</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">siteUrl</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">'default_url'</span>      <span class="token operator">=</span><span class="token operator">></span> Helper<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">options</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">siteUrl</span> <span class="token punctuation">.</span> <span class="token string">'index.php'</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">'theme_images_url'</span> <span class="token operator">=</span><span class="token operator">></span> Helper<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">options</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">themeUrl</span> <span class="token punctuation">.</span> <span class="token string">'/assets/images/'</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">echo</span> <span class="token function">json_encode</span> <span class="token punctuation">(</span><span class="token variable">$array</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+<h3 id="首页文章无限加载文章">首页文章无限加载文章</h3>
+<p>首先在 functions.php 中加入一段判断 ajax 请求的方法：</p>
+<pre><code class="language-php">function is_ajax()
+{
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+        if ('xmlhttprequest' == strtolower($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+            return true;
+        }
+    }
+    return false;
+}
+</code></pre>
+<p>然后在首页模板 index.php 中加入判断，if (is_ajax ()): 则不输出 header footer 等信息。<br>
+最后一步，再模板公共 js 文件中加入以下代码：</p>
+<pre><code class="language-javascript">    var page = 1;
+    var $body = (window.opera) ? (document.compatMode == &quot;CSS1Compat&quot; ? $('html') : $('body')) : $('html,body');
+    $('#blog_load_more').click(function(event) {
+        $(this).hide();
+        $('#spinner').show();
+        $.ajax({
+            type: 'get',
+            url: SITE.default_url + '/page/' + parseInt(page + 1),
+            success: function(data, textStatus, XMLHttpRequest) {
+                page++;
+                $('.w-blog-list').append(data);
+                $('#spinner').hide();
+                $('#blog_load_more').show();
+            },
+            error: function(MLHttpRequest, textStatus, errorThrown) {
+                $('#spinner').hide();
+                $.jGrowl('Network Error');
+            }
+        });
+    });
+</code></pre>
+<p>其中 #blog_load_more 为需要绑定的加载更多按钮，#spinner 为加载过程中的动画，.w-blog-list 为首页文章列表容器。<br>
+由于 Typecho 并没有 Ajax 钩子函数，所以需要在 functions.php 中加入以下代码：</p>
+<pre><code class="language-php">function site_data()
+{
+    $array = array(
+        'site_url'         =&gt; Helper::options()-&gt;siteUrl,
+        'default_url'      =&gt; Helper::options()-&gt;siteUrl . 'index.php',
+        'theme_images_url' =&gt; Helper::options()-&gt;themeUrl . '/assets/images/',
+    );
+    echo json_encode($array);
+}
+</code></pre>
 <p>之后在 footer.php 中引入该数据：</p>
-<figure class="highlight code" data-language="Html"><pre class="language-html"><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
-<span class="line">var SITE = <span class="token prolog">&lt;?php site_data ()?></span>;</span>
-<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span></pre><div class="tools"></div></figure>
+<pre><code class="language-html">&lt;script type=&quot;text/javascript&quot;&gt;
+var SITE = &lt;?php site_data()?&gt;;
+&lt;/script&gt;
+</code></pre>
 <p>此处的 SITE 就是一个 JSON 对象，可以直接用了。</p>
-<h3 id="WordPress-的-add-filter-很好用，Typecho-也可以实现类似的功能："><a href="#WordPress-的-add-filter-很好用，Typecho-也可以实现类似的功能：" class="headerlink" title="WordPress 的 add_filter 很好用，Typecho 也可以实现类似的功能："></a>WordPress 的 add_filter 很好用，Typecho 也可以实现类似的功能：</h3><p>比如想把文章中的图片都加上 rel=”fancybox” 的属性，WordPress 可能使用的以下方法：</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token function">add_filter</span> <span class="token punctuation">(</span><span class="token string">'the_content'</span><span class="token punctuation">,</span> <span class="token string">'fancybox_replace'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token keyword">function</span> <span class="token function">fancybox_replace</span> <span class="token punctuation">(</span><span class="token variable">$content</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">global</span> <span class="token variable">$post</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$pattern</span>     <span class="token operator">=</span> <span class="token string">"/&lt;a (.*?) href=('|\")([^>]*).(bmp|gif|jpeg|jpg|png)('|\")(.*?)>(.*?)&lt;\/a>/i"</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$replacement</span> <span class="token operator">=</span> <span class="token string">'&lt;a$1href=$2$3.$4$5 target="_blank" rel="fancybox"$6>$7&lt;/a>'</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$content</span>     <span class="token operator">=</span> <span class="token function">preg_replace</span> <span class="token punctuation">(</span><span class="token variable">$pattern</span><span class="token punctuation">,</span> <span class="token variable">$replacement</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">return</span> <span class="token variable">$content</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+<h3 id="WordPress的add-filter很好用，Typecho也可以实现类似的功能：">WordPress 的 add_filter 很好用，Typecho 也可以实现类似的功能：</h3>
+<p>比如想把文章中的图片都加上 rel=&quot;fancybox&quot; 的属性，WordPress 可能使用的以下方法：</p>
+<pre><code class="language-php">add_filter('the_content', 'fancybox_replace');
+function fancybox_replace($content)
+{
+    global $post;
+    $pattern     = &quot;/&lt;a(.*?)href=('|\&quot;)([^&gt;]*).(bmp|gif|jpeg|jpg|png)('|\&quot;)(.*?)&gt;(.*?)&lt;\/a&gt;/i&quot;;
+    $replacement = '&lt;a$1href=$2$3.$4$5 target=&quot;_blank&quot; rel=&quot;fancybox&quot;$6&gt;$7&lt;/a&gt;';
+    $content     = preg_replace($pattern, $replacement, $content);
+    return $content;
+}
+</code></pre>
 <p>Typecho 中可以这么写：</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">function</span> <span class="token function">themeInit</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">is</span> <span class="token punctuation">(</span><span class="token string">'single'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">content</span> <span class="token operator">=</span> <span class="token function">fancybox_replace</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">content</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="获取文章第一张图片"><a href="#获取文章第一张图片" class="headerlink" title="获取文章第一张图片"></a>获取文章第一张图片</h3><p>分为 markdown 和 html 两种方式</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">function</span> <span class="token function">get_post_img</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token variable">$cid</span> <span class="token operator">=</span> <span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">cid</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$db</span> <span class="token operator">=</span> Typecho_Db<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$rs</span> <span class="token operator">=</span> <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">fetchRow</span> <span class="token punctuation">(</span><span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">select</span> <span class="token punctuation">(</span><span class="token string">'table.contents.text'</span><span class="token punctuation">)</span></span>
-<span class="line">                               <span class="token operator">-</span><span class="token operator">></span><span class="token function">from</span> <span class="token punctuation">(</span><span class="token string">'table.contents'</span><span class="token punctuation">)</span></span>
-<span class="line">                               <span class="token operator">-</span><span class="token operator">></span><span class="token function">where</span> <span class="token punctuation">(</span><span class="token string">'cid=?'</span><span class="token punctuation">,</span> <span class="token variable">$cid</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$text</span> <span class="token operator">=</span> <span class="token variable">$rs</span> <span class="token punctuation">[</span><span class="token string">'text'</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">===</span> <span class="token function">strpos</span> <span class="token punctuation">(</span><span class="token variable">$text</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token function">preg_match</span> <span class="token punctuation">(</span><span class="token string">'/!\[[^\]]*]\([^\)]*\.(png|jpeg|jpg|gif|bmp)\)/i'</span><span class="token punctuation">,</span> <span class="token variable">$text</span><span class="token punctuation">,</span> <span class="token variable">$img</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">empty</span> <span class="token punctuation">(</span><span class="token variable">$img</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token keyword">return</span> <span class="token string">'none'</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token function">preg_match</span> <span class="token punctuation">(</span><span class="token string">"/(?:\()(.*)(?:\))/i"</span><span class="token punctuation">,</span> <span class="token variable">$img</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">$result</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token variable">$img_url</span> <span class="token operator">=</span> <span class="token variable">$result</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token keyword">return</span> <span class="token string">'&lt;img src="'</span> <span class="token punctuation">.</span> <span class="token variable">$img_url</span> <span class="token punctuation">.</span> <span class="token string">'"/>'</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token function">preg_match_all</span> <span class="token punctuation">(</span><span class="token string">"/\&lt;img.*?src\=\"(.*?)\"[^>]*>/i"</span><span class="token punctuation">,</span> <span class="token variable">$text</span><span class="token punctuation">,</span> <span class="token variable">$img</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">empty</span> <span class="token punctuation">(</span><span class="token variable">$img</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token keyword">return</span> <span class="token string">'none'</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token variable">$img_url</span> <span class="token operator">=</span> <span class="token variable">$img</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token keyword">return</span> <span class="token string">'&lt;img src="'</span> <span class="token punctuation">.</span> <span class="token variable">$img_url</span> <span class="token punctuation">.</span> <span class="token string">'"/>'</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="评论列表加"><a href="#评论列表加" class="headerlink" title="评论列表加 @"></a>评论列表加 @</h3><figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">function</span> <span class="token function">get_comment_at</span> <span class="token punctuation">(</span><span class="token variable">$coid</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token variable">$db</span>   <span class="token operator">=</span> Typecho_Db<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$prow</span> <span class="token operator">=</span> <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">fetchRow</span> <span class="token punctuation">(</span><span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">select</span> <span class="token punctuation">(</span><span class="token string">'parent'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">from</span> <span class="token punctuation">(</span><span class="token string">'table.comments'</span><span class="token punctuation">)</span></span>
-<span class="line">                                 <span class="token operator">-</span><span class="token operator">></span><span class="token function">where</span> <span class="token punctuation">(</span><span class="token string">'coid = ? AND status = ?'</span><span class="token punctuation">,</span> <span class="token variable">$coid</span><span class="token punctuation">,</span> <span class="token string">'approved'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$parent</span> <span class="token operator">=</span> <span class="token variable">$prow</span> <span class="token punctuation">[</span><span class="token string">'parent'</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$parent</span> <span class="token operator">!=</span> <span class="token string">"0"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token variable">$arow</span> <span class="token operator">=</span> <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">fetchRow</span> <span class="token punctuation">(</span><span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">select</span> <span class="token punctuation">(</span><span class="token string">'author'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">from</span> <span class="token punctuation">(</span><span class="token string">'table.comments'</span><span class="token punctuation">)</span></span>
-<span class="line">                                     <span class="token operator">-</span><span class="token operator">></span><span class="token function">where</span> <span class="token punctuation">(</span><span class="token string">'coid = ? AND status = ?'</span><span class="token punctuation">,</span> <span class="token variable">$parent</span><span class="token punctuation">,</span> <span class="token string">'approved'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token variable">$author</span> <span class="token operator">=</span> <span class="token variable">$arow</span> <span class="token punctuation">[</span><span class="token string">'author'</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token variable">$href</span>   <span class="token operator">=</span> <span class="token string">'&lt;a href="#comment-'</span> <span class="token punctuation">.</span> <span class="token variable">$parent</span> <span class="token punctuation">.</span> <span class="token string">'">@'</span> <span class="token punctuation">.</span> <span class="token variable">$author</span> <span class="token punctuation">.</span> <span class="token string">'&lt;/a>'</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">echo</span> <span class="token variable">$href</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">echo</span> <span class="token string">''</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="非插件实现文章阅读次数统计"><a href="#非插件实现文章阅读次数统计" class="headerlink" title="非插件实现文章阅读次数统计"></a>非插件实现文章阅读次数统计</h3><p>在文章页面引入 get_post_view () 方法。</p>
-<figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token comment" spellcheck="true">//get_post_view ($this)</span></span>
-<span class="line"><span class="token keyword">function</span> <span class="token function">get_post_view</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token variable">$cid</span>    <span class="token operator">=</span> <span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">cid</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$db</span>     <span class="token operator">=</span> Typecho_Db<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">get</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$prefix</span> <span class="token operator">=</span> <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">getPrefix</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">array_key_exists</span> <span class="token punctuation">(</span><span class="token string">'views'</span><span class="token punctuation">,</span> <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">fetchRow</span> <span class="token punctuation">(</span><span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">select</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">from</span> <span class="token punctuation">(</span><span class="token string">'table.contents'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">query</span> <span class="token punctuation">(</span><span class="token string">'ALTER TABLE `'</span> <span class="token punctuation">.</span> <span class="token variable">$prefix</span> <span class="token punctuation">.</span> <span class="token string">'contents` ADD `views` INT (10) DEFAULT 0;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">echo</span> <span class="token number">0</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">return</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token variable">$row</span> <span class="token operator">=</span> <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">fetchRow</span> <span class="token punctuation">(</span><span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">select</span> <span class="token punctuation">(</span><span class="token string">'views'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">from</span> <span class="token punctuation">(</span><span class="token string">'table.contents'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">where</span> <span class="token punctuation">(</span><span class="token string">'cid = ?'</span><span class="token punctuation">,</span> <span class="token variable">$cid</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">is</span> <span class="token punctuation">(</span><span class="token string">'single'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">       <span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">query</span> <span class="token punctuation">(</span><span class="token variable">$db</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">update</span> <span class="token punctuation">(</span><span class="token string">'table.contents'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">rows</span> <span class="token punctuation">(</span><span class="token keyword">array</span> <span class="token punctuation">(</span><span class="token string">'views'</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>int<span class="token punctuation">)</span> <span class="token variable">$row</span> <span class="token punctuation">[</span><span class="token string">'views'</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">where</span> <span class="token punctuation">(</span><span class="token string">'cid = ?'</span><span class="token punctuation">,</span> <span class="token variable">$cid</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token keyword">echo</span> <span class="token variable">$row</span> <span class="token punctuation">[</span><span class="token string">'views'</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="判断移动端访问"><a href="#判断移动端访问" class="headerlink" title="判断移动端访问"></a>判断移动端访问</h3><figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">function</span> <span class="token function">is_mobile</span> <span class="token punctuation">(</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token variable">$user_agent</span>     <span class="token operator">=</span> <span class="token variable">$_SERVER</span> <span class="token punctuation">[</span><span class="token string">'HTTP_USER_AGENT'</span><span class="token punctuation">]</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$mobile_browser</span> <span class="token operator">=</span> <span class="token keyword">array</span> <span class="token punctuation">(</span></span>
-<span class="line">        <span class="token string">"mqqbrowser"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 手机 QQ 浏览器</span></span>
-<span class="line">        <span class="token string">"opera mobi"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// 手机 opera</span></span>
-<span class="line">        <span class="token string">"juc"</span><span class="token punctuation">,</span> <span class="token string">"iuc"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//uc 浏览器</span></span>
-<span class="line">        <span class="token string">"fennec"</span><span class="token punctuation">,</span> <span class="token string">"ios"</span><span class="token punctuation">,</span> <span class="token string">"applewebKit/420"</span><span class="token punctuation">,</span> <span class="token string">"applewebkit/525"</span><span class="token punctuation">,</span> <span class="token string">"applewebkit/532"</span><span class="token punctuation">,</span> <span class="token string">"ipad"</span><span class="token punctuation">,</span> <span class="token string">"iphone"</span><span class="token punctuation">,</span> <span class="token string">"ipaq"</span><span class="token punctuation">,</span> <span class="token string">"ipod"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">"iemobile"</span><span class="token punctuation">,</span> <span class="token string">"windows ce"</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//windows phone</span></span>
-<span class="line">        <span class="token string">"240x320"</span><span class="token punctuation">,</span> <span class="token string">"480x640"</span><span class="token punctuation">,</span> <span class="token string">"acer"</span><span class="token punctuation">,</span> <span class="token string">"android"</span><span class="token punctuation">,</span> <span class="token string">"anywhereyougo.com"</span><span class="token punctuation">,</span> <span class="token string">"asus"</span><span class="token punctuation">,</span> <span class="token string">"audio"</span><span class="token punctuation">,</span> <span class="token string">"blackberry"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">"blazer"</span><span class="token punctuation">,</span> <span class="token string">"coolpad"</span><span class="token punctuation">,</span> <span class="token string">"dopod"</span><span class="token punctuation">,</span> <span class="token string">"etouch"</span><span class="token punctuation">,</span> <span class="token string">"hitachi"</span><span class="token punctuation">,</span> <span class="token string">"htc"</span><span class="token punctuation">,</span> <span class="token string">"huawei"</span><span class="token punctuation">,</span> <span class="token string">"jbrowser"</span><span class="token punctuation">,</span> <span class="token string">"lenovo"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">"lg"</span><span class="token punctuation">,</span> <span class="token string">"lg-"</span><span class="token punctuation">,</span> <span class="token string">"lge-"</span><span class="token punctuation">,</span> <span class="token string">"lge"</span><span class="token punctuation">,</span> <span class="token string">"mobi"</span><span class="token punctuation">,</span> <span class="token string">"moto"</span><span class="token punctuation">,</span> <span class="token string">"nokia"</span><span class="token punctuation">,</span> <span class="token string">"phone"</span><span class="token punctuation">,</span> <span class="token string">"samsung"</span><span class="token punctuation">,</span> <span class="token string">"sony"</span><span class="token punctuation">,</span></span>
-<span class="line">        <span class="token string">"symbian"</span><span class="token punctuation">,</span> <span class="token string">"tablet"</span><span class="token punctuation">,</span> <span class="token string">"tianyu"</span><span class="token punctuation">,</span> <span class="token string">"wap"</span><span class="token punctuation">,</span> <span class="token string">"xda"</span><span class="token punctuation">,</span> <span class="token string">"xde"</span><span class="token punctuation">,</span> <span class="token string">"zte"</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token variable">$is_mobile</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$mobile_browser</span> <span class="token keyword">as</span> <span class="token variable">$device</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">stristr</span> <span class="token punctuation">(</span><span class="token variable">$user_agent</span><span class="token punctuation">,</span> <span class="token variable">$device</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token variable">$is_mobile</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token keyword">break</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token keyword">return</span> <span class="token variable">$is_mobile</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="ajax-评论"><a href="#ajax-评论" class="headerlink" title="ajax 评论"></a>ajax 评论</h3><p>AjaxComments 有小 bug，不太好用，直接食用以下的修改版代码，在公共 js 中调用 ajaxComments () 方法即可</p>
-<figure class="highlight code" data-language="Javascript"><pre class="language-javascript"><span class="line"><span class="token keyword">function</span> ajaxComment <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">var</span> selector <span class="token operator">=</span> <span class="token punctuation">{</span></span>
-<span class="line">        commentMainFrame<span class="token punctuation">:</span> <span class="token string">'#comment'</span><span class="token punctuation">,</span></span>
-<span class="line">        commentList<span class="token punctuation">:</span> <span class="token string">'#commentlist'</span><span class="token punctuation">,</span></span>
-<span class="line">        commentNumText<span class="token punctuation">:</span> <span class="token string">'#comment h3'</span><span class="token punctuation">,</span></span>
-<span class="line">        commentReplyButton<span class="token punctuation">:</span> <span class="token string">'#comment span.reply'</span><span class="token punctuation">,</span></span>
-<span class="line">        submitForm<span class="token punctuation">:</span> <span class="token string">'#commentform'</span><span class="token punctuation">,</span></span>
-<span class="line">        submitTextarea<span class="token punctuation">:</span> <span class="token string">'#textarea'</span><span class="token punctuation">,</span></span>
-<span class="line">        submitButton<span class="token punctuation">:</span> <span class="token string">'#submit'</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token keyword">var</span> parentId <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span></span>
-<span class="line">    bindCommentReplyButton <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitTextarea<span class="token punctuation">)</span><span class="token punctuation">.</span>after <span class="token punctuation">(</span><span class="token string">'&lt;div style="display:none;" id="ajaxCommentMsg">&lt;\/div>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    $msg <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#ajaxCommentMsg'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span>on <span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> selector<span class="token punctuation">.</span>submitForm<span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        $msg<span class="token punctuation">.</span>empty <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitButton<span class="token punctuation">)</span><span class="token punctuation">.</span>val <span class="token punctuation">(</span><span class="token string">' 发射中哦 = A='</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitButton<span class="token punctuation">)</span><span class="token punctuation">.</span>attr <span class="token punctuation">(</span><span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">.</span>fadeTo <span class="token punctuation">(</span><span class="token string">'slow'</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitForm<span class="token punctuation">)</span><span class="token punctuation">.</span>find <span class="token punctuation">(</span><span class="token string">'#author'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitForm<span class="token punctuation">)</span><span class="token punctuation">.</span>find <span class="token punctuation">(</span><span class="token string">'#author'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>val <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                message <span class="token punctuation">(</span><span class="token string">' 昵称没填呢 QAQ'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                enableCommentButton <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line">            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitForm<span class="token punctuation">)</span><span class="token punctuation">.</span>find <span class="token punctuation">(</span><span class="token string">'#mail'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>val <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                message <span class="token punctuation">(</span><span class="token string">' 邮箱没填呢 QAQ'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                enableCommentButton <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line">            <span class="token keyword">var</span> filter <span class="token operator">=</span> <span class="token regex">/^[^@\s&lt;&amp;>]+@([a-z0-9]+\.)+[a-z]{2,4}$/i</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>filter<span class="token punctuation">.</span>test <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitForm<span class="token punctuation">)</span><span class="token punctuation">.</span>find <span class="token punctuation">(</span><span class="token string">'#mail'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>val <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                message <span class="token punctuation">(</span><span class="token string">' 邮箱地址不正确呢 QAQ'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                enableCommentButton <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitForm<span class="token punctuation">)</span><span class="token punctuation">.</span>find <span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitTextarea<span class="token punctuation">)</span><span class="token punctuation">.</span>val <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            message <span class="token punctuation">(</span><span class="token string">' 评论似乎什么也没写呢 QAQ'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            enableCommentButton <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">        $<span class="token punctuation">.</span>ajax <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">            url<span class="token punctuation">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span>attr <span class="token punctuation">(</span><span class="token string">'action'</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
-<span class="line">            type<span class="token punctuation">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span>attr <span class="token punctuation">(</span><span class="token string">'method'</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
-<span class="line">            data<span class="token punctuation">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span>serializeArray <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
-<span class="line">            error<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                message <span class="token punctuation">(</span><span class="token string">' 发射失败，请重试！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                setTimeout <span class="token punctuation">(</span>NProgress<span class="token punctuation">.</span>done<span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span></span>
-<span class="line">                enableCommentButton <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
-<span class="line">            success<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>commentList<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                    errorMsg <span class="token operator">=</span> data<span class="token punctuation">.</span>match <span class="token punctuation">(</span><span class="token regex">/.+/g</span><span class="token punctuation">)</span><span class="token punctuation">.</span>join <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>match <span class="token punctuation">(</span><span class="token regex">/\&lt;div.+\>.+\&lt;\/div\>/g</span><span class="token punctuation">)</span><span class="token punctuation">.</span>join <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>match <span class="token punctuation">(</span><span class="token regex">/[^\,]+/g</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    $msg<span class="token punctuation">.</span>html <span class="token punctuation">(</span>errorMsg <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> errorMsg <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> errorMsg <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    enableCommentButton <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line">                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">                    userCommentId <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>commentList<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">.</span>html <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>match <span class="token punctuation">(</span><span class="token regex">/id=\"?comment-\d+/g</span><span class="token punctuation">)</span><span class="token punctuation">.</span>join <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>match <span class="token punctuation">(</span><span class="token regex">/\d+/g</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sort <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                        <span class="token keyword">return</span> a <span class="token operator">-</span> b<span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>pop <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    commentLi <span class="token operator">=</span> <span class="token string">'&lt;li id="comment-'</span> <span class="token operator">+</span> userCommentId <span class="token operator">+</span> <span class="token string">'" class="comment">'</span> <span class="token operator">+</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#comment-'</span> <span class="token operator">+</span> userCommentId<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">.</span>html <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">+</span> <span class="token string">'&lt;\/li>'</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token keyword">if</span> <span class="token punctuation">(</span>parentId<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#'</span> <span class="token operator">+</span> parentId<span class="token punctuation">)</span><span class="token punctuation">.</span>find <span class="token punctuation">(</span><span class="token string">".comment-children"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">                            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#'</span> <span class="token operator">+</span> parentId<span class="token punctuation">)</span><span class="token punctuation">.</span>append <span class="token punctuation">(</span><span class="token string">"&lt;ul class='children'>&lt;/ul>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                        <span class="token punctuation">}</span></span>
-<span class="line">                        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#'</span> <span class="token operator">+</span> parentId <span class="token operator">+</span> <span class="token string">".children:first"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>append <span class="token punctuation">(</span>commentLi<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                        parentId <span class="token operator">=</span> <span class="token string">''</span></span>
-<span class="line">                        $body<span class="token punctuation">.</span>animate <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">                            scrollTop<span class="token punctuation">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#comment-'</span> <span class="token operator">+</span> userCommentId<span class="token punctuation">)</span><span class="token punctuation">.</span>offset <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>top <span class="token operator">-</span> <span class="token number">450</span></span>
-<span class="line">                        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">900</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span>
-<span class="line">                        <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>commentList<span class="token punctuation">)</span><span class="token punctuation">.</span>prepend <span class="token punctuation">(</span>commentLi<span class="token punctuation">)</span></span>
-<span class="line">                        $body<span class="token punctuation">.</span>animate <span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">                            scrollTop<span class="token punctuation">:</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#comment-'</span> <span class="token operator">+</span> userCommentId<span class="token punctuation">)</span><span class="token punctuation">.</span>offset <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>top <span class="token operator">-</span> <span class="token number">200</span></span>
-<span class="line">                        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">900</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token punctuation">}</span></span>
-<span class="line">                    <span class="token comment" spellcheck="true">//$('#comment-' + userCommentId).slideDown ('slow');</span></span>
-<span class="line"></span>
-<span class="line">                    <span class="token comment" spellcheck="true">//console.log (userCommentId);</span></span>
-<span class="line">                    <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>commentNumText<span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">?</span> <span class="token punctuation">(</span>n <span class="token operator">=</span> parseInt <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>commentNumText<span class="token punctuation">)</span><span class="token punctuation">.</span>text <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>match <span class="token punctuation">(</span><span class="token regex">/\d+/</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>commentNumText<span class="token punctuation">)</span><span class="token punctuation">.</span>html <span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>commentNumText<span class="token punctuation">)</span><span class="token punctuation">.</span>html <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>replace <span class="token punctuation">(</span>n<span class="token punctuation">,</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span></span>
-<span class="line">                    TypechoComment<span class="token punctuation">.</span>cancelReply <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitTextarea<span class="token punctuation">)</span><span class="token punctuation">.</span>val <span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>commentReplyButton <span class="token operator">+</span> <span class="token string">' b, #cancel-comment-reply-link'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>unbind <span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    bindCommentReplyButton <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">                    enableCommentButton <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">                <span class="token punctuation">}</span></span>
-<span class="line">            <span class="token punctuation">}</span></span>
-<span class="line">        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token keyword">function</span> bindCommentReplyButton <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span>on <span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> selector<span class="token punctuation">.</span>commentReplyButton<span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            parentId <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parents <span class="token punctuation">(</span><span class="token string">'li.comment'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>attr <span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitTextarea<span class="token punctuation">)</span><span class="token punctuation">.</span>focus <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span>on <span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token string">'#cancel-comment-reply-link'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">            parentId <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token keyword">function</span> enableCommentButton <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitButton<span class="token punctuation">)</span><span class="token punctuation">.</span>attr <span class="token punctuation">(</span><span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">.</span>fadeTo <span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token function">$</span><span class="token punctuation">(</span>selector<span class="token punctuation">.</span>submitButton<span class="token punctuation">)</span><span class="token punctuation">.</span>val <span class="token punctuation">(</span><span class="token string">' 发射 = A='</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"></span>
-<span class="line">    <span class="token keyword">function</span> message <span class="token punctuation">(</span>msg<span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
-<span class="line">        $msg<span class="token punctuation">.</span>hide <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        $msg<span class="token punctuation">.</span>html <span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">.</span>slideToggle <span class="token punctuation">(</span><span class="token string">'fast'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="无限嵌套评论"><a href="#无限嵌套评论" class="headerlink" title="无限嵌套评论"></a>无限嵌套评论</h3><figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">function</span> <span class="token function">themeInit</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    Helper<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">options</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">commentsMaxNestingLevels</span> <span class="token operator">=</span> <span class="token number">999</span><span class="token punctuation">;</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
-<h3 id="非插件实现路由"><a href="#非插件实现路由" class="headerlink" title="非插件实现路由"></a>非插件实现路由</h3><figure class="highlight code" data-language="Php"><pre class="language-php"><span class="line"><span class="token keyword">function</span> <span class="token function">themeInit</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token punctuation">)</span></span>
-<span class="line"><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">is</span> <span class="token punctuation">(</span><span class="token string">'archive'</span><span class="token punctuation">,</span> <span class="token number">404</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
-<span class="line">    <span class="token punctuation">{</span></span>
-<span class="line">        <span class="token variable">$path_info</span> <span class="token operator">=</span> <span class="token function">trim</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">request</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">getPathinfo</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$path_info</span> <span class="token operator">==</span> <span class="token string">'i/redirect'</span><span class="token punctuation">)</span></span>
-<span class="line">        <span class="token punctuation">{</span></span>
-<span class="line">            <span class="token variable">$url</span> <span class="token operator">=</span> <span class="token function">urldecode</span> <span class="token punctuation">(</span><span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">request</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">url</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            <span class="token variable">$archive</span><span class="token operator">-</span><span class="token operator">></span><span class="token property">response</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">redirect</span> <span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="line">            exit<span class="token punctuation">;</span></span>
-<span class="line">        <span class="token punctuation">}</span></span>
-<span class="line">    <span class="token punctuation">}</span></span>
-<span class="line"><span class="token punctuation">}</span></span></pre><div class="tools"></div></figure>
+<pre><code class="language-php">function themeInit($archive)
+{
+    if ($archive-&gt;is('single')) {
+        $archive-&gt;content = fancybox_replace($archive-&gt;content);
+    }
+
+}
+</code></pre>
+<h3 id="获取文章第一张图片">获取文章第一张图片</h3>
+<p>分为 markdown 和 html 两种方式</p>
+<pre><code class="language-php">function get_post_img($archive)
+{
+    $cid = $archive-&gt;cid;
+    $db = Typecho_Db::get();
+    $rs = $db-&gt;fetchRow($db-&gt;select('table.contents.text')
+                               -&gt;from('table.contents')
+                               -&gt;where('cid=?', $cid));
+    $text = $rs['text'];
+    if (0 === strpos($text, '')) {
+        preg_match('/!\[[^\]]*]\([^\)]*\.(png|jpeg|jpg|gif|bmp)\)/i', $text, $img);
+        if (empty($img)) {
+            return 'none';
+        } else {
+            preg_match(&quot;/(?:\()(.*)(?:\))/i&quot;, $img[0], $result);
+            $img_url = $result[1];
+            return '&lt;img src=&quot;' . $img_url . '&quot;/&gt;';
+        }
+    } else {
+        preg_match_all(&quot;/\&lt;img.*?src\=\&quot;(.*?)\&quot;[^&gt;]*&gt;/i&quot;, $text, $img);
+        if (empty($img)) {
+            return 'none';
+        } else {
+            $img_url = $img[1][0];
+            return '&lt;img src=&quot;' . $img_url . '&quot;/&gt;';
+        }
+    }
+}
+</code></pre>
+<h3 id="评论列表加">评论列表加 @</h3>
+<pre><code class="language-php">function get_comment_at($coid)
+{
+    $db   = Typecho_Db::get();
+    $prow = $db-&gt;fetchRow($db-&gt;select('parent')-&gt;from('table.comments')
+                                 -&gt;where('coid = ? AND status = ?', $coid, 'approved'));
+    $parent = $prow['parent'];
+    if ($parent != &quot;0&quot;) {
+        $arow = $db-&gt;fetchRow($db-&gt;select('author')-&gt;from('table.comments')
+                                     -&gt;where('coid = ? AND status = ?', $parent, 'approved'));
+        $author = $arow['author'];
+        $href   = '&lt;a href=&quot;#comment-' . $parent . '&quot;&gt;@' . $author . '&lt;/a&gt;';
+        echo $href;
+    } else {
+        echo '';
+    }
+
+}
+</code></pre>
+<h3 id="非插件实现文章阅读次数统计">非插件实现文章阅读次数统计</h3>
+<p>在文章页面引入 get_post_view () 方法。</p>
+<pre><code class="language-php">//get_post_view($this)
+function get_post_view($archive)
+{
+    $cid    = $archive-&gt;cid;
+    $db     = Typecho_Db::get();
+    $prefix = $db-&gt;getPrefix();
+    if (!array_key_exists('views', $db-&gt;fetchRow($db-&gt;select()-&gt;from('table.contents')))) {
+        $db-&gt;query('ALTER TABLE `' . $prefix . 'contents` ADD `views` INT(10) DEFAULT 0;');
+        echo 0;
+        return;
+    }
+    $row = $db-&gt;fetchRow($db-&gt;select('views')-&gt;from('table.contents')-&gt;where('cid = ?', $cid));
+    if ($archive-&gt;is('single')) {
+       $db-&gt;query($db-&gt;update('table.contents')-&gt;rows(array('views' =&gt; (int) $row['views'] + 1))-&gt;where('cid = ?', $cid));
+    }
+    echo $row['views'];
+}
+</code></pre>
+<h3 id="判断移动端访问">判断移动端访问</h3>
+<pre><code class="language-php">function is_mobile()
+{
+    $user_agent     = $_SERVER['HTTP_USER_AGENT'];
+    $mobile_browser = array(
+        &quot;mqqbrowser&quot;, //手机QQ浏览器
+        &quot;opera mobi&quot;, //手机opera
+        &quot;juc&quot;, &quot;iuc&quot;, //uc浏览器
+        &quot;fennec&quot;, &quot;ios&quot;, &quot;applewebKit/420&quot;, &quot;applewebkit/525&quot;, &quot;applewebkit/532&quot;, &quot;ipad&quot;, &quot;iphone&quot;, &quot;ipaq&quot;, &quot;ipod&quot;,
+        &quot;iemobile&quot;, &quot;windows ce&quot;, //windows phone
+        &quot;240x320&quot;, &quot;480x640&quot;, &quot;acer&quot;, &quot;android&quot;, &quot;anywhereyougo.com&quot;, &quot;asus&quot;, &quot;audio&quot;, &quot;blackberry&quot;,
+        &quot;blazer&quot;, &quot;coolpad&quot;, &quot;dopod&quot;, &quot;etouch&quot;, &quot;hitachi&quot;, &quot;htc&quot;, &quot;huawei&quot;, &quot;jbrowser&quot;, &quot;lenovo&quot;,
+        &quot;lg&quot;, &quot;lg-&quot;, &quot;lge-&quot;, &quot;lge&quot;, &quot;mobi&quot;, &quot;moto&quot;, &quot;nokia&quot;, &quot;phone&quot;, &quot;samsung&quot;, &quot;sony&quot;,
+        &quot;symbian&quot;, &quot;tablet&quot;, &quot;tianyu&quot;, &quot;wap&quot;, &quot;xda&quot;, &quot;xde&quot;, &quot;zte&quot;,
+    );
+    $is_mobile = false;
+    foreach ($mobile_browser as $device) {
+        if (stristr($user_agent, $device)) {
+            $is_mobile = true;
+            break;
+        }
+    }
+    return $is_mobile;
+}
+</code></pre>
+<h3 id="ajax评论">ajax 评论</h3>
+<p>AjaxComments 有小 bug，不太好用，直接食用以下的修改版代码，在公共 js 中调用 ajaxComments () 方法即可</p>
+<pre><code class="language-javascript">function ajaxComment() {
+    var selector = {
+        commentMainFrame: '#comment',
+        commentList: '#commentlist',
+        commentNumText: '#comment h3',
+        commentReplyButton: '#comment span.reply',
+        submitForm: '#commentform',
+        submitTextarea: '#textarea',
+        submitButton: '#submit',
+    };
+    var parentId = '';
+    bindCommentReplyButton();
+    $(selector.submitTextarea).after('&lt;div style=&quot;display:none;&quot; id=&quot;ajaxCommentMsg&quot;&gt;&lt;\/div&gt;');
+    $msg = $('#ajaxCommentMsg');
+    $(document).on('submit', selector.submitForm, function() {
+        $msg.empty();
+        $(selector.submitButton).val('发射中哦=A=');
+        $(selector.submitButton).attr('disabled', true).fadeTo('slow', 0.5);
+        if ($(selector.submitForm).find('#author')[0]) {
+            if ($(selector.submitForm).find('#author').val() == '') {
+                message('昵称没填呢QAQ');
+                enableCommentButton();
+                return false;
+            }
+            if ($(selector.submitForm).find('#mail').val() == '') {
+                message('邮箱没填呢QAQ');
+                enableCommentButton();
+                return false;
+            }
+            var filter = /^[^@\s&lt;&amp;&gt;]+@([a-z0-9]+\.)+[a-z]{2,4}$/i;
+            if (!filter.test($(selector.submitForm).find('#mail').val())) {
+                message('邮箱地址不正确呢QAQ');
+                enableCommentButton();
+                return false;
+            }
+        }
+        if ($(selector.submitForm).find(selector.submitTextarea).val() == '') {
+            message('评论似乎什么也没写呢QAQ');
+            enableCommentButton();
+            return false;
+        }
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: $(this).serializeArray(),
+            error: function() {
+                message('发射失败,请重试!');
+                setTimeout(NProgress.done, 500)
+                enableCommentButton();
+                return false;
+            },
+            success: function(data) {
+                if (!$(selector.commentList, data).length) {
+                    errorMsg = data.match(/.+/g).join().match(/\&lt;div.+\&gt;.+\&lt;\/div\&gt;/g).join().match(/[^\,]+/g);
+                    $msg.html(errorMsg[0] + errorMsg[1] + errorMsg[2]);
+                    enableCommentButton();
+                    return false;
+                } else {
+                    userCommentId = $(selector.commentList, data).html().match(/id=\&quot;?comment-\d+/g).join().match(/\d+/g).sort(function(a, b) {
+                        return a - b;
+                    }).pop();
+                    commentLi = '&lt;li id=&quot;comment-' + userCommentId + '&quot; class=&quot;comment&quot;&gt;' + $('#comment-' + userCommentId, data).html(); + '&lt;\/li&gt;';
+                    if (parentId) {
+                        if ($('#' + parentId).find(&quot;.comment-children&quot;).length &lt;= 0) {
+                            $('#' + parentId).append(&quot;&lt;ul class='children'&gt;&lt;/ul&gt;&quot;);
+                        }
+                        $('#' + parentId + &quot; .children:first&quot;).append(commentLi);
+                        parentId = ''
+                        $body.animate({
+                            scrollTop: $('#comment-' + userCommentId).offset().top - 450
+                        }, 900);
+                    } else {
+                        $(selector.commentList).prepend(commentLi)
+                        $body.animate({
+                            scrollTop: $('#comment-' + userCommentId).offset().top - 200
+                        }, 900);
+                    }
+                    //$('#comment-' + userCommentId).slideDown('slow');
+
+                    //console.log(userCommentId);
+                    $(selector.commentNumText).length ? (n = parseInt($(selector.commentNumText).text().match(/\d+/)), $(selector.commentNumText).html($(selector.commentNumText).html().replace(n, n + 1))) : 0;
+                    TypechoComment.cancelReply();
+                    $(selector.submitTextarea).val('');
+                    $(selector.commentReplyButton + ' b, #cancel-comment-reply-link').unbind('click');
+                    bindCommentReplyButton();
+                    enableCommentButton();
+
+                }
+            }
+        });
+        return false;
+    });
+
+    function bindCommentReplyButton() {
+        $(document).on('click', selector.commentReplyButton, function() {
+            parentId = $(this).parents('li.comment').attr(&quot;id&quot;);
+            $(selector.submitTextarea).focus();
+        });
+        $(document).on('click', '#cancel-comment-reply-link', function() {
+            parentId = '';
+        });
+    }
+
+    function enableCommentButton() {
+        $(selector.submitButton).attr('disabled', false).fadeTo('', 1);
+        $(selector.submitButton).val('发射=A=');
+    }
+
+    function message(msg) {
+        $msg.hide();
+        $msg.html(msg).slideToggle('fast');
+    }
+}
+
+</code></pre>
+<h3 id="无限嵌套评论">无限嵌套评论</h3>
+<pre><code class="language-php">function themeInit($archive)
+{
+    Helper::options()-&gt;commentsMaxNestingLevels = 999;
+}
+</code></pre>
+<h3 id="非插件实现路由">非插件实现路由</h3>
+<pre><code class="language-php">function themeInit($archive)
+{
+    if ($archive-&gt;is('archive', 404))
+    {
+        $path_info = trim($archive-&gt;request-&gt;getPathinfo(), '/');
+        if ($path_info == 'i/redirect')
+        {
+            $url = urldecode($archive-&gt;request-&gt;url);
+            $archive-&gt;response-&gt;redirect($url);
+            exit;
+        }
+    }
+}
+</code></pre>
 
       </div>
     </article>
@@ -372,7 +398,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -393,32 +419,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/typecho-theme-tips.html"></div>
+  <div id="disqus_thread" data-title="Typecho 主题制作总结" data-permalink="https://kotori.love/archives/typecho-theme-tips.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -427,13 +450,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

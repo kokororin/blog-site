@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">备份一下 KDE 配置</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/backup-kde-configuration.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/backup-kde-configuration.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -83,31 +84,43 @@
 <blockquote>
 <p><a href="http://sforkw.jd-app.com/?p=114" target="_blank" rel="noopener">http://sforkw.jd-app.com/?p=114</a></p>
 </blockquote>
-<h3 id="KDE4-的配置参考"><a href="#KDE4-的配置参考" class="headerlink" title="KDE4 的配置参考"></a>KDE4 的配置参考</h3><p>西北工大回来后，时间又充裕了，所以又开始了折腾 KDE。</p>
+<h3 id="KDE4的配置参考">KDE4 的配置参考</h3>
+<p>西北工大回来后，时间又充裕了，所以又开始了折腾 KDE。</p>
 <p>话说 KDE 的渲染阴影等效果非常接近 MacBook。先放几张图：</p>
-<p><img src="https://static-files.kotori.love/blog/2015/02/2015-02-3.png" alt="抓图 14"><br><img src="https://static-files.kotori.love/blog/2015/02/57_2015-02-3.png" alt="抓图 15"><br><img src="https://static-files.kotori.love/blog/2015/02/82_2015-02-3.png" alt="抓图 18"></p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/2015-02-3.png" alt="抓图14"><br>
+<img src="https://static-files.kotori.love/blog/2015/02/57_2015-02-3.png" alt="抓图15"><br>
+<img src="https://static-files.kotori.love/blog/2015/02/82_2015-02-3.png" alt="抓图18"></p>
 <p>下面说一下，我的配置过程：</p>
 <ol>
-<li><p>** 发行版：**</p>
+<li>
+<p><strong>发行版：</strong></p>
 <p>我的发行版是 Arch，没有 Arch 强大的 AUR，很多桌面的配件很难装上。</p>
 </li>
-<li><p>** 主题：**</p>
-<p>我的 plasma 主题是 Helium 与 dynamo 主题混合而成。标题栏主题是 Qtcurve，图标主题是 dynamo 与 flattr 混合而成，鼠标主题是 Breeze。应用程序主题是 Qtcurve，配色是 Breeze。这些都可以到 <a href="http://pan.baidu.com/s/1jGLy3n4" target="_blank" rel="noopener">这里下载</a>。先安装 qtcurve 再将下载下来的文件解压并覆盖～/.kde4/share/ 即可。注意，Qtcurve 的配置方案是 Breeze，并且在窗口管理器中设置边框大小是无侧边框。</p>
+<li>
+<p><strong>主题：</strong></p>
+<p>我的 plasma 主题是 Helium 与 dynamo 主题混合而成。标题栏主题是 Qtcurve，图标主题是 dynamo 与 flattr 混合而成，鼠标主题是 Breeze。应用程序主题是 Qtcurve，配色是 Breeze。这些都可以到<a href="http://pan.baidu.com/s/1jGLy3n4" target="_blank" rel="noopener">这里下载</a>。先安装 qtcurve 再将下载下来的文件解压并覆盖～/.kde4/share/ 即可。注意，Qtcurve 的配置方案是 Breeze，并且在窗口管理器中设置边框大小是无侧边框。</p>
 </li>
-<li><p>** 全局菜单：**</p>
-<p>全局菜单可以先加 archlinuxcn 源，然后依次用 yaourt 安装 appmenu-qt,appmenu-qt5,appmenu-gtk,kdeplasma-applets-menubar 。完成之后在面板上添加刚安装的部件再打开 “系统设置 &amp; gt; 应用程序外观 &amp; gt; 风格” 然后选择微调标签，修改 “菜单栏风格” 为 “仅导出” 就能有全局菜单了。</p>
+<li>
+<p><strong>全局菜单：</strong></p>
+<p>全局菜单可以先加 archlinuxcn 源，然后依次用 yaourt 安装 appmenu-qt,appmenu-qt5,appmenu-gtk,kdeplasma-applets-menubar 。完成之后在面板上添加刚安装的部件再打开 “系统设置&gt; 应用程序外观 &gt; 风格” 然后选择微调标签，修改 “菜单栏风格” 为 “仅导出” 就能有全局菜单了。</p>
 </li>
-<li><p>** 最大化隐藏菜单栏：**</p>
+<li>
+<p><strong>最大化隐藏菜单栏：</strong></p>
 <p>最大化隐藏菜单栏可以直接在 qtCurve 中配置，依然在 “窗口管理器” 中，勾选 “最大化窗口无边框” 复选框即可。</p>
 </li>
-<li><p>** 最大化上面板显示窗口控制按钮：**（最后一张图鼠标所指的地方）</p>
+<li>
+<p><strong>最大化上面板显示窗口控制按钮：</strong>（最后一张图鼠标所指的地方）</p>
 <p>在 AUR 中安装 kdeplasma-applets-kwin-button-improved，然后在面板上重复三次添加这个部件，分别设置为最小化（iconify），最大化 / 回复（maximize/restore）和关闭（close）就行了。</p>
 </li>
 </ol>
-<h3 id="KDE-的-Mac-向折腾指南"><a href="#KDE-的-Mac-向折腾指南" class="headerlink" title="KDE 的 Mac 向折腾指南"></a>KDE 的 Mac 向折腾指南</h3><p>惯例，先上图：</p>
+<h3 id="KDE的Mac向折腾指南">KDE 的 Mac 向折腾指南</h3>
+<p>惯例，先上图：</p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/13_2015-02-3.png" alt="logo9"></p>
-<p><img src="https://static-files.kotori.love/blog/2015/02/32_2015-02-3.png" alt="logo5"><br><img src="https://static-files.kotori.love/blog/2015/02/93_2015-02-3.png" alt="logo6"><br><img src="https://static-files.kotori.love/blog/2015/02/9_2015-02-3.png" alt="logo7"><br><img src="https://static-files.kotori.love/blog/2015/02/89_2015-02-3.png" alt="logo8"></p>
-<p>首先，KDE 的全局菜单可以参考我以前的文章 <a href="http://sforkw.jd-app.com/?p=114。" target="_blank" rel="noopener">http://sforkw.jd-app.com/?p=114。</a></p>
+<p><img src="https://static-files.kotori.love/blog/2015/02/32_2015-02-3.png" alt="logo5"><br>
+<img src="https://static-files.kotori.love/blog/2015/02/93_2015-02-3.png" alt="logo6"><br>
+<img src="https://static-files.kotori.love/blog/2015/02/9_2015-02-3.png" alt="logo7"><br>
+<img src="https://static-files.kotori.love/blog/2015/02/89_2015-02-3.png" alt="logo8"></p>
+<p>首先，KDE 的全局菜单可以参考我以前的文章 http://sforkw.jd-app.com/?p=114。</p>
 <p>然后，Plasma 的主题是 AG-plasma，aurorae 主题是 Yoxydaze-light。这些可以去 kde-look 里找。</p>
 <p>底部的 dock 是 plank，主题是 ArHU，在 deviantART 中找到的。另外，plank 上的图标是受 gtk 主题控制的，所以装 numix-circle 是最好不过的。</p>
 <p>我的 apps 文件可以在这里下载：<a href="http://pan.baidu.com/s/1hqGJDmk" target="_blank" rel="noopener">http://pan.baidu.com/s/1hqGJDmk</a></p>
@@ -145,7 +158,9 @@ PressureReveal=false
 #Whether to show only pinned applications. Useful for running more then one dock.
 PinnedOnly=true
 #Whether to automatically pin an application if it seems useful to do.
-AutoPinning=true</code></pre><p>~/.local/share/plank/themes/ArHU/ 中的 dock.theme 和 hover.theme 文件分别是：</p>
+AutoPinning=true
+</code></pre>
+<p>~/.local/share/plank/themes/ArHU/ 中的 dock.theme 和 hover.theme 文件分别是：</p>
 <pre><code>#This file auto-generated by Plank.
 #2014-12-06T06:22:37+0000
 
@@ -217,7 +232,9 @@ LineWidth=0
 OuterStrokeColor=0;;0;;0;;0
 FillStartColor=0;;0;;0;;150
 FillEndColor=0;;0;;0;;150
-InnerStrokeColor=0;;0;;0;;0</code></pre><p>以上是我折腾的结果，找主题也找了半天。大家如果有更好的主题与壁纸也拿来分享一下吧。</p>
+InnerStrokeColor=0;;0;;0;;0
+</code></pre>
+<p>以上是我折腾的结果，找主题也找了半天。大家如果有更好的主题与壁纸也拿来分享一下吧。</p>
 
       </div>
     </article>
@@ -231,7 +248,7 @@ InnerStrokeColor=0;;0;;0;;0</code></pre><p>以上是我折腾的结果，找主�
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -252,32 +269,29 @@ InnerStrokeColor=0;;0;;0;;0</code></pre><p>以上是我折腾的结果，找主�
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/backup-kde-configuration.html"></div>
+  <div id="disqus_thread" data-title="备份一下 KDE 配置" data-permalink="https://kotori.love/archives/backup-kde-configuration.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -286,13 +300,19 @@ InnerStrokeColor=0;;0;;0;;0</code></pre><p>以上是我折腾的结果，找主�
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

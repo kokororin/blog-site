@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">如何黑掉彩笔的网站 (¬_¬)</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/how-to-hack-the-crayon-website.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/how-to-hack-the-crayon-website.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -89,27 +90,27 @@
 <p><img src="https://static-files.kotori.love/blog/2015/02/32_2015-02-5.jpg" alt=""></p>
 <p>寻找一个可以提交字符串到服务器的页面</p>
 <p>并且保证这个字符串会在前台页面显示，比如贴吧的发帖之类的功能</p>
-<p>&nbsp;</p>
+<p> </p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/41_2015-02-5.jpg" alt=""></p>
 <p>找到 html 标签，我们看到有 maxlength 属性，这里先干掉再说，因为一会我们要提交 js 代码</p>
 <p>这里就可见，web 的前台验证什么的，都是假的，客户端提交的数据，必须要做后台验证。</p>
-<p>&nbsp;</p>
+<p> </p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/56_2015-02-5.jpg" alt=""></p>
 <p>准备一段 js，代表，这里以简单为主，仅仅测试</p>
-<p>&nbsp;</p>
+<p> </p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/62_2015-02-5.jpg" alt=""></p>
 <p>粘到文本框里去</p>
-<p>&nbsp;</p>
+<p> </p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/92_2015-02-5.jpg" alt=""></p>
 <p>提交成功</p>
 <p>看到没？彩笔做的网站，前台框架用得爽，后台验证完全没有，顺利过了</p>
-<p>&nbsp;</p>
+<p> </p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/87_2015-02-5.jpg" alt=""></p>
 <p>打开相应的显示画面，看到了我们的 js 已经成功被执行</p>
-<p>&nbsp;</p>
+<p> </p>
 <p><img src="https://static-files.kotori.love/blog/2015/02/18_2015-02-5.jpg" alt=""></p>
 <p>查看一下源代码，我们的 js 已经被嵌入了 html</p>
-<p>&nbsp;</p>
+<p> </p>
 <p>总结：</p>
 <p>真正的坏人，不会上传一段 alert 那么简单。</p>
 <p>正如名字一样，跨站的意思是，大的脚本不会直接上传，一定是再远程。</p>
@@ -117,8 +118,8 @@
 <p><img src="https://static-files.kotori.love/blog/2015/02/97_2015-02-5.jpg" alt=""></p>
 <p>防范 xss 的方法，前面已经提到了，用户提交数据的时候，做后台验证是其一。</p>
 <p>其二就是前台展示数据的时候，一定要做代码转义。</p>
-<p>这里隆重推荐，我大微软的 asp.net MVC + razor 真心很强大。</p>
-<p>** 前台后台验证一条龙，显示转意一句话。**</p>
+<p>这里隆重推荐，我大微软的 <a href="http://asp.net" target="_blank" rel="noopener">asp.net</a> MVC + razor 真心很强大。</p>
+<p><strong>前台后台验证一条龙，显示转意一句话。</strong></p>
 
       </div>
     </article>
@@ -132,7 +133,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -153,32 +154,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/how-to-hack-the-crayon-website.html"></div>
+  <div id="disqus_thread" data-title="如何黑掉彩笔的网站 (¬_¬)" data-permalink="https://kotori.love/archives/how-to-hack-the-crayon-website.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -187,13 +185,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

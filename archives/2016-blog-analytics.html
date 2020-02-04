@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">2016 年度博客统计报告</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/2016-blog-analytics.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/2016-blog-analytics.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -77,15 +78,27 @@
       
       
       <div class="post-content" itemprop="articleBody">
-        <h3 id="会话数与浏览量"><a href="#会话数与浏览量" class="headerlink" title="会话数与浏览量"></a>会话数与浏览量</h3><p>过去的 365 天里，本博客的基本访问情况如下图：<br><img src="https://static-files.kotori.love/blog/2017/01/1716341378.png" alt=""></p>
+        <h3 id="会话数与浏览量">会话数与浏览量</h3>
+<p>过去的 365 天里，本博客的基本访问情况如下图：<br>
+<img src="https://static-files.kotori.love/blog/2017/01/1716341378.png" alt=""></p>
 <p>这期间，本博客一共迎来了 3309 位用户，他们一共产生了 7417 次会话以及 20986 次浏览。平均每天 9 位用户、20 次会话以及 57 次浏览。</p>
-<h3 id="地理位置与语言"><a href="#地理位置与语言" class="headerlink" title="地理位置与语言"></a>地理位置与语言</h3><p>毫无疑问，本博客主要流量都来自于中国大陆，占到 56.61%：<br><img src="https://static-files.kotori.love/blog/2017/01/1268377185.png" alt=""></p>
-<p>而从浏览器语言上看，简体中文占到 74.65%，也就是说以上的中国大陆流量并不准确（<br><img src="https://static-files.kotori.love/blog/2017/01/2868255890.png" alt=""></p>
-<h3 id="操作系统与浏览器"><a href="#操作系统与浏览器" class="headerlink" title="操作系统与浏览器"></a>操作系统与浏览器</h3><p>首先来看操作系统概况，本博客主要流量还是来自于桌面端。<br><img src="https://static-files.kotori.love/blog/2017/01/2832465407.png" alt=""></p>
-<p>浏览器方面，来自 IE 的份额不足 2%：<br><img src="https://static-files.kotori.love/blog/2017/01/1050433201.png" alt=""></p>
-<h3 id="流量来源"><a href="#流量来源" class="headerlink" title="流量来源"></a>流量来源</h3><p>本博客流量来源主要有搜索引擎、第三方网站引荐、直接访问三大块。完整统计如下：<br><img src="https://static-files.kotori.love/blog/2017/01/3589224206.png" alt=""></p>
-<p>Google 对原创博客非常友好，使用 HTTPS 并提高访问速度也有利于 Google 权重，所以本博客在 Google 的排名非常好，最终高达 11.31% 的流量均来自于 Google 搜索。而百度对原创博客就没有这么友好了，但基于它在国内庞大的市场份额，本博客也有 0.62% 的流量来自于百度：<br><img src="https://static-files.kotori.love/blog/2017/01/779984279.png" alt="Screen Shot 2017-01-07 at 2.26.42 PM.png"></p>
-<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>在 2016 年已经过去的这五个月里，我一共写了 18 篇文章，如果保持这个更新频率，今年的总文章数会达到 83 篇。</p>
+<h3 id="地理位置与语言">地理位置与语言</h3>
+<p>毫无疑问，本博客主要流量都来自于中国大陆，占到 56.61%：<br>
+<img src="https://static-files.kotori.love/blog/2017/01/1268377185.png" alt=""></p>
+<p>而从浏览器语言上看，简体中文占到 74.65%，也就是说以上的中国大陆流量并不准确（<br>
+<img src="https://static-files.kotori.love/blog/2017/01/2868255890.png" alt=""></p>
+<h3 id="操作系统与浏览器">操作系统与浏览器</h3>
+<p>首先来看操作系统概况，本博客主要流量还是来自于桌面端。<br>
+<img src="https://static-files.kotori.love/blog/2017/01/2832465407.png" alt=""></p>
+<p>浏览器方面，来自 IE 的份额不足 2%：<br>
+<img src="https://static-files.kotori.love/blog/2017/01/1050433201.png" alt=""></p>
+<h3 id="流量来源">流量来源</h3>
+<p>本博客流量来源主要有搜索引擎、第三方网站引荐、直接访问三大块。完整统计如下：<br>
+<img src="https://static-files.kotori.love/blog/2017/01/3589224206.png" alt=""></p>
+<p>Google 对原创博客非常友好，使用 HTTPS 并提高访问速度也有利于 Google 权重，所以本博客在 Google 的排名非常好，最终高达 11.31% 的流量均来自于 Google 搜索。而百度对原创博客就没有这么友好了，但基于它在国内庞大的市场份额，本博客也有 0.62% 的流量来自于百度：<br>
+<img src="https://static-files.kotori.love/blog/2017/01/779984279.png" alt="Screen Shot 2017-01-07 at 2.26.42 PM.png"></p>
+<h3 id="后记">后记</h3>
+<p>在 2016 年已经过去的这五个月里，我一共写了 18 篇文章，如果保持这个更新频率，今年的总文章数会达到 83 篇。</p>
 
       </div>
     </article>
@@ -99,7 +112,7 @@
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -120,32 +133,29 @@
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/2016-blog-analytics.html"></div>
+  <div id="disqus_thread" data-title="2016 年度博客统计报告" data-permalink="https://kotori.love/archives/2016-blog-analytics.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -154,13 +164,19 @@
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>

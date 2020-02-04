@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="/css/mori.css">
 
   
-<link rel="stylesheet" href="/css/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
   
 <link rel="stylesheet" href="/css/flat-ui.min.css">
@@ -31,10 +31,10 @@
 <link rel="stylesheet" href="/css/prism.css">
 
   
-<link rel="stylesheet" href="/fonts/md/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/css/nprogress.css">
 
   
-<link rel="stylesheet" href="/js/zoom-js/css/zoom.css">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
   
@@ -45,7 +45,8 @@
 <body>
   
 
-  <div id="main" class="container">
+  <div id="pjax-container">
+    <div id="main" class="container">
   <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
     <article class="post" style="padding-top:20px">
       <h2 itemprop="name headline" style="font-weight:400">一些奇怪的 nginx 配置文件</h2>
@@ -53,7 +54,7 @@
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
           
-          <a id="comment_go" href="#disqus_thread" class="fui-bubble"></a>
+          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
           <a style="font-size:30px;margin-left:1px">·</a>
           <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/nginx-config-file.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/nginx-config-file.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
@@ -78,8 +79,9 @@
       
       <div class="post-content" itemprop="articleBody">
         <p>RT</p>
-<h3 id="Gravatar"><a href="#Gravatar" class="headerlink" title="Gravatar"></a>Gravatar</h3><pre><code>proxy_cache_path  /data/wwwroot/gravatar.kotori.love/cache  levels=1:2   keys_zone=gravatar:10m inactive=7d max_size=1g;
-
+<h3 id="Gravatar">Gravatar</h3>
+<pre><code>proxy_cache_path  /data/wwwroot/gravatar.kotori.love/cache  levels=1:2   keys_zone=gravatar:10m inactive=7d max_size=1g;
+ 
 server {
     listen 80;
     listen 443 ssl http2;
@@ -95,25 +97,25 @@ server {
     ssl_session_cache shared:SSL:20m;
     ssl_session_timeout 60m;
     add_header Strict-Transport-Security &quot;max-age=63072000; includeSubdomains; preload&quot;;
-
-    if ($query_string ~* &quot;.*[\;&#39;\&lt;\&gt;].*&quot; ){
+ 
+    if ( $query_string ~* &quot;.*[\;'\&lt;\&gt;].*&quot; ){
         return 404;
     }
-
+ 
     location ~ .*\.(wma|wmv|asf|mp3|mmf|zip|rar|jpg|gif|png|swf|flv)$ {
         valid_referers none blocked *.kotori.love gravatar.kotori.love;
         if ($invalid_referer) {
             return 403;
         }
     }
-
+ 
     location avatar/ {
             valid_referers none blocked *.kotori.love gravatar.kotori.love;
             if ($invalid_referer) {
                     #return 403;
             }
     }
-
+ 
     location / {
         valid_referers none blocked *.kotori.love gravatar.kotori.love;
             if ($invalid_referer) {
@@ -141,7 +143,10 @@ server {
         subs_filter http://gravatar.com http://gravatar.kotori.love;
     }
 }
-</code></pre><h3 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h3><pre><code>server {
+
+</code></pre>
+<h3 id="Google">Google</h3>
+<pre><code>server {
 listen 443 ssl;
 server_name g.kotori.love;
 access_log /data/wwwlogs/g.kotori.love_nginx.log combined;
@@ -163,11 +168,11 @@ resolver 8.8.8.8;
 location / {
     google on;
     google_language zh-CN;
-   # subs_filter &#39;_\.ua\(&quot;rwt&quot;,function\(\)\{[^\}]*\}\);&#39; &#39;&#39; igr;
-   subs_filter &#39;&lt;/head&gt;&#39; &#39;&lt;style id=&quot;kotori-custom-css&quot;&gt;#gb_8,#gb_78,#gb_36,#gb_5,#gb_23,#gbztm,#gb_119,#gbi4s1 {display:none}&lt;/style&gt;&lt;/head&gt;&#39; o;
-   subs_filter &#39;&lt;title&gt;Google&lt;/title&gt;&#39; &#39;&lt;title&gt;Kotori\&#39;s Google&lt;/title&gt;&#39; o;
-   subs_filter &#39;&lt;input value=&quot;Google 搜索&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#39; &#39;&lt;input value=&quot;Kotori 一下&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#39; o;
-   subs_filter &#39;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt; 简体中文 &lt;/div&gt;&#39; &#39;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot;nowrap=&quot;&quot;&gt; 喵星人 &lt;/div&gt;&#39; o; 
+   # subs_filter '_\.ua\(&quot;rwt&quot;,function\(\)\{[^\}]*\}\);' '' igr;
+   subs_filter '&lt;/head&gt;' '&lt;style id=&quot;kotori-custom-css&quot;&gt;#gb_8,#gb_78,#gb_36,#gb_5,#gb_23,#gbztm,#gb_119,#gbi4s1{display:none}&lt;/style&gt;&lt;/head&gt;' o;
+   subs_filter '&lt;title&gt;Google&lt;/title&gt;' '&lt;title&gt;Kotori\'s Google&lt;/title&gt;' o;
+   subs_filter '&lt;input value=&quot;Google 搜索&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;' '&lt;input value=&quot;Kotori 一下&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;' o;
+   subs_filter '&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;简体中文&lt;/div&gt;' '&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;喵星人&lt;/div&gt;' o; 
     }
 
 }
@@ -185,7 +190,10 @@ listen 80;
 server_name g.kotori.love;
 #return 301 https://$server_name$request_uri;
 return 403;
-}</code></pre><h3 id="Google-Ajax-lib"><a href="#Google-Ajax-lib" class="headerlink" title="Google Ajax lib"></a>Google Ajax lib</h3><pre><code>proxy_temp_file_write_size 128k;
+}
+</code></pre>
+<h3 id="Google-Ajax-lib">Google Ajax lib</h3>
+<pre><code>proxy_temp_file_write_size 128k;
 proxy_temp_path   /var/cache/nginx/temp;
 proxy_cache_path  /var/cache/nginx/cache levels=1:2 keys_zone=cache_one:50m inactive=7d max_size=5g;
 
@@ -203,7 +211,7 @@ server {
     location / {
         proxy_pass_header Server;
         proxy_set_header Host ajax.googleapis.com;
-        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_set_header Accept-Encoding '';
         proxy_redirect off;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Scheme $scheme;
@@ -237,7 +245,7 @@ server {
     location / {
         proxy_pass_header Server;
         proxy_set_header Host ajax.googleapis.com;
-        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_set_header Accept-Encoding '';
         proxy_redirect off;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Scheme $scheme;
@@ -247,7 +255,10 @@ server {
         proxy_cache_key $host$uri$is_args$args;
         expires max;
     }
-}</code></pre><h3 id="Google-Fonts-lib"><a href="#Google-Fonts-lib" class="headerlink" title="Google Fonts lib"></a>Google Fonts lib</h3><pre><code>upstream google {
+}
+</code></pre>
+<h3 id="Google-Fonts-lib">Google Fonts lib</h3>
+<pre><code>upstream google {
     server fonts.googleapis.com:443;
 }
 
@@ -263,12 +274,12 @@ server {
     resolver 8.8.8.8;
 
     location /css {
-        sub_filter &#39;fonts.gstatic.com&#39; &#39;fonts.css.network&#39;;
+        sub_filter 'fonts.gstatic.com' 'fonts.css.network';
         sub_filter_once off;
         sub_filter_types text/css;
         proxy_pass_header Server;
         proxy_set_header Host fonts.googleapis.com;
-        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_set_header Accept-Encoding '';
         proxy_redirect off;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Scheme $scheme;
@@ -280,12 +291,12 @@ server {
     }
 
     location /icon {
-        sub_filter &#39;fonts.gstatic.com&#39; &#39;fonts.css.network&#39;;
+        sub_filter 'fonts.gstatic.com' 'fonts.css.network';
         sub_filter_once off;
         sub_filter_types text/css;
         proxy_pass_header Server;
         proxy_set_header Host fonts.googleapis.com;
-        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_set_header Accept-Encoding '';
         proxy_redirect off;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Scheme $scheme;
@@ -330,12 +341,12 @@ server {
     resolver 8.8.8.8;
 
     location /css {
-        sub_filter &#39;fonts.gstatic.com&#39; &#39;fonts.css.network&#39;; 
+        sub_filter 'fonts.gstatic.com' 'fonts.css.network'; 
         sub_filter_once off;
         sub_filter_types text/css;
         proxy_pass_header Server;
         proxy_set_header Host fonts.googleapis.com;
-        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_set_header Accept-Encoding '';
         proxy_redirect off;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Scheme $scheme;
@@ -347,12 +358,12 @@ server {
     }
 
     location /icon {
-        sub_filter &#39;fonts.gstatic.com&#39; &#39;fonts.css.network&#39;; 
+        sub_filter 'fonts.gstatic.com' 'fonts.css.network'; 
         sub_filter_once off;
         sub_filter_types text/css;
         proxy_pass_header Server;
         proxy_set_header Host fonts.googleapis.com;
-        proxy_set_header Accept-Encoding &#39;&#39;;
+        proxy_set_header Accept-Encoding '';
         proxy_redirect off;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Scheme $scheme;
@@ -375,7 +386,9 @@ server {
         proxy_cache_key $host$uri$is_args$args;
         expires max;
     }
-}</code></pre>
+}
+</code></pre>
+
       </div>
     </article>
   </div>
@@ -388,7 +401,7 @@ server {
             <span class="fui-home"></span>
           </a>
         </li>
-        <li class="next" id="outcomment">
+        <li class="next" data-action="comment-show">
           <a href="javascript:void(0)">
             <span class="fui-chat"></span>
           </a>
@@ -409,32 +422,29 @@ server {
     </div>
   </center>
 
-  <div id="disqus_thread" data-permalink="https://kotori.love/archives/nginx-config-file.html"></div>
+  <div id="disqus_thread" data-title="一些奇怪的 nginx 配置文件" data-permalink="https://kotori.love/archives/nginx-config-file.html" data-allow-comment=""></div>
 
   
 
 </div>
 
+  </div>
   <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
       Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml">RSS</a>
+      / <a href="/atom.xml" data-nopjax>RSS</a>
   </p></div>
 </footer>
 
+<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
-<script src="/js/vendor/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 
 
-<script src="/js/zoom-js/js/zoom.js"></script>
-
-
-<script src="/js/vendor/bootstrap.js"></script>
-
-
+<script src="/js/bootstrap.js"></script>
 
 
 <script src="/js/flat-ui.min.js"></script>
@@ -443,13 +453,19 @@ server {
 <script src="/js/prism.js"></script>
 
 
-<script src="/js/disqus-loader.js"></script>
+<script src="/js/pjax.js"></script>
 
 
-<script>!function(a,i,n){function t(){this.initDom(),this.updateLinks()}t.prototype.getHitokoto=function(){n.ajax({url:"https://api.imjad.cn/hitokoto/"}).then(function(t){n("#hitokoto").html("Hitokoto&nbsp; · &nbsp;&nbsp;"+t)})},t.prototype.updateLinks=function(){n("a").each(function(t,o){var a=n(o),i=a.attr("href");return!i||(i&&0===i.indexOf("https://kotori.love")?(i=""===(i=i.replace("https://kotori.love",""))?"/":i,a.attr("href",i),!0):"javascript:"===i.substring(0,11)||"#"===i.substring(0,1)||"/"===i.substring(0,1)||void a.attr("_target","blank"))})},t.prototype.initDom=function(){if(n("#main-index").fadeIn(800),n("#main-archive").fadeIn(800),n("#main-post").fadeIn(500),n("#postnav").fadeIn(800),n("#main-page").fadeIn(500),n("#pagenav").fadeIn(800),n("#bottomtools").fadeIn(1200),""!=a.location.hash){var t=a.location.hash.indexOf("#disqus_thread"),o=a.location.hash.indexOf("#respond-post");"-1"==t&&"-1"==o||n("#disqus_thread").fadeIn(1e3)}n("#thatsi").fadeIn(1300),n("#footer").css("display","block"),n("#outcomment").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#comment_go").click(function(){n("#disqus_thread").fadeIn(1e3)}),n("#tor_show").click(function(){"none;"==n("#postTor").css("display")?(n("#postTor").fadeIn(400),n("#postTor").css("display","inline-block")):n("#postTor").fadeOut(400)}),n("[data-toggle=tooltip]").tooltip(),n("a[href*=#],area[href*=#]").click(function(){if($body=a.opera?"CSS1Compat"==i.compatMode?n("html"):n("body"):n("html,body"),location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname&&location.search==this.search){var t=n(this.hash);if((t=t.length&&t||n("[name="+this.hash.slice(1)+"]")).length){var o=t.offset().top;return n("html,body").animate({scrollTop:o},1e3),!1}}}),disqusLoader("#disqus_thread",{scriptUrl:"//sora-diary.disqus.com/embed.js",disqusConfig:function(){this.page.url=n("#disqus_thread").attr("data-permalink"),this.page.identifier=n("#disqus_thread").attr("data-permalink")}})},new t}(window,document,jQuery)</script>
+<script src="/js/nprogress.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
+<script src="/js/mori.js"></script>
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
+
 
 </body>
 </html>
