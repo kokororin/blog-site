@@ -380,9 +380,9 @@ git push --tags origin m
       <category term="终点" scheme="https://kotori.love/categories/%E7%BB%88%E7%82%B9/"/>
     
     
-      <category term="lovelive" scheme="https://kotori.love/tags/lovelive/"/>
-    
       <category term="bilibili" scheme="https://kotori.love/tags/bilibili/"/>
+    
+      <category term="lovelive" scheme="https://kotori.love/tags/lovelive/"/>
     
   </entry>
   

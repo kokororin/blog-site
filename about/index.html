@@ -42,8 +42,9 @@
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
 </head>
 
-<body>
-  
+  <body>
+    <div id="pjax-container">
+      
   <header class="container">
     <a href="https://kotori.love">
       <h1 style="color:#34495e">ことりのおやつにしてやるぞー！</h1>
@@ -53,15 +54,15 @@
   </header>
 
 
-  <div id="pjax-container">
-    <div id="main" class="container">
-  <div id="main-page" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
-    <article class="post" style="padding-top:20px">
-      <h2 itemprop="name headline" style="font-weight:400">About</h2>
       
-      
-      <div class="post-content" itemprop="articleBody">
-        <h3 id="关于本站">关于本站</h3>
+  <div id="main" class="container">
+    <div id="main-page" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
+      <article class="post" style="padding-top:20px">
+        <h2 itemprop="name headline" style="font-weight:400">About</h2>
+        
+        
+        <div class="post-content" itemprop="articleBody">
+          <h3 id="关于本站">关于本站</h3>
 <p><strong>本站为个人博客，属于非营利性个人网站，依靠博主一己之力支持建设并维护。</strong></p>
 <h3 id="关于博主">关于博主</h3>
 <p>**<br>
@@ -88,33 +89,35 @@
 <p><img src="https://licensebuttons.net/l/by-nc-sa/3.0/cn/88x31.png" alt=""><br>
 除特别说明外，用户内容均采用 <a href="http://creativecommons.org/licenses/by-sa/3.0/cn/" target="_blank" rel="noopener">知识共享署名 - 相同方式共享 3.0 中国大陆许可协议</a> 进行许可</p>
 
-      </div>
-    </article>
-  </div>
-
-  <center>
-    <div id="postnav" style="display:none">
-      <ul class="pager">
-        <li class="previous">
-          <a href="https://kotori.love">
-            <span class="fui-home"></span>
-          </a>
-        </li>
-        <li class="next" data-action="comment-show">
-          <a href="javascript:void(0)">
-            <span class="fui-chat"></span>
-          </a>
-        </li>
-
-      </ul>
+        </div>
+      </article>
     </div>
-  </center>
-  <div id="disqus_thread" data-title="about" data-permalink="https://kotori.love/about/" data-allow-comment="false"></div>
 
-</div>
+    <center>
+      <div id="postnav" style="display:none">
+        <ul class="pager">
+          <li class="previous">
+            <a href="https://kotori.love">
+              <span class="fui-home"></span>
+            </a>
+          </li>
+          <li class="next" data-action="comment-show">
+            <a href="javascript:void(0)">
+              <span class="fui-chat"></span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </center>
+      <div id="disqus_thread" style="display:none" data-title="about" data-permalink="https://kotori.love/about/" data-allow-comment="false"></div>
+
 
   </div>
-  <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
+
+
+
+      <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
   <hr>
   <div style="text-align:center;padding-bottom:9px">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
@@ -123,7 +126,7 @@
   </p></div>
 </footer>
 
-<script>window.moriVars={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
+<script>window.MORI_VARS={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
 
 
 <script src="/js/jquery.min.js"></script>
@@ -147,10 +150,6 @@
 <script src="/js/mori.js"></script>
 
 
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70944432-1"></script>
-  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-70944432-1")</script>
-
-
-</body>
+    </div>
+  </body>
 </html>
