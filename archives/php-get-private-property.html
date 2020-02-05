@@ -2,42 +2,40 @@
 <html class="han-la">
   <head>
   <meta charset="utf-8">
-  
+  <!-- Meta & Title & Info -->
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="renderer" content="webkit">
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="theme-color" content="#16a085">
-  
-  
+  <!-- Blue #448AFF -->
+  <!-- Title -->
   
   <title>从外部获取 php 类的私有属性 | ことりのおやつにしてやるぞー！</title>
 
-  
+  <!-- Favicons -->
   <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
   <link rel="icon" href="/favicon.ico">
 
 
+  <!-- Import CSS -->
   
+    
+      <link rel="stylesheet" href="/css/mori.css">
+    
+      <link rel="stylesheet" href="/css/bootstrap.css">
+    
+      <link rel="stylesheet" href="/css/flat-ui.css">
+    
+      <link rel="stylesheet" href="/css/prism.css">
+    
+      <link rel="stylesheet" href="/css/nprogress.css">
+    
+      <link rel="stylesheet" href="/fonts/material-design-iconic-font.css">
+    
   
-<link rel="stylesheet" href="/css/mori.css">
-
-  
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-  
-<link rel="stylesheet" href="/css/flat-ui.min.css">
-
-  
-<link rel="stylesheet" href="/css/prism.css">
-
-  
-<link rel="stylesheet" href="/css/nprogress.css">
-
-  
-<link rel="stylesheet" href="/fonts/material-design-iconic-font.min.css">
 
 
-  
+  <!-- RSS -->
   
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
 </head>
@@ -47,19 +45,19 @@
       
 
       <div id="main" class="container">
-  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting" style="display:none">
-    <article class="post" style="padding-top:20px">
-      <h2 itemprop="name headline" style="font-weight:400">从外部获取 php 类的私有属性</h2>
+  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting">
+    <article class="post" style="padding-top: 20px;">
+      <h2 itemprop="name headline" style="font-weight: normal;">从外部获取 php 类的私有属性</h2>
       <div class="text-right">
         <div class="text-bar">
           <a href="https://kotori.love" class="fui-home"></a>
-          
+          <!-- <a href="javascript:void(0)" class="fui-list-bulleted" data-action="show-tor"></a> -->
           <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
-          <a style="font-size:30px;margin-left:1px">·</a>
-          <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/php-get-private-property.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/php-get-private-property.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
-          <a href="https://plus.google.com/share?url=https://kotori.love/archives/php-get-private-property.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Google+" class="fui-google-plus"></a>
-          <a href="http://service.weibo.com/share/share.php?url=https://kotori.love/archives/php-get-private-property.html&title=从外部获取 php 类的私有属性" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Weibo" class="fui-bookmark"></a>
+          <a style="font-size: 30px;margin-left: 1px;">·</a>
+          <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/php-get-private-property.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/php-get-private-property.html" target="_blank" rel="nofollow"
+            data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
         </div>
         <div class="post-info">
           <span class="post-info-n">
@@ -75,8 +73,8 @@
           <a><time datetime="2017-08-23T03:47:00.000Z">2017-08-23</time></a>
         </div>
       </div>
-      
-      
+      <!-- 头图 -->
+      <!-- end -->
       <div class="post-content" itemprop="articleBody">
         <blockquote>
 <p>最近把 Typecho 升级到了 1.1 (17.8.17)，然后主题部分功能挂了，应该是以前<s>魔改</s>过核心代码导致的，70 说国庆会出一个 Beta 版，看来以后还是不改源代码了 …⁄(⁄ ⁄・⁄ω⁄・⁄ ⁄)⁄…</p>
@@ -98,7 +96,7 @@ echo $currentPage;
   </div>
 
   <center>
-    <div id="postnav" style="display:none">
+    <div id="postnav">
       <ul class="pager">
         <li class="previous">
           <a href="https://kotori.love">
@@ -126,44 +124,40 @@ echo $currentPage;
     </div>
   </center>
 
-    <div id="disqus_thread" style="display:none" data-title="从外部获取 php 类的私有属性" data-permalink="https://kotori.love/archives/php-get-private-property.html" data-allow-comment=""></div>
+    <div id="disqus_thread" style="display: none" data-title="从外部获取 php 类的私有属性" data-permalink="https://kotori.love/archives/php-get-private-property.html" data-allow-comment=""></div>
 
-
-  
 
 </div>
 
-      <footer id="footer" class="container" style="background:rgba(255,255,255,0);display:none">
+      <footer id="footer" class="container" style="background:rgba(255, 255, 255, 0);">
   <hr>
-  <div style="text-align:center;padding-bottom:9px">
+  <div style="text-align:center;padding-bottom:9px;">
     <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
-      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
+      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank"
+        href="https://yumoe.com">Moricolor</a>
       / <a href="/atom.xml" data-nopjax>RSS</a>
-  </p></div>
+  </div>
 </footer>
 
-<script>window.MORI_VARS={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
+<script>
+  window.MORI_VARS = {
+    bottomTools: {"hitokoto":true,"category":true,"tag":false,"search":true},
+    comment: {"use":"disqus","shortname":"sora-diary"},
+    analytics: {"use":"google","id":"UA-70944432-1"},
+    url: "https://kotori.love"
+  }
+</script>
 
 
-<script src="/js/jquery.min.js"></script>
-
-
-<script src="/js/bootstrap.js"></script>
-
-
-<script src="/js/flat-ui.min.js"></script>
-
-
-<script src="/js/prism.js"></script>
-
-
-<script src="/js/pjax.js"></script>
-
-
-<script src="/js/nprogress.js"></script>
-
-
-<script src="/js/mori.js"></script>
+  
+    <script src="/js/prism.js"></script>
+  
+    <script src="/js/pjax.js"></script>
+  
+    <script src="/js/nprogress.js"></script>
+  
+    <script src="/js/mori.js"></script>
+  
 
 
     </div>
