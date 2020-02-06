@@ -1,111 +1,49 @@
-<!DOCTYPE html>
-<html class="han-la">
-  <head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="renderer" content="webkit">
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-  <meta name="theme-color" content="#16a085">
-  
-  
-  
-  <title>Typecho 主题制作总结 | ことりのおやつにしてやるぞー！</title>
-
-  
-  <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
-  <link rel="icon" href="/favicon.ico">
-
-
-  
-  
-    <link rel="stylesheet" href="/css/app.css?v=ee47d74dd8cd8cca">
-  
-
-
-  
-  
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="pjax-container">
-      
-
-      <div id="main" class="container">
-  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting">
-    <article class="post" style="padding-top:20px">
-      <h2 itemprop="name headline" style="font-weight:400">Typecho 主题制作总结</h2>
-      <div class="text-right">
-        <div class="text-bar">
-          <a href="https://kotori.love" class="fui-home"></a>
-          
-          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
-          <a style="font-size:30px;margin-left:1px">·</a>
-          <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/typecho-theme-tips.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/typecho-theme-tips.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
-        </div>
-        <div class="post-info">
-          <span class="post-info-n">
-            
-              <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
-            
-          </span>
-          
-            <a href="/tags/typecho/">typecho</a>
-          
-            <a href="/tags/%E4%B8%BB%E9%A2%98/">主题</a>
-          
-          <a><time datetime="2015-07-05T04:53:00.000Z">2015-07-05</time></a>
-        </div>
-      </div>
-      
-      
-      <div class="post-content" itemprop="articleBody">
-        <p>由于 Typecho 相比 WordPress，所提供的接口较少，所以有些地方需要注意下。</p>
+<!doctype html>
+<html class="han-la"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/><meta name="renderer" content="webkit"/><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/><meta name="theme-color" content="#16a085"/><title>Typecho 主题制作总结 | ことりのおやつにしてやるぞー！</title><link rel="icon shortcut" type="image/ico" href="/favicon.ico"/><link rel="icon" href="/favicon.ico"/><link rel="stylesheet" href="/css/app.css?v=d321d063c0308fd1"/><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head><body><div id="pjax-container"><div id="main" class="container"><div id="main-post" role="main" itemscope="" itemType="http://schema.org/BlogPosting"><article class="post" style="padding-top:20px"><h2 itemProp="name headline" style="font-weight:normal">Typecho 主题制作总结</h2><div class="text-right"><div class="text-bar"><a href="https://kotori.love" class="fui-home"></a><a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a><a style="font-size:30px;margin-left:1px">·</a><a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/typecho-theme-tips.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a><a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/typecho-theme-tips.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a></div><div class="post-info"><span class="post-info-n"><a href="/categories/%E7%A7%91%E6%8A%80/">科技</a></span><a href="/tags/typecho/">typecho</a><a href="/tags/%E4%B8%BB%E9%A2%98/">主题</a><a><time dateTime="2015-07-05T04:53:00.000Z">2015-07-05</time></a></div></div><div class="post-content" itemProp="articleBody"><p>由于 Typecho 相比 WordPress，所提供的接口较少，所以有些地方需要注意下。</p>
 <h3 id="首页文章无限加载文章">首页文章无限加载文章</h3>
 <p>首先在 functions.php 中加入一段判断 ajax 请求的方法：</p>
 <pre><code class="language-php">function is_ajax()
 {
-    if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-        if ('xmlhttprequest' == strtolower($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+    if (isset($_SERVER[&#x27;HTTP_X_REQUESTED_WITH&#x27;])) {
+        if (&#x27;xmlhttprequest&#x27; == strtolower($_SERVER[&#x27;HTTP_X_REQUESTED_WITH&#x27;])) {
             return true;
         }
     }
     return false;
 }
 </code></pre>
-<p>然后在首页模板 index.php 中加入判断，if (is_ajax ()): 则不输出 header footer 等信息。<br>
+<p>然后在首页模板 index.php 中加入判断，if (is_ajax ()): 则不输出 header footer 等信息。<br/>
 最后一步，再模板公共 js 文件中加入以下代码：</p>
 <pre><code class="language-javascript">    var page = 1;
-    var $body = (window.opera) ? (document.compatMode == &quot;CSS1Compat&quot; ? $('html') : $('body')) : $('html,body');
-    $('#blog_load_more').click(function(event) {
+    var $body = (window.opera) ? (document.compatMode == &quot;CSS1Compat&quot; ? $(&#x27;html&#x27;) : $(&#x27;body&#x27;)) : $(&#x27;html,body&#x27;);
+    $(&#x27;#blog_load_more&#x27;).click(function(event) {
         $(this).hide();
-        $('#spinner').show();
+        $(&#x27;#spinner&#x27;).show();
         $.ajax({
-            type: 'get',
-            url: SITE.default_url + '/page/' + parseInt(page + 1),
+            type: &#x27;get&#x27;,
+            url: SITE.default_url + &#x27;/page/&#x27; + parseInt(page + 1),
             success: function(data, textStatus, XMLHttpRequest) {
                 page++;
-                $('.w-blog-list').append(data);
-                $('#spinner').hide();
-                $('#blog_load_more').show();
+                $(&#x27;.w-blog-list&#x27;).append(data);
+                $(&#x27;#spinner&#x27;).hide();
+                $(&#x27;#blog_load_more&#x27;).show();
             },
             error: function(MLHttpRequest, textStatus, errorThrown) {
-                $('#spinner').hide();
-                $.jGrowl('Network Error');
+                $(&#x27;#spinner&#x27;).hide();
+                $.jGrowl(&#x27;Network Error&#x27;);
             }
         });
     });
 </code></pre>
-<p>其中 #blog_load_more 为需要绑定的加载更多按钮，#spinner 为加载过程中的动画，.w-blog-list 为首页文章列表容器。<br>
+<p>其中 #blog_load_more 为需要绑定的加载更多按钮，#spinner 为加载过程中的动画，.w-blog-list 为首页文章列表容器。<br/>
 由于 Typecho 并没有 Ajax 钩子函数，所以需要在 functions.php 中加入以下代码：</p>
 <pre><code class="language-php">function site_data()
 {
     $array = array(
-        'site_url'         =&gt; Helper::options()-&gt;siteUrl,
-        'default_url'      =&gt; Helper::options()-&gt;siteUrl . 'index.php',
-        'theme_images_url' =&gt; Helper::options()-&gt;themeUrl . '/assets/images/',
+        &#x27;site_url&#x27;         =&gt; Helper::options()-&gt;siteUrl,
+        &#x27;default_url&#x27;      =&gt; Helper::options()-&gt;siteUrl . &#x27;index.php&#x27;,
+        &#x27;theme_images_url&#x27; =&gt; Helper::options()-&gt;themeUrl . &#x27;/assets/images/&#x27;,
     );
     echo json_encode($array);
 }
@@ -118,12 +56,12 @@ var SITE = &lt;?php site_data()?&gt;;
 <p>此处的 SITE 就是一个 JSON 对象，可以直接用了。</p>
 <h3 id="WordPress的add-filter很好用，Typecho也可以实现类似的功能：">WordPress 的 add_filter 很好用，Typecho 也可以实现类似的功能：</h3>
 <p>比如想把文章中的图片都加上 rel=&quot;fancybox&quot; 的属性，WordPress 可能使用的以下方法：</p>
-<pre><code class="language-php">add_filter('the_content', 'fancybox_replace');
+<pre><code class="language-php">add_filter(&#x27;the_content&#x27;, &#x27;fancybox_replace&#x27;);
 function fancybox_replace($content)
 {
     global $post;
-    $pattern     = &quot;/&lt;a(.*?)href=('|\&quot;)([^&gt;]*).(bmp|gif|jpeg|jpg|png)('|\&quot;)(.*?)&gt;(.*?)&lt;\/a&gt;/i&quot;;
-    $replacement = '&lt;a$1href=$2$3.$4$5 target=&quot;_blank&quot; rel=&quot;fancybox&quot;$6&gt;$7&lt;/a&gt;';
+    $pattern     = &quot;/&lt;a(.*?)href=(&#x27;|\&quot;)([^&gt;]*).(bmp|gif|jpeg|jpg|png)(&#x27;|\&quot;)(.*?)&gt;(.*?)&lt;\/a&gt;/i&quot;;
+    $replacement = &#x27;&lt;a$1href=$2$3.$4$5 target=&quot;_blank&quot; rel=&quot;fancybox&quot;$6&gt;$7&lt;/a&gt;&#x27;;
     $content     = preg_replace($pattern, $replacement, $content);
     return $content;
 }
@@ -131,7 +69,7 @@ function fancybox_replace($content)
 <p>Typecho 中可以这么写：</p>
 <pre><code class="language-php">function themeInit($archive)
 {
-    if ($archive-&gt;is('single')) {
+    if ($archive-&gt;is(&#x27;single&#x27;)) {
         $archive-&gt;content = fancybox_replace($archive-&gt;content);
     }
 
@@ -143,26 +81,26 @@ function fancybox_replace($content)
 {
     $cid = $archive-&gt;cid;
     $db = Typecho_Db::get();
-    $rs = $db-&gt;fetchRow($db-&gt;select('table.contents.text')
-                               -&gt;from('table.contents')
-                               -&gt;where('cid=?', $cid));
-    $text = $rs['text'];
-    if (0 === strpos($text, '')) {
-        preg_match('/!\[[^\]]*]\([^\)]*\.(png|jpeg|jpg|gif|bmp)\)/i', $text, $img);
+    $rs = $db-&gt;fetchRow($db-&gt;select(&#x27;table.contents.text&#x27;)
+                               -&gt;from(&#x27;table.contents&#x27;)
+                               -&gt;where(&#x27;cid=?&#x27;, $cid));
+    $text = $rs[&#x27;text&#x27;];
+    if (0 === strpos($text, &#x27;&#x27;)) {
+        preg_match(&#x27;/!\[[^\]]*]\([^\)]*\.(png|jpeg|jpg|gif|bmp)\)/i&#x27;, $text, $img);
         if (empty($img)) {
-            return 'none';
+            return &#x27;none&#x27;;
         } else {
             preg_match(&quot;/(?:\()(.*)(?:\))/i&quot;, $img[0], $result);
             $img_url = $result[1];
-            return '&lt;img src=&quot;' . $img_url . '&quot;/&gt;';
+            return &#x27;&lt;img src=&quot;&#x27; . $img_url . &#x27;&quot;/&gt;&#x27;;
         }
     } else {
         preg_match_all(&quot;/\&lt;img.*?src\=\&quot;(.*?)\&quot;[^&gt;]*&gt;/i&quot;, $text, $img);
         if (empty($img)) {
-            return 'none';
+            return &#x27;none&#x27;;
         } else {
             $img_url = $img[1][0];
-            return '&lt;img src=&quot;' . $img_url . '&quot;/&gt;';
+            return &#x27;&lt;img src=&quot;&#x27; . $img_url . &#x27;&quot;/&gt;&#x27;;
         }
     }
 }
@@ -171,17 +109,17 @@ function fancybox_replace($content)
 <pre><code class="language-php">function get_comment_at($coid)
 {
     $db   = Typecho_Db::get();
-    $prow = $db-&gt;fetchRow($db-&gt;select('parent')-&gt;from('table.comments')
-                                 -&gt;where('coid = ? AND status = ?', $coid, 'approved'));
-    $parent = $prow['parent'];
+    $prow = $db-&gt;fetchRow($db-&gt;select(&#x27;parent&#x27;)-&gt;from(&#x27;table.comments&#x27;)
+                                 -&gt;where(&#x27;coid = ? AND status = ?&#x27;, $coid, &#x27;approved&#x27;));
+    $parent = $prow[&#x27;parent&#x27;];
     if ($parent != &quot;0&quot;) {
-        $arow = $db-&gt;fetchRow($db-&gt;select('author')-&gt;from('table.comments')
-                                     -&gt;where('coid = ? AND status = ?', $parent, 'approved'));
-        $author = $arow['author'];
-        $href   = '&lt;a href=&quot;#comment-' . $parent . '&quot;&gt;@' . $author . '&lt;/a&gt;';
+        $arow = $db-&gt;fetchRow($db-&gt;select(&#x27;author&#x27;)-&gt;from(&#x27;table.comments&#x27;)
+                                     -&gt;where(&#x27;coid = ? AND status = ?&#x27;, $parent, &#x27;approved&#x27;));
+        $author = $arow[&#x27;author&#x27;];
+        $href   = &#x27;&lt;a href=&quot;#comment-&#x27; . $parent . &#x27;&quot;&gt;@&#x27; . $author . &#x27;&lt;/a&gt;&#x27;;
         echo $href;
     } else {
-        echo '';
+        echo &#x27;&#x27;;
     }
 
 }
@@ -194,22 +132,22 @@ function get_post_view($archive)
     $cid    = $archive-&gt;cid;
     $db     = Typecho_Db::get();
     $prefix = $db-&gt;getPrefix();
-    if (!array_key_exists('views', $db-&gt;fetchRow($db-&gt;select()-&gt;from('table.contents')))) {
-        $db-&gt;query('ALTER TABLE `' . $prefix . 'contents` ADD `views` INT(10) DEFAULT 0;');
+    if (!array_key_exists(&#x27;views&#x27;, $db-&gt;fetchRow($db-&gt;select()-&gt;from(&#x27;table.contents&#x27;)))) {
+        $db-&gt;query(&#x27;ALTER TABLE `&#x27; . $prefix . &#x27;contents` ADD `views` INT(10) DEFAULT 0;&#x27;);
         echo 0;
         return;
     }
-    $row = $db-&gt;fetchRow($db-&gt;select('views')-&gt;from('table.contents')-&gt;where('cid = ?', $cid));
-    if ($archive-&gt;is('single')) {
-       $db-&gt;query($db-&gt;update('table.contents')-&gt;rows(array('views' =&gt; (int) $row['views'] + 1))-&gt;where('cid = ?', $cid));
+    $row = $db-&gt;fetchRow($db-&gt;select(&#x27;views&#x27;)-&gt;from(&#x27;table.contents&#x27;)-&gt;where(&#x27;cid = ?&#x27;, $cid));
+    if ($archive-&gt;is(&#x27;single&#x27;)) {
+       $db-&gt;query($db-&gt;update(&#x27;table.contents&#x27;)-&gt;rows(array(&#x27;views&#x27; =&gt; (int) $row[&#x27;views&#x27;] + 1))-&gt;where(&#x27;cid = ?&#x27;, $cid));
     }
-    echo $row['views'];
+    echo $row[&#x27;views&#x27;];
 }
 </code></pre>
 <h3 id="判断移动端访问">判断移动端访问</h3>
 <pre><code class="language-php">function is_mobile()
 {
-    $user_agent     = $_SERVER['HTTP_USER_AGENT'];
+    $user_agent     = $_SERVER[&#x27;HTTP_USER_AGENT&#x27;];
     $mobile_browser = array(
         &quot;mqqbrowser&quot;, //手机QQ浏览器
         &quot;opera mobi&quot;, //手机opera
@@ -235,51 +173,51 @@ function get_post_view($archive)
 <p>AjaxComments 有小 bug，不太好用，直接食用以下的修改版代码，在公共 js 中调用 ajaxComments () 方法即可</p>
 <pre><code class="language-javascript">function ajaxComment() {
     var selector = {
-        commentMainFrame: '#comment',
-        commentList: '#commentlist',
-        commentNumText: '#comment h3',
-        commentReplyButton: '#comment span.reply',
-        submitForm: '#commentform',
-        submitTextarea: '#textarea',
-        submitButton: '#submit',
+        commentMainFrame: &#x27;#comment&#x27;,
+        commentList: &#x27;#commentlist&#x27;,
+        commentNumText: &#x27;#comment h3&#x27;,
+        commentReplyButton: &#x27;#comment span.reply&#x27;,
+        submitForm: &#x27;#commentform&#x27;,
+        submitTextarea: &#x27;#textarea&#x27;,
+        submitButton: &#x27;#submit&#x27;,
     };
-    var parentId = '';
+    var parentId = &#x27;&#x27;;
     bindCommentReplyButton();
-    $(selector.submitTextarea).after('&lt;div style=&quot;display:none;&quot; id=&quot;ajaxCommentMsg&quot;&gt;&lt;\/div&gt;');
-    $msg = $('#ajaxCommentMsg');
-    $(document).on('submit', selector.submitForm, function() {
+    $(selector.submitTextarea).after(&#x27;&lt;div style=&quot;display:none;&quot; id=&quot;ajaxCommentMsg&quot;&gt;&lt;\/div&gt;&#x27;);
+    $msg = $(&#x27;#ajaxCommentMsg&#x27;);
+    $(document).on(&#x27;submit&#x27;, selector.submitForm, function() {
         $msg.empty();
-        $(selector.submitButton).val('发射中哦=A=');
-        $(selector.submitButton).attr('disabled', true).fadeTo('slow', 0.5);
-        if ($(selector.submitForm).find('#author')[0]) {
-            if ($(selector.submitForm).find('#author').val() == '') {
-                message('昵称没填呢QAQ');
+        $(selector.submitButton).val(&#x27;发射中哦=A=&#x27;);
+        $(selector.submitButton).attr(&#x27;disabled&#x27;, true).fadeTo(&#x27;slow&#x27;, 0.5);
+        if ($(selector.submitForm).find(&#x27;#author&#x27;)[0]) {
+            if ($(selector.submitForm).find(&#x27;#author&#x27;).val() == &#x27;&#x27;) {
+                message(&#x27;昵称没填呢QAQ&#x27;);
                 enableCommentButton();
                 return false;
             }
-            if ($(selector.submitForm).find('#mail').val() == '') {
-                message('邮箱没填呢QAQ');
+            if ($(selector.submitForm).find(&#x27;#mail&#x27;).val() == &#x27;&#x27;) {
+                message(&#x27;邮箱没填呢QAQ&#x27;);
                 enableCommentButton();
                 return false;
             }
             var filter = /^[^@\s&lt;&amp;&gt;]+@([a-z0-9]+\.)+[a-z]{2,4}$/i;
-            if (!filter.test($(selector.submitForm).find('#mail').val())) {
-                message('邮箱地址不正确呢QAQ');
+            if (!filter.test($(selector.submitForm).find(&#x27;#mail&#x27;).val())) {
+                message(&#x27;邮箱地址不正确呢QAQ&#x27;);
                 enableCommentButton();
                 return false;
             }
         }
-        if ($(selector.submitForm).find(selector.submitTextarea).val() == '') {
-            message('评论似乎什么也没写呢QAQ');
+        if ($(selector.submitForm).find(selector.submitTextarea).val() == &#x27;&#x27;) {
+            message(&#x27;评论似乎什么也没写呢QAQ&#x27;);
             enableCommentButton();
             return false;
         }
         $.ajax({
-            url: $(this).attr('action'),
-            type: $(this).attr('method'),
+            url: $(this).attr(&#x27;action&#x27;),
+            type: $(this).attr(&#x27;method&#x27;),
             data: $(this).serializeArray(),
             error: function() {
-                message('发射失败,请重试!');
+                message(&#x27;发射失败,请重试!&#x27;);
                 setTimeout(NProgress.done, 500)
                 enableCommentButton();
                 return false;
@@ -294,29 +232,29 @@ function get_post_view($archive)
                     userCommentId = $(selector.commentList, data).html().match(/id=\&quot;?comment-\d+/g).join().match(/\d+/g).sort(function(a, b) {
                         return a - b;
                     }).pop();
-                    commentLi = '&lt;li id=&quot;comment-' + userCommentId + '&quot; class=&quot;comment&quot;&gt;' + $('#comment-' + userCommentId, data).html(); + '&lt;\/li&gt;';
+                    commentLi = &#x27;&lt;li id=&quot;comment-&#x27; + userCommentId + &#x27;&quot; class=&quot;comment&quot;&gt;&#x27; + $(&#x27;#comment-&#x27; + userCommentId, data).html(); + &#x27;&lt;\/li&gt;&#x27;;
                     if (parentId) {
-                        if ($('#' + parentId).find(&quot;.comment-children&quot;).length &lt;= 0) {
-                            $('#' + parentId).append(&quot;&lt;ul class='children'&gt;&lt;/ul&gt;&quot;);
+                        if ($(&#x27;#&#x27; + parentId).find(&quot;.comment-children&quot;).length &lt;= 0) {
+                            $(&#x27;#&#x27; + parentId).append(&quot;&lt;ul class=&#x27;children&#x27;&gt;&lt;/ul&gt;&quot;);
                         }
-                        $('#' + parentId + &quot; .children:first&quot;).append(commentLi);
-                        parentId = ''
+                        $(&#x27;#&#x27; + parentId + &quot; .children:first&quot;).append(commentLi);
+                        parentId = &#x27;&#x27;
                         $body.animate({
-                            scrollTop: $('#comment-' + userCommentId).offset().top - 450
+                            scrollTop: $(&#x27;#comment-&#x27; + userCommentId).offset().top - 450
                         }, 900);
                     } else {
                         $(selector.commentList).prepend(commentLi)
                         $body.animate({
-                            scrollTop: $('#comment-' + userCommentId).offset().top - 200
+                            scrollTop: $(&#x27;#comment-&#x27; + userCommentId).offset().top - 200
                         }, 900);
                     }
-                    //$('#comment-' + userCommentId).slideDown('slow');
+                    //$(&#x27;#comment-&#x27; + userCommentId).slideDown(&#x27;slow&#x27;);
 
                     //console.log(userCommentId);
                     $(selector.commentNumText).length ? (n = parseInt($(selector.commentNumText).text().match(/\d+/)), $(selector.commentNumText).html($(selector.commentNumText).html().replace(n, n + 1))) : 0;
                     TypechoComment.cancelReply();
-                    $(selector.submitTextarea).val('');
-                    $(selector.commentReplyButton + ' b, #cancel-comment-reply-link').unbind('click');
+                    $(selector.submitTextarea).val(&#x27;&#x27;);
+                    $(selector.commentReplyButton + &#x27; b, #cancel-comment-reply-link&#x27;).unbind(&#x27;click&#x27;);
                     bindCommentReplyButton();
                     enableCommentButton();
 
@@ -327,23 +265,23 @@ function get_post_view($archive)
     });
 
     function bindCommentReplyButton() {
-        $(document).on('click', selector.commentReplyButton, function() {
-            parentId = $(this).parents('li.comment').attr(&quot;id&quot;);
+        $(document).on(&#x27;click&#x27;, selector.commentReplyButton, function() {
+            parentId = $(this).parents(&#x27;li.comment&#x27;).attr(&quot;id&quot;);
             $(selector.submitTextarea).focus();
         });
-        $(document).on('click', '#cancel-comment-reply-link', function() {
-            parentId = '';
+        $(document).on(&#x27;click&#x27;, &#x27;#cancel-comment-reply-link&#x27;, function() {
+            parentId = &#x27;&#x27;;
         });
     }
 
     function enableCommentButton() {
-        $(selector.submitButton).attr('disabled', false).fadeTo('', 1);
-        $(selector.submitButton).val('发射=A=');
+        $(selector.submitButton).attr(&#x27;disabled&#x27;, false).fadeTo(&#x27;&#x27;, 1);
+        $(selector.submitButton).val(&#x27;发射=A=&#x27;);
     }
 
     function message(msg) {
         $msg.hide();
-        $msg.html(msg).slideToggle('fast');
+        $msg.html(msg).slideToggle(&#x27;fast&#x27;);
     }
 }
 
@@ -357,10 +295,10 @@ function get_post_view($archive)
 <h3 id="非插件实现路由">非插件实现路由</h3>
 <pre><code class="language-php">function themeInit($archive)
 {
-    if ($archive-&gt;is('archive', 404))
+    if ($archive-&gt;is(&#x27;archive&#x27;, 404))
     {
-        $path_info = trim($archive-&gt;request-&gt;getPathinfo(), '/');
-        if ($path_info == 'i/redirect')
+        $path_info = trim($archive-&gt;request-&gt;getPathinfo(), &#x27;/&#x27;);
+        if ($path_info == &#x27;i/redirect&#x27;)
         {
             $url = urldecode($archive-&gt;request-&gt;url);
             $archive-&gt;response-&gt;redirect($url);
@@ -369,60 +307,11 @@ function get_post_view($archive)
     }
 }
 </code></pre>
-
-      </div>
-    </article>
-  </div>
-
-  <center>
-    <div id="postnav">
-      <ul class="pager">
-        <li class="previous">
-          <a href="https://kotori.love">
-            <span class="fui-home"></span>
-          </a>
-        </li>
-        <li class="next" data-action="comment-show">
-          <a href="javascript:void(0)">
-            <span class="fui-chat"></span>
-          </a>
-        </li>
-
-        <li class="previous">
-          
-            <a href="https://kotori.love/archives/fetch-gravatar-with-php.html" title="简单使用 php 获取 gravatar 头像">简单使用 php 获取 gravatar 头像</a>
-          
-        </li>
-
-        <li class="next">
-          
-            <a href="https://kotori.love/archives/public-dns-hellodns.html" title="HelloDNS 公共 DNS">HelloDNS 公共 DNS</a>
-          
-        </li>
-      </ul>
-    </div>
-  </center>
-
-    <div id="disqus_thread" style="display:none" data-title="Typecho 主题制作总结" data-permalink="https://kotori.love/archives/typecho-theme-tips.html" data-allow-comment=""></div>
-
-
-</div>
-
-      <footer id="footer" class="container" style="background:rgba(255,255,255,0)">
-  <hr>
-  <div style="text-align:center;padding-bottom:9px">
-    <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
-      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml" data-nopjax>RSS</a>
-  </p></div>
-</footer>
-
-<script>window.MORI_VARS={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
-
-
-  <script src="/js/app.js?v=a71591c3c4714e31"></script>
-
-
-    </div>
-  </body>
-</html>
+</div></article></div><center><div id="postnav"><ul class="pager"><li class="previous"><a href="https://kotori.love"><span class="fui-home"></span></a></li><li class="next" data-action="comment-show"><a href="#"><span class="fui-chat"></span></a></li><li class="previous"><a href="https://kotori.love/archives/fetch-gravatar-with-php.html" title="简单使用 php 获取 gravatar 头像">简单使用 php 获取 gravatar 头像</a></li><li class="next"><a href="https://kotori.love/archives/public-dns-hellodns.html" title="HelloDNS 公共 DNS">HelloDNS 公共 DNS</a></li></ul></div></center><div id="disqus_thread" style="display:none" data-title="Typecho 主题制作总结" data-permalink="https://kotori.love/archives/typecho-theme-tips.html"></div></div><footer id="footer" class="container" style="background:rgba(255, 255, 255, 0)"><hr/><div style="text-align:center;padding-bottom:9px"><p>© 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>. Using <a target="_blank" href="https://hexo.io/">Hexo</a>  &amp; <a target="_blank" href="https://yumoe.com">Moricolor</a> / <a href="/atom.xml" data-nopjax="true">RSS</a></p></div></footer><script>
+window.MORI_VARS = {
+  bottomTools: {"hitokoto":true,"category":true,"tag":false,"search":true},
+  comment: {"use":"disqus","shortname":"sora-diary"},
+  analytics: {"use":"google","id":"UA-70944432-1"},
+  url: "https://kotori.love"
+}
+</script><script src="/js/app.js?v=5eabb217debf50f4"></script></div></body></html>

@@ -1,71 +1,11 @@
-<!DOCTYPE html>
-<html class="han-la">
-  <head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="renderer" content="webkit">
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-  <meta name="theme-color" content="#16a085">
-  
-  
-  
-  <title>Chrome 扩展开发笔记 | ことりのおやつにしてやるぞー！</title>
-
-  
-  <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
-  <link rel="icon" href="/favicon.ico">
-
-
-  
-  
-    <link rel="stylesheet" href="/css/app.css?v=ee47d74dd8cd8cca">
-  
-
-
-  
-  
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="pjax-container">
-      
-
-      <div id="main" class="container">
-  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting">
-    <article class="post" style="padding-top:20px">
-      <h2 itemprop="name headline" style="font-weight:400">Chrome 扩展开发笔记</h2>
-      <div class="text-right">
-        <div class="text-bar">
-          <a href="https://kotori.love" class="fui-home"></a>
-          
-          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
-          <a style="font-size:30px;margin-left:1px">·</a>
-          <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/chrome-extension-notes.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/chrome-extension-notes.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
-        </div>
-        <div class="post-info">
-          <span class="post-info-n">
-            
-              <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
-            
-          </span>
-          
-            <a href="/tags/chrome/">chrome</a>
-          
-          <a><time datetime="2015-10-06T12:37:00.000Z">2015-10-06</time></a>
-        </div>
-      </div>
-      
-      
-      <div class="post-content" itemprop="articleBody">
-        <blockquote>
+<!doctype html>
+<html class="han-la"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/><meta name="renderer" content="webkit"/><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/><meta name="theme-color" content="#16a085"/><title>Chrome 扩展开发笔记 | ことりのおやつにしてやるぞー！</title><link rel="icon shortcut" type="image/ico" href="/favicon.ico"/><link rel="icon" href="/favicon.ico"/><link rel="stylesheet" href="/css/app.css?v=d321d063c0308fd1"/><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head><body><div id="pjax-container"><div id="main" class="container"><div id="main-post" role="main" itemscope="" itemType="http://schema.org/BlogPosting"><article class="post" style="padding-top:20px"><h2 itemProp="name headline" style="font-weight:normal">Chrome 扩展开发笔记</h2><div class="text-right"><div class="text-bar"><a href="https://kotori.love" class="fui-home"></a><a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a><a style="font-size:30px;margin-left:1px">·</a><a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/chrome-extension-notes.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a><a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/chrome-extension-notes.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a></div><div class="post-info"><span class="post-info-n"><a href="/categories/%E7%A7%91%E6%8A%80/">科技</a></span><a href="/tags/chrome/">chrome</a><a><time dateTime="2015-10-06T12:37:00.000Z">2015-10-06</time></a></div></div><div class="post-content" itemProp="articleBody"><blockquote>
 <p>今天研究了一下 Chrome 扩展的基本结构，尝试着开发了一款音乐播放器 (Kotori Music Player)。随便记点东西。</p>
 </blockquote>
 <p>先看看这个拓展的效果，如下图:</p>
-<p><img src="https://static-files.kotori.love/blog/2015/10/2407146113.png" alt="EC25D950-E3CB-4BE5-ACF8-EF7C1843BAA4.png"></p>
-<p><img src="https://static-files.kotori.love/blog/2015/10/1859953824.png" alt="216C02A1-A210-4032-8214-CF0433421D0E.png"></p>
+<p><img src="https://static-files.kotori.love/blog/2015/10/2407146113.png" alt="EC25D950-E3CB-4BE5-ACF8-EF7C1843BAA4.png"/></p>
+<p><img src="https://static-files.kotori.love/blog/2015/10/1859953824.png" alt="216C02A1-A210-4032-8214-CF0433421D0E.png"/></p>
 <h3 id="基本结构">基本结构</h3>
 <p>Chrome 扩展都包含一个 Manifest 文件 ——manifest.json，这个文件可以告诉 Chrome 关于这个扩展的相关信息，它是整个扩展的入口，也是 Chrome 扩展必不可少的部分。 Chrome 扩展的 Manifest 文件必须包含 name、version 和 manifest_version 属性，目前来说 manifest_version 属性值只能为数字 2，对于应用来说，还必须包含 app 属性。</p>
 <p>其他常用的可选属性还有 browser_action、page_action、background、permissions、options_page、content_scripts，所以我们可以保留一份 manifest.json 模板，当编写新的扩展时直接填入相应的属性值。如果我们需要的属性不在这个模板中，可以再去查阅官方文档，但我想这样的一份模板可以应对大部分的扩展了。下面就放上 Kotori Music Player 的 manifest.json 文件模板：</p>
@@ -101,7 +41,7 @@
     ]
 }
 </code></pre>
-<p>以上除了 permissions 都能根据字面意思理解，permissions 属性中声明需要跨域的权限。一些 API 比如 tabs,notifications,<br>
+<p>以上除了 permissions 都能根据字面意思理解，permissions 属性中声明需要跨域的权限。一些 API 比如 tabs,notifications,<br/>
 contextMenus 等都需要在 permissions 中声明。</p>
 <p>接下来看一下 background.html，主要就是放置一个 audio 标签，用于后台播放歌曲文件。</p>
 <pre><code class="language-html">&lt;html&gt;
@@ -118,25 +58,25 @@ contextMenus 等都需要在 permissions 中声明。</p>
 </code></pre>
 <p>其中主要的 JavaScript 脚本 background.js 如下，主要包括精选集解析，歌曲解析，LRC 格式歌词解析。在 background 处理完必要的事件后，将一些需要和前台 popup 交互的元素复制到变量里：</p>
 <pre><code class="language-javascript">//各种需要用到的变量
-var audio = $('#music').get(0);
+var audio = $(&#x27;#music&#x27;).get(0);
 var item = null;
 var isPlaying = false;
 var currentMusic = 0;
 var prevMusic = -1;
 var repeat = parseInt(localStorage.repeat);
 var ratio = 0;
-var name = '';
-var artist = '';
-var cover = '';
+var name = &#x27;&#x27;;
+var artist = &#x27;&#x27;;
+var cover = &#x27;&#x27;;
 var playlist = null;
 var lyricUrl = null;
 var lyric = null;
 var collectID = getCollectID();
 
 $.ajax({
-    url: 'http://kotori.sinaapp.com/xiami/collect/' + collectID,
-    type: 'get',
-    dataType: 'json',
+    url: &#x27;http://kotori.sinaapp.com/xiami/collect/&#x27; + collectID,
+    type: &#x27;get&#x27;,
+    dataType: &#x27;json&#x27;,
     async: false,
     success: function(data) {
         playlist = data;
@@ -144,17 +84,17 @@ $.ajax({
     error: function() {
         showNotification({
             type: &quot;basic&quot;,
-            title: 'Message',
-            message: 'Kotori API Error',
-            iconUrl: 'images/icon-128.png'
+            title: &#x27;Message&#x27;,
+            message: &#x27;Kotori API Error&#x27;,
+            iconUrl: &#x27;images/icon-128.png&#x27;
         });
     }
 });
 
 
-console.log('&lt;&lt;&lt;Kotoriの电台&gt;&gt;&gt;');
-console.log('Version : 20150719');
-console.log('Current Music: ' + currentMusic + ' Repeat: ' + repeat);
+console.log(&#x27;&lt;&lt;&lt;Kotoriの电台&gt;&gt;&gt;&#x27;);
+console.log(&#x27;Version : 20150719&#x27;);
+console.log(&#x27;Current Music: &#x27; + currentMusic + &#x27; Repeat: &#x27; + repeat);
 
 
 var loadMusic = function(i) {
@@ -167,7 +107,7 @@ var loadMusic = function(i) {
         type: &quot;get&quot;,
         async: false,
         dataType: &quot;json&quot;,
-        url: 'https://kotori.sinaapp.com/xiami/single/' + item.id,
+        url: &#x27;https://kotori.sinaapp.com/xiami/single/&#x27; + item.id,
         success: function(data) {
 
             if (data.url != null) {
@@ -190,14 +130,14 @@ var loadMusic = function(i) {
                     
                 }
 
-                console.log('Song Title: ' + data.name + ' Song Artist: ' + data.artist_name);
+                console.log(&#x27;Song Title: &#x27; + data.name + &#x27; Song Artist: &#x27; + data.artist_name);
             } else {
 
                 showNotification({
                     type: &quot;basic&quot;,
-                    title: 'Message',
-                    message: '歌曲获取失败，请重试。',
-                    iconUrl: 'images/icon-128.png'
+                    title: &#x27;Message&#x27;,
+                    message: &#x27;歌曲获取失败，请重试。&#x27;,
+                    iconUrl: &#x27;images/icon-128.png&#x27;
                 });
 
             }
@@ -250,8 +190,8 @@ var getLyric = function() {
     }
     $.ajax({
         url: lyricUrl,
-        type: 'get',
-        dataType: 'text',
+        type: &#x27;get&#x27;,
+        dataType: &#x27;text&#x27;,
         async: false,
         success: function(data) {
             lyric = parseLyric(data);
@@ -259,9 +199,9 @@ var getLyric = function() {
         error: function() {
             showNotification({
                 type: &quot;basic&quot;,
-                title: 'Message',
-                message: 'Lyric Fetch Error',
-                iconUrl: 'images/icon-128.png'
+                title: &#x27;Message&#x27;,
+                message: &#x27;Lyric Fetch Error&#x27;,
+                iconUrl: &#x27;images/icon-128.png&#x27;
             });
         }
     });
@@ -269,7 +209,7 @@ var getLyric = function() {
 
 var parseLyric = function(text) {
     //get each line from the text
-    var lines = text.split('\n'),
+    var lines = text.split(&#x27;\n&#x27;),
         //this regex mathes the time [00.12.78]
         pattern = /\[\d{2}:\d{2}.\d{2}\]/g,
         result = [];
@@ -286,10 +226,10 @@ var parseLyric = function(text) {
     //display all content on the page
     lines.forEach(function(v, i, a) {
         var time = v.match(pattern),
-            value = v.replace(pattern, '');
+            value = v.replace(pattern, &#x27;&#x27;);
         time.forEach(function(v1, i1, a1) {
             //convert the [min:sec] to secs format then store into result
-            var t = v1.slice(1, -1).split(':');
+            var t = v1.slice(1, -1).split(&#x27;:&#x27;);
             result.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]) + parseInt(offset) / 1000, value]);
         });
     });
@@ -309,7 +249,7 @@ var getOffset = function(text) {
             // Get only the first match.
             offset_line = text.match(offsetPattern)[0],
             // Get the second part of the offset.
-            offset_str = offset_line.split(':')[1];
+            offset_str = offset_line.split(&#x27;:&#x27;)[1];
         // Convert it to Int.
         offset = parseInt(offset_str);
     } catch (err) {
@@ -408,10 +348,10 @@ loadMusic(currentMusic);
 
             foreach ($array as $val) {
                 // 清除掉”回车不换行“符号
-                $val = preg_replace('/\r/', '', $val);
+                $val = preg_replace(&#x27;/\r/&#x27;, &#x27;&#x27;, $val);
 
                 // 正则匹配歌词时间
-                $temp = preg_match_all('/\[\d{2}\:\d{2}\.\d{2}\]/', $val, $matches);
+                $temp = preg_match_all(&#x27;/\[\d{2}\:\d{2}\.\d{2}\]/&#x27;, $val, $matches);
                 if (!empty($matches[0])) {
                     $data_plus = &quot;&quot;;
                     $time_array = array();
@@ -433,7 +373,7 @@ loadMusic(currentMusic);
                     // 将时间和歌词组合到数组中
                     foreach ($time_array as $V) {
                         //$lrc[] = array($V, $data_plus);
-                        $lrc['time' . $V] = $data_plus;
+                        $lrc[&#x27;time&#x27; . $V] = $data_plus;
                     }
                 }
             }
@@ -444,7 +384,7 @@ loadMusic(currentMusic);
             // 输出 json格式
             return json_encode($lrc);
         }
-        return 'no lyric';
+        return &#x27;no lyric&#x27;;
     }
 private function bsort(array $array)
     {
@@ -515,8 +455,8 @@ private function bsort(array $array)
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-<p>这里的 js 文件主要就是控制 background 页面中的 audio 标签，就不给出篇幅了。<br>
-关键一句就是 <code>var bg = chrome.extension.getBackgroundPage();</code> <br>
+<p>这里的 js 文件主要就是控制 background 页面中的 audio 标签，就不给出篇幅了。<br/>
+关键一句就是 <code>var bg = chrome.extension.getBackgroundPage();</code> <br/>
  通过 bg.xx 就可以调用 background 中的变量和方法。</p>
 <p>歌词同步的具体思路：</p>
 <ul>
@@ -532,66 +472,17 @@ private function bsort(array $array)
 <h3 id="安装地址">安装地址</h3>
 <p><a href="https://chrome.google.com/webstore/detail/jfibodpknfkelhgncgbicgoeifilampg" target="_blank" rel="noopener">Chrome Web Store</a></p>
 <h3 id="参考文档">参考文档</h3>
-<p><a href="https://crxdoc-zh.appspot.com/extensions/getstarted" target="_blank" rel="noopener">入门：建立 Chrome 扩展程序</a><br>
-<a href="https://crxdoc-zh.appspot.com/extensions/tabs" target="_blank" rel="noopener"> chrome.tabs</a><br>
-<a href="http://www.zhihu.com/question/20179805" target="_blank" rel="noopener"> 如何从零开始写一个 Chrome 扩展？</a><br>
-<a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="noopener">官方入门文档</a><br>
-<a href="http://www.w3ctech.com/topic/283" target="_blank" rel="noopener"> Chrome 扩展开发笔记</a><br>
+<p><a href="https://crxdoc-zh.appspot.com/extensions/getstarted" target="_blank" rel="noopener">入门：建立 Chrome 扩展程序</a><br/>
+<a href="https://crxdoc-zh.appspot.com/extensions/tabs" target="_blank" rel="noopener"> chrome.tabs</a><br/>
+<a href="http://www.zhihu.com/question/20179805" target="_blank" rel="noopener"> 如何从零开始写一个 Chrome 扩展？</a><br/>
+<a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="noopener">官方入门文档</a><br/>
+<a href="http://www.w3ctech.com/topic/283" target="_blank" rel="noopener"> Chrome 扩展开发笔记</a><br/>
 <a href="http://www.cnblogs.com/Wayou/p/sync_lyric_with_html5_audio.html" target="_blank" rel="noopener">论 HTML5 Audio 标签歌词同步的实现</a></p>
-
-      </div>
-    </article>
-  </div>
-
-  <center>
-    <div id="postnav">
-      <ul class="pager">
-        <li class="previous">
-          <a href="https://kotori.love">
-            <span class="fui-home"></span>
-          </a>
-        </li>
-        <li class="next" data-action="comment-show">
-          <a href="javascript:void(0)">
-            <span class="fui-chat"></span>
-          </a>
-        </li>
-
-        <li class="previous">
-          
-            <a href="https://kotori.love/archives/install-nginx-php-mysql-on-osx.html" title="OS X 下配置 Nginx+PHP+MySQL">OS X 下配置 Nginx+PHP+MySQL</a>
-          
-        </li>
-
-        <li class="next">
-          
-            <a href="https://kotori.love/archives/download-baiduyun-with-aria2.html" title="使用 aria2 黑科技高速下载百度等网盘文件">使用 aria2 黑科技高速下载百度等网盘文件</a>
-          
-        </li>
-      </ul>
-    </div>
-  </center>
-
-    <div id="disqus_thread" style="display:none" data-title="Chrome 扩展开发笔记" data-permalink="https://kotori.love/archives/chrome-extension-notes.html" data-allow-comment=""></div>
-
-
-</div>
-
-      <footer id="footer" class="container" style="background:rgba(255,255,255,0)">
-  <hr>
-  <div style="text-align:center;padding-bottom:9px">
-    <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
-      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml" data-nopjax>RSS</a>
-  </p></div>
-</footer>
-
-<script>window.MORI_VARS={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
-
-
-  <script src="/js/app.js?v=a71591c3c4714e31"></script>
-
-
-    </div>
-  </body>
-</html>
+</div></article></div><center><div id="postnav"><ul class="pager"><li class="previous"><a href="https://kotori.love"><span class="fui-home"></span></a></li><li class="next" data-action="comment-show"><a href="#"><span class="fui-chat"></span></a></li><li class="previous"><a href="https://kotori.love/archives/install-nginx-php-mysql-on-osx.html" title="OS X 下配置 Nginx+PHP+MySQL">OS X 下配置 Nginx+PHP+MySQL</a></li><li class="next"><a href="https://kotori.love/archives/download-baiduyun-with-aria2.html" title="使用 aria2 黑科技高速下载百度等网盘文件">使用 aria2 黑科技高速下载百度等网盘文件</a></li></ul></div></center><div id="disqus_thread" style="display:none" data-title="Chrome 扩展开发笔记" data-permalink="https://kotori.love/archives/chrome-extension-notes.html"></div></div><footer id="footer" class="container" style="background:rgba(255, 255, 255, 0)"><hr/><div style="text-align:center;padding-bottom:9px"><p>© 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>. Using <a target="_blank" href="https://hexo.io/">Hexo</a>  &amp; <a target="_blank" href="https://yumoe.com">Moricolor</a> / <a href="/atom.xml" data-nopjax="true">RSS</a></p></div></footer><script>
+window.MORI_VARS = {
+  bottomTools: {"hitokoto":true,"category":true,"tag":false,"search":true},
+  comment: {"use":"disqus","shortname":"sora-diary"},
+  analytics: {"use":"google","id":"UA-70944432-1"},
+  url: "https://kotori.love"
+}
+</script><script src="/js/app.js?v=5eabb217debf50f4"></script></div></body></html>

@@ -1,94 +1,34 @@
-<!DOCTYPE html>
-<html class="han-la">
-  <head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="renderer" content="webkit">
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-  <meta name="theme-color" content="#16a085">
-  
-  
-  
-  <title>Pixiv の画像を一括ダウンロード | ことりのおやつにしてやるぞー！</title>
-
-  
-  <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
-  <link rel="icon" href="/favicon.ico">
-
-
-  
-  
-    <link rel="stylesheet" href="/css/app.css?v=ee47d74dd8cd8cca">
-  
-
-
-  
-  
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="pjax-container">
-      
-
-      <div id="main" class="container">
-  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting">
-    <article class="post" style="padding-top:20px">
-      <h2 itemprop="name headline" style="font-weight:400">Pixiv の画像を一括ダウンロード</h2>
-      <div class="text-right">
-        <div class="text-bar">
-          <a href="https://kotori.love" class="fui-home"></a>
-          
-          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
-          <a style="font-size:30px;margin-left:1px">·</a>
-          <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/pixiv-batch-download.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/pixiv-batch-download.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
-        </div>
-        <div class="post-info">
-          <span class="post-info-n">
-            
-              <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
-            
-          </span>
-          
-            <a href="/tags/pixiv/">pixiv</a>
-          
-          <a><time datetime="2016-08-22T11:48:00.000Z">2016-08-22</time></a>
-        </div>
-      </div>
-      
-      
-      <div class="post-content" itemprop="articleBody">
-        <p>必要 → <a href="https://github.com/kokororin/pixiv-api-php" target="_blank" rel="noopener">pixiv-api-php</a></p>
+<!doctype html>
+<html class="han-la"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/><meta name="renderer" content="webkit"/><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/><meta name="theme-color" content="#16a085"/><title>Pixiv の画像を一括ダウンロード | ことりのおやつにしてやるぞー！</title><link rel="icon shortcut" type="image/ico" href="/favicon.ico"/><link rel="icon" href="/favicon.ico"/><link rel="stylesheet" href="/css/app.css?v=d321d063c0308fd1"/><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head><body><div id="pjax-container"><div id="main" class="container"><div id="main-post" role="main" itemscope="" itemType="http://schema.org/BlogPosting"><article class="post" style="padding-top:20px"><h2 itemProp="name headline" style="font-weight:normal">Pixiv の画像を一括ダウンロード</h2><div class="text-right"><div class="text-bar"><a href="https://kotori.love" class="fui-home"></a><a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a><a style="font-size:30px;margin-left:1px">·</a><a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/pixiv-batch-download.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a><a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/pixiv-batch-download.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a></div><div class="post-info"><span class="post-info-n"><a href="/categories/%E7%A7%91%E6%8A%80/">科技</a></span><a href="/tags/pixiv/">pixiv</a><a><time dateTime="2016-08-22T11:48:00.000Z">2016-08-22</time></a></div></div><div class="post-content" itemProp="articleBody"><p>必要 → <a href="https://github.com/kokororin/pixiv-api-php" target="_blank" rel="noopener">pixiv-api-php</a></p>
 <pre><code class="language-php">#!/usr/bin/env php
 &lt;?php
-require_once '/path/to/pixiv-api-php/pixiv.php';
+require_once &#x27;/path/to/pixiv-api-php/pixiv.php&#x27;;
 
-$word = '南ことり';
+$word = &#x27;南ことり&#x27;;
 
 $api = new PixivAPI();
 
-$result = $api-&gt;search_works($word, 1, 10, 'tag');
+$result = $api-&gt;search_works($word, 1, 10, &#x27;tag&#x27;);
 $origin = [];
-while ($result['pagination']['next'] != '') {
-    foreach ($result['response'] as $value) {
+while ($result[&#x27;pagination&#x27;][&#x27;next&#x27;] != &#x27;&#x27;) {
+    foreach ($result[&#x27;response&#x27;] as $value) {
         array_push($origin, [
-            'filename' =&gt; $value['id'] . '_' . $value['title'] . '.jpg',
-            'url' =&gt; $value['image_urls']['large'],
+            &#x27;filename&#x27; =&gt; $value[&#x27;id&#x27;] . &#x27;_&#x27; . $value[&#x27;title&#x27;] . &#x27;.jpg&#x27;,
+            &#x27;url&#x27; =&gt; $value[&#x27;image_urls&#x27;][&#x27;large&#x27;],
         ]);
     }
-    $result = $api-&gt;search_works($word, $result['pagination']['next'], 10, 'tag');
+    $result = $api-&gt;search_works($word, $result[&#x27;pagination&#x27;][&#x27;next&#x27;], 10, &#x27;tag&#x27;);
 }
 
 foreach ($origin as $value) {
-    echo 'start: ' . $value['url'] . PHP_EOL;
-    download_image($value['url'], $value['filename']);
+    echo &#x27;start: &#x27; . $value[&#x27;url&#x27;] . PHP_EOL;
+    download_image($value[&#x27;url&#x27;], $value[&#x27;filename&#x27;]);
 }
 
 function download_image($url, $filename)
 {
-    $filepath = __DIR__ . '/dl/' . $filename;
+    $filepath = __DIR__ . &#x27;/dl/&#x27; . $filename;
     if (is_file($filepath)) {
         return;
     }
@@ -96,69 +36,20 @@ function download_image($url, $filename)
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36');
-    curl_setopt($ch, CURLOPT_REFERER, 'http://www.pixiv.net/');
+    curl_setopt($ch, CURLOPT_USERAGENT, &#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36&#x27;);
+    curl_setopt($ch, CURLOPT_REFERER, &#x27;http://www.pixiv.net/&#x27;);
     $result = curl_exec($ch);
     curl_close($ch);
-    $fp = fopen($filepath, 'w');
+    $fp = fopen($filepath, &#x27;w&#x27;);
     fwrite($fp, $result);
     fclose($fp);
 }
 </code></pre>
-
-      </div>
-    </article>
-  </div>
-
-  <center>
-    <div id="postnav">
-      <ul class="pager">
-        <li class="previous">
-          <a href="https://kotori.love">
-            <span class="fui-home"></span>
-          </a>
-        </li>
-        <li class="next" data-action="comment-show">
-          <a href="javascript:void(0)">
-            <span class="fui-chat"></span>
-          </a>
-        </li>
-
-        <li class="previous">
-          
-            <a href="https://kotori.love/archives/backup-vps-to-git.html" title="备份服务器数据至 git">备份服务器数据至 git</a>
-          
-        </li>
-
-        <li class="next">
-          
-            <a href="https://kotori.love/archives/vulnerable-react-native.html" title="React Native 中的坑">React Native 中的坑</a>
-          
-        </li>
-      </ul>
-    </div>
-  </center>
-
-    <div id="disqus_thread" style="display:none" data-title="Pixiv の画像を一括ダウンロード" data-permalink="https://kotori.love/archives/pixiv-batch-download.html" data-allow-comment=""></div>
-
-
-</div>
-
-      <footer id="footer" class="container" style="background:rgba(255,255,255,0)">
-  <hr>
-  <div style="text-align:center;padding-bottom:9px">
-    <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
-      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml" data-nopjax>RSS</a>
-  </p></div>
-</footer>
-
-<script>window.MORI_VARS={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
-
-
-  <script src="/js/app.js?v=a71591c3c4714e31"></script>
-
-
-    </div>
-  </body>
-</html>
+</div></article></div><center><div id="postnav"><ul class="pager"><li class="previous"><a href="https://kotori.love"><span class="fui-home"></span></a></li><li class="next" data-action="comment-show"><a href="#"><span class="fui-chat"></span></a></li><li class="previous"><a href="https://kotori.love/archives/backup-vps-to-git.html" title="备份服务器数据至 git">备份服务器数据至 git</a></li><li class="next"><a href="https://kotori.love/archives/vulnerable-react-native.html" title="React Native 中的坑">React Native 中的坑</a></li></ul></div></center><div id="disqus_thread" style="display:none" data-title="Pixiv の画像を一括ダウンロード" data-permalink="https://kotori.love/archives/pixiv-batch-download.html"></div></div><footer id="footer" class="container" style="background:rgba(255, 255, 255, 0)"><hr/><div style="text-align:center;padding-bottom:9px"><p>© 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>. Using <a target="_blank" href="https://hexo.io/">Hexo</a>  &amp; <a target="_blank" href="https://yumoe.com">Moricolor</a> / <a href="/atom.xml" data-nopjax="true">RSS</a></p></div></footer><script>
+window.MORI_VARS = {
+  bottomTools: {"hitokoto":true,"category":true,"tag":false,"search":true},
+  comment: {"use":"disqus","shortname":"sora-diary"},
+  analytics: {"use":"google","id":"UA-70944432-1"},
+  url: "https://kotori.love"
+}
+</script><script src="/js/app.js?v=5eabb217debf50f4"></script></div></body></html>

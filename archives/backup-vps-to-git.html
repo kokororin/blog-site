@@ -1,70 +1,6 @@
-<!DOCTYPE html>
-<html class="han-la">
-  <head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="renderer" content="webkit">
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-  <meta name="theme-color" content="#16a085">
-  
-  
-  
-  <title>备份服务器数据至 git | ことりのおやつにしてやるぞー！</title>
-
-  
-  <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
-  <link rel="icon" href="/favicon.ico">
-
-
-  
-  
-    <link rel="stylesheet" href="/css/app.css?v=ee47d74dd8cd8cca">
-  
-
-
-  
-  
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="pjax-container">
-      
-
-      <div id="main" class="container">
-  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting">
-    <article class="post" style="padding-top:20px">
-      <h2 itemprop="name headline" style="font-weight:400">备份服务器数据至 git</h2>
-      <div class="text-right">
-        <div class="text-bar">
-          <a href="https://kotori.love" class="fui-home"></a>
-          
-          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
-          <a style="font-size:30px;margin-left:1px">·</a>
-          <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/backup-vps-to-git.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/backup-vps-to-git.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
-        </div>
-        <div class="post-info">
-          <span class="post-info-n">
-            
-              <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
-            
-          </span>
-          
-            <a href="/tags/%E5%A4%87%E4%BB%BD/">备份</a>
-          
-            <a href="/tags/github/">github</a>
-          
-            <a href="/tags/git/">git</a>
-          
-          <a><time datetime="2016-09-30T00:41:00.000Z">2016-09-30</time></a>
-        </div>
-      </div>
-      
-      
-      <div class="post-content" itemprop="articleBody">
-        <p>之前有过一篇<a href="https://kotori.love/archives/backup-vps-to-dropbox.html">《将 VPS 备份到 Dropbox 的脚本》</a>，现在研究了一下备份到 git 的脚本，去他喵的 Dropbox</p>
+<!doctype html>
+<html class="han-la"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/><meta name="renderer" content="webkit"/><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/><meta name="theme-color" content="#16a085"/><title>备份服务器数据至 git | ことりのおやつにしてやるぞー！</title><link rel="icon shortcut" type="image/ico" href="/favicon.ico"/><link rel="icon" href="/favicon.ico"/><link rel="stylesheet" href="/css/app.css?v=d321d063c0308fd1"/><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head><body><div id="pjax-container"><div id="main" class="container"><div id="main-post" role="main" itemscope="" itemType="http://schema.org/BlogPosting"><article class="post" style="padding-top:20px"><h2 itemProp="name headline" style="font-weight:normal">备份服务器数据至 git</h2><div class="text-right"><div class="text-bar"><a href="https://kotori.love" class="fui-home"></a><a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a><a style="font-size:30px;margin-left:1px">·</a><a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/backup-vps-to-git.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a><a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/backup-vps-to-git.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a></div><div class="post-info"><span class="post-info-n"><a href="/categories/%E7%A7%91%E6%8A%80/">科技</a></span><a href="/tags/%E5%A4%87%E4%BB%BD/">备份</a><a href="/tags/github/">github</a><a href="/tags/git/">git</a><a><time dateTime="2016-09-30T00:41:00.000Z">2016-09-30</time></a></div></div><div class="post-content" itemProp="articleBody"><p>之前有过一篇<a href="https://kotori.love/archives/backup-vps-to-dropbox.html">《将 VPS 备份到 Dropbox 的脚本》</a>，现在研究了一下备份到 git 的脚本，去他喵的 Dropbox</p>
 <pre><code class="language-bash">#!/usr/bin/env bash
 
 MYSQL_USR=&quot;&quot;
@@ -95,9 +31,9 @@ crontab -l &gt; $LOCAL_BAK_DIR/scripts/crontab
 
 mkdir $LOCAL_BAK_DIR/db
 
-for db in `/usr/local/mysql/bin/mysql -u$MYSQL_USR -p$MYSQL_PWD -B -N -e 'SHOW DATABASES' | xargs`; do
+for db in `/usr/local/mysql/bin/mysql -u$MYSQL_USR -p$MYSQL_PWD -B -N -e &#x27;SHOW DATABASES&#x27; | xargs`; do
     (/usr/local/mysql/bin/mysqldump -u$MYSQL_USR -p$MYSQL_PWD ${db} &gt;  $LOCAL_BAK_DIR/db/${db}.sql
-    sed -i '$d' $LOCAL_BAK_DIR/db/${db}.sql)
+    sed -i &#x27;$d&#x27; $LOCAL_BAK_DIR/db/${db}.sql)
 done
 
 
@@ -109,60 +45,11 @@ git push origin master
 
 rm -rf $LOCAL_BAK_DIR
 </code></pre>
-
-      </div>
-    </article>
-  </div>
-
-  <center>
-    <div id="postnav">
-      <ul class="pager">
-        <li class="previous">
-          <a href="https://kotori.love">
-            <span class="fui-home"></span>
-          </a>
-        </li>
-        <li class="next" data-action="comment-show">
-          <a href="javascript:void(0)">
-            <span class="fui-chat"></span>
-          </a>
-        </li>
-
-        <li class="previous">
-          
-            <a href="https://kotori.love/archives/curl-login-pixiv.html" title="模拟登录 pixiv.net">模拟登录 pixiv.net</a>
-          
-        </li>
-
-        <li class="next">
-          
-            <a href="https://kotori.love/archives/pixiv-batch-download.html" title="Pixiv の画像を一括ダウンロード">Pixiv の画像を一括ダウンロード</a>
-          
-        </li>
-      </ul>
-    </div>
-  </center>
-
-    <div id="disqus_thread" style="display:none" data-title="备份服务器数据至 git" data-permalink="https://kotori.love/archives/backup-vps-to-git.html" data-allow-comment=""></div>
-
-
-</div>
-
-      <footer id="footer" class="container" style="background:rgba(255,255,255,0)">
-  <hr>
-  <div style="text-align:center;padding-bottom:9px">
-    <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
-      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml" data-nopjax>RSS</a>
-  </p></div>
-</footer>
-
-<script>window.MORI_VARS={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
-
-
-  <script src="/js/app.js?v=a71591c3c4714e31"></script>
-
-
-    </div>
-  </body>
-</html>
+</div></article></div><center><div id="postnav"><ul class="pager"><li class="previous"><a href="https://kotori.love"><span class="fui-home"></span></a></li><li class="next" data-action="comment-show"><a href="#"><span class="fui-chat"></span></a></li><li class="previous"><a href="https://kotori.love/archives/curl-login-pixiv.html" title="模拟登录 pixiv.net">模拟登录 pixiv.net</a></li><li class="next"><a href="https://kotori.love/archives/pixiv-batch-download.html" title="Pixiv の画像を一括ダウンロード">Pixiv の画像を一括ダウンロード</a></li></ul></div></center><div id="disqus_thread" style="display:none" data-title="备份服务器数据至 git" data-permalink="https://kotori.love/archives/backup-vps-to-git.html"></div></div><footer id="footer" class="container" style="background:rgba(255, 255, 255, 0)"><hr/><div style="text-align:center;padding-bottom:9px"><p>© 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>. Using <a target="_blank" href="https://hexo.io/">Hexo</a>  &amp; <a target="_blank" href="https://yumoe.com">Moricolor</a> / <a href="/atom.xml" data-nopjax="true">RSS</a></p></div></footer><script>
+window.MORI_VARS = {
+  bottomTools: {"hitokoto":true,"category":true,"tag":false,"search":true},
+  comment: {"use":"disqus","shortname":"sora-diary"},
+  analytics: {"use":"google","id":"UA-70944432-1"},
+  url: "https://kotori.love"
+}
+</script><script src="/js/app.js?v=5eabb217debf50f4"></script></div></body></html>

@@ -1,66 +1,6 @@
-<!DOCTYPE html>
-<html class="han-la">
-  <head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="renderer" content="webkit">
-  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-  <meta name="theme-color" content="#16a085">
-  
-  
-  
-  <title>React/React Native 的 ES5 ES6 写法对照表 | ことりのおやつにしてやるぞー！</title>
-
-  
-  <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
-  <link rel="icon" href="/favicon.ico">
-
-
-  
-  
-    <link rel="stylesheet" href="/css/app.css?v=ee47d74dd8cd8cca">
-  
-
-
-  
-  
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="pjax-container">
-      
-
-      <div id="main" class="container">
-  <div id="main-post" role="main" itemscope itemtype="http://schema.org/BlogPosting">
-    <article class="post" style="padding-top:20px">
-      <h2 itemprop="name headline" style="font-weight:400">React/React Native 的 ES5 ES6 写法对照表</h2>
-      <div class="text-right">
-        <div class="text-bar">
-          <a href="https://kotori.love" class="fui-home"></a>
-          
-          <a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a>
-          <a style="font-size:30px;margin-left:1px">·</a>
-          <a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/react-native-es5-es6-difference.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/react-native-es5-es6-difference.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a>
-        </div>
-        <div class="post-info">
-          <span class="post-info-n">
-            
-              <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
-            
-          </span>
-          
-            <a href="/tags/react/">react</a>
-          
-          <a><time datetime="2016-07-13T08:22:00.000Z">2016-07-13</time></a>
-        </div>
-      </div>
-      
-      
-      <div class="post-content" itemprop="articleBody">
-        <h3 id="模块">模块</h3>
+<!doctype html>
+<html class="han-la"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/><meta name="renderer" content="webkit"/><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/><meta name="theme-color" content="#16a085"/><title>React/React Native 的 ES5 ES6 写法对照表 | ことりのおやつにしてやるぞー！</title><link rel="icon shortcut" type="image/ico" href="/favicon.ico"/><link rel="icon" href="/favicon.ico"/><link rel="stylesheet" href="/css/app.css?v=d321d063c0308fd1"/><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ことりのおやつにしてやるぞー！" type="application/atom+xml">
+</head><body><div id="pjax-container"><div id="main" class="container"><div id="main-post" role="main" itemscope="" itemType="http://schema.org/BlogPosting"><article class="post" style="padding-top:20px"><h2 itemProp="name headline" style="font-weight:normal">React/React Native 的 ES5 ES6 写法对照表</h2><div class="text-right"><div class="text-bar"><a href="https://kotori.love" class="fui-home"></a><a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a><a style="font-size:30px;margin-left:1px">·</a><a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/react-native-es5-es6-difference.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a><a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/react-native-es5-es6-difference.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a></div><div class="post-info"><span class="post-info-n"><a href="/categories/%E7%A7%91%E6%8A%80/">科技</a></span><a href="/tags/react/">react</a><a><time dateTime="2016-07-13T08:22:00.000Z">2016-07-13</time></a></div></div><div class="post-content" itemProp="articleBody"><h3 id="模块">模块</h3>
 <h4 id="引用">引用</h4>
 <p>在 ES5 里，如果使用 CommonJS 标准，引入 React 包基本通过 require 进行，代码类似这样：</p>
 <pre><code class="language-javascript">//ES5
@@ -81,11 +21,11 @@ var {
 import React, { 
     Component,
     PropTypes,
-} from 'react';
+} from &#x27;react&#x27;;
 import {
     Image,
     Text
-} from 'react-native'
+} from &#x27;react-native&#x27;
 </code></pre>
 <p>注意在 React Native 里，import 直到 0.12 + 才能正常运作。</p>
 <h4 id="导出单个类">导出单个类</h4>
@@ -105,10 +45,10 @@ export default class MyComponent extends Component{
 </code></pre>
 <p>引用的时候也类似：</p>
 <pre><code class="language-javascript">//ES5
-var MyComponent = require('./MyComponent');
+var MyComponent = require(&#x27;./MyComponent&#x27;);
 
 //ES6
-import MyComponent from './MyComponent';
+import MyComponent from &#x27;./MyComponent&#x27;;
 </code></pre>
 <h3 id="定义组件">定义组件</h3>
 <p>在 ES5 里，通常通过 React.createClass 来定义一个组件类，像这样：</p>
@@ -255,7 +195,7 @@ class Video extends React.Component {
 <pre><code class="language-javascript">//ES5
 var PostInfo = React.createClass({
     handleOptionsButtonClick: function(e) {
-        // Here, 'this' refers to the component instance.
+        // Here, &#x27;this&#x27; refers to the component instance.
         this.setState({showOptionsModal: true});
     },
     render: function(){
@@ -306,10 +246,10 @@ e=&gt;{
 <pre><code class="language-javascript">// 错误的做法
 class PauseMenu extends React.Component{
     componentWillMount(){
-        AppStateIOS.addEventListener('change', this.onAppPaused.bind(this));
+        AppStateIOS.addEventListener(&#x27;change&#x27;, this.onAppPaused.bind(this));
     }
     componentDidUnmount(){
-        AppStateIOS.removeEventListener('change', this.onAppPaused.bind(this));
+        AppStateIOS.removeEventListener(&#x27;change&#x27;, this.onAppPaused.bind(this));
     }
     onAppPaused(event){
     }
@@ -321,10 +261,10 @@ class PauseMenu extends React.Component{
         this._onAppPaused = this.onAppPaused.bind(this);
     }
     componentWillMount(){
-        AppStateIOS.addEventListener('change', this._onAppPaused);
+        AppStateIOS.addEventListener(&#x27;change&#x27;, this._onAppPaused);
     }
     componentDidUnmount(){
-        AppStateIOS.removeEventListener('change', this._onAppPaused);
+        AppStateIOS.removeEventListener(&#x27;change&#x27;, this._onAppPaused);
     }
     onAppPaused(event){
     }
@@ -334,10 +274,10 @@ class PauseMenu extends React.Component{
 <pre><code class="language-javascript">// 正确的做法
 class PauseMenu extends React.Component{
     componentWillMount(){
-        AppStateIOS.addEventListener('change', this.onAppPaused);
+        AppStateIOS.addEventListener(&#x27;change&#x27;, this.onAppPaused);
     }
     componentDidUnmount(){
-        AppStateIOS.removeEventListener('change', this.onAppPaused);
+        AppStateIOS.removeEventListener(&#x27;change&#x27;, this.onAppPaused);
     }
     onAppPaused = (event) =&gt; {
         //把方法直接作为一个arrow function的属性来定义，初始化的时候就绑定好了this指针
@@ -346,7 +286,7 @@ class PauseMenu extends React.Component{
 </code></pre>
 <h3 id="Mixins">Mixins</h3>
 <p>在 ES5 下，我们经常使用 mixin 来为我们的类添加一些新的方法，譬如 PureRenderMixin</p>
-<pre><code class="language-javascript">var PureRenderMixin = require('react-addons-pure-render-mixin');
+<pre><code class="language-javascript">var PureRenderMixin = require(&#x27;react-addons-pure-render-mixin&#x27;);
 React.createClass({
   mixins: [PureRenderMixin],
 
@@ -366,7 +306,7 @@ export var Enhance = ComposedComponent =&gt; class extends Component {
         this.state = { data: null };
     }
     componentDidMount() {
-        this.setState({ data: 'Hello' });
+        this.setState({ data: &#x27;Hello&#x27; });
     }
     render() {
         return &lt;ComposedComponent {...this.props} data={this.state.data} /&gt;;
@@ -416,60 +356,11 @@ export default Enhance(MyComponent); // Enhanced component
 <blockquote>
 <p>转自 http://bbs.reactnative.cn/topic/15/react-react-native-% E7%9A%84es5-es6% E5%86%99% E6% B3%95% E5% AF% B9% E7%85% A7% E8% A1% A8/2</p>
 </blockquote>
-
-      </div>
-    </article>
-  </div>
-
-  <center>
-    <div id="postnav">
-      <ul class="pager">
-        <li class="previous">
-          <a href="https://kotori.love">
-            <span class="fui-home"></span>
-          </a>
-        </li>
-        <li class="next" data-action="comment-show">
-          <a href="javascript:void(0)">
-            <span class="fui-chat"></span>
-          </a>
-        </li>
-
-        <li class="previous">
-          
-            <a href="https://kotori.love/archives/react-native-upload.html" title="React Native 中的上传">React Native 中的上传</a>
-          
-        </li>
-
-        <li class="next">
-          
-            <a href="https://kotori.love/archives/php-memcached.html" title="初探 memcached">初探 memcached</a>
-          
-        </li>
-      </ul>
-    </div>
-  </center>
-
-    <div id="disqus_thread" style="display:none" data-title="React/React Native 的 ES5 ES6 写法对照表" data-permalink="https://kotori.love/archives/react-native-es5-es6-difference.html" data-allow-comment=""></div>
-
-
-</div>
-
-      <footer id="footer" class="container" style="background:rgba(255,255,255,0)">
-  <hr>
-  <div style="text-align:center;padding-bottom:9px">
-    <p>&copy; 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>.
-      Using <a target="_blank" href="https://hexo.io/">Hexo</a> & <a target="_blank" href="https://yumoe.com">Moricolor</a>
-      / <a href="/atom.xml" data-nopjax>RSS</a>
-  </p></div>
-</footer>
-
-<script>window.MORI_VARS={bottomTools:{hitokoto:!0,category:!0,tag:!1,search:!0},comment:{use:"disqus",shortname:"sora-diary"},analytics:{use:"google",id:"UA-70944432-1"},url:"https://kotori.love"}</script>
-
-
-  <script src="/js/app.js?v=a71591c3c4714e31"></script>
-
-
-    </div>
-  </body>
-</html>
+</div></article></div><center><div id="postnav"><ul class="pager"><li class="previous"><a href="https://kotori.love"><span class="fui-home"></span></a></li><li class="next" data-action="comment-show"><a href="#"><span class="fui-chat"></span></a></li><li class="previous"><a href="https://kotori.love/archives/react-native-upload.html" title="React Native 中的上传">React Native 中的上传</a></li><li class="next"><a href="https://kotori.love/archives/php-memcached.html" title="初探 memcached">初探 memcached</a></li></ul></div></center><div id="disqus_thread" style="display:none" data-title="React/React Native 的 ES5 ES6 写法对照表" data-permalink="https://kotori.love/archives/react-native-es5-es6-difference.html"></div></div><footer id="footer" class="container" style="background:rgba(255, 255, 255, 0)"><hr/><div style="text-align:center;padding-bottom:9px"><p>© 2020 <a href="https://kotori.love">ことりのおやつにしてやるぞー！</a>. Using <a target="_blank" href="https://hexo.io/">Hexo</a>  &amp; <a target="_blank" href="https://yumoe.com">Moricolor</a> / <a href="/atom.xml" data-nopjax="true">RSS</a></p></div></footer><script>
+window.MORI_VARS = {
+  bottomTools: {"hitokoto":true,"category":true,"tag":false,"search":true},
+  comment: {"use":"disqus","shortname":"sora-diary"},
+  analytics: {"use":"google","id":"UA-70944432-1"},
+  url: "https://kotori.love"
+}
+</script><script src="/js/app.js?v=5eabb217debf50f4"></script></div></body></html>
