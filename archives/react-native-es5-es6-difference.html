@@ -1,9 +1,4 @@
-<!doctype html>
-<html class="han-la"><head><link rel=manifest href=/manifest.json><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/><meta name="renderer" content="webkit"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/><meta name="theme-color" content="#16a085"/><meta name="description" content="React/React Native 的 ES5 ES6 写法对照表"/><meta name="keywords" content="react"/><title>React/React Native 的 ES5 ES6 写法对照表 | あかね空</title><link rel="icon shortcut" type="image/ico" href="/favicon.ico"/><link rel="icon" href="/favicon.ico"/><link rel="stylesheet" href="/assets/app.css?v=775bb307e8087fad"/><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="あかね空" type="application/atom+xml">
-</head><body><div id="pjax-container"><div id="main" class="container"><div id="main-post" role="main" itemscope="" itemType="http://schema.org/BlogPosting"><article class="post" style="padding-top:20px"><h2 itemProp="name headline" style="font-weight:normal">React/React Native 的 ES5 ES6 写法对照表</h2><div class="text-right"><div class="text-bar"><a href="https://kotori.love" class="fui-home"></a><a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a><a style="font-size:30px;margin-left:1px">·</a><a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/react-native-es5-es6-difference.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a><a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/react-native-es5-es6-difference.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a></div><div class="post-info"><span class="post-info-n"><a href="/categories/%E7%A7%91%E6%8A%80/">科技</a></span><a href="/tags/react/">react</a><a><time dateTime="2016-07-13T08:22:00.000Z">2016-07-13</time></a></div></div><div class="post-content" itemProp="articleBody"><h3 id="模块">模块</h3>
-<h4 id="引用">引用</h4>
-<p>在 ES5 里，如果使用 CommonJS 标准，引入 React 包基本通过 require 进行，代码类似这样：</p>
-<pre><code class="language-javascript">//ES5
+<!doctype html><html class="han-la"><head><link rel="manifest" href="/manifest.json"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta name="renderer" content="webkit"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#16a085"><meta name="description" content="React/React Native 的 ES5 ES6 写法对照表"><meta name="keywords" content="react"><title>React/React Native 的 ES5 ES6 写法对照表 | あかね空</title><link rel="icon shortcut" type="image/ico" href="/favicon.ico"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/app.css?v=775bb307e8087fad"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="あかね空" type="application/atom+xml"></head><body><div id="pjax-container"><div id="main" class="container"><div id="main-post" role="main" itemscope="" itemtype="http://schema.org/BlogPosting"><article class="post" style="padding-top:20px"><h2 itemprop="name headline" style="font-weight:400">React/React Native 的 ES5 ES6 写法对照表</h2><div class="text-right"><div class="text-bar"><a href="https://kotori.love" class="fui-home"></a><a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a><a style="font-size:30px;margin-left:1px">·</a><a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/react-native-es5-es6-difference.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a><a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/react-native-es5-es6-difference.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a></div><div class="post-info"><span class="post-info-n"><a href="/categories/%E7%A7%91%E6%8A%80/">科技</a></span><a href="/tags/react/">react</a><a><time datetime="2016-07-13T08:22:00.000Z">2016-07-13</time></a></div></div><div class="post-content" itemprop="articleBody"><h3 id="模块">模块</h3><h4 id="引用">引用</h4><p>在 ES5 里，如果使用 CommonJS 标准，引入 React 包基本通过 require 进行，代码类似这样：</p><pre><code class="language-javascript">//ES5
 var React = require(&quot;react&quot;);
 var {
     Component,
@@ -15,9 +10,7 @@ var {
     Image,
     Text,
 } = ReactNative;  //引用具体的React Native组件
-</code></pre>
-<p>在 ES6 里，import 写法更为标准</p>
-<pre><code class="language-javascript">//ES6
+</code></pre><p>在 ES6 里，import 写法更为标准</p><pre><code class="language-javascript">//ES6
 import React, { 
     Component,
     PropTypes,
@@ -26,33 +19,22 @@ import {
     Image,
     Text
 } from &#x27;react-native&#x27;
-</code></pre>
-<p>注意在 React Native 里，import 直到 0.12 + 才能正常运作。</p>
-<h4 id="导出单个类">导出单个类</h4>
-<p>在 ES5 里，要导出一个类给别的模块用，一般通过 <code>module.exports</code>  来导出</p>
-<pre><code class="language-javascript">//ES5
+</code></pre><p>注意在 React Native 里，import 直到 0.12 + 才能正常运作。</p><h4 id="导出单个类">导出单个类</h4><p>在 ES5 里，要导出一个类给别的模块用，一般通过 <code>module.exports</code> 来导出</p><pre><code class="language-javascript">//ES5
 var MyComponent = React.createClass({
     ...
 });
 module.exports = MyComponent;
-</code></pre>
-<p>在 ES6 里，通常用 export default 来实现相同的功能：</p>
-<pre><code class="language-javascript">//ES6
+</code></pre><p>在 ES6 里，通常用 export default 来实现相同的功能：</p><pre><code class="language-javascript">//ES6
 
 export default class MyComponent extends Component{
     ...
 }
-</code></pre>
-<p>引用的时候也类似：</p>
-<pre><code class="language-javascript">//ES5
+</code></pre><p>引用的时候也类似：</p><pre><code class="language-javascript">//ES5
 var MyComponent = require(&#x27;./MyComponent&#x27;);
 
 //ES6
 import MyComponent from &#x27;./MyComponent&#x27;;
-</code></pre>
-<h3 id="定义组件">定义组件</h3>
-<p>在 ES5 里，通常通过 React.createClass 来定义一个组件类，像这样：</p>
-<pre><code class="language-javascript">//ES5
+</code></pre><h3 id="定义组件">定义组件</h3><p>在 ES5 里，通常通过 React.createClass 来定义一个组件类，像这样：</p><pre><code class="language-javascript">//ES5
 var Photo = React.createClass({
     render: function() {
         return (
@@ -60,9 +42,7 @@ var Photo = React.createClass({
         );
     },
 });
-</code></pre>
-<p>在 ES6 里，我们通过定义一个继承自 React.Component 的 class 来定义一个组件类，像这样：</p>
-<pre><code class="language-javascript">//ES6
+</code></pre><p>在 ES6 里，我们通过定义一个继承自 React.Component 的 class 来定义一个组件类，像这样：</p><pre><code class="language-javascript">//ES6
 class Photo extends React.Component {
     render() {
         return (
@@ -70,10 +50,7 @@ class Photo extends React.Component {
         );
     }
 }
-</code></pre>
-<h4 id="给组件定义方法">给组件定义方法</h4>
-<p>从上面的例子里可以看到，给组件定义方法不再用 名字: function () 的写法，而是直接用名字 ()，在方法的最后也不能有逗号了。</p>
-<pre><code class="language-javascript">//ES5 
+</code></pre><h4 id="给组件定义方法">给组件定义方法</h4><p>从上面的例子里可以看到，给组件定义方法不再用 名字: function () 的写法，而是直接用名字 ()，在方法的最后也不能有逗号了。</p><pre><code class="language-javascript">//ES5 
 var Photo = React.createClass({
     componentWillMount: function(){
 
@@ -95,10 +72,7 @@ class Photo extends React.Component {
         );
     }
 }
-</code></pre>
-<h4 id="定义组件的属性类型和默认属性">定义组件的属性类型和默认属性</h4>
-<p>在 ES5 里，属性类型和默认属性分别通过 propTypes 成员和 getDefaultProps 方法来实现</p>
-<pre><code class="language-javascript">//ES5 
+</code></pre><h4 id="定义组件的属性类型和默认属性">定义组件的属性类型和默认属性</h4><p>在 ES5 里，属性类型和默认属性分别通过 propTypes 成员和 getDefaultProps 方法来实现</p><pre><code class="language-javascript">//ES5 
 var Video = React.createClass({
     getDefaultProps: function() {
         return {
@@ -118,9 +92,7 @@ var Video = React.createClass({
         );
     },
 });
-</code></pre>
-<p>在 ES6 里，可以统一使用 static 成员来实现</p>
-<pre><code class="language-javascript">//ES6
+</code></pre><p>在 ES6 里，可以统一使用 static 成员来实现</p><pre><code class="language-javascript">//ES6
 class Video extends React.Component {
     static defaultProps = {
         autoPlay: false,
@@ -138,9 +110,7 @@ class Video extends React.Component {
         );
     } // 注意这里既没有分号也没有逗号
 }
-</code></pre>
-<p>也有人这么写，虽然不推荐，但读到代码的时候你应当能明白它的意思：</p>
-<pre><code class="language-javascript">//ES6
+</code></pre><p>也有人这么写，虽然不推荐，但读到代码的时候你应当能明白它的意思：</p><pre><code class="language-javascript">//ES6
 class Video extends React.Component {
     render() {
         return (
@@ -158,11 +128,7 @@ Video.propTypes = {
     posterFrameSrc: React.PropTypes.string.isRequired,
     videoSrc: React.PropTypes.string.isRequired,
 };
-</code></pre>
-<p>注意：对 React 开发者而言，static 成员在 IE10 及之前版本不能被继承，而在 IE11 和其它浏览器上可以，这有时候会带来一些问题。React Native 开发者可以不用担心这个问题。</p>
-<h3 id="初始化STATE">初始化 STATE</h3>
-<p>ES5 下情况类似，</p>
-<pre><code class="language-javascript">//ES5 
+</code></pre><p>注意：对 React 开发者而言，static 成员在 IE10 及之前版本不能被继承，而在 IE11 和其它浏览器上可以，这有时候会带来一些问题。React Native 开发者可以不用担心这个问题。</p><h3 id="初始化STATE">初始化 STATE</h3><p>ES5 下情况类似，</p><pre><code class="language-javascript">//ES5 
 var Video = React.createClass({
     getInitialState: function() {
         return {
@@ -170,17 +136,13 @@ var Video = React.createClass({
         };
     },
 })
-</code></pre>
-<p>ES6 下，有两种写法：</p>
-<pre><code class="language-javascript">//ES6
+</code></pre><p>ES6 下，有两种写法：</p><pre><code class="language-javascript">//ES6
 class Video extends React.Component {
     state = {
         loopsRemaining: this.props.maxLoops,
     }
 }
-</code></pre>
-<p>不过我们推荐更易理解的在构造函数中初始化（这样你还可以根据需要做一些计算）：</p>
-<pre><code>//ES6
+</code></pre><p>不过我们推荐更易理解的在构造函数中初始化（这样你还可以根据需要做一些计算）：</p><pre><code>//ES6
 class Video extends React.Component {
     constructor(props){
         super(props);
@@ -189,10 +151,7 @@ class Video extends React.Component {
         };
     }
 }
-</code></pre>
-<h3 id="把方法作为回调提供">把方法作为回调提供</h3>
-<p>很多习惯于 ES6 的用户反而不理解在 ES5 下可以这么做：</p>
-<pre><code class="language-javascript">//ES5
+</code></pre><h3 id="把方法作为回调提供">把方法作为回调提供</h3><p>很多习惯于 ES6 的用户反而不理解在 ES5 下可以这么做：</p><pre><code class="language-javascript">//ES5
 var PostInfo = React.createClass({
     handleOptionsButtonClick: function(e) {
         // Here, &#x27;this&#x27; refers to the component instance.
@@ -206,10 +165,7 @@ var PostInfo = React.createClass({
         )
     },
 });
-</code></pre>
-<p>在 ES5 下，React.createClass 会把所有的方法都 bind 一遍，这样可以提交到任意的地方作为回调函数，而 this 不会变化。但官方现在逐步认为这反而是不标准、不易理解的。</p>
-<p>在 ES6 下，你需要通过 bind 来绑定 this 引用，或者使用箭头函数（它会绑定当前 scope 的 this 引用）来调用</p>
-<pre><code class="language-javascript">//ES6
+</code></pre><p>在 ES5 下，React.createClass 会把所有的方法都 bind 一遍，这样可以提交到任意的地方作为回调函数，而 this 不会变化。但官方现在逐步认为这反而是不标准、不易理解的。</p><p>在 ES6 下，你需要通过 bind 来绑定 this 引用，或者使用箭头函数（它会绑定当前 scope 的 this 引用）来调用</p><pre><code class="language-javascript">//ES6
 class PostInfo extends React.Component
 {
     handleOptionsButtonClick(e){
@@ -226,9 +182,7 @@ class PostInfo extends React.Component
         )
     },
 }
-</code></pre>
-<p>箭头函数实际上是在这里定义了一个临时的函数，箭头函数的箭头 =&gt; 之前是一个空括号、单个的参数名、或用括号括起的多个参数名，而箭头之后可以是一个表达式（作为函数的返回值），或者是用花括号括起的函数体（需要自行通过 return 来返回值，否则返回的是 undefined）。</p>
-<pre><code class="language-javascript">// 箭头函数的例子
+</code></pre><p>箭头函数实际上是在这里定义了一个临时的函数，箭头函数的箭头 =&gt; 之前是一个空括号、单个的参数名、或用括号括起的多个参数名，而箭头之后可以是一个表达式（作为函数的返回值），或者是用花括号括起的函数体（需要自行通过 return 来返回值，否则返回的是 undefined）。</p><pre><code class="language-javascript">// 箭头函数的例子
 ()=&gt;1
 v=&gt;v+1
 (a,b)=&gt;a+b
@@ -241,9 +195,7 @@ e=&gt;{
     }
     return 1000/e;
 }
-</code></pre>
-<p>需要注意的是，不论是 bind 还是箭头函数，每次被执行都返回的是一个新的函数引用，因此如果你还需要函数的引用去做一些别的事情（譬如卸载监听器），那么你必须自己保存这个引用</p>
-<pre><code class="language-javascript">// 错误的做法
+</code></pre><p>需要注意的是，不论是 bind 还是箭头函数，每次被执行都返回的是一个新的函数引用，因此如果你还需要函数的引用去做一些别的事情（譬如卸载监听器），那么你必须自己保存这个引用</p><pre><code class="language-javascript">// 错误的做法
 class PauseMenu extends React.Component{
     componentWillMount(){
         AppStateIOS.addEventListener(&#x27;change&#x27;, this.onAppPaused.bind(this));
@@ -269,9 +221,7 @@ class PauseMenu extends React.Component{
     onAppPaused(event){
     }
 }
-</code></pre>
-<p>从这个帖子中我们还学习到一种新的做法：</p>
-<pre><code class="language-javascript">// 正确的做法
+</code></pre><p>从这个帖子中我们还学习到一种新的做法：</p><pre><code class="language-javascript">// 正确的做法
 class PauseMenu extends React.Component{
     componentWillMount(){
         AppStateIOS.addEventListener(&#x27;change&#x27;, this.onAppPaused);
@@ -283,10 +233,7 @@ class PauseMenu extends React.Component{
         //把方法直接作为一个arrow function的属性来定义，初始化的时候就绑定好了this指针
     }
 }
-</code></pre>
-<h3 id="Mixins">Mixins</h3>
-<p>在 ES5 下，我们经常使用 mixin 来为我们的类添加一些新的方法，譬如 PureRenderMixin</p>
-<pre><code class="language-javascript">var PureRenderMixin = require(&#x27;react-addons-pure-render-mixin&#x27;);
+</code></pre><h3 id="Mixins">Mixins</h3><p>在 ES5 下，我们经常使用 mixin 来为我们的类添加一些新的方法，譬如 PureRenderMixin</p><pre><code class="language-javascript">var PureRenderMixin = require(&#x27;react-addons-pure-render-mixin&#x27;);
 React.createClass({
   mixins: [PureRenderMixin],
 
@@ -294,11 +241,7 @@ React.createClass({
     return &lt;div className={this.props.className}&gt;foo&lt;/div&gt;;
   }
 });
-</code></pre>
-<p>然而现在官方已经不再打算在 ES6 里继续推行 Mixin，他们说：Mixins Are Dead. Long Live Composition。</p>
-<p>尽管如果要继续使用 mixin，还是有一些第三方的方案可以用，譬如这个方案</p>
-<p>不过官方推荐，对于库编写者而言，应当尽快放弃 Mixin 的编写方式，上文中提到 Sebastian Markbåge 的一段代码推荐了一种新的编码方式：</p>
-<pre><code class="language-javascript">//Enhance.js
+</code></pre><p>然而现在官方已经不再打算在 ES6 里继续推行 Mixin，他们说：Mixins Are Dead. Long Live Composition。</p><p>尽管如果要继续使用 mixin，还是有一些第三方的方案可以用，譬如这个方案</p><p>不过官方推荐，对于库编写者而言，应当尽快放弃 Mixin 的编写方式，上文中提到 Sebastian Markbåge 的一段代码推荐了一种新的编码方式：</p><pre><code class="language-javascript">//Enhance.js
 import { Component } from &quot;React&quot;;
 
 export var Enhance = ComposedComponent =&gt; class extends Component {
@@ -323,12 +266,7 @@ class MyComponent {
 }
 
 export default Enhance(MyComponent); // Enhanced component
-</code></pre>
-<p>用一个 “增强函数”，来某个类增加一些方法，并且返回一个新类，这无疑能实现 mixin 所实现的大部分需求。</p>
-<h3 id="ES6-带来的其它好处">ES6 + 带来的其它好处</h3>
-<h4 id="解构-属性延展">解构 &amp; 属性延展</h4>
-<p>结合使用 ES6 + 的解构和属性延展，我们给孩子传递一批属性更为方便了。这个例子把 className 以外的所有属性传递给 div 标签：</p>
-<pre><code class="language-javascript">class AutoloadingPostsGrid extends React.Component {
+</code></pre><p>用一个 “增强函数”，来某个类增加一些方法，并且返回一个新类，这无疑能实现 mixin 所实现的大部分需求。</p><h3 id="ES6-带来的其它好处">ES6 + 带来的其它好处</h3><h4 id="解构-属性延展">解构 &amp; 属性延展</h4><p>结合使用 ES6 + 的解构和属性延展，我们给孩子传递一批属性更为方便了。这个例子把 className 以外的所有属性传递给 div 标签：</p><pre><code class="language-javascript">class AutoloadingPostsGrid extends React.Component {
     render() {
         var {
             className,
@@ -342,18 +280,10 @@ export default Enhance(MyComponent); // Enhanced component
         );
     }
 }
-</code></pre>
-<p>下面这种写法，则是传递所有属性的同时，用覆盖新的 className 值：</p>
-<pre><code>&lt;div {...this.props} className=&quot;override&quot;&gt;
+</code></pre><p>下面这种写法，则是传递所有属性的同时，用覆盖新的 className 值：</p><pre><code>&lt;div {...this.props} className=&quot;override&quot;&gt;
     …
 &lt;/div&gt;
-</code></pre>
-<p>这个例子则相反，如果属性中没有包含 className，则提供默认的值，而如果属性中已经包含了，则使用属性中的值</p>
-<pre><code>&lt;div className=&quot;base&quot; {...this.props}&gt;
+</code></pre><p>这个例子则相反，如果属性中没有包含 className，则提供默认的值，而如果属性中已经包含了，则使用属性中的值</p><pre><code>&lt;div className=&quot;base&quot; {...this.props}&gt;
     …
 &lt;/div&gt;
-</code></pre>
-<blockquote>
-<p>转自 http://bbs.reactnative.cn/topic/15/react-react-native-% E7%9A%84es5-es6% E5%86%99% E6% B3%95% E5% AF% B9% E7%85% A7% E8% A1% A8/2</p>
-</blockquote>
-</div></article></div><center><div id="postnav"><ul class="pager"><li class="previous"><a href="https://kotori.love"><span class="fui-home"></span></a></li><li class="next" data-action="comment-show"><a href="#"><span class="fui-chat"></span></a></li><li class="previous"><a href="https://kotori.love/archives/react-native-upload.html" title="React Native 中的上传">React Native 中的上传</a></li><li class="next"><a href="https://kotori.love/archives/php-memcached.html" title="初探 memcached">初探 memcached</a></li></ul></div></center><div id="disqus_thread" data-title="React/React Native 的 ES5 ES6 写法对照表" data-permalink="https://kotori.love/archives/react-native-es5-es6-difference.html"></div></div><footer id="footer" class="container" style="background:rgba(255, 255, 255, 0)"><hr/><div style="text-align:center;padding-bottom:9px"><p>© 2014 - 2020 <a href="https://kotori.love">あかね空</a>. Using <a target="_blank" href="https://hexo.io/">Hexo</a>  &amp; <a target="_blank" href="https://yumoe.com">Moricolor</a> / <a href="/atom.xml" data-nopjax="true">RSS</a></p></div></footer><script id="mori-json" type="text/json">{"bottomTools":{"hitokoto":true,"category":true,"tag":false,"search":true},"comment":{"use":"disqus","shortname":"sora-diary"},"analytics":{"use":"google","id":"UA-70944432-1"},"url":"https://kotori.love"}</script><script src="/assets/app.js?v=5f4e87ae9e29630a"></script></div></body></html>
+</code></pre><blockquote><p>转自 http://bbs.reactnative.cn/topic/15/react-react-native-% E7%9A%84es5-es6% E5%86%99% E6% B3%95% E5% AF% B9% E7%85% A7% E8% A1% A8/2</p></blockquote></div></article></div><center><div id="postnav"><ul class="pager"><li class="previous"><a href="https://kotori.love"><span class="fui-home"></span></a></li><li class="next" data-action="comment-show"><a href="#"><span class="fui-chat"></span></a></li><li class="previous"><a href="https://kotori.love/archives/react-native-upload.html" title="React Native 中的上传">React Native 中的上传</a></li><li class="next"><a href="https://kotori.love/archives/php-memcached.html" title="初探 memcached">初探 memcached</a></li></ul></div></center><div id="disqus_thread" data-title="React/React Native 的 ES5 ES6 写法对照表" data-permalink="https://kotori.love/archives/react-native-es5-es6-difference.html"></div></div><footer id="footer" class="container" style="background:rgba(255,255,255,0)"><hr><div style="text-align:center;padding-bottom:9px"><p>© 2014 - 2020 <a href="https://kotori.love">あかね空</a>. Using <a target="_blank" href="https://hexo.io/">Hexo</a>  &amp; <a target="_blank" href="https://yumoe.com">Moricolor</a> / <a href="/atom.xml" data-nopjax="true">RSS</a></p></div></footer><script id="mori-json" type="text/json">{"bottomTools":{"hitokoto":true,"category":true,"tag":false,"search":true},"comment":{"use":"disqus","shortname":"sora-diary"},"analytics":{"use":"google","id":"UA-70944432-1"},"url":"https://kotori.love"}</script><script src="/assets/app.js?v=5f4e87ae9e29630a"></script></div></body></html>
