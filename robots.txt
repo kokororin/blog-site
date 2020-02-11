@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /atom.xml
+Disallow: /page/*
+Disallow: /tags/*
+Disallow: /categories/*
+Disallow: /search*
+Sitemap: https://kotori.love/sitemap
