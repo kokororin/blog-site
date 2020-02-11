@@ -1,302 +1,302 @@
-<!doctype html><html class="han-la"><head><link rel="manifest" href="/manifest.json"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta name="renderer" content="webkit"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#16a085"><meta name="description" content="一些奇怪的 nginx 配置文件"><meta name="keywords" content="gravatar,nginx"><title>一些奇怪的 nginx 配置文件 | あかね空</title><link rel="icon shortcut" type="image/ico" href="/favicon.ico"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/app.css?v=775bb307e8087fad"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="あかね空" type="application/atom+xml"></head><body><div id="pjax-container"><div id="main" class="container"><div id="main-post" role="main" itemscope="" itemtype="http://schema.org/BlogPosting"><article class="post" style="padding-top:20px"><h2 itemprop="name headline" style="font-weight:400">一些奇怪的 nginx 配置文件</h2><div class="text-right"><div class="text-bar"><a href="https://kotori.love" class="fui-home"></a><a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a><a style="font-size:30px;margin-left:1px">·</a><a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/nginx-config-file.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a><a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/nginx-config-file.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a></div><div class="post-info"><span class="post-info-n"><a href="/categories/%E7%A7%91%E6%8A%80/">科技</a></span><a href="/tags/gravatar/">gravatar</a><a href="/tags/nginx/">nginx</a><a><time datetime="2015-11-29T12:05:00.000Z">2015-11-29</time></a></div></div><div class="post-content" itemprop="articleBody"><p>RT</p><h3 id="Gravatar">Gravatar</h3><pre><code class="language-nginx">proxy_cache_path  /data/wwwroot/gravatar.kotori.love/cache  levels=1:2   keys_zone=gravatar:10m inactive=7d max_size=1g;
+<!doctype html><html class="han-la"><head><link rel="manifest" href="/manifest.json"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta name="renderer" content="webkit"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#16a085"><meta name="description" content="一些奇怪的 nginx 配置文件"><meta name="keywords" content="nginx,gravatar"><title>一些奇怪的 nginx 配置文件 | あかね空</title><link rel="icon shortcut" type="image/ico" href="/favicon.ico"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/app.css?v=775bb307e8087fad"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="あかね空" type="application/atom+xml"></head><body><div id="pjax-container"><div id="main" class="container"><div id="main-post" role="main" itemscope="" itemtype="http://schema.org/BlogPosting"><article class="post" style="padding-top:20px"><h2 itemprop="name headline" style="font-weight:400">一些奇怪的 nginx 配置文件</h2><div class="text-right"><div class="text-bar"><a href="/" class="fui-home"></a><a href="#disqus_thread" class="fui-bubble" data-action="comment-go"></a><a style="font-size:30px;margin-left:1px">·</a><a href="https://twitter.com/intent/tweet?url=https://kotori.love/archives/nginx-config-file.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="fui-twitter"></a><a href="https://www.facebook.com/sharer/sharer.php?u=https://kotori.love/archives/nginx-config-file.html" target="_blank" rel="nofollow" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="fui-facebook"></a></div><div class="post-info"><span class="post-info-n"><a href="/categories/%E7%A7%91%E6%8A%80/">科技</a></span><a href="/tags/nginx/">nginx</a><a href="/tags/gravatar/">gravatar</a><a><time datetime="2015-11-29T12:05:00.000Z">2015-11-29</time></a></div></div><div class="post-content" itemprop="articleBody"><p>RT</p><h3 id="Gravatar">Gravatar</h3><pre class="language-nginx"><code class="language-nginx"><span class="token keyword">proxy_cache_path</span>  <span class="token operator">/</span>data<span class="token operator">/</span>wwwroot<span class="token operator">/</span>gravatar<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love<span class="token operator">/</span>cache  levels<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">2</span>   keys_zone<span class="token operator">=</span>gravatar<span class="token punctuation">:</span><span class="token number">10</span>m inactive<span class="token operator">=</span><span class="token number">7</span>d max_size<span class="token operator">=</span><span class="token number">1</span>g<span class="token punctuation">;</span>
  
-server {
-    listen 80;
-    listen 443 ssl http2;
-    server_name gravatar.kotori.love;
-    access_log /data/wwwlogs/gravatar.kotori.love_nginx.log combined;
-    include none.conf;
+<span class="token keyword">server</span> <span class="token punctuation">{</span>
+    <span class="token keyword">listen</span> <span class="token number">80</span><span class="token punctuation">;</span>
+    <span class="token keyword">listen</span> <span class="token number">443</span> <span class="token keyword">ssl</span> http2<span class="token punctuation">;</span>
+    <span class="token keyword">server_name</span> gravatar<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love<span class="token punctuation">;</span>
+    <span class="token keyword">access_log</span> <span class="token operator">/</span>data<span class="token operator">/</span>wwwlogs<span class="token operator">/</span>gravatar<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love_nginx<span class="token punctuation">.</span>log combined<span class="token punctuation">;</span>
+    <span class="token keyword">include</span> none<span class="token punctuation">.</span>conf<span class="token punctuation">;</span>
 
-    ssl_certificate /path/to/file;
-    ssl_certificate_key /path/to/file;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_stapling on;
-    ssl_ciphers &quot;ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA&quot;;
-    ssl_session_cache shared:SSL:20m;
-    ssl_session_timeout 60m;
-    add_header Strict-Transport-Security &quot;max-age=63072000; includeSubdomains; preload&quot;;
+    <span class="token keyword">ssl_certificate</span> <span class="token operator">/</span>path<span class="token operator">/</span>to<span class="token operator">/</span>file<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_certificate_key</span> <span class="token operator">/</span>path<span class="token operator">/</span>to<span class="token operator">/</span>file<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_protocols</span> TLSv1 TLSv1<span class="token punctuation">.</span><span class="token number">1</span> TLSv1<span class="token punctuation">.</span><span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">ssl_stapling</span> on<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_ciphers</span> <span class="token string">&quot;ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">ssl_session_cache</span> shared<span class="token punctuation">:</span><span class="token keyword">SSL</span><span class="token punctuation">:</span><span class="token number">20</span>m<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_session_timeout</span> <span class="token number">60</span>m<span class="token punctuation">;</span>
+    <span class="token keyword">add_header</span> Strict<span class="token operator">-</span>Transport<span class="token operator">-</span>Security <span class="token string">&quot;max-age=63072000; includeSubdomains; preload&quot;</span><span class="token punctuation">;</span>
  
-    if ( $query_string ~* &quot;.*[\;&#x27;\&lt;\&gt;].*&quot; ){
-        return 404;
-    }
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token variable">$query_string</span> <span class="token operator">~</span><span class="token operator">*</span> <span class="token string">&quot;.*[\;&#x27;\&lt;\&gt;].*&quot;</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">404</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
  
-    location ~ .*\.(wma|wmv|asf|mp3|mmf|zip|rar|jpg|gif|png|swf|flv)$ {
-        valid_referers none blocked *.kotori.love gravatar.kotori.love;
-        if ($invalid_referer) {
-            return 403;
-        }
-    }
+    <span class="token keyword">location</span> <span class="token operator">~</span> <span class="token punctuation">.</span><span class="token operator">*</span>\<span class="token punctuation">.</span><span class="token punctuation">(</span>wma<span class="token operator">|</span>wmv<span class="token operator">|</span>asf<span class="token operator">|</span>mp3<span class="token operator">|</span>mmf<span class="token operator">|</span>zip<span class="token operator">|</span>rar<span class="token operator">|</span>jpg<span class="token operator">|</span>gif<span class="token operator">|</span>png<span class="token operator">|</span>swf<span class="token operator">|</span><span class="token keyword">flv</span><span class="token punctuation">)</span>$ <span class="token punctuation">{</span>
+        <span class="token keyword">valid_referers</span> none blocked <span class="token operator">*</span><span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love gravatar<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$invalid_referer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">403</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
  
-    location avatar/ {
-            valid_referers none blocked *.kotori.love gravatar.kotori.love;
-            if ($invalid_referer) {
-                    #return 403;
-            }
-    }
+    <span class="token keyword">location</span> avatar<span class="token operator">/</span> <span class="token punctuation">{</span>
+            <span class="token keyword">valid_referers</span> none blocked <span class="token operator">*</span><span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love gravatar<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$invalid_referer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment">#return 403;</span>
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
  
-    location / {
-        valid_referers none blocked *.kotori.love gravatar.kotori.love;
-            if ($invalid_referer) {
-                #return 403;
-            }
-        proxy_redirect                   off;
-        proxy_pass                       http://gravatar.com;
-        add_header                       Nginx-Cache            &quot;$upstream_cache_status&quot;;
-        proxy_connect_timeout            180;
-        proxy_send_timeout               180;
-        proxy_read_timeout               180;
-        proxy_buffer_size                128k;
-        proxy_buffers                    4                    128k;
-        proxy_busy_buffers_size          128k;
-        proxy_temp_file_write_size       128k;
-        proxy_cache                      gravatar;
-        proxy_cache_valid                200                    302        1h;
-        proxy_cache_valid                404                    1m;
-        proxy_cache_key                  $uri$is_args$args;
-        proxy_set_header                 Host                $host;
-        proxy_set_header                 Accept-Encoding        &quot;&quot;;
-        proxy_set_header                 X-Real-IP            $remote_addr;
-        proxy_set_header                 X-Forwarded-For        $proxy_add_x_forwarded_for;
-        subs_filter_types                text/css text/xml    application/xml    application/xml+rss;
-        subs_filter http://gravatar.com http://gravatar.kotori.love;
-    }
-}
+    <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+        <span class="token keyword">valid_referers</span> none blocked <span class="token operator">*</span><span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love gravatar<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$invalid_referer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">#return 403;</span>
+            <span class="token punctuation">}</span>
+        <span class="token keyword">proxy_redirect</span>                   off<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass</span>                       <span class="token keyword">http</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>gravatar<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">add_header</span>                       Nginx<span class="token operator">-</span>Cache            <span class="token string">&quot;$upstream_cache_status&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_connect_timeout</span>            <span class="token number">180</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_send_timeout</span>               <span class="token number">180</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_read_timeout</span>               <span class="token number">180</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_buffer_size</span>                <span class="token number">128</span>k<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_buffers</span>                    <span class="token number">4</span>                    <span class="token number">128</span>k<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_busy_buffers_size</span>          <span class="token number">128</span>k<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_temp_file_write_size</span>       <span class="token number">128</span>k<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache</span>                      gravatar<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>                <span class="token number">200</span>                    <span class="token number">302</span>        <span class="token number">1</span>h<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>                <span class="token number">404</span>                    <span class="token number">1</span>m<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_key</span>                  <span class="token variable">$uri</span><span class="token variable">$is_args</span><span class="token variable">$args</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span>                 Host                <span class="token variable">$host</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span>                 Accept<span class="token operator">-</span>Encoding        <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span>                 X<span class="token operator">-</span>Real<span class="token operator">-</span>IP            <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span>                 X<span class="token operator">-</span>Forwarded<span class="token operator">-</span>For        <span class="token variable">$proxy_add_x_forwarded_for</span><span class="token punctuation">;</span>
+        subs_filter_types                text<span class="token operator">/</span>css text<span class="token operator">/</span>xml    application<span class="token operator">/</span>xml    application<span class="token operator">/</span>xml<span class="token operator">+</span>rss<span class="token punctuation">;</span>
+        subs_filter <span class="token keyword">http</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>gravatar<span class="token punctuation">.</span>com <span class="token keyword">http</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>gravatar<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-</code></pre><h3 id="Google">Google</h3><pre><code class="language-nginx">server {
-listen 443 ssl;
-server_name g.kotori.love;
-access_log /data/wwwlogs/g.kotori.love_nginx.log combined;
-index index.html index.htm index.jsp index.php;
-#include none.conf;
-#root /data/wwwroot/g.kotori.love;
+</code></pre><h3 id="Google">Google</h3><pre class="language-nginx"><code class="language-nginx"><span class="token keyword">server</span> <span class="token punctuation">{</span>
+<span class="token keyword">listen</span> <span class="token number">443</span> <span class="token keyword">ssl</span><span class="token punctuation">;</span>
+<span class="token keyword">server_name</span> g<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love<span class="token punctuation">;</span>
+<span class="token keyword">access_log</span> <span class="token operator">/</span>data<span class="token operator">/</span>wwwlogs<span class="token operator">/</span>g<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love_nginx<span class="token punctuation">.</span>log combined<span class="token punctuation">;</span>
+<span class="token keyword">index</span> <span class="token keyword">index</span><span class="token punctuation">.</span>html <span class="token keyword">index</span><span class="token punctuation">.</span>htm <span class="token keyword">index</span><span class="token punctuation">.</span>jsp <span class="token keyword">index</span><span class="token punctuation">.</span>php<span class="token punctuation">;</span>
+<span class="token comment">#include none.conf;</span>
+<span class="token comment">#root /data/wwwroot/g.kotori.love;</span>
 
-ssl_certificate /path/to/file;
-ssl_certificate_key /path/to/file;
-ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-#ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RS
-#ssl_prefer_server_ciphers on;
-ssl_session_cache shared:SSL:20m;
-ssl_session_timeout 60m;
+<span class="token keyword">ssl_certificate</span> <span class="token operator">/</span>path<span class="token operator">/</span>to<span class="token operator">/</span>file<span class="token punctuation">;</span>
+<span class="token keyword">ssl_certificate_key</span> <span class="token operator">/</span>path<span class="token operator">/</span>to<span class="token operator">/</span>file<span class="token punctuation">;</span>
+<span class="token keyword">ssl_protocols</span> TLSv1 TLSv1<span class="token punctuation">.</span><span class="token number">1</span> TLSv1<span class="token punctuation">.</span><span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token comment">#ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RS</span>
+<span class="token comment">#ssl_prefer_server_ciphers on;</span>
+<span class="token keyword">ssl_session_cache</span> shared<span class="token punctuation">:</span><span class="token keyword">SSL</span><span class="token punctuation">:</span><span class="token number">20</span>m<span class="token punctuation">;</span>
+<span class="token keyword">ssl_session_timeout</span> <span class="token number">60</span>m<span class="token punctuation">;</span>
 
-resolver 8.8.8.8;
+<span class="token keyword">resolver</span> <span class="token number">8.8</span><span class="token number">.8</span><span class="token number">.8</span><span class="token punctuation">;</span>
 
 
-location / {
-    google on;
-    google_language zh-CN;
-   # subs_filter &#x27;_\.ua\(&quot;rwt&quot;,function\(\)\{[^\}]*\}\);&#x27; &#x27;&#x27; igr;
-   subs_filter &#x27;&lt;/head&gt;&#x27; &#x27;&lt;style id=&quot;kotori-custom-css&quot;&gt;#gb_8,#gb_78,#gb_36,#gb_5,#gb_23,#gbztm,#gb_119,#gbi4s1{display:none}&lt;/style&gt;&lt;/head&gt;&#x27; o;
-   subs_filter &#x27;&lt;title&gt;Google&lt;/title&gt;&#x27; &#x27;&lt;title&gt;Kotori\&#x27;s Google&lt;/title&gt;&#x27; o;
-   subs_filter &#x27;&lt;input value=&quot;Google 搜索&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#x27; &#x27;&lt;input value=&quot;Kotori 一下&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#x27; o;
-   subs_filter &#x27;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;简体中文&lt;/div&gt;&#x27; &#x27;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;喵星人&lt;/div&gt;&#x27; o; 
-    }
+<span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+    google on<span class="token punctuation">;</span>
+    google_language zh<span class="token operator">-</span>CN<span class="token punctuation">;</span>
+   <span class="token comment"># subs_filter &#x27;_\.ua\(&quot;rwt&quot;,function\(\)\{[^\}]*\}\);&#x27; &#x27;&#x27; igr;</span>
+   subs_filter <span class="token string">&#x27;&lt;/head&gt;&#x27;</span> <span class="token string">&#x27;&lt;style id=&quot;kotori-custom-css&quot;&gt;#gb_8,#gb_78,#gb_36,#gb_5,#gb_23,#gbztm,#gb_119,#gbi4s1{display:none}&lt;/style&gt;&lt;/head&gt;&#x27;</span> o<span class="token punctuation">;</span>
+   subs_filter <span class="token string">&#x27;&lt;title&gt;Google&lt;/title&gt;&#x27;</span> <span class="token string">&#x27;&lt;title&gt;Kotori\&#x27;s Google&lt;/title&gt;&#x27;</span> o<span class="token punctuation">;</span>
+   subs_filter <span class="token string">&#x27;&lt;input value=&quot;Google 搜索&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#x27;</span> <span class="token string">&#x27;&lt;input value=&quot;Kotori 一下&quot; aria-label=&quot;Google 搜索&quot; name=&quot;btnK&quot; type=&quot;submit&quot; jsaction=&quot;sf.chk&quot;&gt;&#x27;</span> o<span class="token punctuation">;</span>
+   subs_filter <span class="token string">&#x27;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;简体中文&lt;/div&gt;&#x27;</span> <span class="token string">&#x27;&lt;div style=&quot;position:relative;color:#4285f4;font:16px/16px roboto-regular, arial, sans-serif;left:215px;top:76px&quot; nowrap=&quot;&quot;&gt;喵星人&lt;/div&gt;&#x27;</span> o<span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
 
-}
+<span class="token punctuation">}</span>
 
-upstream www.google.com {
-      server 74.125.224.80:443;
-      server 74.125.224.82:443;
-      server 74.125.224.81:443;
-      server 74.125.224.84:443;
-      server 74.125.224.83:443;
-}
+<span class="token keyword">upstream</span> www<span class="token punctuation">.</span>google<span class="token punctuation">.</span>com <span class="token punctuation">{</span>
+      <span class="token keyword">server</span> <span class="token number">74.125</span><span class="token number">.224</span><span class="token number">.80</span><span class="token punctuation">:</span><span class="token number">443</span><span class="token punctuation">;</span>
+      <span class="token keyword">server</span> <span class="token number">74.125</span><span class="token number">.224</span><span class="token number">.82</span><span class="token punctuation">:</span><span class="token number">443</span><span class="token punctuation">;</span>
+      <span class="token keyword">server</span> <span class="token number">74.125</span><span class="token number">.224</span><span class="token number">.81</span><span class="token punctuation">:</span><span class="token number">443</span><span class="token punctuation">;</span>
+      <span class="token keyword">server</span> <span class="token number">74.125</span><span class="token number">.224</span><span class="token number">.84</span><span class="token punctuation">:</span><span class="token number">443</span><span class="token punctuation">;</span>
+      <span class="token keyword">server</span> <span class="token number">74.125</span><span class="token number">.224</span><span class="token number">.83</span><span class="token punctuation">:</span><span class="token number">443</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-server {
-listen 80;
-server_name g.kotori.love;
-#return 301 https://$server_name$request_uri;
-return 403;
-}
-</code></pre><h3 id="Google-Ajax-lib">Google Ajax lib</h3><pre><code class="language-nginx">proxy_temp_file_write_size 128k;
-proxy_temp_path   /var/cache/nginx/temp;
-proxy_cache_path  /var/cache/nginx/cache levels=1:2 keys_zone=cache_one:50m inactive=7d max_size=5g;
+<span class="token keyword">server</span> <span class="token punctuation">{</span>
+<span class="token keyword">listen</span> <span class="token number">80</span><span class="token punctuation">;</span>
+<span class="token keyword">server_name</span> g<span class="token punctuation">.</span>kotori<span class="token punctuation">.</span>love<span class="token punctuation">;</span>
+<span class="token comment">#return 301 https://$server_name$request_uri;</span>
+<span class="token keyword">return</span> <span class="token number">403</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Google-Ajax-lib">Google Ajax lib</h3><pre class="language-nginx"><code class="language-nginx"><span class="token keyword">proxy_temp_file_write_size</span> <span class="token number">128</span>k<span class="token punctuation">;</span>
+<span class="token keyword">proxy_temp_path</span>   <span class="token operator">/</span>var<span class="token operator">/</span>cache<span class="token operator">/</span>nginx<span class="token operator">/</span>temp<span class="token punctuation">;</span>
+<span class="token keyword">proxy_cache_path</span>  <span class="token operator">/</span>var<span class="token operator">/</span>cache<span class="token operator">/</span>nginx<span class="token operator">/</span>cache levels<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">2</span> keys_zone<span class="token operator">=</span>cache_one<span class="token punctuation">:</span><span class="token number">50</span>m inactive<span class="token operator">=</span><span class="token number">7</span>d max_size<span class="token operator">=</span><span class="token number">5</span>g<span class="token punctuation">;</span>
 
-upstream googleajax {
-    server ajax.googleapis.com:443;
-}
+<span class="token keyword">upstream</span> googleajax <span class="token punctuation">{</span>
+    <span class="token keyword">server</span> ajax<span class="token punctuation">.</span>googleapis<span class="token punctuation">.</span>com<span class="token punctuation">:</span><span class="token number">443</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-server {
-    listen 80;
+<span class="token keyword">server</span> <span class="token punctuation">{</span>
+    <span class="token keyword">listen</span> <span class="token number">80</span><span class="token punctuation">;</span>
 
-    server_name ajax.css.network;
+    <span class="token keyword">server_name</span> ajax<span class="token punctuation">.</span>css<span class="token punctuation">.</span>network<span class="token punctuation">;</span>
 
-    resolver 8.8.8.8;
+    <span class="token keyword">resolver</span> <span class="token number">8.8</span><span class="token number">.8</span><span class="token number">.8</span><span class="token punctuation">;</span>
 
-    location / {
-        proxy_pass_header Server;
-        proxy_set_header Host ajax.googleapis.com;
-        proxy_set_header Accept-Encoding &#x27;&#x27;;
-        proxy_redirect off;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Scheme $scheme;
-        proxy_pass https://googleajax;
-        proxy_cache cache_one;
-        proxy_cache_valid  200 304 365d;
-        proxy_cache_key $host$uri$is_args$args;
-        expires max;
-    }
-}
+    <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+        <span class="token keyword">proxy_pass_header</span> <span class="token keyword">Server</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Host ajax<span class="token punctuation">.</span>googleapis<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Accept<span class="token operator">-</span>Encoding <span class="token string">&#x27;&#x27;</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_redirect</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Real<span class="token operator">-</span>IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Scheme <span class="token variable">$scheme</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass</span> <span class="token keyword">https</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>googleajax<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache</span> cache_one<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>  <span class="token number">200</span> <span class="token number">304</span> <span class="token number">365</span>d<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_key</span> <span class="token variable">$host</span><span class="token variable">$uri</span><span class="token variable">$is_args</span><span class="token variable">$args</span><span class="token punctuation">;</span>
+        <span class="token keyword">expires</span> max<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-server {
-    listen 443 ssl spdy;
+<span class="token keyword">server</span> <span class="token punctuation">{</span>
+    <span class="token keyword">listen</span> <span class="token number">443</span> <span class="token keyword">ssl</span> spdy<span class="token punctuation">;</span>
 
-    ssl on;
-    ssl_certificate /root/ssl/css.crt;
-    ssl_certificate_key /root/ssl/css.key;
+    <span class="token keyword">ssl</span> on<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_certificate</span> <span class="token operator">/</span><span class="token keyword">root</span><span class="token operator">/</span><span class="token keyword">ssl</span><span class="token operator">/</span>css<span class="token punctuation">.</span>crt<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_certificate_key</span> <span class="token operator">/</span><span class="token keyword">root</span><span class="token operator">/</span><span class="token keyword">ssl</span><span class="token operator">/</span>css<span class="token punctuation">.</span>key<span class="token punctuation">;</span>
 
-    ssl_prefer_server_ciphers on;
-    ssl_dhparam /etc/ssl/certs/dhparam.pem;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers &quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;;
-    keepalive_timeout 70;
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_timeout 10m; 
+    <span class="token keyword">ssl_prefer_server_ciphers</span> on<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_dhparam</span> <span class="token operator">/</span>etc<span class="token operator">/</span><span class="token keyword">ssl</span><span class="token operator">/</span>certs<span class="token operator">/</span>dhparam<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_protocols</span> TLSv1 TLSv1<span class="token punctuation">.</span><span class="token number">1</span> TLSv1<span class="token punctuation">.</span><span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">ssl_ciphers</span> <span class="token string">&quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">keepalive_timeout</span> <span class="token number">70</span><span class="token punctuation">;</span>
+    <span class="token keyword">ssl_session_cache</span> shared<span class="token punctuation">:</span><span class="token keyword">SSL</span><span class="token punctuation">:</span><span class="token number">10</span>m<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_session_timeout</span> <span class="token number">10</span>m<span class="token punctuation">;</span> 
 
-    server_name ajax.css.network;
+    <span class="token keyword">server_name</span> ajax<span class="token punctuation">.</span>css<span class="token punctuation">.</span>network<span class="token punctuation">;</span>
 
-    resolver 8.8.8.8;
+    <span class="token keyword">resolver</span> <span class="token number">8.8</span><span class="token number">.8</span><span class="token number">.8</span><span class="token punctuation">;</span>
 
-    location / {
-        proxy_pass_header Server;
-        proxy_set_header Host ajax.googleapis.com;
-        proxy_set_header Accept-Encoding &#x27;&#x27;;
-        proxy_redirect off;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Scheme $scheme;
-        proxy_pass https://googleajax;
-        proxy_cache cache_one;
-        proxy_cache_valid  200 304 365d;
-        proxy_cache_key $host$uri$is_args$args;
-        expires max;
-    }
-}
-</code></pre><h3 id="Google-Fonts-lib">Google Fonts lib</h3><pre><code class="language-nginx">upstream google {
-    server fonts.googleapis.com:443;
-}
+    <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+        <span class="token keyword">proxy_pass_header</span> <span class="token keyword">Server</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Host ajax<span class="token punctuation">.</span>googleapis<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Accept<span class="token operator">-</span>Encoding <span class="token string">&#x27;&#x27;</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_redirect</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Real<span class="token operator">-</span>IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Scheme <span class="token variable">$scheme</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass</span> <span class="token keyword">https</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>googleajax<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache</span> cache_one<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>  <span class="token number">200</span> <span class="token number">304</span> <span class="token number">365</span>d<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_key</span> <span class="token variable">$host</span><span class="token variable">$uri</span><span class="token variable">$is_args</span><span class="token variable">$args</span><span class="token punctuation">;</span>
+        <span class="token keyword">expires</span> max<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="Google-Fonts-lib">Google Fonts lib</h3><pre class="language-nginx"><code class="language-nginx"><span class="token keyword">upstream</span> google <span class="token punctuation">{</span>
+    <span class="token keyword">server</span> fonts<span class="token punctuation">.</span>googleapis<span class="token punctuation">.</span>com<span class="token punctuation">:</span><span class="token number">443</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-upstream gstatic {
-    server fonts.gstatic.com:443;
-}
+<span class="token keyword">upstream</span> gstatic <span class="token punctuation">{</span>
+    <span class="token keyword">server</span> fonts<span class="token punctuation">.</span>gstatic<span class="token punctuation">.</span>com<span class="token punctuation">:</span><span class="token number">443</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-server {
-    listen 80;
+<span class="token keyword">server</span> <span class="token punctuation">{</span>
+    <span class="token keyword">listen</span> <span class="token number">80</span><span class="token punctuation">;</span>
 
-    server_name fonts.css.network;
+    <span class="token keyword">server_name</span> fonts<span class="token punctuation">.</span>css<span class="token punctuation">.</span>network<span class="token punctuation">;</span>
 
-    resolver 8.8.8.8;
+    <span class="token keyword">resolver</span> <span class="token number">8.8</span><span class="token number">.8</span><span class="token number">.8</span><span class="token punctuation">;</span>
 
-    location /css {
-        sub_filter &#x27;fonts.gstatic.com&#x27; &#x27;fonts.css.network&#x27;;
-        sub_filter_once off;
-        sub_filter_types text/css;
-        proxy_pass_header Server;
-        proxy_set_header Host fonts.googleapis.com;
-        proxy_set_header Accept-Encoding &#x27;&#x27;;
-        proxy_redirect off;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Scheme $scheme;
-        proxy_pass https://google;
-        proxy_cache cache_one;
-        proxy_cache_valid  200 304 365d;
-        proxy_cache_key $host$uri$is_args$args;
-        expires max;
-    }
+    <span class="token keyword">location</span> <span class="token operator">/</span>css <span class="token punctuation">{</span>
+        <span class="token keyword">sub_filter</span> <span class="token string">&#x27;fonts.gstatic.com&#x27;</span> <span class="token string">&#x27;fonts.css.network&#x27;</span><span class="token punctuation">;</span>
+        <span class="token keyword">sub_filter_once</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">sub_filter_types</span> text<span class="token operator">/</span>css<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass_header</span> <span class="token keyword">Server</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Host fonts<span class="token punctuation">.</span>googleapis<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Accept<span class="token operator">-</span>Encoding <span class="token string">&#x27;&#x27;</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_redirect</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Real<span class="token operator">-</span>IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Scheme <span class="token variable">$scheme</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass</span> <span class="token keyword">https</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>google<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache</span> cache_one<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>  <span class="token number">200</span> <span class="token number">304</span> <span class="token number">365</span>d<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_key</span> <span class="token variable">$host</span><span class="token variable">$uri</span><span class="token variable">$is_args</span><span class="token variable">$args</span><span class="token punctuation">;</span>
+        <span class="token keyword">expires</span> max<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    location /icon {
-        sub_filter &#x27;fonts.gstatic.com&#x27; &#x27;fonts.css.network&#x27;;
-        sub_filter_once off;
-        sub_filter_types text/css;
-        proxy_pass_header Server;
-        proxy_set_header Host fonts.googleapis.com;
-        proxy_set_header Accept-Encoding &#x27;&#x27;;
-        proxy_redirect off;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Scheme $scheme;
-        proxy_pass https://google;
-        proxy_cache cache_one;
-        proxy_cache_valid  200 304 365d;
-        proxy_cache_key $host$uri$is_args$args;
-        expires max;
-    }
+    <span class="token keyword">location</span> <span class="token operator">/</span>icon <span class="token punctuation">{</span>
+        <span class="token keyword">sub_filter</span> <span class="token string">&#x27;fonts.gstatic.com&#x27;</span> <span class="token string">&#x27;fonts.css.network&#x27;</span><span class="token punctuation">;</span>
+        <span class="token keyword">sub_filter_once</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">sub_filter_types</span> text<span class="token operator">/</span>css<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass_header</span> <span class="token keyword">Server</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Host fonts<span class="token punctuation">.</span>googleapis<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Accept<span class="token operator">-</span>Encoding <span class="token string">&#x27;&#x27;</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_redirect</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Real<span class="token operator">-</span>IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Scheme <span class="token variable">$scheme</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass</span> <span class="token keyword">https</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>google<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache</span> cache_one<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>  <span class="token number">200</span> <span class="token number">304</span> <span class="token number">365</span>d<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_key</span> <span class="token variable">$host</span><span class="token variable">$uri</span><span class="token variable">$is_args</span><span class="token variable">$args</span><span class="token punctuation">;</span>
+        <span class="token keyword">expires</span> max<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    location / {
-        proxy_pass_header Server;
-        proxy_set_header Host fonts.gstatic.com;
-        proxy_redirect off;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Scheme $scheme;
-        proxy_pass http://gstatic;
-        proxy_cache cache_one;
-        proxy_cache_valid  200 304 365d;
-        proxy_cache_key $host$uri$is_args$args;
-        expires max;
-    }
-}
+    <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+        <span class="token keyword">proxy_pass_header</span> <span class="token keyword">Server</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Host fonts<span class="token punctuation">.</span>gstatic<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_redirect</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Real<span class="token operator">-</span>IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Scheme <span class="token variable">$scheme</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass</span> <span class="token keyword">http</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>gstatic<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache</span> cache_one<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>  <span class="token number">200</span> <span class="token number">304</span> <span class="token number">365</span>d<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_key</span> <span class="token variable">$host</span><span class="token variable">$uri</span><span class="token variable">$is_args</span><span class="token variable">$args</span><span class="token punctuation">;</span>
+        <span class="token keyword">expires</span> max<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-server {
-    listen 443 ssl spdy;
+<span class="token keyword">server</span> <span class="token punctuation">{</span>
+    <span class="token keyword">listen</span> <span class="token number">443</span> <span class="token keyword">ssl</span> spdy<span class="token punctuation">;</span>
 
-    ssl on;
-    ssl_certificate /root/ssl/css.crt;
-    ssl_certificate_key /root/ssl/css.key;
+    <span class="token keyword">ssl</span> on<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_certificate</span> <span class="token operator">/</span><span class="token keyword">root</span><span class="token operator">/</span><span class="token keyword">ssl</span><span class="token operator">/</span>css<span class="token punctuation">.</span>crt<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_certificate_key</span> <span class="token operator">/</span><span class="token keyword">root</span><span class="token operator">/</span><span class="token keyword">ssl</span><span class="token operator">/</span>css<span class="token punctuation">.</span>key<span class="token punctuation">;</span>
 
-    ssl_prefer_server_ciphers on;
-    ssl_dhparam /etc/ssl/certs/dhparam.pem;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers &quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;;
-    keepalive_timeout 70;
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_timeout 10m; 
+    <span class="token keyword">ssl_prefer_server_ciphers</span> on<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_dhparam</span> <span class="token operator">/</span>etc<span class="token operator">/</span><span class="token keyword">ssl</span><span class="token operator">/</span>certs<span class="token operator">/</span>dhparam<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_protocols</span> TLSv1 TLSv1<span class="token punctuation">.</span><span class="token number">1</span> TLSv1<span class="token punctuation">.</span><span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">ssl_ciphers</span> <span class="token string">&quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">keepalive_timeout</span> <span class="token number">70</span><span class="token punctuation">;</span>
+    <span class="token keyword">ssl_session_cache</span> shared<span class="token punctuation">:</span><span class="token keyword">SSL</span><span class="token punctuation">:</span><span class="token number">10</span>m<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_session_timeout</span> <span class="token number">10</span>m<span class="token punctuation">;</span> 
 
-    server_name fonts.css.network;
+    <span class="token keyword">server_name</span> fonts<span class="token punctuation">.</span>css<span class="token punctuation">.</span>network<span class="token punctuation">;</span>
 
-    resolver 8.8.8.8;
+    <span class="token keyword">resolver</span> <span class="token number">8.8</span><span class="token number">.8</span><span class="token number">.8</span><span class="token punctuation">;</span>
 
-    location /css {
-        sub_filter &#x27;fonts.gstatic.com&#x27; &#x27;fonts.css.network&#x27;; 
-        sub_filter_once off;
-        sub_filter_types text/css;
-        proxy_pass_header Server;
-        proxy_set_header Host fonts.googleapis.com;
-        proxy_set_header Accept-Encoding &#x27;&#x27;;
-        proxy_redirect off;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Scheme $scheme;
-        proxy_pass https://google;
-        proxy_cache cache_one;
-        proxy_cache_valid  200 304 365d;
-        proxy_cache_key $host$uri$is_args$args;
-        expires max;
-    }
+    <span class="token keyword">location</span> <span class="token operator">/</span>css <span class="token punctuation">{</span>
+        <span class="token keyword">sub_filter</span> <span class="token string">&#x27;fonts.gstatic.com&#x27;</span> <span class="token string">&#x27;fonts.css.network&#x27;</span><span class="token punctuation">;</span> 
+        <span class="token keyword">sub_filter_once</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">sub_filter_types</span> text<span class="token operator">/</span>css<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass_header</span> <span class="token keyword">Server</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Host fonts<span class="token punctuation">.</span>googleapis<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Accept<span class="token operator">-</span>Encoding <span class="token string">&#x27;&#x27;</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_redirect</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Real<span class="token operator">-</span>IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Scheme <span class="token variable">$scheme</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass</span> <span class="token keyword">https</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>google<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache</span> cache_one<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>  <span class="token number">200</span> <span class="token number">304</span> <span class="token number">365</span>d<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_key</span> <span class="token variable">$host</span><span class="token variable">$uri</span><span class="token variable">$is_args</span><span class="token variable">$args</span><span class="token punctuation">;</span>
+        <span class="token keyword">expires</span> max<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    location /icon {
-        sub_filter &#x27;fonts.gstatic.com&#x27; &#x27;fonts.css.network&#x27;; 
-        sub_filter_once off;
-        sub_filter_types text/css;
-        proxy_pass_header Server;
-        proxy_set_header Host fonts.googleapis.com;
-        proxy_set_header Accept-Encoding &#x27;&#x27;;
-        proxy_redirect off;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Scheme $scheme;
-        proxy_pass https://google;
-        proxy_cache cache_one;
-        proxy_cache_valid  200 304 365d;
-        proxy_cache_key $host$uri$is_args$args;
-        expires max;
-    }
+    <span class="token keyword">location</span> <span class="token operator">/</span>icon <span class="token punctuation">{</span>
+        <span class="token keyword">sub_filter</span> <span class="token string">&#x27;fonts.gstatic.com&#x27;</span> <span class="token string">&#x27;fonts.css.network&#x27;</span><span class="token punctuation">;</span> 
+        <span class="token keyword">sub_filter_once</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">sub_filter_types</span> text<span class="token operator">/</span>css<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass_header</span> <span class="token keyword">Server</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Host fonts<span class="token punctuation">.</span>googleapis<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Accept<span class="token operator">-</span>Encoding <span class="token string">&#x27;&#x27;</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_redirect</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Real<span class="token operator">-</span>IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Scheme <span class="token variable">$scheme</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass</span> <span class="token keyword">https</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>google<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache</span> cache_one<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>  <span class="token number">200</span> <span class="token number">304</span> <span class="token number">365</span>d<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_key</span> <span class="token variable">$host</span><span class="token variable">$uri</span><span class="token variable">$is_args</span><span class="token variable">$args</span><span class="token punctuation">;</span>
+        <span class="token keyword">expires</span> max<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    location / {
-        proxy_pass_header Server;
-        proxy_set_header Host fonts.gstatic.com;
-        proxy_redirect off;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Scheme $scheme;
-        proxy_pass https://gstatic;
-        proxy_cache cache_one;
-        proxy_cache_valid  200 304 365d;
-        proxy_cache_key $host$uri$is_args$args;
-        expires max;
-    }
-}
-</code></pre></div></article></div><center><div id="postnav"><ul class="pager"><li class="previous"><a href="https://kotori.love"><span class="fui-home"></span></a></li><li class="next" data-action="comment-show"><a href="#"><span class="fui-chat"></span></a></li><li class="previous"><a href="https://kotori.love/archives/typecho-plugin-access.html" title="Typecho 仿 (?) 百度统计插件">Typecho 仿 (?) 百度统计插件</a></li><li class="next"><a href="https://kotori.love/archives/install-nginx-php-mysql-on-osx.html" title="OS X 下配置 Nginx+PHP+MySQL">OS X 下配置 Nginx+PHP+MySQL</a></li></ul></div></center><div id="disqus_thread" data-title="一些奇怪的 nginx 配置文件" data-permalink="https://kotori.love/archives/nginx-config-file.html"></div></div><footer id="footer" class="container" style="background:rgba(255,255,255,0)"><hr><div style="text-align:center;padding-bottom:9px"><p>© 2014 - 2020 <a href="https://kotori.love">あかね空</a>. Using <a target="_blank" href="https://hexo.io/">Hexo</a>  &amp; <a target="_blank" href="https://yumoe.com">Moricolor</a> / <a href="/atom.xml" data-nopjax="true">RSS</a></p></div></footer><script id="mori-json" type="text/json">{"bottomTools":{"hitokoto":true,"category":true,"tag":false,"search":true},"comment":{"use":"disqus","shortname":"sora-diary"},"analytics":{"use":"google","id":"UA-70944432-1"},"sentry":{"dsn":"https://7bdda1be9b094ef0b6ff3c364024537c@sentry.io/2406563"},"url":"https://kotori.love"}</script><script src="/assets/app.js?v=5af621e4f9777a58"></script></div></body></html>
+    <span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+        <span class="token keyword">proxy_pass_header</span> <span class="token keyword">Server</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> Host fonts<span class="token punctuation">.</span>gstatic<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_redirect</span> off<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Real<span class="token operator">-</span>IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_set_header</span> X<span class="token operator">-</span>Scheme <span class="token variable">$scheme</span><span class="token punctuation">;</span>
+        <span class="token keyword">proxy_pass</span> <span class="token keyword">https</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>gstatic<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache</span> cache_one<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_valid</span>  <span class="token number">200</span> <span class="token number">304</span> <span class="token number">365</span>d<span class="token punctuation">;</span>
+        <span class="token keyword">proxy_cache_key</span> <span class="token variable">$host</span><span class="token variable">$uri</span><span class="token variable">$is_args</span><span class="token variable">$args</span><span class="token punctuation">;</span>
+        <span class="token keyword">expires</span> max<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></article></div><center><div id="postnav"><ul class="pager"><li class="previous"><a href="/"><span class="fui-home"></span></a></li><li class="next" data-action="comment-show"><a href="#"><span class="fui-chat"></span></a></li><li class="previous"><a href="/archives/typecho-plugin-access.html" title="Typecho 仿 (?) 百度统计插件">Typecho 仿 (?) 百度统计插件</a></li><li class="next"><a href="/archives/install-nginx-php-mysql-on-osx.html" title="OS X 下配置 Nginx+PHP+MySQL">OS X 下配置 Nginx+PHP+MySQL</a></li></ul></div></center><div id="disqus_thread" data-title="一些奇怪的 nginx 配置文件" data-permalink="https://kotori.love/archives/nginx-config-file.html"></div></div><footer id="footer" class="container" style="background:rgba(255,255,255,0)"><hr><div style="text-align:center;padding-bottom:9px"><p>© 2014 - 2020 <a href="/">あかね空</a>. Using <a target="_blank" href="https://hexo.io/">Hexo</a>  &amp; <a target="_blank" href="https://yumoe.com">Moricolor</a> / <a href="/atom.xml" data-nopjax="true">RSS</a></p></div></footer><script id="mori-json" type="text/json">{"bottomTools":{"hitokoto":true,"category":true,"tag":false,"search":true},"comment":{"use":"disqus","shortname":"sora-diary"},"analytics":{"use":"google","id":"UA-70944432-1"},"sentry":{"dsn":"https://7bdda1be9b094ef0b6ff3c364024537c@sentry.io/2406563"},"url":"https://kotori.love"}</script><script src="/assets/app.js?v=904b4db6370a967f"></script></div></body></html>
