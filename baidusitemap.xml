@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://kotori.love/archives/typescript-react.html</loc>
+    <lastmod>2020-02-12</lastmod>
+  </url>  <url>
     <loc>https://kotori.love/archives/problems-with-react-async-component.html</loc>
     <lastmod>2020-02-11</lastmod>
   </url>  <url>
@@ -16,10 +19,10 @@
     <loc>https://kotori.love/archives/integrates-basket-into-webpack.html</loc>
     <lastmod>2020-02-11</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/react-native-upload.html</loc>
+    <loc>https://kotori.love/archives/react-native-es5-es6-difference.html</loc>
     <lastmod>2020-02-11</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/react-native-es5-es6-difference.html</loc>
+    <loc>https://kotori.love/archives/react-native-upload.html</loc>
     <lastmod>2020-02-11</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/typecho-pjax.html</loc>
@@ -28,22 +31,19 @@
     <loc>https://kotori.love/archives/typecho-theme-tips.html</loc>
     <lastmod>2020-02-11</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/vulnerable-react-native.html</loc>
+    <loc>https://kotori.love/archives/webpack-dev-server-issue-in-safari.html</loc>
     <lastmod>2020-02-11</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/webpack-dev-server-issue-in-safari.html</loc>
+    <loc>https://kotori.love/archives/vulnerable-react-native.html</loc>
     <lastmod>2020-02-11</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/nginx-config-file.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/typescript-react.html</loc>
-    <lastmod>2020-02-08</lastmod>
-  </url>  <url>
-    <loc>https://kotori.love/archives/unicode-in-jsx.html</loc>
+    <loc>https://kotori.love/archives/use-virtualbox-virtual-machine-to-install-os-x-10-10-yosemite.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/use-virtualbox-virtual-machine-to-install-os-x-10-10-yosemite.html</loc>
+    <loc>https://kotori.love/archives/unicode-in-jsx.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/useful-git-snippets.html</loc>
@@ -52,19 +52,19 @@
     <loc>https://kotori.love/archives/ubuntu-sublime-text-imfix.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/typecho-plugin-blockip.html</loc>
+    <loc>https://kotori.love/archives/typecho-plugin-access.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/typecho-plugin-access.html</loc>
+    <loc>https://kotori.love/archives/typecho-plugin-blockip.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/typecho-pagetolinks.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/tutorial-to-build-tieba-assistant.html</loc>
+    <loc>https://kotori.love/archives/successfully-installed-black-apple.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/successfully-installed-black-apple.html</loc>
+    <loc>https://kotori.love/archives/tutorial-to-build-tieba-assistant.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/react-js-pinterest-style-layout-site.html</loc>
@@ -121,34 +121,34 @@
     <loc>https://kotori.love/archives/install-nginx-php-mysql-on-osx.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/homemade-chrome-theme-love-live.html</loc>
+    <loc>https://kotori.love/archives/hitokoto-data.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/hitokoto-data.html</loc>
+    <loc>https://kotori.love/archives/homemade-chrome-theme-love-live.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/how-to-hack-the-crayon-website.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/gnome-shell-transparent-method.html</loc>
+    <loc>https://kotori.love/archives/google-chrome-new-ui-solution.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/fuck-gfw.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/google-chrome-new-ui-solution.html</loc>
+    <loc>https://kotori.love/archives/gnome-shell-transparent-method.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/first-post-2020.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/download-baiduyun-with-aria2.html</loc>
+    <loc>https://kotori.love/archives/fetch-gravatar-with-php.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/decompile-apk.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
-    <loc>https://kotori.love/archives/fetch-gravatar-with-php.html</loc>
+    <loc>https://kotori.love/archives/download-baiduyun-with-aria2.html</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://kotori.love/archives/curl-login-pixiv.html</loc>
