@@ -40,7 +40,7 @@
 Property &#39;to&#39; does not exist on type &#39;IntrinsicAttributes &amp; IntrinsicClassAttributes&lt;NavItem&gt; &amp; Readonly&lt;NavItemProps&gt; &amp; Readonly&lt;...&gt;&#39;.ts(2769)
 
 
-然而 TypeScript 只认带
+然而 TypeScript 只认带 ······
     
     </summary>
     
@@ -87,7 +87,8 @@ Property &#39;to&#39; does not exist on type &#39;IntrinsicAttributes &amp; Intr
     
     <summary type="html">
     
-      emmmm… 万年不水文
+      &gt; emmmm… 万年不水文
+
 
 事情是这样的，在 Windows 下拷贝了一个中文目录进去，结果在手机上看就乱码了，而且目录里的文件都看不到，于是搜索找到一个 Linux 下删除乱码的办法：
 
@@ -168,7 +169,7 @@ do
     COMMIT_HASH=$(git rev-list -1 $tag)
 
     # get the commit date of the tag and create a new tag using
-    # th
+    # th ······
     
     </summary>
     
@@ -205,7 +206,7 @@ export default asyncComponent({
 但是这样导致的问题是无法获取到 react-cropper 组件的 ref 属性，此时获取到的 ref 是 AsyncComponent 。
 
 
-所以需要把 reac
+所以需要把 reac ······
     
     </summary>
     
@@ -246,7 +247,7 @@ basket.require({url: &#39;helloworld.js&#39;});
 
 以下总结来自某乎：
 
-PC 
+PC  ······
     
     </summary>
     
@@ -277,7 +278,8 @@ PC
 eval(&quot;const a = function () {}; function b() {  a(); }; b();&quot;)
 
 
-ReferenceError: Can’t find variable: a
+&gt; ReferenceError: Can’t find variable: a
+
 
 解决方法
 使用老版本（bu
@@ -285,7 +287,7 @@ yarn add webpack-dev-server@~2.7.0 -D
 
 
 其它方法
-yarn 
+ya ······
     
     </summary>
     
@@ -326,7 +328,7 @@ yarn
 
 
 获取 access_token
-我们的服务器获取到 code 以后，向 LINE 的服务器发送一个 
+我们的服务器获取到 code 以后，向 LINE 的服务器发送一个  ······
     
     </summary>
     
@@ -368,7 +370,7 @@ yarn
 
 生成这样的 html
 
-&lt;input class=&quot;iconfont&quot; type=&quot;button&quot; v
+&lt;input class=&quot;iconfont&quot; type=&quot;button&quot; v ······
     
     </summary>
     
@@ -391,7 +393,8 @@ yarn
     
     <summary type="html">
     
-      最近把 Typecho 升级到了 1.1 (17.8.17)，然后主题部分功能挂了，应该是以前魔改过核心代码导致的，70 说国庆会出一个 Beta 版，看来以后还是不改源代码了 …⁄(⁄ ⁄・⁄ω⁄・⁄ ⁄)⁄…
+      &gt; 最近把 Typecho 升级到了 1.1 (17.8.17)，然后主题部分功能挂了，应该是以前魔改过核心代码导致的，70 说国庆会出一个 Beta 版，看来以后还是不改源代码了 …⁄(⁄ ⁄・⁄ω⁄・⁄ ⁄)⁄…
+
 
 Typecho 评论页中，如果要获取当前的页码是没有办法的，可能需要调用 $comments-&gt;_currentPage ，但是 Widget_Comments_Archive::_currentPage 是 private 的。
 
@@ -399,7 +402,7 @@ Typecho 评论页中，如果要获取当前的页码是没有办法的，可能
 
 代码如下：
 
-$reflection = new ReflectionC
+$reflection = new Reflecti ······
     
     </summary>
     
@@ -424,15 +427,19 @@ $reflection = new ReflectionC
     
     <summary type="html">
     
-      池袋・サンシャインシティ周辺にて、スクフェスにログインすると、ゲーム内の「背景」や「称号」をゲットすることができます！！
+      
+
+&gt; 池袋・サンシャインシティ周辺にて、スクフェスにログインすると、ゲーム内の「背景」や「称号」をゲットすることができます！！
 ゲットした「背景」や「称号」を設定してみんなで「スクフェス感謝祭 2017」を盛り上げよう♪
 
-※ご使用端末の位置情報設定を ON にしてご利用ください。
+
+&gt; ※ご使用端末の位置情報設定を ON にしてご利用ください。
 ※1 アカウントにつき各種 1 回まで取得可能です。
 ※6/10 (土) 09:00 〜 6/11 (日) 23:59 まではホームバナーおよび「その他 ＞ 位置情報」メニューから受け取り可能です
 ※背景のみ 6/12 (月) 0:00 以降も「その他 ＞ 位置情報メニュー」から受け取り可能です
 
-【背景】噴水広場・池袋
+
+&gt; 【 ······
     
     </summary>
     
@@ -463,12 +470,13 @@ $reflection = new ReflectionC
 
 如果是切账号时忘记设置密码就用这个
 
-私は二つのアカウントを持ちます。普通は引き継ぎパスワードにスクリーンショットをして保存します。でも、今回は、私はパスワードを設定せずに別のアカウントを引き継ぎしました。今、このアカウントがローグインできません。すみませんが、お助けをください。お面倒を挂けて本当にすみませんでした。
+&gt; 私は二つのアカウントを持ちます。普通は引き継ぎパスワードにスクリーンショットをして保存します。でも、今回は、私はパスワードを設定せずに別のアカウントを引き継ぎしました。今、このアカウントがローグインできません。すみませんが、お助けをください。お面倒を挂けて本当にすみませんでした。
 私のゲームの名前：【】
 ユーザー ID：【】
 端末の OS は Android/IOS です。
 
-老玩家回归没有新版引继码的用这
+
+老玩家回归没有新版引继码 ······
     
     </summary>
     
@@ -501,9 +509,9 @@ $reflection = new ReflectionC
       <category term="终点" scheme="https://kotori.love/categories/%E7%BB%88%E7%82%B9/"/>
     
     
-      <category term="bilibili" scheme="https://kotori.love/tags/bilibili/"/>
-    
       <category term="lovelive" scheme="https://kotori.love/tags/lovelive/"/>
+    
+      <category term="bilibili" scheme="https://kotori.love/tags/bilibili/"/>
     
   </entry>
   
@@ -531,7 +539,7 @@ void gtk_im_context_set_client_window (GtkIMContext *context, GdkWindow *window)
 {
     GtkIMContextClass *klass;
     g_return_if_fail (GTK_IS_IM_CONTEXT (context));
-    klass = GTK_IM_CONTEX
+    klass = GTK_IM_CONTEX ······
     
     </summary>
     
@@ -564,7 +572,7 @@ void gtk_im_context_set_client_window (GtkIMContext *context, GdkWindow *window)
 PS: is_cookie_ok 没有改动，依旧按原来的使用。
 PSS: nodejs 版 pixiv-cookie
 
-define(&#39;BEFORE_LOGIN_COOKIE&#39;, __DIR__ . &#39;/BEFORE_LOGIN_COOKIE.txt&#39;); //登录页面的coo
+define(&#39;BEFORE_LOGIN_COOKIE&#39;, __DIR__ . &#39;/BEFORE_LOGIN_COOKIE.txt&#39;); //登录页面的coo ······
     
     </summary>
     
@@ -644,7 +652,7 @@ import wx from &#39;weixin-js-sdk&#39;;
 
 export function initWX() {
     getConfigFromServer(location.href.split(&#39;#&#39;)[0])
-        .then
+        .then ······
     
     </summary>
     
@@ -690,7 +698,7 @@ export function initWX() {
 
 
 流量来源
-本博客流量来源主要有搜索引擎、第三方网站引荐、直接访问三大
+本博客流量来源主要有搜索引擎、第三方网站引荐、直接访问三大 ······
     
     </summary>
     
@@ -726,7 +734,7 @@ export function initWX() {
  * react
  * react-dom
  * react-router-component
- * 
+ *  ······
     
     </summary>
     
