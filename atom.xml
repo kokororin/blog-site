@@ -37,10 +37,7 @@
 
 如果像这样， NavItem 组件上没有 to 这个属性，很自然的会报错。
 
-Property &#39;to&#39; does not exist on type &#39;IntrinsicAttributes &amp; IntrinsicClassAttributes&lt;NavItem&gt; &amp; Readonly&lt;NavItemProps&gt; &amp; Readonly&lt;...&gt;&#39;.ts(2769)
-
-
-然而 TypeScript 只认带 ······
+Property &#39;to&#39; does not exist on type &#39;IntrinsicAttributes &amp; Intr ······
     
     </summary>
     
@@ -166,10 +163,7 @@ git tag -l | while read -r tag
 do
 
     # get the commit hash of the current tag
-    COMMIT_HASH=$(git rev-list -1 $tag)
-
-    # get the commit date of the tag and create a new tag using
-    # th ······
+    COMMIT_HA ······
     
     </summary>
     
@@ -199,14 +193,7 @@ do
 import { asyncComponent } from &#39;react-async-component&#39;;
 
 export default asyncComponent({
-  resolve: () =&gt; import(&#39;react-cropper&#39;)
-});
-
-
-但是这样导致的问题是无法获取到 react-cropper 组件的 ref 属性，此时获取到的 ref 是 AsyncComponent 。
-
-
-所以需要把 reac ······
+  resolve: () =&gt; import(&#39;react ······
     
     </summary>
     
@@ -238,16 +225,7 @@ basket.js 的简单使用方式
 basket.require({url: &#39;helloworld.js&#39;});
 
 
-和浏览器缓存相比的优势
-在 PC 端和浏览器缓存相比没有任何优势，移动端 SPA 值得尝试。
-（特别是在某信的 WebView 里，304 缓存的时间短如小香菇 2333）
-
-
-
-
-以下总结来自某乎：
-
-PC  ······
+和浏览器缓 ······
     
     </summary>
     
@@ -278,16 +256,7 @@ PC  ······
 eval(&quot;const a = function () {}; function b() {  a(); }; b();&quot;)
 
 
-&gt; ReferenceError: Can’t find variable: a
-
-
-解决方法
-使用老版本（bu
-yarn add webpack-dev-server@~2.7.0 -D
-
-
-其它方法
-ya ······
+&gt; Re ······
     
     </summary>
     
@@ -321,14 +290,7 @@ ya ······
 
 
 获取 code
-将用户重定向到 https://access.line.me/dialog/oauth/weblogin?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx 这个地址
-
-用户登录完了以后会跳转至上一步的 redirect_uri ，并带上 code 参数。
-
-
-
-获取 access_token
-我们的服务器获取到 code 以后，向 LINE 的服务器发送一个  ······
+将用户重定向到 https://access.line.me/dialog/oauth/weblogin?response_type=code&amp;client_id=xxx&amp;redirect_uri=xxx 这个地 ······
     
     </summary>
     
@@ -363,14 +325,7 @@ ya ······
 
 如果这样还好办，可以用 dangerouslySetInnerHTML 达到效果。
 
-但是，有些情况下，需要达到如下效果
-
-&lt;Icon tagName=&quot;input&quot; content=&quot;628&quot; /&gt;
-
-
-生成这样的 html
-
-&lt;input class=&quot;iconfont&quot; type=&quot;button&quot; v ······
+但是，有些情况下，需要 ······
     
     </summary>
     
@@ -396,13 +351,7 @@ ya ······
       &gt; 最近把 Typecho 升级到了 1.1 (17.8.17)，然后主题部分功能挂了，应该是以前魔改过核心代码导致的，70 说国庆会出一个 Beta 版，看来以后还是不改源代码了 …⁄(⁄ ⁄・⁄ω⁄・⁄ ⁄)⁄…
 
 
-Typecho 评论页中，如果要获取当前的页码是没有办法的，可能需要调用 $comments-&gt;_currentPage ，但是 Widget_Comments_Archive::_currentPage 是 private 的。
-
-在不修改源代码的情况下，可以使用 ReflectionClass 来获取。
-
-代码如下：
-
-$reflection = new Reflecti ······
+Typecho 评论页中，如果要获取当前的页码是没有办法的，可能需要调用 $comments-&gt;_currentPage ，但是 Widget_Comments_Archive: ······
     
     </summary>
     
@@ -435,11 +384,7 @@ $reflection = new Reflecti ······
 
 &gt; ※ご使用端末の位置情報設定を ON にしてご利用ください。
 ※1 アカウントにつき各種 1 回まで取得可能です。
-※6/10 (土) 09:00 〜 6/11 (日) 23:59 まではホームバナーおよび「その他 ＞ 位置情報」メニューから受け取り可能です
-※背景のみ 6/12 (月) 0:00 以降も「その他 ＞ 位置情報メニュー」から受け取り可能です
-
-
-&gt; 【 ······
+※6/10 (土) 09:00 〜 6/11 (日)  ······
     
     </summary>
     
@@ -470,13 +415,7 @@ $reflection = new Reflecti ······
 
 如果是切账号时忘记设置密码就用这个
 
-&gt; 私は二つのアカウントを持ちます。普通は引き継ぎパスワードにスクリーンショットをして保存します。でも、今回は、私はパスワードを設定せずに別のアカウントを引き継ぎしました。今、このアカウントがローグインできません。すみませんが、お助けをください。お面倒を挂けて本当にすみませんでした。
-私のゲームの名前：【】
-ユーザー ID：【】
-端末の OS は Android/IOS です。
-
-
-老玩家回归没有新版引继码 ······
+&gt; 私は二つのアカウントを持ちます。普通は引き継ぎパスワードにスクリーンショットをして保存します。でも、今回は、私はパスワードを設定せずに別のアカウントを引き継ぎしました。今、このアカウントがローグインできませ ······
     
     </summary>
     
@@ -537,9 +476,7 @@ vim ~/.sublime_imfix.c
 #include &lt;gtk/gtkimcontext.h&gt;
 void gtk_im_context_set_client_window (GtkIMContext *context, GdkWindow *window)
 {
-    GtkIMContextClass *klass;
-    g_return_if_fail (GTK_IS_IM_CONTEXT (context));
-    klass = GTK_IM_CONTEX ······
+    Gtk ······
     
     </summary>
     
@@ -570,9 +507,7 @@ void gtk_im_context_set_client_window (GtkIMContext *context, GdkWindow *window)
 直接上代码，添加了登录错误的异常 = w= 同时不再需要 sunra/php-simple-html-dom-parse 。
 可以看到 p 站添加了 Google reCAPTCHA ，但是目前没有碰到验证码。
 PS: is_cookie_ok 没有改动，依旧按原来的使用。
-PSS: nodejs 版 pixiv-cookie
-
-define(&#39;BEFORE_LOGIN_COOKIE&#39;, __DIR__ . &#39;/BEFORE_LOGIN_COOKIE.txt&#39;); //登录页面的coo ······
+PSS: no ······
     
     </summary>
     
@@ -619,9 +554,7 @@ const foo = {
 
 那么怎么从 JS 语法层面避免这个异常？ (eval is evil)
 
-方法一： [&lt;?php?&gt;][0] 
-方法二： (x =&gt; x)(&lt;?php&gt;) 
-方法三 (擦边)： new Object(&lt;?php?&gt;)
+方法一： [&lt;? ······
     
     </summary>
     
@@ -648,11 +581,7 @@ const foo = {
 
 所以下面的代码就会导致 JSSDK 在 pushState 后验证失败，报错 invalid signature ，原因如上。
 
-import wx from &#39;weixin-js-sdk&#39;;
-
-export function initWX() {
-    getConfigFromServer(location.href.split(&#39;#&#39;)[0])
-        .then ······
+import wx from &#39;weixin-js- ······
     
     </summary>
     
@@ -687,18 +616,7 @@ export function initWX() {
 毫无疑问，本博客主要流量都来自于中国大陆，占到 56.61%：
 
 
-而从浏览器语言上看，简体中文占到 74.65%，也就是说以上的中国大陆流量并不准确（
-
-
-操作系统与浏览器
-首先来看操作系统概况，本博客主要流量还是来自于桌面端。
-
-
-浏览器方面，来自 IE 的份额不足 2%：
-
-
-流量来源
-本博客流量来源主要有搜索引擎、第三方网站引荐、直接访问三大 ······
+而从浏览器语言上看，简体中文占到 74.65%，也就是说以上的中国大陆流量并不准确（ ······
     
     </summary>
     
@@ -727,14 +645,7 @@ export function initWX() {
 
 特徴
  * ラベルによって、挿絵を選別する
- * 挿絵の詳細情報を調べる
- * pixiv に登録して、好きな挿絵にブックマークをする
-
-主な技術:
- * react
- * react-dom
- * react-router-component
- *  ······
+ * 挿 ······
     
     </summary>
     
