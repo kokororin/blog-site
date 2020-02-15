@@ -448,9 +448,9 @@ Typecho 评论页中，如果要获取当前的页码是没有办法的，可能
       <category term="终点" scheme="https://kotori.love/categories/%E7%BB%88%E7%82%B9/"/>
     
     
-      <category term="bilibili" scheme="https://kotori.love/tags/bilibili/"/>
-    
       <category term="lovelive" scheme="https://kotori.love/tags/lovelive/"/>
+    
+      <category term="bilibili" scheme="https://kotori.love/tags/bilibili/"/>
     
   </entry>
   
