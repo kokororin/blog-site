@@ -589,9 +589,9 @@ import wx from &#39;weixin-js- ······
       <category term="科技" scheme="https://kotori.love/categories/%E7%A7%91%E6%8A%80/"/>
     
     
-      <category term="javascript" scheme="https://kotori.love/tags/javascript/"/>
-    
       <category term="wechat" scheme="https://kotori.love/tags/wechat/"/>
+    
+      <category term="javascript" scheme="https://kotori.love/tags/javascript/"/>
     
   </entry>
   
