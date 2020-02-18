@@ -108,7 +108,7 @@ find -inum 6283265 -exec rm -rf {} \;
       <category term="科技" scheme="https://kotori.love/categories/%E7%A7%91%E6%8A%80/"/>
     
     
-      <category term="Android" scheme="https://kotori.love/tags/Android/"/>
+      <category term="android" scheme="https://kotori.love/tags/android/"/>
     
       <category term="adb" scheme="https://kotori.love/tags/adb/"/>
     
@@ -137,7 +137,7 @@ find -inum 6283265 -exec rm -rf {} \;
       <category term="终点" scheme="https://kotori.love/categories/%E7%BB%88%E7%82%B9/"/>
     
     
-      <category term="Aqours" scheme="https://kotori.love/tags/Aqours/"/>
+      <category term="aqours" scheme="https://kotori.love/tags/aqours/"/>
     
   </entry>
   
@@ -298,7 +298,7 @@ eval(&quot;const a = function () {}; function b() {  a(); }; b();&quot;)
       <category term="科技" scheme="https://kotori.love/categories/%E7%A7%91%E6%8A%80/"/>
     
     
-      <category term="LINE" scheme="https://kotori.love/tags/LINE/"/>
+      <category term="line" scheme="https://kotori.love/tags/line/"/>
     
   </entry>
   
@@ -370,7 +370,7 @@ Typecho 评论页中，如果要获取当前的页码是没有办法的，可能
     <link href="https://kotori.love/archives/lovelive-sif-2017-thanksgiving-virtual-positioning.html"/>
     <id>https://kotori.love/archives/lovelive-sif-2017-thanksgiving-virtual-positioning.html</id>
     <published>2017-06-02T01:42:00.000Z</published>
-    <updated>2020-02-07T04:47:26.752Z</updated>
+    <updated>2020-02-18T03:35:09.533Z</updated>
     
     <content type="html"><![CDATA[<p><img src="https://static-files.kotori.love/blog/2017/06/583732268.png" alt=".png"></p><blockquote><p>池袋・サンシャインシティ周辺にて、スクフェスにログインすると、ゲーム内の「背景」や「称号」をゲットすることができます！！<br>ゲットした「背景」や「称号」を設定してみんなで「スクフェス感謝祭 2017」を盛り上げよう♪</p></blockquote><blockquote><p>※ご使用端末の位置情報設定を ON にしてご利用ください。<br>※1 アカウントにつき各種 1 回まで取得可能です。<br>※6/10 (土) 09:00 〜 6/11 (日) 23:59 まではホームバナーおよび「その他 ＞ 位置情報」メニューから受け取り可能です<br>※背景のみ 6/12 (月) 0:00 以降も「その他 ＞ 位置情報メニュー」から受け取り可能です</p></blockquote><blockquote><p>【背景】噴水広場・池袋 サンシャインシティ<br>配布期間: 6/10 (土) 09:00 〜 無期限</p></blockquote><blockquote><p>【称号】スクフェス感謝祭 2017<br> 配布期間: 6/10 (土) 09:00 〜 6/11 (日) 23:59<br>※こちらの称号は先行配信です。後日、7/15 よりシール SHOP にて再配信予定です。</p></blockquote><p>大概就是 10 号感谢祭到现场可以领取背景和称号奖励，嘛就是这样……</p><p>难道我等不在日玩家就要少了一个背景吗。。。</p><p>虚拟定位到 Sunshine City (サンシャインシティ、池袋附近)<br> 可破 （应该，到时候测试一下吧）</p><p><img src="https://static-files.kotori.love/blog/2017/06/3658065054.jpg" alt="1.jpg"></p><p>设置好位置后，打开其他地图应用，可以看到位置已经变了 (┌^o^)┐</p><p><img src="https://static-files.kotori.love/blog/2017/06/2680981258.jpg" alt="2.jpg"><br><img src="https://static-files.kotori.love/blog/2017/06/2853152459.jpg" alt="3.jpg"></p><p><strong>6 月 5 日更新</strong><br> Android 开启了开发者模式后会在游戏中提示！！！</p><p>设备的开发者选项被打开了<br>模拟位置函数不能被使用<br>请检查你的设备设置<br><img src="https://static-files.kotori.love/blog/2017/06/588508535.jpg" alt="58200ffc1e178a82c09aaccbfc03738da977e83b.jpg"></p>]]></content>
     
@@ -392,7 +392,7 @@ Typecho 评论页中，如果要获取当前的页码是没有办法的，可能
       <category term="次元" scheme="https://kotori.love/categories/%E6%AC%A1%E5%85%83/"/>
     
     
-      <category term="LOVE LIVE!" scheme="https://kotori.love/tags/LOVE-LIVE/"/>
+      <category term="lovelive" scheme="https://kotori.love/tags/lovelive/"/>
     
       <category term="sif" scheme="https://kotori.love/tags/sif/"/>
     
@@ -403,7 +403,7 @@ Typecho 评论页中，如果要获取当前的页码是没有办法的，可能
     <link href="https://kotori.love/archives/lovelive-sif-account-recovery.html"/>
     <id>https://kotori.love/archives/lovelive-sif-account-recovery.html</id>
     <published>2017-05-31T13:15:00.000Z</published>
-    <updated>2020-02-07T04:47:26.753Z</updated>
+    <updated>2020-02-18T03:35:09.534Z</updated>
     
     <content type="html"><![CDATA[<p>嘛…… 之前 SIF 账号由于手贱弄丢了，所以这里记录一下申诉流程 w</p><p>首先要给 <code>info-lovelive@klab.com</code>  发一封邮件表明情况</p><p>如果是切账号时忘记设置密码就用这个</p><blockquote><p>私は二つのアカウントを持ちます。普通は引き継ぎパスワードにスクリーンショットをして保存します。でも、今回は、私はパスワードを設定せずに別のアカウントを引き継ぎしました。今、このアカウントがローグインできません。すみませんが、お助けをください。お面倒を挂けて本当にすみませんでした。<br>私のゲームの名前：【】<br>ユーザー ID：【】<br>端末の OS は Android/IOS です。</p></blockquote><p>老玩家回归没有新版引继码的用这个</p><blockquote><p>今私もう一度ゲームをインストールしました。でも、引き継ぎ ID がなかったので、引き継ぐことができませんでした。今、このアカウントがローグインできません。すみませんが、お助けをください。お面倒を挂けて本当にすみませんでした。<br>私のゲームの名前：【】<br>ユーザー ID：【】<br>端末の OS は Android/IOS です。</p></blockquote><p>然后不许摸过了一天就会给你发一封邮件：（以下省略不许摸的客套话）</p><blockquote><p>※お客様情報入力時の注意点※<br>１.【回答】部分にご記載ください。<br>２. すべての項目にご回答ください。<br>３. わからない場合は「不明」とご記載ください。</p></blockquote><blockquote><hr></blockquote><p>◆別のメールアドレスでお問い合わせをされたことがあるか<br>　ある場合、該当のメールアドレスをお教えください<br>　（ドメインが異なる場合もご連絡ください）<br>【回答】：</p><blockquote><p>※お問い合わせをされたことがない場合は、回答欄に「なし」とご記載ください。</p></blockquote><blockquote><hr><p>◆ユーザー ID〈必須〉<span style="color: red">游戏 ID</span><br>【回答】：</p></blockquote><blockquote><p>※プロフィール画面の 9 桁の数字です。</p></blockquote><blockquote><hr><p>◆登録名〈必須〉 <span style="color: red">名字</span><br>【回答】：</p></blockquote><blockquote><hr></blockquote><p>◆ランク <span style="color: red">rank</span><br>【回答】：</p><blockquote><hr></blockquote><p>◆有償アイテム (ラブカストーン、各種セット販売アイテム等) の購入履歴画像の添付（2 枚以上）<br>【回答】：<span style="color: red">课金记录截图</span></p><blockquote><p>※購入したことがない場合は、回答欄に「購入なし」とご記載ください。<br>※iTunes または、Google ウォレットの購入履歴・レシートメールのスクリーンショット</p></blockquote><blockquote><hr><p>◆過去に使用したことのあるシリアルコード <span style="color: red">所有使用过的序列号</span><br>【回答】：</p></blockquote><blockquote><p>※使用したことがない場合は、回答欄に「なし」とご記載ください。</p></blockquote><blockquote><hr><p>◆過去の課金時に使用していた端末名と OS バージョン <span style="color: red">课金设备和操作系统版本号</span><br>【回答】：</p></blockquote><blockquote><p>※OS バージョンは覚えている場合ご記載ください。</p></blockquote><blockquote><hr><p>◆アプリの登録日時〈必須〉<span style="color: red">第一次登录日期</span><br>【回答】：</p></blockquote><blockquote><p>例）20●●年●月●日</p></blockquote><blockquote><hr><p>◆初期選択部員名〈必須〉<span style="color: red">初始部员</span><br>【回答】：</p></blockquote><blockquote><p>※当アプリを始めた時に一番最初に選んだ部員名をご記載ください。</p></blockquote><blockquote><hr><p>◆最後にログインを行った日時〈必須〉<span style="color: red">最后登录时间</span><br>【回答】：</p></blockquote><blockquote><p>例）20●●年●月●日</p></blockquote><blockquote><hr><p>◆これまで使用していた端末名と OS バージョン〈必須〉 <span style="color: red">所有使用过的设备和操作系统版本</span><br>【回答】：</p></blockquote><blockquote><p>※OS バージョンは覚えている場合ご記載ください。<br>※複数使用されていた場合は、覚えている範囲の端末名をすべてご記載ください。</p></blockquote><blockquote><hr><p>◆過去に使用した引き継ぎパスワード（16 桁の数字） <span style="color: red">过去使用过的继承码</span><br>【回答】：</p></blockquote><blockquote><p>※過去に当アプリで発行した引き継ぎパスワード（16 桁の数字）をご記載ください。<br>※ご自身で設定した引き継ぎパスワードを使用した場合は、回答欄に「なし」とご記載ください。</p></blockquote><blockquote><hr><p>◆ユニット名〈必須〉 <span style="color: red">队伍名</span><br>【回答】：</p></blockquote><blockquote><p>※設定したユニット名を覚えている範囲ですべてご記載ください。</p></blockquote><blockquote><hr><p>◆メイン以外のセンター部員 <span style="color: red">主队以外的 C 位部员的技能名或卡名</span><br>【回答】：</p></blockquote><blockquote><p>※部員名と絵柄の特徴、または特技名をご記載ください。</p></blockquote><blockquote><hr><p>◆フレンドの名前 <span style="color: red">好友的名字</span><br>【回答】：</p></blockquote><blockquote><hr></blockquote><p>◆アプリ内メールの履歴〈必須〉<span style="color: red">邮件历史</span><br>【回答】：</p><blockquote><p>※他のユーザー様とメールのやりとりをした場合、その内容をご記載ください。<br>　(例：◯◯さんと◯◯について話をしました 等)</p></blockquote><p>以上全部填完以后回信，一天左右，会告诉你已经收到信息，等待我们审核</p><p>然后大概一星期左右，收到如下邮件：（省略废话）</p><blockquote><p>今回は情報不足のため本人確認をおこなうことができませんでした。<br>お客様のお力になれず、誠に申し訳ございません。</p></blockquote><blockquote><p>以前のデータの復旧をご希望される場合は、<br>下記項目についてご記入の上、ご返信ください。</p></blockquote><blockquote><p>===============</p></blockquote><blockquote><p>◆チュートリアルの際に選択した μ’s もしくは Aqours の部員名を教えてください：<span style="color: red">初始部员</span></p></blockquote><blockquote><p>◆初めて参加したイベントを教えてください：<span style="color: red">初次参加的活动名</span></p></blockquote><blockquote><p>◆最初に獲得した UR 部員の名前と特技名を教えてください：<span style="color: red">最初获得的 UR</span></p></blockquote><blockquote><p>◆今までに当アプリで使用したことがある端末の正確な機種名、OS のバージョンを全て教えてください <span style="color: red">所有登录过的设备</span><br>　※OS のみの申告では調査を行うことができません<br>　　機種名（iPhone4、Xperia Z など）：<br>　　OS（iOS7、Android4.1 など）：</p></blockquote><p>由此可见，初始部员、初始时间、登录过的设备名，在其它信息正确的情况下，这三者只要回答对一个就能 100% 申诉成功。</p><p>然后再过一个礼拜，如果信息都正确的话，不许摸爸爸就会把引继码发回了<br><img src="https://static-files.kotori.love/blog/2017/05/3507131166.jpg" alt="webwxgetmsgimg.jpg"></p><h3 id="后记（？）">后记（？）</h3><ul><li>回答不要答非所问，多用敬语</li><li>被问到是否经手第三者一定要回答不，就算是朋友也不行</li><li>如果申诉失败的话就换个邮箱继续</li><li>千万不要回信催不许摸爸爸！</li><li>可以说说你和这个账号的故事（大概能提高成功率）</li></ul><h3 id="完惹">完惹</h3>]]></content>
     
@@ -423,7 +423,7 @@ Typecho 评论页中，如果要获取当前的页码是没有办法的，可能
       <category term="次元" scheme="https://kotori.love/categories/%E6%AC%A1%E5%85%83/"/>
     
     
-      <category term="LOVE LIVE!" scheme="https://kotori.love/tags/LOVE-LIVE/"/>
+      <category term="lovelive" scheme="https://kotori.love/tags/lovelive/"/>
     
       <category term="sif" scheme="https://kotori.love/tags/sif/"/>
     
