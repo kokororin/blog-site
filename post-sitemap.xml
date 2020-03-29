@@ -8,56 +8,8 @@
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/pixiv-lovelive-viewer-for-android.html</loc>
-        <lastmod>2020-02-18T03:35:09.535Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/lovelive-sif-account-recovery.html</loc>
-        <lastmod>2020-02-18T03:35:09.534Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/lovelive-sif-2017-thanksgiving-virtual-positioning.html</loc>
-        <lastmod>2020-02-18T03:35:09.533Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/homemade-chrome-theme-love-live.html</loc>
-        <lastmod>2020-02-18T03:35:09.532Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://kotori.love/archives/%CE%BC-sic-forever.html</loc>
-        <lastmod>2020-02-16T03:58:19.048Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/final-lovelive-repo.html</loc>
-        <lastmod>2020-02-13T03:10:20.421Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/react-native-upload.html</loc>
-        <lastmod>2020-02-12T10:51:29.365Z</lastmod>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -65,95 +17,7 @@
 
     <url>
         <loc>https://kotori.love/archives/typescript-react.html</loc>
-        <lastmod>2020-02-12T02:55:51.431Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/problems-with-react-async-component.html</loc>
-        <lastmod>2020-02-11T12:02:11.278Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/vulnerable-pushstate-in-wechat-browser.html</loc>
-        <lastmod>2020-02-11T12:02:11.274Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/chrome-extension-notes.html</loc>
-        <lastmod>2020-02-11T12:02:11.274Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/integrates-basket-into-webpack.html</loc>
-        <lastmod>2020-02-11T12:02:11.249Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/webpack-dev-server-issue-in-safari.html</loc>
-        <lastmod>2020-02-11T12:02:11.249Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/a-javascript-question-create-json-object-from-server.html</loc>
-        <lastmod>2020-02-11T12:02:11.249Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/vulnerable-react-native.html</loc>
-        <lastmod>2020-02-11T12:02:11.249Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/react-native-es5-es6-difference.html</loc>
-        <lastmod>2020-02-11T12:02:11.249Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/typecho-pjax.html</loc>
-        <lastmod>2020-02-11T12:02:11.249Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/typecho-theme-tips.html</loc>
-        <lastmod>2020-02-11T12:02:11.249Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/nginx-config-file.html</loc>
-        <lastmod>2020-02-09T03:55:02.878Z</lastmod>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -161,151 +25,31 @@
 
     <url>
         <loc>https://kotori.love/archives/useful-git-snippets.html</loc>
-        <lastmod>2020-02-07T04:47:26.784Z</lastmod>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/unicode-in-jsx.html</loc>
-        <lastmod>2020-02-07T04:47:26.784Z</lastmod>
+        <loc>https://kotori.love/archives/problems-with-react-async-component.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/use-virtualbox-virtual-machine-to-install-os-x-10-10-yosemite.html</loc>
-        <lastmod>2020-02-07T04:47:26.784Z</lastmod>
+        <loc>https://kotori.love/archives/integrates-basket-into-webpack.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/ubuntu-sublime-text-imfix.html</loc>
-        <lastmod>2020-02-07T04:47:26.783Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/typecho-plugin-access.html</loc>
-        <lastmod>2020-02-07T04:47:26.781Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/typecho-plugin-blockip.html</loc>
-        <lastmod>2020-02-07T04:47:26.781Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/typecho-pagetolinks.html</loc>
-        <lastmod>2020-02-07T04:47:26.780Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/successfully-installed-black-apple.html</loc>
-        <lastmod>2020-02-07T04:47:26.777Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/tutorial-to-build-tieba-assistant.html</loc>
-        <lastmod>2020-02-07T04:47:26.777Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/react-js-pinterest-style-layout-site.html</loc>
-        <lastmod>2020-02-07T04:47:26.773Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/posutoba-imitation-baidu-project-completed.html</loc>
-        <lastmod>2020-02-07T04:47:26.768Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/pixiv-batch-download.html</loc>
-        <lastmod>2020-02-07T04:47:26.759Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/php-memcached.html</loc>
-        <lastmod>2020-02-07T04:47:26.759Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/php-get-private-property.html</loc>
-        <lastmod>2020-02-07T04:47:26.758Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/noel.html</loc>
-        <lastmod>2020-02-07T04:47:26.758Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/nginx-custom-header.html</loc>
-        <lastmod>2020-02-07T04:47:26.757Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/nginx-reverse-proxy-google-parameter-configuration.html</loc>
-        <lastmod>2020-02-07T04:47:26.757Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/lovelive-the-school-idol-movie.html</loc>
-        <lastmod>2020-02-07T04:47:26.756Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/lovelive-sunshine-special-announcement.html</loc>
-        <lastmod>2020-02-07T04:47:26.754Z</lastmod>
+        <loc>https://kotori.love/archives/webpack-dev-server-issue-in-safari.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -313,15 +57,175 @@
 
     <url>
         <loc>https://kotori.love/archives/line-social-login.html</loc>
-        <lastmod>2020-02-07T04:47:26.752Z</lastmod>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/kotori-php-framework.html</loc>
-        <lastmod>2020-02-07T04:47:26.751Z</lastmod>
+        <loc>https://kotori.love/archives/unicode-in-jsx.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/php-get-private-property.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/lovelive-sif-2017-thanksgiving-virtual-positioning.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/lovelive-sif-account-recovery.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/lovelive-sunshine-special-announcement.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/ubuntu-sublime-text-imfix.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/vulnerable-pushstate-in-wechat-browser.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/react-js-pinterest-style-layout-site.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/pixiv-batch-download.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/vulnerable-react-native.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/react-native-upload.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/react-native-es5-es6-difference.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/php-memcached.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/typecho-pjax.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/pixiv-lovelive-viewer-for-android.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/lovelive-the-school-idol-movie.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/typecho-plugin-access.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/nginx-config-file.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/typecho-pagetolinks.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/typecho-plugin-blockip.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/nginx-custom-header.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -329,63 +233,79 @@
 
     <url>
         <loc>https://kotori.love/archives/install-ubuntu-server-and-lnmp.html</loc>
-        <lastmod>2020-02-07T04:47:26.750Z</lastmod>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/install-nginx-php-mysql-on-osx.html</loc>
-        <lastmod>2020-02-07T04:47:26.749Z</lastmod>
+        <loc>https://kotori.love/archives/kotori-php-framework.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/how-to-install-archlinux-gnome-graphical-user-interface.html</loc>
-        <lastmod>2020-02-07T04:47:26.749Z</lastmod>
+        <loc>https://kotori.love/archives/typecho-theme-tips.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/hitokoto-data.html</loc>
-        <lastmod>2020-02-07T04:47:26.748Z</lastmod>
+        <loc>https://kotori.love/archives/successfully-installed-black-apple.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/how-to-hack-the-crayon-website.html</loc>
-        <lastmod>2020-02-07T04:47:26.748Z</lastmod>
+        <loc>https://kotori.love/archives/use-virtualbox-virtual-machine-to-install-os-x-10-10-yosemite.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/google-chrome-new-ui-solution.html</loc>
-        <lastmod>2020-02-07T04:47:26.747Z</lastmod>
+        <loc>https://kotori.love/archives/posutoba-imitation-baidu-project-completed.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/fuck-gfw.html</loc>
-        <lastmod>2020-02-07T04:47:26.747Z</lastmod>
+        <loc>https://kotori.love/archives/nginx-reverse-proxy-google-parameter-configuration.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://kotori.love/archives/gnome-shell-transparent-method.html</loc>
-        <lastmod>2020-02-07T04:47:26.747Z</lastmod>
+        <loc>https://kotori.love/archives/noel.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/tutorial-to-build-tieba-assistant.html</loc>
+        <lastmod>2020-03-29T12:06:56.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/final-lovelive-repo.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -393,95 +313,7 @@
 
     <url>
         <loc>https://kotori.love/archives/first-post-2020.html</loc>
-        <lastmod>2020-02-07T04:47:26.746Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/download-baiduyun-with-aria2.html</loc>
-        <lastmod>2020-02-07T04:47:26.745Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/decompile-apk.html</loc>
-        <lastmod>2020-02-07T04:47:26.745Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/fetch-gravatar-with-php.html</loc>
-        <lastmod>2020-02-07T04:47:26.745Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/curl-login-pixiv.html</loc>
-        <lastmod>2020-02-07T04:47:26.744Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/curl-login-pixiv-next.html</loc>
-        <lastmod>2020-02-07T04:47:26.743Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/backup-vps-to-git.html</loc>
-        <lastmod>2020-02-07T04:47:26.741Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/backup-vps-to-dropbox.html</loc>
-        <lastmod>2020-02-07T04:47:26.741Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/backup-kde-configuration.html</loc>
-        <lastmod>2020-02-07T04:47:26.740Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/archlinux-font-config.html</loc>
-        <lastmod>2020-02-07T04:47:26.739Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/aqours-fmt-in-shanghai-playlist.html</loc>
-        <lastmod>2020-02-07T04:47:26.738Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://kotori.love/archives/add-gnome-3-12-applications-menu-logo.html</loc>
-        <lastmod>2020-02-07T04:47:26.730Z</lastmod>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -489,7 +321,31 @@
 
     <url>
         <loc>https://kotori.love/archives/adb-delete-garbled-file.html</loc>
-        <lastmod>2020-02-07T04:47:26.729Z</lastmod>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/aqours-fmt-in-shanghai-playlist.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/curl-login-pixiv-next.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/a-javascript-question-create-json-object-from-server.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -497,7 +353,151 @@
 
     <url>
         <loc>https://kotori.love/archives/2016-blog-analytics.html</loc>
-        <lastmod>2020-02-07T04:47:26.728Z</lastmod>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/curl-login-pixiv.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/backup-vps-to-git.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/google-chrome-new-ui-solution.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/install-nginx-php-mysql-on-osx.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/chrome-extension-notes.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/download-baiduyun-with-aria2.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/fuck-gfw.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/decompile-apk.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/hitokoto-data.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/fetch-gravatar-with-php.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/backup-vps-to-dropbox.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/homemade-chrome-theme-love-live.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/how-to-hack-the-crayon-website.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/backup-kde-configuration.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/how-to-install-archlinux-gnome-graphical-user-interface.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/archlinux-font-config.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/gnome-shell-transparent-method.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://kotori.love/archives/add-gnome-3-12-applications-menu-logo.html</loc>
+        <lastmod>2020-03-29T12:06:56.856Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
